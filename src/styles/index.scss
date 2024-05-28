@@ -85,8 +85,8 @@ h4 {
         margin-right: 15px;
 
         & img {
-            width: 65px;
-            height: 65px;
+            width: 120px;
+            height: 70px;
             border-radius: 5px;
         }
     }
@@ -403,40 +403,45 @@ blockquote {
 
 .vertical-timeline-container {
     width: 80%;
-    max-width: 700px;
+   
     margin: 0 auto;
     margin-top: 25px;
+    margin-bottom: 10px;
 }
 
 /***************************/
-/*  Contact Page           */
+/*  Career Page           */
 /***************************/
 
-.contact-container {
+.career-container {
     width: 80%;
     max-width: 700px;
     margin: 0 auto;
     margin-top: 25px;
 }
 
-.contact-header {
+.career-header {
   line-height: 1.5em;
   font-size: 2.5em;
   letter-spacing: .08rem;
   color: #000;
 }
 
-.contact-text {
+.career-text {
     margin: 2em auto;
     line-height: 1.6;
+    white-space: pre-wrap;
 }
+pre {
+    white-space: pre-wrap;
+   }
 
-.contact-form-container {
+.career-form-container {
     margin-left: -20px;
 }
 
-.contact-form-name,
-.contact-form-email {
+.career-form-name,
+.career-form-email {
     padding: 20px 20px;
     width: 50%;
     clear: none;
@@ -445,7 +450,7 @@ blockquote {
     box-sizing: border-box;
 }
 
-.contact-message-form-field {
+.career-message-form-field {
     line-height: 1.25em;
     transition: all 0.35s ease-in-out;
     border: solid 1px rgba(0, 0, 0, 0.15);
@@ -470,7 +475,7 @@ blockquote {
     }
 }
 
-.contact-message-textarea {
+.career-message-textarea {
     resize: vertical;
     overflow-wrap: break-word;
     outline: none;
@@ -479,7 +484,7 @@ blockquote {
     width: calc(100% - 54px);
 }
 
-.contact-submit-btn {
+.career-submit-btn {
     border: none;
     color: white;
     padding: 12px 30px;
@@ -506,3 +511,23 @@ blockquote {
         border-color: transparent;
     }
 }
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .timeline-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .timeline-date {
+    text-align: left;
+  }
+  
+  .timeline-content {
+    text-align: right;
+  }

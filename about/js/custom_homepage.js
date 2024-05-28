@@ -237,7 +237,7 @@
 	 //  $('html,body').animate({scrollTop: $(this).closest('section').offset().top+150}, 500);				
 		
 	   // h2 title becomes hidden		
-	   $(".contact_toggle").slideUp(300,"swing");
+	   $(".career_toggle").slideUp(300,"swing");
 	   // Google map div becomes visible, and the map funtion get started 
 	   $('#google_map').slideToggle(function initialize() {
 	
@@ -308,7 +308,7 @@
 		// map container becomes hidden
 	    $('#google_map').slideUp(300,"swing");
 		// and h2 title becomes shown again
-	  	$(".contact_toggle").slideDown(200,"swing");
+	  	$(".career_toggle").slideDown(200,"swing");
 		
 	});		
 			

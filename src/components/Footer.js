@@ -1,7 +1,4 @@
 import React from 'react';
-
-import { ReactComponent as TwitterIcon } from '../assets/icons/twitter.svg';
-import { ReactComponent as LinkedInIcon } from '../assets/icons/linkedin.svg';
 import { ReactComponent as GitHubIcon } from '../assets/icons/github.svg';
 import { ReactComponent as MailIcon } from '../assets/icons/mail.svg';
 import { ReactComponent as WhatsAppIcon } from '../assets/icons/whatsapp.svg';
@@ -15,26 +12,8 @@ export default function Header() {
                     className="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-title="Twitter"
-                    href="https://twitter.com/availchet"
-                >
-                    <TwitterIcon className="social-link-icon" aria-label="Twitter" />
-                </a>
-                <a
-                    className="social-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-title="LinkedIn"
-                    href="https://www.linkedin.com/in/chetanya-kandhari"
-                >
-                    <LinkedInIcon className="social-link-icon" aria-label="LinkedIn" />
-                </a>
-                <a
-                    className="social-link"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     data-title="GitHub"
-                    href="https://github.com/availchet"
+                    href="https://github.com/jyoung9154"
                 >
                     <GitHubIcon className="social-link-icon" aria-label="GitHub" />
                 </a>
@@ -43,7 +22,7 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-title="E-mail"
-                    href="mailto:availchet@gmail.com"
+                    href="mailto:jyoung_9154@naver.com"
                 >
                     <MailIcon
                         className="social-link-icon"
@@ -55,8 +34,8 @@ export default function Header() {
                     className="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-title="WhatsApp"
-                    href="https://wa.me/353899776356"
+                    data-title="KakaoTalk"
+                    href="http://qr.kakao.com/talk/Ce5_pAdT76JbejDu0v0.bv4XQJA-"
                 >
                     <WhatsAppIcon
                         className="social-link-icon"
@@ -69,13 +48,13 @@ export default function Header() {
                     className="social-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    data-title="Résumé"
-                    href="/assets/ChetanyaKandhariResume.pdf"
+                    data-title="이력서"
+                    href="/assets/resume.pdf"
                 >
                     <ResumeIcon
                         className="social-link-icon"
                         viewBox="0 0 512 512"
-                        aria-label="Résumé"
+                        aria-label="이력서"
                     />
                 </a>
             </div>

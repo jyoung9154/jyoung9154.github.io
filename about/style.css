@@ -441,7 +441,7 @@ body>footer, table, .styled { background:none; }
 #top {  }	
 #about { background: url(../images/diamond_upholstery.png) fixed;  } 
 #portfolio {  }
-#contact { background: none;  }
+#career { background: none;  }
 
 			
 /*------=h-------------------*/
@@ -666,7 +666,7 @@ ul.filter a, ul.curly_brackets, a ul.tabs a { font-size:1.05em; }
 	clear:both;
 	margin-top:0px; }
 	
-.contactcontainer { 
+.careercontainer { 
 	position:relative;
 	clear:both;
 	margin-top:0px; 

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import About from './About';
 import Timeline from './Timeline';
-import Contact from './Contact';
+import Career from './Career';
 import Header from './Header';
 import Footer from './Footer';
 import XEyes from "./XEyes";
@@ -29,8 +29,8 @@ export default function App() {
                 <Route exact path="/timeline">
                     <Timeline />
                 </Route>
-                <Route  exact path="/contact">
-                    <Contact />
+                <Route  exact path="/career">
+                    <Career />
                 </Route>
                 <Route exact path="/">
                     <Home />

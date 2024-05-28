@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Logo from '../assets/images/logo.png';
+import Logo from '../assets/images/JLogo.png';
 
 export default function Header() {
     return (
@@ -28,8 +28,8 @@ export default function Header() {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/contact" exact activeClassName="nav-link-selected">
-                                Contact
+                            <NavLink to="/career" exact activeClassName="nav-link-selected">
+                                Career
                             </NavLink>
                         </li>
                     </ul>

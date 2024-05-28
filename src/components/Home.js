@@ -11,10 +11,10 @@ export default function Home() {
                 </figure>
                 <article>
                     <h1 className="home-title">
-                        Chetanya Kandhari
+                        Park JaeYoung
                     </h1>
                     <p className="home-description">
-                        Full-stack Developer | Go + React
+                        Full-stack Developer | Java(Spring or Boot) + React
                     </p>
                 </article>
             </div>
