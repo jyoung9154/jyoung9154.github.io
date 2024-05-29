@@ -18,8 +18,6 @@ jobs:
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
-          # Ensure line endings are correct
-          lfs_skip_smudge: 1
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -35,7 +33,7 @@ jobs:
           CI: true
 
       - name: Lint Code Base
-        uses: github/super-linter@v4.8.0
+        uses: github/super-linter@v3
         env:
           VALIDATE_ALL_CODEBASE: false
           LINTER_RULES_PATH: .github/linters
@@ -53,9 +51,6 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
-        with:
-          # Ensure line endings are correct
-          lfs_skip_smudge: 1
 
       - name: Cache node modules
         uses: actions/cache@v2
