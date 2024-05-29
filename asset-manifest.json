@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f923cfeb.css",
+    "main.js": "/static/js/main.c8c864e9.js",
+    "static/js/787.9efdc664.chunk.js": "/static/js/787.9efdc664.chunk.js",
+    "static/media/profile.jpeg": "/static/media/profile.547d42613bebf0493643.jpeg",
+    "static/media/JLogo.png": "/static/media/JLogo.fbd7bed81c0450185954.png",
+    "static/media/oh_snap_404.jpg": "/static/media/oh_snap_404.0d2ffdea9474c8bf24c9.jpg",
+    "static/media/oh_snap.jpg": "/static/media/oh_snap.bf11975c72243db32eb0.jpg",
+    "static/media/github.svg": "/static/media/github.033300a8a526f2c5fb71d5499d034326.svg",
+    "static/media/whatsapp.svg": "/static/media/whatsapp.2b280c71edc7ce6e171c5023eb86e43a.svg",
+    "index.html": "/index.html",
+    "static/media/star.svg": "/static/media/star.681f0a02ceb3f291e15097b7ddbe8251.svg",
+    "static/media/work.svg": "/static/media/work.ecd66392effb5bf5d79dcbffd236babd.svg",
+    "static/media/school.svg": "/static/media/school.82d931e68bd81613a8fe4b533a246e3e.svg",
+    "static/media/resume.svg": "/static/media/resume.d3cc10343a59db660548b3700671da0b.svg",
+    "static/media/mail.svg": "/static/media/mail.5bedffa5dc284252af97944bc7074354.svg",
+    "main.f923cfeb.css.map": "/static/css/main.f923cfeb.css.map",
+    "main.c8c864e9.js.map": "/static/js/main.c8c864e9.js.map",
+    "787.9efdc664.chunk.js.map": "/static/js/787.9efdc664.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f923cfeb.css",
+    "static/js/main.c8c864e9.js"
+  ]
+}
