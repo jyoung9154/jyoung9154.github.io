@@ -20,7 +20,7 @@
     "max-len": [
       "warn",
       {
-        "code": 200
+        "code": 300
       }
     ],
     "prefer-promise-reject-errors": [

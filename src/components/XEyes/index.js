@@ -70,20 +70,20 @@ class XEyes extends React.Component {
     renderEyes = (x, y, size, canvas) => {
         const context = canvas.getContext('2d');
         const rect = canvas.getBoundingClientRect();
-
+    
         context.clearRect(0, 0, size * 2 + 10, size + 10);
-
+    
         const { mouseX, mouseY } = this.state;
         const drawX = mouseX - rect.left;
         const drawY = mouseY - rect.top;
-
+    
         drawEye(context, size, drawX, drawY, size / 2 + 5, size / 2 + 5);
         drawEye(context, size, drawX, drawY, size * 1.5 + 5, size / 2 + 5);
-    };
-
-    render() {
+      };
+    
+      render() {
         const { eyes } = this.state;
-        eyes.map(({ x, y, size, canvas }) => this.renderEyes(x, y, size, canvas));
+        eyes.forEach(({ x, y, size, canvas }) => this.renderEyes(x, y, size, canvas));
         return <div id="info">Click to add eyes</div>;
     }
 }
