@@ -2,7 +2,7 @@ import React from 'react';
 
 import './XEyes.css';
 
-const drawEye = function (context, size, x, y, cx, cy) {
+const drawEye = (context, size, x, y, cx, cy) => {
     const dx = x - cx;
     const dy = y - cy;
     const angle = Math.atan2(dy, dx);
@@ -16,7 +16,7 @@ const drawEye = function (context, size, x, y, cx, cy) {
     context.arc(size * 0.4, 0, size * 0.1, 0, Math.PI * 2);
     context.fill();
     context.restore();
-};
+  };  
 
 class XEyes extends React.Component {
     constructor(props) {
