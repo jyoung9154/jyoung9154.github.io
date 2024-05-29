@@ -63,7 +63,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b master -d build",
+    "deploy": "gh-pages -d build",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "stylelint": "stylelint **/*.scss",
