@@ -1,11 +1,11 @@
 {
-  "name": "availchet-site",
+  "name": "jyoung9154-site",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://availchet.github.io",
+  "homepage": "https://jyoung9154.github.io",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jyoung9154/availchet.github.io.git"
+    "url": "git+https://github.com/jyoung9154/jyoung9154.github.io.git"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
