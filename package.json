@@ -82,5 +82,19 @@
   "browserslist": [
     "last 1 version",
     ">1%"
-  ]
+  ],
+  "jscpd": {
+    "threshold": 20,
+    "min-lines": 5,
+    "min-tokens": 70,
+    "reporters": [
+      "json",
+      "console",
+      "html"
+    ],
+    "exclude": [
+      "**/*.test.js",
+      "**/*.spec.js"
+    ]
+  }
 }
