@@ -15,7 +15,7 @@ const drawEye = function (context, size, x, y, cx, cy) {
     context.beginPath();
     context.arc(size * 0.4, 0, size * 0.1, 0, Math.PI * 2);
     context.fill();
-    context.restore();ㅛ
+    context.restore();
 };
 
 class XEyes extends React.Component {
