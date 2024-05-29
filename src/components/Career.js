@@ -5,7 +5,7 @@ export default function Career() {
         <div className="career-container">
             <article>
                 <h2 className="career-header">📜 경력기술서</h2>
-                <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '13px', border: 'none' }}>
+                <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '14px', border: 'none' }}>
                 <h3>🏢 더존비즈온</h3>
                 솔루션사업본부 UC개발팀 [2018.09 ~ 2022.06 (3년 10개월)] <br/>
                 - 1977년 설립, 매출액 3,500억, 사원 수 : 1764명<br/>
@@ -27,7 +27,7 @@ export default function Career() {
                 (5) 성과 : 수동으로 진행하였던 마이그레이션을 툴 개발로 인해 마이그레이션 소요시간 대폭 단축 (소요시간 3일 ➡️ 2시간) 및 고객사 업세일 진행속도 증가에 따른 그룹웨어 매출액 증가<br/>
                 - 약 500여 고객사 마이그레이션 진행<br/>
                 </pre>
-                <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '13px', border: 'none' }}>
+                <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '14px', border: 'none' }}>
                 <b style={{ fontSize: '16px' }}>2. Amaranth10(그룹웨어) 전자결재 개발 및 유지보수 </b><br/>
                 (1) 개발 기간 : 2019.11 ~ 2022.06 (2년 7개월)<br/>
                 (2) 개발 인원 : 3명<br/>
@@ -43,7 +43,7 @@ export default function Career() {
                 (4) 개발 및 유지보수 기여도 : 35%<br/>
                 (5) 성과 : 신규 프로그램 개발로 사용자 경험 확대 및 다양한 옵션과 기능 개선 및 추가로 고객 편의 제공 및 제품 판매 이후 200여건 유지보수 진행 <br/>
                 </pre>
-                <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '13px', border: 'none' }}>
+                <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '14px', border: 'none' }}>
                 <b style={{ fontSize: '16px' }}>3. BizboxAlpha(그룹웨어) 전자결재 개발 및 유지보수</b><br/>
                 (1) 개발 기간 : 2018.09 ~ 2021.03 (2년 6개월)<br/>
                 (2) 개발 인원 : 4명<br/>
