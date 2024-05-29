@@ -14,7 +14,7 @@ export default function Career() {
                 <b style={{ fontSize: '16px' }}>1.그룹웨어 전자결재 백엔드, 프론트엔드 개발 및 유지보수</b><br/>
                 - 기술 스택 : Java(Spring), Spring Boot, JSP, React, MySQL, Redis, Git, SVN, Docker<br/>
                 <b style={{ fontSize: '16px' }}>2.그룹웨어 전자결재 마이그레이션 개발 및 진행</b><br/>
-                -기술 스택: Linux, Spring Boot(JPA), React, MySQL, MSSQL, Oracle DB, Git<br/>
+                - 기술 스택: Linux, Spring Boot(JPA), React, MySQL, MSSQL, Oracle DB, Git<br/>
                 <br/>
                 <h3>🧑‍💻 진행 프로젝트</h3>
                 <b style={{ fontSize: '16px' }}>1. 전자결재 데이터 마이그레이션</b><br/>
