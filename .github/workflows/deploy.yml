@@ -33,6 +33,6 @@ jobs:
         run: |
           npm run predeploy
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/jyoung9154/jyoung9154.github.io.git
-          npx gh-pages -d dist -u "github-actions-bot <support+actions@github.com>"
+          npx gh-pages -d build -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
