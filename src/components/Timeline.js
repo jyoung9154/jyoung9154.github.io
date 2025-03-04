@@ -14,8 +14,10 @@ export default function Home() {
         {
             id: 0,
             date: '2024년 6월 - Present',
-            title: '개발자 취업 준비',
-            type: typeSchool,
+            title: '더존비즈온',
+            subtitle: <pre style={{ backgroundColor: 'inherit', fontSize: '16px', border: 'none' }}>그룹웨어 메일 개발 <br/>
+            1. 그룹웨어 메일 개발 및 유지보수 <br/>
+            type: typeWork,
         },
         {
             id: 1,
