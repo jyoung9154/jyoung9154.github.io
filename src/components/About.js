@@ -38,7 +38,7 @@ export default function About() {
                 </p>
 
                 
-                <p>웹개발 경력 4년</p> 
+                <p>웹개발 경력 5년</p> 
                 <p>Java, Spring, React.js 등 다양한 기술 스택 보유하고 있으며 클린코드 작성에 중점을 두고 있습
                     니다. 꾸준한 문제해결 능력으로 업무에 성실히 임할 자신 있습니다.</p>
                 <p>주어진 기회에서 최선을 다해 회사의 성장에 기여하고, 함께 일하는 동료들과 협력하여 프로젝트를 성공적으로 완수하는 데 주력하겠습니다. 새로운 기술에 대한
@@ -60,6 +60,12 @@ export default function About() {
                 
                 <div className="timeline-container">
                     <div className="timeline-item">
+                        <div className="timeline-date">2024.06 ~ [재직중]</div>
+                        <div className="timeline-content">
+                        <span><b>더존비즈온 근무 [그룹웨어 메일 개발 담당]</b></span>
+                        </div>
+                    </div>
+                    <div className="timeline-item">
                         <div className="timeline-date">2022.09 ~ 2024.05 [1년 8개월]</div>
                         <div className="timeline-content">
                         <span><b>세계여행 [6대륙 41개국]</b></span>
@@ -68,7 +74,7 @@ export default function About() {
                     <div className="timeline-item">
                         <div className="timeline-date">2018.09 ~ 2022.06 [3년 10개월]</div>
                         <div className="timeline-content">
-                        <span><b>더존비즈온 근무[그룹웨어 전자결재 담당]</b></span>
+                        <span><b>더존비즈온 근무 [그룹웨어 전자결재 개발 담당]</b></span>
                         </div>
                     </div>
                     <div className="timeline-item">
@@ -104,6 +110,10 @@ export default function About() {
                     <tr>
                         <td>Web technologies</td>
                         <td>HTML5, CSS3, ES7+</td>
+                    </tr>
+                    <tr>
+                        <td>Etc</td>
+                        <td>ElasticSearch, Kafka</td>
                     </tr>
                 </table>
             </div>
