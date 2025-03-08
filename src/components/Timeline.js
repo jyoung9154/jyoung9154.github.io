@@ -92,7 +92,7 @@ export default function Timeline() {
                         contentArrowStyle={{ borderRight: '7px solid #ffecb3' }}
                         date={<span style={{ fontSize: '18px', fontWeight: 600, color: '#ffb300' }}>{item.date}</span>}
                         iconStyle={{ 
-                            background: item.type === typeWork ? 'linear-gradient(135deg, #ffcc80, #ffb300)' : 'linear-gradient(135deg, #80cbc4, #00897b)', 
+                            background: item.type === typeWork ? 'rgb(255, 248, 220)' : 'rgb(255, 248, 220)', 
                             color: '#fff', 
                             display: 'flex', 
                             alignItems: 'center', 
