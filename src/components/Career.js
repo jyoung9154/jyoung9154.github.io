@@ -7,9 +7,8 @@ export default function Career() {
                 <h2 className="career-header">📜 경력기술서</h2>
                 <pre className="career-text" style={{ backgroundColor: 'inherit', fontSize: '14px', border: 'none' }}>
                 <h3>🏢 더존비즈온</h3>
-                솔루션사업본부 UC개발팀 메일 Unit [2024.06 ~ ]                
                 솔루션사업본부 UC개발팀 전자결재 Unit [2018.09 ~ 2022.06 (3년 10개월)] <br/>
-                
+                솔루션사업본부 UC개발팀 메일 Unit [2024.06 ~ ]<br/>
                 - 1977년 설립, 소프트웨어 개발업, 매출액 4,000억, 사원 수 : 1792명<br/>
                 <br/>
                 <h3>🖊️ 주요 업무</h3>

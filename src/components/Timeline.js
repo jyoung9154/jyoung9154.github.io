@@ -8,7 +8,6 @@ import { ReactComponent as SchoolIcon } from '../assets/icons/school.svg';
 import { ReactComponent as StarIcon } from '../assets/icons/star.svg';
 
 export default function Home() {
-    const typeSchool = 'school';
     const typeWork = 'work';
     const timelineData = [
         {
@@ -16,7 +15,7 @@ export default function Home() {
             date: '2024년 6월 - Present',
             title: '더존비즈온',
             subtitle: <pre style={{ backgroundColor: 'inherit', fontSize: '16px', border: 'none' }}>그룹웨어 메일 개발 <br/>
-            1. 그룹웨어 메일 개발 및 유지보수 <br/>
+            1. 그룹웨어 메일 개발 및 유지보수</pre>,
             type: typeWork,
         },
         {
