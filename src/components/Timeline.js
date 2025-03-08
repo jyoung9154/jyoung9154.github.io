@@ -77,19 +77,13 @@ export default function Timeline() {
 
     return (
         <div style={{ padding: '20px', fontFamily: 'Poppins, sans-serif' }}>
-
-{/* <VerticalTimeline
-            className="vertical-timeline-container"
-            animate={false}
-            lineColor="#000"
-        > */}
             <VerticalTimeline animate lineColor="#000">
                 {timelineData.map(item => (
                     <VerticalTimelineElement
                         key={item.id}
                         className="vertical-timeline-element--work"
                         contentStyle={{ 
-                            background: '#fff8dc', 
+                            background: '#000', 
                             color: '#333', 
                             borderRadius: '10px', 
                             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)', 
@@ -98,7 +92,7 @@ export default function Timeline() {
                         contentArrowStyle={{ borderRight: '7px solid #ffecb3' }}
                         date={<span style={{ fontSize: '18px', fontWeight: 600, color: '#ffb300' }}>{item.date}</span>}
                         iconStyle={{ 
-                            background: item.type === typeWork ? 'rgb(255, 248, 220)' : 'rgb(255, 248, 220)', 
+                            background: item.type === typeWork ? 'linear-gradient(271deg, rgb(255 210 66), rgb(255 221 141 / 71%))' : 'linear-gradient(135deg, rgb(98 191 182), rgb(138 255 243))', 
                             color: '#fff', 
                             display: 'flex', 
                             alignItems: 'center', 
