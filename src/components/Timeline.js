@@ -76,8 +76,14 @@ export default function Timeline() {
     ];
 
     return (
-        <div style={{ padding: '20px', background: 'linear-gradient(135deg, #ffffff, #fff8dc)', fontFamily: 'Poppins, sans-serif' }}>
-            <VerticalTimeline animate>
+        <div style={{ padding: '20px', fontFamily: 'Poppins, sans-serif' }}>
+
+{/* <VerticalTimeline
+            className="vertical-timeline-container"
+            animate={false}
+            lineColor="#000"
+        > */}
+            <VerticalTimeline animate lineColor="#000">
                 {timelineData.map(item => (
                     <VerticalTimelineElement
                         key={item.id}
