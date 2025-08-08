@@ -21,10 +21,9 @@ export default function Career() {
                 {/* 핵심 역량 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded"></span>
+                        <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded"/>
                         핵심 역량 및 특징
                     </h2>
-                    
                     <div className="grid md:grid-cols-2 gap-6 mb-8">
                         <div className="space-y-4">
                             <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
@@ -98,7 +97,7 @@ export default function Career() {
                 {/* 주요 프로젝트 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-green-500 to-emerald-600 mr-3 rounded"></span>
+                        <span className="w-1 h-8 bg-gradient-to-b from-green-500 to-emerald-600 mr-3 rounded"/>
                         주요 프로젝트
                     </h2>
 
@@ -111,7 +110,6 @@ export default function Career() {
                                     2024.07 ~ 현재
                                 </span>
                             </div>
-                            
                             <div className="flex flex-wrap gap-2 mb-4">
                                 {['Spring Boot', 'React', 'MySQL', 'Kubernetes', 'ElasticSearch', 'Kafka', 'MailEngine'].map(tech => (
                                     <span key={tech} className="px-2 py-1 bg-blue-50 text-blue-700 rounded text-xs">
@@ -156,7 +154,6 @@ export default function Career() {
                                     2018.12 ~ 2022.06
                                 </span>
                             </div>
-                            
                             <div className="grid md:grid-cols-3 gap-6">
                                 <div className="p-4 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg">
                                     <h4 className="font-bold text-purple-700 mb-2">개발 내용</h4>
@@ -200,8 +197,7 @@ export default function Career() {
                                     <li>• 관리자 화면 및 설정 기능</li>
                                     <li>• 200여건 유지보수 완료</li>
                                 </ul>
-                            </div>
-                            
+                            </div>  
                             <div className="border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow">
                                 <h3 className="text-lg font-bold text-gray-800 mb-2">BizboxAlpha 전자결재</h3>
                                 <span className="inline-block px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm mb-4">
