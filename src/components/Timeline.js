@@ -100,7 +100,7 @@ export default function Timeline() {
 
   return (
     <div className="timeline-wrapper">
-      <VerticalTimeline animate={true} lineColor="#e5e7eb">
+      <VerticalTimeline animate lineColor="#e5e7eb">
         {timelineData.map((item) => {
           const s = stylesByType(item.type);
           return (
