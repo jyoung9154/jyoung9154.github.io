@@ -14,7 +14,7 @@ export default function Career() {
                         <p className="text-blue-100 mb-2">솔루션사업본부 UC개발팀</p>
                         <div className="flex flex-wrap gap-4 text-sm">
                             <span>전자결재 Unit [2018.09 ~ 2022.06 (3년 10개월)]</span>
-                            <span>메일 Unit [2024.06 ~ ]</span>
+                            <span>메일 Unit [2024.07 ~ ]</span>
                         </div>
                         <p className="text-blue-100 mt-2 text-sm">- 1977년 설립, 소프트웨어 개발업, 매출액 4,000억, 사원 수 : 1792명</p>
                     </div>
@@ -23,7 +23,7 @@ export default function Career() {
                 {/* 주요 업무 - 원문 그대로 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded"></span>
+                        <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded">
                         주요 업무
                     </h2>
 
@@ -48,7 +48,7 @@ export default function Career() {
                 {/* 핵심 역량 및 특징 - 원문 그대로 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 mr-3 rounded"></span>
+                        <span className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 mr-3 rounded">
                         핵심 역량 및 특징
                     </h2>
 
@@ -101,7 +101,7 @@ export default function Career() {
                 {/* 주요 프로젝트 - 원문 그대로 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-green-500 to-emerald-600 mr-3 rounded"></span>
+                        <span className="w-1 h-8 bg-gradient-to-b from-green-500 to-emerald-600 mr-3 rounded">
                         주요 프로젝트
                     </h2>
 
