@@ -25,6 +25,7 @@ export default function Career() {
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded">
                         주요 업무
+                        </span>
                     </h2>
 
                     <div className="space-y-6 text-sm text-gray-700">
