@@ -35,7 +35,7 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     data-title="KakaoTalk"
-                    href="http://qr.kakao.com/talk/Ce5_pAdT76JbejDu0v0.bv4XQJA-"
+                    href="https://open.kakao.com/o/seT0joLh"
                 >
                     <WhatsAppIcon
                         className="social-link-icon"
