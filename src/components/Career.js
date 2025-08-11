@@ -23,9 +23,9 @@ export default function Career() {
                 {/* 주요 업무 - 원문 그대로 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded">
+                        <span className="w-1 h-8 bg-gradient-to-b from-blue-500 to-indigo-600 mr-3 rounded" />
                         주요 업무
-                        </span>
+                        
                     </h2>
 
                     <div className="space-y-6 text-sm text-gray-700">
@@ -49,7 +49,7 @@ export default function Career() {
                 {/* 핵심 역량 및 특징 - 원문 그대로 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 mr-3 rounded">
+                        <span className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 mr-3 rounded" />
                         핵심 역량 및 특징
                     </h2>
 
@@ -102,7 +102,7 @@ export default function Career() {
                 {/* 주요 프로젝트 - 원문 그대로 */}
                 <div className="bg-white rounded-2xl shadow-lg p-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <span className="w-1 h-8 bg-gradient-to-b from-green-500 to-emerald-600 mr-3 rounded">
+                        <span className="w-1 h-8 bg-gradient-to-b from-green-500 to-emerald-600 mr-3 rounded" />
                         주요 프로젝트
                     </h2>
 
