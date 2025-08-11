@@ -1,4 +1,48 @@
 import React from 'react';
+import {
+    SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes,
+    SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit
+  } from "react-icons/si";
+  
+  // 기술 스택 뱃지 데이터
+  const techStacks = [
+    { name: "Spring", icon: <SiSpring className="text-green-500" />, bg: "bg-green-100", text: "text-green-700" },
+    { name: "React", icon: <SiReact className="text-sky-500" />, bg: "bg-sky-100", text: "text-sky-700" },
+    { name: "MySQL", icon: <SiMysql className="text-blue-500" />, bg: "bg-blue-100", text: "text-blue-700" },
+    { name: "Docker", icon: <SiDocker className="text-sky-600" />, bg: "bg-sky-100", text: "text-sky-700" },
+    { name: "Kubernetes", icon: <SiKubernetes className="text-blue-600" />, bg: "bg-blue-100", text: "text-blue-700" },
+    { name: "Redis", icon: <SiRedis className="text-red-500" />, bg: "bg-red-100", text: "text-red-700" },
+    { name: "Kafka", icon: <SiApachekafka className="text-gray-800" />, bg: "bg-gray-100", text: "text-gray-800" },
+    { name: "ElasticSearch", icon: <SiElasticsearch className="text-yellow-500" />, bg: "bg-yellow-100", text: "text-yellow-700" },
+    { name: "Linux", icon: <SiLinux className="text-black" />, bg: "bg-gray-200", text: "text-gray-800" },
+    { name: "Git", icon: <SiGit className="text-orange-500" />, bg: "bg-orange-100", text: "text-orange-700" },
+  ];
+  
+  // 뱃지 컴포넌트
+  function TechBadges() {
+    return (
+      <div className="flex flex-wrap gap-2 mt-2">
+        {techStacks.map((tech) => (
+          <span
+            key={tech.name}
+            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition ${tech.bg} ${tech.text}`}
+          >
+            {tech.icon}
+            {tech.name}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  // 섹션별 커스텀 뱃지 프리셋
+const badges = {
+    header: techStacks, // 전체 스택
+    task1: ["Spring", "React", "MySQL", "Redis", "Git", "Docker", "Kubernetes"].map(n => techStacks.find(t => t.name === n)),
+    task2: ["Linux", "Spring", "React", "MySQL", "Git"].map(n => (n === "Spring" ? "Spring" : n)).map(n => techStacks.find(t => t.name === n || (n === "Spring" && t.name === "Spring"))),
+    task3: ["Linux", "Spring", "React", "MySQL", "Git", "Kubernetes", "ElasticSearch", "Kafka"].map(n => techStacks.find(t => t.name === n || (n === "Spring" && t.name === "Spring"))),
+    mailModule: ["Spring", "React", "MySQL", "Kubernetes", "ElasticSearch", "Kafka", "Linux", "Git"].map(n => techStacks.find(t => t.name === n || (n === "Spring" && t.name === "Spring"))),
+  };
 
 export default function Career() {
     return (
@@ -19,6 +63,7 @@ export default function Career() {
                             <span>메일 Unit [2024.07 ~ 재직중]</span>
                         </div>
                         <p className="text-blue-100 mt-2 text-base">- 1977년 설립, 소프트웨어 개발업, 매출액 4,000억, 사원 수 : 1755명</p>
+                        <TechBadges items={badges.header} className="mt-4" />
                     </div>
                 </div>
 
@@ -34,16 +79,19 @@ export default function Career() {
                         <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
                             <p className="font-bold text-gray-900 mb-2">1.그룹웨어 전자결재 백엔드, 프론트엔드 개발 및 유지보수</p>
                             <p>- 기술 스택 : Java(Spring), Spring Boot, JSP, React, MySQL, Redis, Git, SVN, Docker, k8s</p>
+                            {/* <TechBadges items={badges.task1} /> */}
                         </div>
 
                         <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
                             <p className="font-semibold text-gray-900 mb-2">2.그룹웨어 전자결재 마이그레이션 개발 및 운영 담당</p>
                             <p>- 기술 스택: Linux, Spring Boot(JPA), React, MySQL, MSSQL, Oracle DB, Git</p>
+                            {/* <TechBadges items={badges.task2} /> */}
                         </div>
 
                         <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
                             <p className="font-semibold text-gray-900 mb-2">3.그룹웨어 메일 개발 및 유지보수</p>
                             <p>- 기술 스택: Linux, Spring Boot, React, MySQL, Git, k8s, MailEngine(SMTP, POP, IMAP), ElasticSearch, Kafka</p>
+                            {/* <TechBadges items={badges.task3} /> */}
                         </div>
                     </div>
                 </div>
@@ -116,116 +164,189 @@ export default function Career() {
                         <div className="text-base text-gray-700 space-y-1 mb-4">
                             <p>기간: 2024.07 ~ 재직중</p>
                             <p>기술 스택: Spring Boot, React, MySQL, Kubernetes, ElasticSearch, Kafka, MailEngine(SMTP/POP/IMAP), Linux, Git</p>
+                            {/* <TechBadges items={badges.mailModule} className="mb-4" /> */}
                             <p>역할: 기능 개발 및 리팩토링 주도, 운영 자동화로 CS/운영 비용 절감</p>
                         </div>
 
                         <div className="space-y-6">
-                            <div>
-                                <p className="font-semibold text-gray-900">주요 개발 내역</p>
+                            {/* SSL 인증서 등록 기능 개발 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                SSL 인증서 등록 기능 개발
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2024.10.01 ~ 2024.10.31
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 인증서 갱신/적용을 터미널에서 수동으로 처리하며 반복 및 오류·지연 발생</li>
+                                <li>* 개선: 사용자가 직접 인증서 등록, 검증·만료 알림 일원화, 인증서 적용을 위한 Kubernetes 업데이트 절차 정립</li>
+                                <li>* 성과: 인증서 등록 요청 접수율 대폭 하락 및 만료로 인한 장애 리스크 축소</li>
+                                </ul>
                             </div>
 
-                            {/* 각 항목 */}
+                            {/* 메일 탈취 조회 기능 개발 */}
                             <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2024.10.01 ~ 2024.10.31 | SSL 인증서 등록 기능 개발</p>
+                                <p className="text-xl font-semibold text-gray-800">
+                                메일 탈취 조회 기능 개발
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2024.11.01 ~ 2024.11.30
+                                </span>
+                                </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 인증서 갱신/적용을 터미널에서 수동으로 처리하며 반복 및 오류·지연 발생</li>
-                                    <li>* 개선: 사용자가 직접 인증서 등록, 검증·만료 알림 일원화, 인증서 적용을 위한 Kubernetes 업데이트 절차 정립</li>
-                                    <li>* 성과: 인증서 등록 요청 접수율 대폭 하락 및 만료로 인한 장애 리스크 축소</li>
+                                <li>* 배경: 메일 유지보수 접수의 90% 이상을 차지, 로그 실시간 확인·전달에 개발 및 운영 병목 발생</li>
+                                <li>* 개선: 사용자 자가 조회 화면 제공, 탈취 의심계정 리스트·주요 지표(IP/지역/패턴) 시각화</li>
+                                <li>* 성과: 탈취 확인 요청 건수 대폭 감소, 1차 응대 자동화로 CS 리소스 대폭 감소</li>
+                                </ul>
+                            </div>
+
+                            {/* 메일 허용정책 설정 기능 개발 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                메일 허용정책 설정 기능 개발
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2024.12.01 ~ 2024.12.31
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 릴레이설정 및 스팸장비 연동 요청을 고객지원 센터 접수 후 개발팀이 직접 등록하는 비효율 존재</li>
+                                <li>* 개선: 관리자 UI 제공, 권한 검증 및 감사로그 연계로 셀프 프로비저닝 구현</li>
+                                <li>* 성과: 관리자 페이지에서 고객지원팀이 직접 설정함으로서 고객지원 및 개발팀 편의성 극대화</li>
+                                </ul>
+                            </div>
+
+                            {/* 메일 내보내기 기능(법무 모듈) 개발 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                메일 내보내기 기능(법무 모듈) 개발
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.01.02 ~ 2025.01.24
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 법무적 내용으로 주고 받은 메일을 법무모듈 - 사건 연동 기능 개발 요청</li>
+                                <li>* 개발: 특정 메일 내보내기 기능을 개발하여 법무모듈에 전달 후 메일 뷰어 API 제공</li>
+                                <li>* 성과: 법무 사건과 주고받은 메일을 하나의 페이지에서 조회</li>
+                                </ul>
+                            </div>
+
+                            {/* 메일 FrontEnd 전체 리팩토링 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                메일 FrontEnd 전체 리팩토링
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.01.01 ~ 2025.06.30
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 현행 프론트(React)소스가 유지보수하기 매우 불편한 구조로 되어 있어 기능고도화 및 성능 저하, 유지보수 부담 가중</li>
+                                <li>* 개선: 컴포넌트 모듈화, 상태 관리 단순화, 리스트 렌더링 최적화(가상 스크롤/메모이제이션), 공통 UI/훅 표준화 설계 및 개발</li>
+                                <li>* 성과: 프론트 속도 최적화 및 유지보수 효율 증대, 화면 응답 속도 개선</li>
+                                <li>* 특이사항: 메일 모듈 팀장 및 CTO에게 리팩토링 필요성과 프론트 아키텍처 설계 및 코드 리뷰를 통해 승인 후 진행</li>
+                                <li className="pl-4">* 개선 범위 : 메일 프론트 전체</li>
+                                <li>* 참고: 포트폴리오 파일 내 상세 사례 포함</li>
+                                </ul>
+                            </div>
+
+                            {/* 강원랜드 메일 망연계 시스템 개발 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                강원랜드 메일 망연계 시스템 개발
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.02.03 ~ 2025.02.28
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 망분리 환경에서 안전한 메일 연계 및 메일 수발신 통계 API 요청</li>
+                                <li>* 개선: 망분리 환경의 내부망과 외부망 연계 API 개발 및 메일 수발신 통계 API 개발</li>
+                                <li>* 성과: 망분리 환경에서의 안정적인 송수신과 통계 데이터를 통한 메일 탈취 및 의심계정 경고하여 CS적요소 차단</li>
+                                </ul>
+                            </div>
+
+                            {/* AWS S3 연동 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                AWS S3 연동
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.04.07 ~ 2025.04.14
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 더존 클라우드가 아닌 AWS 요청 고객사 수요 대응</li>
+                                <li>* 개선: 메일모듈 AWS S3 연동 대응</li>
+                                </ul>
+                            </div>
+
+                            {/* 발송 진행 확인 기능 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                발송 진행 확인 기능
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.04.24 ~ 2025.05.08
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 메일 발송 상태 확인 요청 문의가 많아 개발 진행</li>
+                                <li>* 개선: 메일 발송/성공/실패 단계 모니터링 화면 제공</li>
+                                <li>* 성과: 운영 가시성 확보, 문의 감소</li>
+                                </ul>
+                            </div>
+
+                            {/* 외부메일 반송 기능 고도화 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                외부메일 반송 기능 고도화
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.05.09 ~ 2025.05.16
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 아웃룩에서 발송한 메일 반송 사유 파악 어려움</li>
+                                <li>* 개선: 아웃룩에서 메일 발송 후 반송 시 반송메일을 추가</li>
+                                <li>* 성과: 발송자가 반송되었는지 확인이 가능하여 문의 감소</li>
+                                </ul>
+                            </div>
+
+                            {/* 전자정부 프레임워크 적용 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                전자정부 프레임워크 적용
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.06.02 ~ 2025.07.02
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 공공 환경 고객사 수요 맞춤 개발 진행</li>
+                                <li>* 개선: 전자정부 프레임워크 적용을 위한 SpringBoot 버전 변경 및 대응</li>
+                                <li>* 성과: 공공 레퍼런스 대응력 강화</li>
+                                </ul>
+                            </div>
+
+                            {/* 메일 BackEnd 속도 개선 */}
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                메일 BackEnd 속도 개선
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.07.24 ~ 2025.08.20
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 클라우드형 고객사 메일 초기 접속시 10초이상 소요되어 최적화 진행</li>
+                                <li>* 개선: 초기 접속시 필수 기초데이터 영역 세분화 및 데이터 분리 및 백그라운드 싱크 및 쿼리·인덱스 개선</li>
+                                <li>* 성과: 메일 초기 접속 및 갱신시 500ms 이내로 단축</li>
                                 </ul>
                             </div>
 
                             <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2024.11.01 ~ 2024.11.30 | 메일 탈취 조회 기능 개발</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 메일 유지보수 접수의 90% 이상을 차지, 로그 실시간 확인·전달에 개발 및 운영 병목 발생</li>
-                                    <li>* 개선: 사용자 자가 조회 화면 제공, 탈취 의심계정 리스트·주요 지표(IP/지역/패턴) 시각화</li>
-                                    <li>* 성과: 탈취 확인 요청 건수 대폭 감소, 1차 응대 자동화로 CS 리소스 대폭 감소</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2024.12.01 ~ 2024.12.31 | 메일 허용정책 설정 기능 개발</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 릴레이설정 및 스팸장비 연동 요청을 고객지원 센터 접수 후 개발팀이 직접 등록하는 비효율 존재</li>
-                                    <li>* 개선: 관리자 UI 제공, 권한 검증 및 감사로그 연계로 셀프 프로비저닝 구현</li>
-                                    <li>* 성과: 관리자 페이지에서 고객지원팀이 직접 설정함으로서 고객지원 및 개발팀 편의성 극대화</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.01.02 ~ 2025.01.24 | 메일 내보내기 기능(법무 모듈) 개발</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 법무적 내용으로 주고 받은 메일을 법무모듈 - 사건 연동 기능 개발 요청</li>
-                                    <li>* 개발: 특정 메일 내보내기 기능을 개발하여 법무모듈에 전달 후 메일 뷰어 API 제공</li>
-                                    <li>* 성과: 법무 사건과 주고받은 메일을 하나의 페이지에서 조회</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.01.01 ~ 2025.06.30 | 메일 FrontEnd 전체 리팩토링</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 현행 프론트(React)소스가 유지보수하기 매우 불편한 구조로 되어 있어 기능고도화 및 성능 저하, 유지보수 부담 가중</li>
-                                    <li>* 개선: 컴포넌트 모듈화, 상태 관리 단순화, 리스트 렌더링 최적화(가상 스크롤/메모이제이션), 공통 UI/훅 표준화 설계 및 개발</li>
-                                    <li>* 성과: 프론트 속도 최적화 및 유지보수 효율 증대, 화면 응답 속도 개선</li>
-                                    <li>* 특이사항: 메일 모듈 팀장 및 CTO에게 리팩토링 필요성과 프론트 아키텍처 설계 및 코드 리뷰를 통해 승인 후 진행</li>
-                                    <li className="pl-4">* 개선 범위 : 메일 프론트 전체</li>
-                                    <li>* 참고: 포트폴리오 파일 내 상세 사례 포함</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.02.03 ~ 2025.02.28 | 강원랜드 메일 망연계 시스템 개발</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 망분리 환경에서 안전한 메일 연계 및 메일 수발신 통계 API 요청</li>
-                                    <li>* 개선: 망분리 환경의 내부망과 외부망 연계 API 개발 및 메일 수발신 통계 API 개발</li>
-                                    <li>* 성과: 망분리 환경에서의 안정적인 송수신과 통계 데이터를 통한 메일 탈취 및 의심계정 경고하여 CS적요소 차단</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.04.07 ~ 2025.04.14 | AWS S3 연동</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 더존 클라우드가 아닌 AWS 요청 고객사 수요 대응</li>
-                                    <li>* 개선: 메일모듈 AWS S3 연동 대응</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.04.24 ~ 2025.05.08 | 발송 진행 확인 기능</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 메일 발송 상태 확인 요청 문의가 많아 개발 진행</li>
-                                    <li>* 개선: 메일 발송/성공/실패 단계 모니터링 화면 제공</li>
-                                    <li>* 성과: 운영 가시성 확보, 문의 감소</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.05.09 ~ 2025.05.16 | 외부메일 반송 기능 고도화</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 아웃룩에서 발송한 메일 반송 사유 파악 어려움</li>
-                                    <li>* 개선: 아웃룩에서 메일 발송 후 반송 시 반송메일을 추가</li>
-                                    <li>* 성과: 발송자가 반송되었는지 확인이 가능하여 문의 감소</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.06.02 ~ 2025.07.02 | 전자정부 프레임워크 적용</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 공공 환경 고객사 수요 맞춤 개발 진행</li>
-                                    <li>* 개선: 전자정부 프레임워크 적용을 위한 SpringBoot 버전 변경 및 대응</li>
-                                    <li>* 성과: 공공 레퍼런스 대응력 강화</li>
-                                </ul>
-                            </div>
-
-                            <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-medium text-gray-800">2025.07.24 ~ 2025.08.20 | 메일 BackEnd 속도 개선</p>
-                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 클라우드형 고객사 메일 초기 접속시 10초이상 소요되어 최적화 진행</li>
-                                    <li>* 개선: 초기 접속시 필수 기초데이터 영역 세분화 및 데이터 분리 및 백그라운드 싱크 및 쿼리·인덱스 개선</li>
-                                    <li>* 성과: 메일 초기 접속 및 갱신시 500ms 이내로 단축</li>
-                                </ul>
+                                <p className="text-xl font-semibold text-gray-800">
+                                그 외 주요기능 고도화 다수 
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2024.07.31 ~ 
+                                </span>
+                                </p>
+                                {/* <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium" */}
                             </div>
                         </div>
+
                     </div>
 
                     {/* 2. 전자결재 데이터 마이그레이션 */}
@@ -240,7 +361,7 @@ export default function Career() {
 
                         <div className="grid md:grid-cols-2 gap-6">
                             <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-semibold text-gray-900 mb-2">주요 개발 내역</p>
+                                <p className="text-xl font-semibold text-gray-900 mb-2">주요 개발 내역</p>
                                 <ul className="text-base text-gray-700 space-y-1 [&>li]:font-medium">
                                     <li>* 더존비즈온의 그룹웨어 제품군 업세일에 따른 마이그레이션 진행</li>
                                     <li>* 데이터 이관, 첨부파일 이관 및 데이터 보정 등 전자결재 전반적인 데이터 및 파일 마이그레이션 툴 개발</li>
@@ -250,7 +371,7 @@ export default function Career() {
                                 </ul>
                             </div>
                             <div className="rounded-lg bg-gray-50 p-4">
-                                <p className="font-semibold text-gray-900 mb-2">성과</p>
+                                <p className="text-xl font-semibold text-gray-900 mb-2">성과</p>
                                 <ul className="text-base text-gray-700 space-y-1 [&>li]:font-medium">
                                     <li>* 소요시간 단축: 수동으로 진행하였던 마이그레이션을 툴 개발로 인해 마이그레이션 소요시간 대폭 단축 (3일 → 2시간)</li>
                                     <li>* 매출 기여: 고객사 업세일 진행속도 증가에 따른 그룹웨어 매출액 증가</li>
@@ -270,7 +391,7 @@ export default function Career() {
                         </div>
 
                         <div className="rounded-lg bg-gray-50 p-4">
-                            <p className="font-semibold text-gray-900 mb-2">주요 개발 내역</p>
+                            <p className="text-xl font-semibold text-gray-900 mb-2">주요 개발 내역</p>
                             <div className="text-base text-gray-700 space-y-1 [&>li]:font-medium">
                                 <p className="font-semibold">(1) 사용자 화면단 개발</p>
                                 <ul className="pl-4 list-disc [&>li]:font-medium">
@@ -306,11 +427,11 @@ export default function Career() {
                         </div>
 
                         <div className="rounded-lg bg-gray-50 p-4">
-                            <p className="font-semibold text-gray-900 mb-2">주요 개발 내역</p>
+                            <p className="text-xl font-semibold text-gray-900 mb-2">주요 개발 내역</p>
                             <ul className="text-base text-gray-700 space-y-1 [&>li]:font-medium pl-4 list-disc">
                                 <li>전자결재 내 주요 기능 고도화 및 약 800여건 유지보수 진행</li>
                             </ul>
-                            <p className="font-semibold text-gray-900 mt-3 mb-2">성과</p>
+                            <p className="text-xl font-semibold text-gray-900 mt-3 mb-2">성과</p>
                             <ul className="text-base text-gray-700 space-y-1 [&>li]:font-medium pl-4 list-disc">
                                 <li>기능 고도화 및 유지보수를 진행함으로써 사용자 편의 제공</li>
                             </ul>
