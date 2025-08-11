@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* the following import is used by react-scripts to bring in the normalize.css styles */
 @import-normalize;
 
