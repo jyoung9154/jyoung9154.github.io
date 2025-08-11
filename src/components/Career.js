@@ -57,6 +57,12 @@ const MarkProject = ({ children, className = "" }) => (
     </span>
 );
 
+const MarkLink = ({ children, className = "" }) => (
+    <span className={`px-1.5 py-0.5 rounded-md bg-blue-100 text-blue-800 font-semibold ${className}`}>
+        {children}
+    </span>
+);
+
 export default function Career() {
     return (
         <div className="career-container min-h-screen bg-gradient-to-br">
@@ -251,12 +257,24 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 현행 프론트(React)소스가 <Mark>유지보수하기 매우 불편한 구조</Mark>로 되어 있어 <Mark>기능고도화 및 성능 저하, 유지보수 부담</Mark> 가중</li>
-                                <li>* 개선: 컴포넌트 모듈화, 상태 관리 단순화, 리스트 <Mark>렌더링 최적화</Mark>(가상 스크롤/메모이제이션), <Mark>공통 UI/훅 표준화 설계 및 개발</Mark></li>
-                                <li>* 성과: 프론트 <Mark>속도 최적화 및 유지보수 효율 증대</Mark>, 화면 응답 속도 개선</li>
-                                <li>* 특이사항: 메일 모듈 팀장 및 CTO에게 <Mark>리팩토링 필요성</Mark>과 프론트 <Mark>아키텍처 설계 및 코드 리뷰를 통해 승인</Mark> 후 진행</li>
-                                <li className="pl-4">* 개선 범위 : 메일 프론트 전체</li>
-                                <li>* 참고: 포트폴리오 파일 내 상세 사례 포함</li>
+                                    <li>* 배경: 현행 프론트(React)소스가 <Mark>유지보수하기 매우 불편한 구조</Mark>로 되어 있어 <Mark>기능고도화 및 성능 저하, 유지보수 부담</Mark> 가중</li>
+                                    <li>* 개선: 컴포넌트 모듈화, 상태 관리 단순화, 리스트 <Mark>렌더링 최적화</Mark>(가상 스크롤/메모이제이션), <Mark>공통 UI/훅 표준화 설계 및 개발</Mark></li>
+                                    <li>* 성과: 프론트 <Mark>속도 최적화 및 유지보수 효율 증대</Mark>, 화면 응답 속도 개선</li>
+                                    <li>* 특이사항: 메일 모듈 팀장 및 CTO에게 <Mark>리팩토링 필요성</Mark>과 프론트 <Mark>아키텍처 설계 및 코드 리뷰를 통해 승인</Mark> 후 진행</li>
+                                    <li className="pl-4">* 개선 범위 : 메일 프론트 전체</li>
+                                    <li>
+                                        * 참고:                                         
+                                        <MarkLink><a 
+                                            href="/assets/Mail_1.pdf" 
+                                            target="_blank" 
+                                            rel="noopener"
+                                            aria-label="메일 아키텍처 재설계 PDF, 새 창에서 열림"
+                                        >
+                                            메일 아키텍처 재설계.pdf (새 창)
+                                        </a>
+                                        </MarkLink>
+                                        
+                                    </li>
                                 </ul>
                             </div>
 
