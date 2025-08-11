@@ -159,58 +159,53 @@ h4 {
 /***************************/
 
 .footer {
-    bottom: 0;
-    height: 110px;
-    font-size: 1.4em;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 16px 0;
 }
 
 .footer-social-links {
-    margin-top: 40px;
-    min-height: 40px;
+    display: flex;
+    align-items: center;
+    gap: 12px; /* 좌우 간격은 이 한 줄로 통제 */
+    margin-top: 0; /* 중앙 정렬 방해 요소 제거 */
 }
 
 .social-link {
-    margin: 0;
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    height: 35px;
+    display: block;       /* 인라인 공백 제거 */
     width: 35px;
-    line-height: 1.45;
-    font-weight: 400;
-    user-select: text;
+    height: 35px;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.14s;
+    padding: 0;           /* 패딩으로 간격 보정 금지 */
 
     &:before {
         content: attr(data-title);
-        display: none;
         position: absolute;
-        bottom: 64px;
-        left: -6px;
-        margin: 0 auto;
+        left: 50%;                 /* 기준 요소의 중앙에 정렬 */
+        bottom: 40px;              /* 아이콘 위로 띄우기 (원하는 값으로 조정) */
+        transform: translate(-50%, 0); /* 가로 중앙 보정 */
+        display: block;
+        white-space: nowrap;
         font-size: 13px;
-        padding: 3px 10px;
+        padding: 4px 10px;         /* 시각적 균형용 내부 여백 */
         background: #222;
         color: #fff;
-        border-radius: 2px;
-        height: 22px;
-        line-height: 22px;
+        border-radius: 4px;
         opacity: 0;
+        pointer-events: none;      /* 툴팁이 호버 해제 막지 않게 */
         transition: opacity 150ms linear, transform 150ms linear;
-        transform: translate3d(0, -8px, 0);
         z-index: 99;
     }
 
     .social-link-icon {
-        height: 30px;
+        display: block;       /* 아이콘을 컨테이너에 딱 맞추기 */
         width: 35px;
-        text-align: center;
-        display: inline-block;
+        height: 35px;
+        margin: 0;
         color: #000;
-        margin: 7px auto;
     }
 
     &:hover {
