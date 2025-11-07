@@ -384,29 +384,6 @@ export default function Career() {
                                 </ul>
                             </div>
 
-                            // <div className="rounded-lg bg-gray-50 p-4">
-                            //     <p className="text-xl font-semibold text-gray-800">
-                            //     <MarkProject> 메일 소프트웨어 리엔지니어링 </MarkProject>
-                            //     <span className="ml-2 align-baseline text-sm text-gray-500">
-                            //         2025.10.13 ~ 
-                            //     </span>
-                            //     </p>
-                            //     <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                            //     <li>배경: Clinet -> Mail Front -> Mail 모듈(인증) -> Mailbox 모듈(기능) -> MailEngine(SMTP, POP, IMAP ) -> Client 구조에서 인증/기능 영역에서 메모리 누수 및 힙 사용량의 지속적인 증가로 성능 저하 확인 </li>
-                            //     <li>개발: 
-                            //      <Mail 모듈(인증)>
-                            //      - 인증·세션 처리를 Filter(Anti-corruption/토큰 1차 검증) + AOP(어노테이션 기반 인가·컨텍스트 주입)로 표준화하여 컨트롤러 내부의 인증/세션 체크 중복을 제거하고 경로별 정책 일관성을 확보. 
-                            //      - 세션/토큰 수명주기(만료·재발급·블랙리스트)와 실패 처리(만료·서명 오류·권한 부족)를 공통화하여 누락·편차를 제거하고, 인증 실패를 조기 차단해 불필요한 리소스 소비를 감소 
-                            //      <Mailbox 모듈(기능)>
-                            //          멀티스레드 메일 처리 파이프라인에서 컨슈머가 대량 배치를 한꺼번에 수신 후 병렬 처리하면서 처리 속도를 초과해 메모리 버퍼가 적체되어 OOM 및 일시적으로 급격한 리소스 사용 증가 발생.
-                            //          쿠버네티스 환경에 맞게 카프카 파티션 증가 및 셋팅 변경
-                            //          메일 유량 제어를 위한 알고리즘 설계 및 쓰레드 제한 처리
-                            //          </li>
-                                     
-                            //     <li>성과: </li>
-                            //     </ul>
-                            // </div>
-
                             <div className="rounded-lg bg-gray-50 p-4">
                               <p className="text-xl font-semibold text-gray-800">
                                 <MarkProject>메일 소프트웨어 리엔지니어링</MarkProject>
