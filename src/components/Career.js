@@ -394,16 +394,15 @@ export default function Career() {
                             
                               <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
                                 <li>
-                                  배경: Client → Mail Front → Mail 모듈(인증) → Mailbox 모듈(기능) → MailEngine(SMTP/POP/IMAP) → Client 파이프라인에서, 인증/기능 구간의 메모리 누수 및 힙 사용량 지속 증가로 처리 지연과 OOM 리스크가 확인.
+                                  배경: <Mark>Client → Mail Front → Mail 모듈(인증) → Mailbox 모듈(기능) → MailEngine(SMTP/POP/IMAP) → Client</Mark> 파이프라인에서, 인증/기능 구간의 메모리 누수 및 힙 사용량 지속 증가로 처리 지연과 OOM 리스크가 확인.
                                 </li>
                             
                                 <li>
-                                  개발:
                                   <div className="mt-1">
                                     <div className="font-semibold text-gray-800">Mail 모듈(인증)</div>
-                                    <ul className="mt-1 ml-4 list-disc space-y-1">
+                                    <ul className="mt-1 ml-4 list-disc space-y-1 [&>li]:font-medium">
                                       <li>
-                                        인증·세션 처리를 Filter(인증 처리) + AOP(세션 체크 및 컨텍스트 주입)로 전역 표준화하여 컨트롤러 내 인증/세션 체크 중복 제거 및 경로별 정책 일관성 확보
+                                        인증·세션 처리를 <Mark>Filter(인증 처리) + AOP(세션 체크 및 컨텍스트 주입)</Mark>로 전역 표준화하여 컨트롤러 내 인증/세션 체크 중복 제거 및 경로별 정책 일관성 확보
                                       </li>
                                       <li>
                                         힙 덤프/GC 로그 분석을 통해 장기 참조·버퍼 미해제 지점 식별하여 객체 수명주기 재설계, <Mark>AOP Final에서 메모리 최적화</Mark> 진행.
@@ -412,10 +411,10 @@ export default function Career() {
                                   </div>
                             
                                   <div className="mt-3">
-                                    <div className="font-semibold text-gray-800">&lt;Mailbox 모듈(기능)&gt;</div>
-                                    <ul className="mt-1 ml-4 list-disc space-y-1">
+                                    <div className="font-semibold text-gray-800">Mailbox 모듈(기능)</div>
+                                    <ul className="mt-1 ml-4 list-disc space-y-1 [&>li]:font-medium">
                                       <li>
-                                        멀티스레드 환경에서 Kafka에서 대량 메일 수신 후 병렬 처리로 처리 속도를 초과해 버퍼 적체 및 OOM이 발생하던 문제를 메일 유량 제어 모델 개발.
+                                        멀티스레드 환경에서 Kafka에서 메일 <Mark>대량 수신 후 병렬 처리로 처리 속도를 초과</Mark>해 버퍼 적체 및 OOM이 발생하던 문제를 <Mark>메일 유량 제어 모델 개발</Mark>.
                                       </li>
                                       <li>
                                         스레드풀(코어/최대/큐 용량)과 워커 메모리 상한을 처리시간 기준으로 재설계, 대용량 첨부 스트리밍 처리·버퍼 재사용으로 힙 피크와 GC 정지 시간 감소.
@@ -427,14 +426,7 @@ export default function Career() {
                                   </div>
                                 </li>
                             
-                                <li>
-                                  성과:
-                                  <ul className="mt-1 ml-4 list-disc space-y-1">
-                                    <li>
-                                      최대 메모리 사용량 110% -> 60%로 감소 및 인증 로직 중복 제거로 변경 범위 축소, 코드 리뷰/배포 리드타임 단축과 결함율 감소, 운영 알림·장애 티켓 감소로 운영 안정성 향상
-                                    </li>
-                                  </ul>
-                                </li>
+                                <li> 성과: <Mark>최대 메모리 사용량 100% -> 60% </Mark>로 감소 및 인증 로직 중복 제거로 변경 범위 축소, 코드 리뷰/배포 리드타임 단축과 결함율 감소, 운영 알림·장애 티켓 감소로 <Mark>운영 안정성 향상</Mark></li>
                               </ul>
                             </div>
 
