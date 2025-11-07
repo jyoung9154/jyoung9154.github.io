@@ -3,9 +3,11 @@ import {
     SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes,
     SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit
   } from "react-icons/si";
-  
+import { MdOutlineSmartToy } from "react-icons/md";  
+
   // 기술 스택 뱃지 데이터
   const techStacks = [
+    { name: "AI", icon: <MdOutlineSmartToy className="text-purple-600" />, bg: "bg-purple-100", text: "text-purple-700" },
     { name: "Spring", icon: <SiSpring className="text-green-500" />, bg: "bg-green-100", text: "text-green-700" },
     { name: "React", icon: <SiReact className="text-sky-500" />, bg: "bg-sky-100", text: "text-sky-700" },
     { name: "MySQL", icon: <SiMysql className="text-blue-500" />, bg: "bg-blue-100", text: "text-blue-700" },
@@ -16,6 +18,7 @@ import {
     { name: "ElasticSearch", icon: <SiElasticsearch className="text-yellow-500" />, bg: "bg-yellow-100", text: "text-yellow-700" },
     { name: "Linux", icon: <SiLinux className="text-black" />, bg: "bg-gray-200", text: "text-gray-800" },
     { name: "Git", icon: <SiGit className="text-orange-500" />, bg: "bg-orange-100", text: "text-orange-700" },
+    
   ];
   
   // 뱃지 컴포넌트
