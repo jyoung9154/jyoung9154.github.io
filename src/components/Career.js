@@ -79,12 +79,12 @@ export default function Career() {
                         <h2 className="text-2xl font-bold mb-2">더존비즈온</h2>
                         <p className="text-blue-100 mb-2">솔루션사업본부 솔루션개발팀</p>
                         <div className="flex flex-wrap gap-4 text-base">
-                            <span>전자결재 Unit [2018.09 ~ 2022.06 (3년 10개월)]</span>
+                            <span>전자결재 Unit [2018.09 ~ 2022.06]</span>
                         </div>
                         <div className="flex flex-wrap gap-4 text-base">
                             <span>메일 Unit [2024.07 ~ 재직중]</span>
                         </div>
-                        <p className="text-blue-100 mt-2 text-base">- 1977년 설립, 소프트웨어 개발업, 매출액 4,000억, 사원 수 : 1755명</p>
+                        <p className="text-blue-100 mt-2 text-base">- 1977년 설립, 소프트웨어 개발업, 사원 수 : 1755명</p>
                         <TechBadges items={badges.header} className="mt-4" />
                     </div>
                 </div>
@@ -126,7 +126,7 @@ export default function Career() {
                     </h2>
 
                     <div className="space-y-2 text-gray-800 text-base">
-                        <p>• 역할: <Mark>[클라우드(SaaS), 구축] 그룹웨어</Mark> 메일·전자결재 영역 풀스택 개발·운영, 대규모 데이터 마이그레이션 자동화 주도</p>
+                        <p>• 역할: <Mark>[클라우드(SaaS), 구축] 그룹웨어</Mark> 메일·전자결재 영역 <Mark>풀스택 개발·운영</Mark>, 대규모 데이터 마이그레이션 자동화 주도, <Mark>Spring AI 기반 MCP 서버를 구축 및 LLM Tool 호출을 구현</Mark></p>
                         <p>• 강점: 모듈 핵심 기능 개발, 반복 업무 자동화, CS 이슈 선제 제거, 대규모 리팩토링 기획·실행, 운영 효율화</p>
                         <p>• 핵심 기술: Spring Boot, React, MySQL, Kafka, ElasticSearch, Kubernetes, MailEngine(SMTP/POP/IMAP)</p>
                         <p>• 주요 성과: <Mark>신규프로젝트 초기 기획~런칭 핵심 기능 개발</Mark> 및 개발 라이프사이클 경험, 마이그레이션 3일→2시간 단축, 자동화로 요청 1/10 수준 감소, 탈취 확인 요청 1/50 수준 감소, 유지보수 접수율 하락, 주요 기능 속도 최적화</p>
@@ -185,24 +185,24 @@ export default function Career() {
                         </div>
                         <div className="text-base text-gray-700 space-y-1 mb-4">
                             <p>기간: 2024.07 ~ 재직중</p>
-                            <p>기술 스택: Spring Boot, React, MySQL, Kubernetes, ElasticSearch, Kafka, MailEngine(SMTP/POP/IMAP), Linux, Git</p>
+                            <p>기술 스택: Spring AI, Spring Boot, React, MySQL, Kubernetes, ElasticSearch, Kafka, MailEngine(SMTP/POP/IMAP), Linux, Git</p>
                             {/* <TechBadges items={badges.mailModule} className="mb-4" /> */}
-                            <p>역할: 기능 개발 및 리팩토링 주도, 운영 자동화로 CS/운영 비용 절감</p>
+                            <p>역할: 소프트웨어 리엔지니어링 및 메일 개발 및 리팩토링 주도, 운영 자동화로 CS/운영 비용 절감</p>
                         </div>
 
                         <div className="space-y-6">
                             {/* SSL 인증서 등록 기능 개발 */}
                             <div className="rounded-lg bg-gray-50 p-4">
                                 <p className="text-xl font-semibold text-gray-800">
-                                <MarkProject>SSL 인증서 등록 기능 개발</MarkProject>
+                                <MarkProject>SSL 인증서 등록 자동화 개발</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
                                     2024.10.01 ~ 2024.10.31
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 인증서 갱신/적용을 터미널에서 수동으로 처리하며 반복 및 오류·지연 발생</li>
-                                <li>* 개선: <Mark>사용자가 직접 인증서 등록</Mark>, 검증·만료 알림 일원화, 인증서 적용을 위한 Kubernetes 업데이트 절차 정립</li>
-                                <li>* 성과: 인증서 등록 요청 접수율 대폭 하락 및 <Mark>인증서 만료로 인한 장애 리스크 축소</Mark></li>
+                                <li>배경: 인증서 갱신/적용을 터미널에서 <Mark>수동으로 처리</Mark>하며 반복 및 오류·지연 발생 및 다운타임 리스크가 존재</li>
+                                <li>개선: <Mark>사용자가 직접 인증서 등록</Mark>, 검증·만료 알림 일원화, 인증서 적용을 위한 Kubernetes 업데이트 절차 정립</li>
+                                <li>성과: 개발 이후 인증서 등록 요청 <Mark>접수율 0건</Mark>으로 수렴 및 <Mark>인증서 만료로 인한 장애 리스크 축소</Mark></li>
                                 </ul>
                             </div>
 
@@ -215,9 +215,9 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 메일 <Mark>유지보수</Mark> 접수의 <Mark>90% 이상</Mark>을 차지, 로그 실시간 확인·전달에 개발 및 운영 병목 발생</li>
-                                <li>* 개선: 사용자 자가 조회 화면 제공, 탈취 의심계정 리스트·주요 지표(IP/지역/패턴) 시각화</li>
-                                <li>* 성과: 탈취 확인 요청 건수 대폭 감소, 1차 응대 <Mark>자동화로 CS 리소스 대폭 감소</Mark></li>
+                                <li>배경: 메일 <Mark>유지보수</Mark> 접수의 <Mark>90% 이상</Mark>을 차지, 로그 실시간 확인·전달에 개발 및 운영 병목 발생</li>
+                                <li>개선: 사용자 자가 조회 화면 제공, 탈취 의심계정 리스트·주요 지표(IP/지역/패턴) 시각화</li>
+                                <li>성과: 탈취 확인 요청 건수 90% 감소, 1차 응대 <Mark>자동화로 CS 리소스 대폭 감소</Mark></li>
                                 </ul>
                             </div>
 
@@ -230,9 +230,9 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 릴레이설정 및 스팸장비 연동 요청을 <Mark>고객지원 센터 접수 후 개발팀이 직접 등록</Mark>하는 비효율 존재</li>
-                                <li>* 개선: 관리자 UI 제공, 권한 검증 및 감사로그 연계로 <Mark>셀프 프로비저닝 구현</Mark></li>
-                                <li>* 성과: 관리자 페이지에서 <Mark>고객지원팀이 직접 설정</Mark>함으로서 고객지원 및 개발팀 편의성 극대화</li>
+                                <li>배경: 릴레이설정 및 스팸장비 연동 요청을 <Mark>고객지원 센터 접수 후 개발팀이 직접 등록</Mark>하는 비효율 존재</li>
+                                <li>개선: 관리자 UI 제공, 권한 검증 및 감사로그 연계로 <Mark>셀프 프로비저닝 구현</Mark></li>
+                                <li>성과: 관리자 페이지에서 <Mark>고객지원팀이 직접 설정</Mark>함으로서 고객지원 및 개발팀 편의성 극대화</li>
                                 </ul>
                             </div>
 
@@ -245,9 +245,9 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 법무적 내용으로 주고 받은 메일을 법무모듈 - 사건 연동 기능 개발 요청</li>
-                                <li>* 개발: 특정 <Mark>메일 내보내기 기능</Mark>을 개발하여 법무모듈에 전달 후 메일 뷰어 API 제공</li>
-                                <li>* 성과: <Mark>법무 사건</Mark>과 주고받은 <Mark>메일을 하나의 페이지</Mark>에서 조회</li>
+                                <li>배경: 법무적 내용으로 주고 받은 메일을 법무모듈 - 사건 연동 기능 개발 요청</li>
+                                <li>개발: 특정 <Mark>메일 내보내기 기능</Mark>을 개발하여 법무모듈에 전달 후 메일 뷰어 API 제공</li>
+                                <li>성과: <Mark>법무 사건</Mark>과 주고받은 <Mark>메일을 하나의 페이지</Mark>에서 조회</li>
                                 </ul>
                             </div>
 
@@ -260,11 +260,11 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                    <li>* 배경: 현행 프론트(React)소스가 <Mark>유지보수하기 매우 불편한 구조</Mark>로 되어 있어 <Mark>기능고도화 및 성능 저하, 유지보수 부담</Mark> 가중</li>
-                                    <li>* 개선: 컴포넌트 모듈화, 상태 관리 단순화, 리스트 <Mark>렌더링 최적화</Mark>(가상 스크롤/메모이제이션), <Mark>공통 UI/훅 표준화 설계 및 개발</Mark></li>
-                                    <li>* 성과: 프론트 <Mark>속도 최적화 및 유지보수 효율 증대</Mark>, 화면 응답 속도 개선</li>
-                                    <li>* 특이사항: 메일 모듈 팀장 및 CTO에게 <Mark>리팩토링 필요성</Mark>과 프론트 <Mark>아키텍처 설계 및 코드 리뷰를 통해 승인</Mark> 후 진행</li>
-                                    <li className="pl-4">* 개선 범위 : 메일 프론트 전체</li>
+                                    <li>배경: 현행 프론트(React)소스가 <Mark>유지보수하기 매우 불편한 구조</Mark>로 되어 있어 <Mark>기능고도화 및 성능 저하, 유지보수 부담</Mark> 가중</li>
+                                    <li>개선: 컴포넌트 모듈화, 상태 관리 단순화, 리스트 <Mark>렌더링 최적화</Mark>(가상 스크롤/메모이제이션), <Mark>공통 UI/훅 표준화 설계 및 개발</Mark></li>
+                                    <li>성과: 프론트 <Mark>속도 최적화 및 유지보수 효율 증대</Mark>, 화면 응답 속도 개선</li>
+                                    <li>특이사항: 메일 모듈 팀장 및 CTO에게 <Mark>리팩토링 필요성</Mark>과 프론트 <Mark>아키텍처 설계 및 코드 리뷰를 통해 승인</Mark> 후 진행</li>
+                                    <li className="pl-4">개선 범위 : 메일 프론트 전체</li>
                                     <li>
                                         * 참고:                                         
                                         <MarkLink><a 
@@ -290,9 +290,9 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 망분리 환경에서 안전한 메일 연계 및 메일 수발신 통계 API 요청</li>
-                                <li>* 개선: 망분리 환경의 내부망과 <Mark>외부망 연계 API 개발</Mark> 및 메일 수발신 <Mark>통계 API 개발</Mark></li>
-                                <li>* 성과: 망분리 환경에서의 안정적인 송수신과 통계 데이터를 통한 메일 탈취 및 의심계정 경고하여 CS적요소 차단</li>
+                                <li>배경: 망분리 환경에서 안전한 메일 연계 및 메일 수발신 통계 API 요청</li>
+                                <li>개선: 망분리 환경의 내부망과 <Mark>외부망 연계 API 개발</Mark> 및 메일 수발신 <Mark>통계 API 개발</Mark></li>
+                                <li>성과: 망분리 환경에서의 안정적인 송수신과 통계 데이터를 통한 메일 탈취 및 의심계정 경고하여 CS적요소 차단</li>
                                 </ul>
                             </div>
 
@@ -305,8 +305,8 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 더존 클라우드가 아닌 AWS 요청 고객사 수요 대응</li>
-                                <li>* 개선: <Mark>메일모듈 AWS S3 연동</Mark> 대응</li>
+                                <li>배경: 더존 클라우드가 아닌 AWS 요청 고객사 수요 대응</li>
+                                <li>개선: <Mark>메일모듈 AWS S3 연동</Mark> 대응</li>
                                 </ul>
                             </div>
 
@@ -319,9 +319,9 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 메일 발송 상태 확인 요청 문의가 많아 개발 진행</li>
-                                <li>* 개선: 메일 <Mark>발송/성공/실패 단계 모니터링 화면 제공</Mark></li>
-                                <li>* 성과: 운영 가시성 확보, 문의 감소</li>
+                                <li>배경: 메일 발송 상태 확인 요청 문의가 많아 개발 진행</li>
+                                <li>개선: 메일 <Mark>발송/성공/실패 단계 모니터링 화면 제공</Mark></li>
+                                <li>성과: 메일 실시간 모니터링을 통한 메일의 신뢰성 및 운영 가시성 확보</li>
                                 </ul>
                             </div>
 
@@ -334,9 +334,9 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 아웃룩에서 발송한 메일 <Mark>반송 사유 파악 어려움</Mark></li>
-                                <li>* 개선: <Mark>아웃룩에서</Mark> 메일 발송 후 <Mark>반송 시 반송메일을 추가</Mark></li>
-                                <li>* 성과: 발송자가 반송되었는지 확인이 가능하여 문의 감소</li>
+                                <li>배경: 아웃룩에서 발송한 메일 <Mark>반송 사유 파악 어려움</Mark></li>
+                                <li>개선: <Mark>아웃룩에서</Mark> 메일 발송 후 <Mark>반송 시 반송메일을 추가</Mark></li>
+                                <li>성과: 발송자가 반송되었는지 확인이 가능하여 문의 감소</li>
                                 </ul>
                             </div>
 
@@ -349,24 +349,24 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 공공 환경 고객사 수요 맞춤 개발 진행</li>
-                                <li>* 개선: <Mark>전자정부 프레임워크</Mark> 적용을 위한 <Mark>Spring-Boot 버전 변경 및 대응</Mark></li>
-                                <li>* 성과: 공공 레퍼런스 대응력 강화</li>
+                                <li>배경: 공공 환경 고객사 수요 맞춤 개발 진행</li>
+                                <li>개선: <Mark>전자정부 프레임워크</Mark> 적용을 위한 <Mark>Spring-Boot 버전 변경 및 대응</Mark></li>
+                                <li>성과: 공공 레퍼런스 대응력 강화 및 호환성 점검 리스크 감소, 운영 가이드 준수로 유지보수 용이성 및 확장성 확보 </li>
                                 </ul>
                             </div>
 
                             {/* 메일 BackEnd 속도 개선 */}
                             <div className="rounded-lg bg-gray-50 p-4">
                                 <p className="text-xl font-semibold text-gray-800">
-                                <MarkProject>메일 BackEnd 속도 개선</MarkProject>
+                                <MarkProject>메일 BackEnd 최적화를 통한 속도 개선</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
                                     2025.07.24 ~ 2025.08.20
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 클라우드형 고객사 메일 <Mark>초기 접속</Mark>시 <Mark>10초 이상 소요</Mark>되어 최적화 진행</li>
-                                <li>* 개선: 초기 접속시 필수 기초데이터 영역 세분화 및 데이터 분리 및 백그라운드 싱크 및 쿼리·인덱스 개선</li>
-                                <li>* 성과: 메일 <Mark>초기 접속 및 갱신시 500ms 이내로 단축</Mark></li>
+                                <li>배경: 클라우드형 고객사 메일 <Mark>초기 접속</Mark>시 <Mark>10초 이상 소요</Mark>되어 최적화 진행</li>
+                                <li>개선: 초기 접속시 필수 기초데이터 영역 세분화 및 데이터 분리 및 백그라운드 싱크 및 쿼리·인덱스 개선</li>
+                                <li>성과: 메일 <Mark>초기 접속 및 갱신시 8~10초 -> 500ms 이내로 단축</Mark></li>
                                 </ul>
                             </div>
 
@@ -378,10 +378,87 @@ export default function Career() {
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
-                                <li>* 배경: 그룹웨어 OneAI(LLM) 구현에 따른 모듈별 <Mark>AI MCP 개발</Mark></li>
-                                <li>* 개발: Spring AI로 <Mark>AI Tools를 설계·구현</Mark>하고 MCP로 <Mark>LLM과 모듈 간 공유/호출</Mark>을 표준화. 구조화된 출력과 파라미터 검증으로 질의 정합성을 보장하고, 재시도·타임아웃·권한 정책으로 외부 연동의 신뢰성을 확보. </li>
-                                <li>* 성과: 자연어 질의로 연관 메일과 해당 링크를 제시하고 요약·추출까지 자동화, AI 전용 검색엔진 쿼리를 개발하여 검색 속도 60% 이상 개선 및 재탐색 40% 감소.﻿​</li>
+                                <li>배경: 그룹웨어 OneAI(LLM) 구현에 따른 모듈별 <Mark>AI MCP 개발</Mark></li>
+                                <li>개발: Spring AI로 <Mark>AI Tools를 설계·구현</Mark>하고 MCP로 <Mark>LLM과 모듈 간 공유/호출</Mark>을 표준화. 구조화된 출력과 파라미터 검증으로 질의 정합성을 보장하고, 재시도·타임아웃·권한 정책으로 외부 연동의 신뢰성을 확보. </li>
+                                <li>성과: 자연어 질의로 연관 메일과 해당 링크를 제시하고 요약·추출까지 자동화, AI 전용 검색엔진 쿼리를 개발하여 검색 속도 60% 이상 개선 및 재탐색 40% 감소.﻿​</li>
                                 </ul>
+                            </div>
+
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
+                                <MarkProject> 메일 소프트웨어 리엔지니어링 </MarkProject>
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.10.13 ~ 
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>배경: Clinet -> Mail Front -> Mail 모듈(인증) -> Mailbox 모듈(기능) -> MailEngine(SMTP, POP, IMAP ) -> Client 구조에서 인증/기능 영역에서 메모리 누수 및 힙 사용량의 지속적인 증가로 성능 저하 확인 </li>
+                                <li>개발: 
+                                 <Mail 모듈(인증)>
+                                 - 인증·세션 처리를 Filter(Anti-corruption/토큰 1차 검증) + AOP(어노테이션 기반 인가·컨텍스트 주입)로 표준화하여 컨트롤러 내부의 인증/세션 체크 중복을 제거하고 경로별 정책 일관성을 확보. 
+                                 - 세션/토큰 수명주기(만료·재발급·블랙리스트)와 실패 처리(만료·서명 오류·권한 부족)를 공통화하여 누락·편차를 제거하고, 인증 실패를 조기 차단해 불필요한 리소스 소비를 감소 
+                                 <Mailbox 모듈(기능)>
+                                     멀티스레드 메일 처리 파이프라인에서 컨슈머가 대량 배치를 한꺼번에 수신 후 병렬 처리하면서 처리 속도를 초과해 메모리 버퍼가 적체되어 OOM 및 일시적으로 급격한 리소스 사용 증가 발생.
+                                     쿠버네티스 환경에 맞게 카프카 파티션 증가 및 셋팅 변경
+                                     메일 유량 제어를 위한 알고리즘 설계 및 쓰레드 제한 처리
+                                     </li>
+                                     
+                                <li>성과: </li>
+                                </ul>
+                            </div>
+
+                            <div className="rounded-lg bg-gray-50 p-4">
+                              <p className="text-xl font-semibold text-gray-800">
+                                <MarkProject>메일 소프트웨어 리엔지니어링</MarkProject>
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                  2025.10.13 ~
+                                </span>
+                              </p>
+                            
+                              <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>
+                                  배경: Client → Mail Front → Mail 모듈(인증) → Mailbox 모듈(기능) → MailEngine(SMTP/POP/IMAP) → Client 파이프라인에서, 인증/기능 구간의 메모리 누수 및 힙 사용량 지속 증가로 처리 지연과 OOM 리스크가 확인.
+                                </li>
+                            
+                                <li>
+                                  개발:
+                                  <div className="mt-1">
+                                    <div className="font-semibold text-gray-800">Mail 모듈(인증)</div>
+                                    <ul className="mt-1 ml-4 list-disc space-y-1">
+                                      <li>
+                                        인증·세션 처리를 Filter(인증 처리) + AOP(세션 체크 및 컨텍스트 주입)로 전역 표준화하여 컨트롤러 내 인증/세션 체크 중복 제거 및 경로별 정책 일관성 확보
+                                      </li>
+                                      <li>
+                                        힙 덤프/GC 로그 분석을 통해 장기 참조·버퍼 미해제 지점 식별하여 객체 수명주기 재설계, <Mark>AOP Final에서 메모리 최적화</Mark> 진행.
+                                      </li>
+                                    </ul>
+                                  </div>
+                            
+                                  <div className="mt-3">
+                                    <div className="font-semibold text-gray-800">&lt;Mailbox 모듈(기능)&gt;</div>
+                                    <ul className="mt-1 ml-4 list-disc space-y-1">
+                                      <li>
+                                        멀티스레드 환경에서 Kafka에서 대량 메일 수신 후 병렬 처리로 처리 속도를 초과해 버퍼 적체 및 OOM이 발생하던 문제를 메일 유량 제어 모델 개발.
+                                      </li>
+                                      <li>
+                                        스레드풀(코어/최대/큐 용량)과 워커 메모리 상한을 처리시간 기준으로 재설계, 대용량 첨부 스트리밍 처리·버퍼 재사용으로 힙 피크와 GC 정지 시간 감소.
+                                      </li>
+                                      <li>
+                                        쿠버네티스 Pod 수에 맞춰 컨슈머 인스턴스/파티션 수를 재정렬
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </li>
+                            
+                                <li>
+                                  성과:
+                                  <ul className="mt-1 ml-4 list-disc space-y-1">
+                                    <li>
+                                      최대 메모리 사용량 110% -> 60%로 감소 및 인증 로직 중복 제거로 변경 범위 축소, 코드 리뷰/배포 리드타임 단축과 결함율 감소, 운영 알림·장애 티켓 감소로 운영 안정성 향상
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
                             </div>
 
                             <div className="rounded-lg bg-gray-50 p-4">
