@@ -369,6 +369,20 @@ export default function Career() {
 
                             <div className="rounded-lg bg-gray-50 p-4">
                                 <p className="text-xl font-semibold text-gray-800">
+                                <MarkProject>메일 AI MCP 개발</MarkProject>
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.09.01 ~ 
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>* 배경: 그룹웨어 OneAI(LLM) 구현에 따른 모듈별 <Mark>AI MCP 개발</Mark></li>
+                                <li>* 개발: Spring AI로 <Mark>AI Tools를 설계·구현</Mark>하고 MCP로 <Mark>LLM과 모듈 간 공유/호출</Mark>을 표준화. 구조화된 출력과 파라미터 검증으로 질의 정합성을 보장하고, 재시도·타임아웃·권한 정책으로 외부 연동의 신뢰성을 확보. </li>
+                                <li>* 성과: 자연어 질의로 연관 메일과 해당 링크를 제시하고 요약·추출까지 자동화, AI 전용 검색엔진 쿼리를 개발하여 검색 속도 60% 이상 개선 및 재탐색 40% 감소.﻿​</li>
+                                </ul>
+                            </div>
+
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
                                 <MarkProject>그 외 주요기능 고도화 다수</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
                                     2024.07.31 ~ 
