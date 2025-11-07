@@ -399,8 +399,8 @@ export default function Career() {
                             
                                 <li>
                                   <div className="mt-1">
-                                    <div className="font-semibold text-gray-800">Mail 모듈(인증)</div>
-                                    <ul className="mt-1 ml-4 list-disc space-y-1 [&>li]:font-medium">
+                                    <div className="font-semibold text-gray-700">Mail 모듈(인증)</div>
+                                    <ul className="mt-1 ml-4 list-disc space-y-1 [&>li]:font-medium [&>li]:text-gray-700">
                                       <li>
                                         인증·세션 처리를 <Mark>Filter(인증 처리) + AOP(세션 체크 및 컨텍스트 주입)</Mark>로 전역 표준화하여 컨트롤러 내 인증/세션 체크 중복 제거 및 경로별 정책 일관성 확보
                                       </li>
@@ -411,8 +411,8 @@ export default function Career() {
                                   </div>
                             
                                   <div className="mt-3">
-                                    <div className="font-semibold text-gray-800">Mailbox 모듈(기능)</div>
-                                    <ul className="mt-1 ml-4 list-disc space-y-1 [&>li]:font-medium">
+                                    <div className="font-semibold text-gray-700">Mailbox 모듈(기능)</div>
+                                    <ul className="mt-1 ml-4 list-disc space-y-1 [&>li]:font-medium [&>li]:text-gray-700">
                                       <li>
                                         멀티스레드 환경에서 Kafka에서 메일 <Mark>대량 수신 후 병렬 처리로 처리 속도를 초과</Mark>해 버퍼 적체 및 OOM이 발생하던 문제를 <Mark>메일 유량 제어 모델 개발</Mark>.
                                       </li>
