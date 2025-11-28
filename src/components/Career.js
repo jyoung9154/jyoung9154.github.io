@@ -374,7 +374,7 @@ export default function Career() {
                                 <p className="text-xl font-semibold text-gray-800">
                                 <MarkProject>메일 AI MCP 개발</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
-                                    2025.09.01 ~ 
+                                    2025.09.01 ~ 2025.09.19
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
@@ -388,7 +388,7 @@ export default function Career() {
                               <p className="text-xl font-semibold text-gray-800">
                                 <MarkProject>메일 소프트웨어 리엔지니어링</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
-                                  2025.10.13 ~
+                                  2025.10.13 ~ 2025.11.07
                                 </span>
                               </p>
                             
@@ -434,7 +434,7 @@ export default function Career() {
                                 <p className="text-xl font-semibold text-gray-800">
                                 <MarkProject>메일 AI 내부정보유출 자동 탐지 개발</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
-                                    2025.11.17 ~ 진행중
+                                    2025.11.17 ~
                                 </span>
                                 </p>
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
