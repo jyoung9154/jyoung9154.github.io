@@ -432,6 +432,19 @@ export default function Career() {
 
                             <div className="rounded-lg bg-gray-50 p-4">
                                 <p className="text-xl font-semibold text-gray-800">
+                                <MarkProject>메일 AI 내부정보유출 자동 탐지 개발</MarkProject>
+                                <span className="ml-2 align-baseline text-sm text-gray-500">
+                                    2025.11.17 ~ 진행중
+                                </span>
+                                </p>
+                                <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
+                                <li>배경: 메일을 발송 전 <Mark>AI를 통한 개인정보 및 기업 민감정보 유출 리스크</Mark> 사전 차단 필요성이 대두 </li>
+                                <li>개발: 관리자가 메일 발송 승인 조건을 AI 프롬프트로 추가함으로서 <Mark>메일 본문·첨부파일 자동 검증</Mark>, HTML 본문 파싱 및 URL 추출, PDF·Word·Excel 파일 내용 자동 분석, 발송제한/관리자승인 정책 연동하여 사전에 유출 차단 할 수 있도록 개발</li>
+                                <li>성과: 외부 발송 메일 <Mark>보안 사고 사전 예방</Mark> 및 메일 관련 개인정보보호법 및 기업 기밀 유출 1차적으로 사전 차단, 관리자 승인 이력으로 메일 보안 가시성 확보</li>
+                                </ul>
+                            </div>
+                            <div className="rounded-lg bg-gray-50 p-4">
+                                <p className="text-xl font-semibold text-gray-800">
                                 <MarkProject>그 외 주요기능 고도화 다수</MarkProject>
                                 <span className="ml-2 align-baseline text-sm text-gray-500">
                                     2024.07.31 ~ 
