@@ -90,7 +90,7 @@ export default function Career() {
           <div className="space-y-6 text-base text-gray-700">
             <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
               <p className="font-bold text-gray-900 mb-2">
-                1. <Mark>CSAT 90%</Mark>, <Mark>20% 향상
+                1. <Mark>CSAT 90%</Mark>, <Mark>20% 향상</Mark>
               </p>
               <p>- Java/Spring, Spring Boot, <Mark>JSP</Mark>, React, MySQL, Redis, Git, SVN, Docker, k8s</p>
               <TechBadges items={badges.task1} />
@@ -190,7 +190,7 @@ export default function Career() {
               </div>
               <div className="text-base text-gray-700 space-y-1 mb-4">
                 <p>SSL 만료 D-30/D-7 자동 알림, <Mark>React PEM/CRT/KEY UI</Mark></p>
-                <p><Mark>Spring Boot X.509 검증</Mark>, Kubernetes Secret + Ingress 자동 리로드</Mark></p>
+                <p><Mark>Spring Boot X.509 검증</Mark>, Kubernetes Secret + Ingress 자동 리로드</p>
               </div>
               <TechBadges items={['React', 'Spring Boot', 'Kubernetes']} />
               <div className="mt-4"><Mark>결과: SSL 이슈 10건 → 0건, CS 만족도 100%</Mark></div>
