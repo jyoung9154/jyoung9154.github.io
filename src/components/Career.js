@@ -2,11 +2,11 @@ import React from 'react';
 import {
     SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes,
     SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit
-  } from "react-icons/si";
-import { MdOutlineSmartToy } from "react-icons/md";  
+} from "react-icons/si";
+import { MdOutlineSmartToy } from "react-icons/md";
 
-  // 기술 스택 뱃지 데이터
-  const techStacks = [
+// 기술 스택 뱃지 데이터
+const techStacks = [
     { name: "AI", icon: <MdOutlineSmartToy className="text-purple-600" />, bg: "bg-purple-100", text: "text-purple-700" },
     { name: "Spring", icon: <SiSpring className="text-green-500" />, bg: "bg-green-100", text: "text-green-700" },
     { name: "React", icon: <SiReact className="text-sky-500" />, bg: "bg-sky-100", text: "text-sky-700" },
@@ -17,26 +17,105 @@ import { MdOutlineSmartToy } from "react-icons/md";
     { name: "Kafka", icon: <SiApachekafka className="text-gray-800" />, bg: "bg-gray-100", text: "text-gray-800" },
     { name: "ElasticSearch", icon: <SiElasticsearch className="text-yellow-500" />, bg: "bg-yellow-100", text: "text-yellow-700" },
     { name: "Linux", icon: <SiLinux className="text-black" />, bg: "bg-gray-200", text: "text-gray-800" },
-    { name: "Git", icon: <SiGit className="text-orange-500" />, bg: "bg-orange-100", text: "text-orange-700" },
-    
-  ];
-  
-  // 뱃지 컴포넌트
-  function TechBadges() {
+    { name: "Git", icon: <SiGit className="text-orange-500" />, bg: "bg-orange-100", text: "text-orange-700" }
+];
+
+const summaryHighlights = [
+    "마이그레이션 자동화로 3일 소요 작업을 2시간으로 단축 (800+ 고객사 마이그레이션 진행)",
+    "계정 탈취 확인 CS 요청 95% 감소 (주 100건 → 5건)",
+    "메일 초기 로딩 20배 개선 (6초 → 0.3초)",
+    "AI 검색 엔진 고도화로 검색 속도 60% 향상, 재탐색 40% 감소",
+    "AI 기반 정보유출 자동탐지 적용으로 OOM/보안 사고 사전 차단 체계 구축",
+    "메모리 사용량 40% 절감 및 OOM 장애 6개월 연속 0건 유지"
+];
+
+const companyProfile = {
+    name: "더존비즈온",
+    dept: "솔루션사업본부 솔루션개발팀",
+    summary: "1977년 설립 | 소프트웨어 개발 | 임직원 1,755명 | 고객사 500+ (대기업·중견·공공)",
+    units: [
+        { label: "전자결재 Unit", period: "2018.09 ~ 2022.06" },
+        { label: "메일 Unit", period: "2024.07 ~ 재직중" }
+    ]
+};
+
+const stackCategories = [
+    { title: "Backend", items: ["Spring Boot", "Spring AI", "Java", "JPA", "MyBatis"] },
+    { title: "Frontend", items: ["React", "JavaScript", "JSP"] },
+    { title: "Database", items: ["MySQL", "Oracle", "MSSQL", "Redis", "ElasticSearch"] },
+    { title: "Infra & DevOps", items: ["Kubernetes", "Docker", "Kafka", "Linux", "Git"] },
+    { title: "Mail Engine", items: ["SMTP", "POP3", "IMAP", "Mail Server Administration"] },
+    { title: "AI / ML", items: ["Spring AI", "MCP", "LLM Tool Integration"] }
+];
+
+const competencyCards = [
+    {
+        title: "문제 발견 → 자동화 → 성과 측정",
+        points: [
+            "반복 CS를 코드로 해결하는 전략으로 유지보수 접수 95%를 자동화",
+            "ElasticSearch + React 대시보드로 사용자 자가진단 구축, 응대 30분 → 즉시"
+        ]
+    },
+    {
+        title: "아키텍쳐 재설계 및 대규모 리팩토링 설계/설득",
+        points: [
+            "메일 프론트엔드 전면 리팩토링으로 렌더링 3.2초 → 0.8초, 번들 54% 감소",
+            "의존성·성능 지표를 정량화해 CTO/팀장 승인 획득 후 단계적 실행"
+        ]
+    },
+    {
+        title: "0→1 전 생애주기 경험",
+        points: [
+            "Amaranth10 전자결재 프로젝트에서 기획·개발·런칭·운영 전 과정 주도",
+            "전자결재 모듈을개발하고 베타/운영 안정화까지 책임"
+        ]
+    },
+    {
+        title: "End-to-End 풀스택 역량",
+        points: [
+            "React UI, Spring Boot API, Kubernetes 배포, Kafka/ElasticSearch 연동까지 직접 수행",
+            "강원랜드 망연계 시스템에서 3-tier 보안 구조와 통계 API 동시 구축"
+        ]
+    },
+    {
+        title: "AI & MCP 통합",
+        points: [
+            "Spring AI 기반 MCP 서버 구축 및 자연어 처리 Tool 설계",
+            "파라미터 검증·재시도·타임아웃·권한 정책으로 AI 연계 품질 확보"
+        ]
+    },
+    {
+        title: "성능 최적화 전문성",
+        points: [
+            "메일 초기 로딩 병목 제거로 6초 → 0.3초",
+            "API 개선, 쿼리 튜닝, 인덱스 재설계, Progressive Loading으로 사용자 경험 개선"
+        ]
+    },
+    {
+        title: "소프트웨어 리엔지니어링",
+        points: [
+            "Filter + AOP 표준화로 인증 로직 단일화, 코드 변경 범위 156파일 → 1파일",
+            "ThreadLocal 해제·버퍼 재사용·동적 스레드풀로 메모리 100% → 40%"
+        ]
+    }
+];
+
+// 뱃지 컴포넌트
+function TechBadges({ items = techStacks, className = "" }) {
     return (
-      <div className="flex flex-wrap gap-2 mt-2">
-        {techStacks.map((tech) => (
-          <span
-            key={tech.name}
-            className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition ${tech.bg} ${tech.text}`}
-          >
-            {tech.icon}
-            {tech.name}
-          </span>
-        ))}
-      </div>
+        <div className={`flex flex-wrap gap-2 mt-2 ${className}`}>
+            {items.map((tech) => (
+                <span
+                    key={tech.name}
+                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium shadow-sm hover:shadow-md transition ${tech.bg} ${tech.text}`}
+                >
+                    {tech.icon}
+                    {tech.name}
+                </span>
+            ))}
+        </div>
     );
-  }
+}
 
   // 섹션별 커스텀 뱃지 프리셋
 const badges = {
@@ -72,20 +151,70 @@ export default function Career() {
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-                    <h1 className="text-4xl font-bold text-gray-800 mb-4">경력기술서</h1>
+                    <h1 className="text-4xl font-bold text-gray-800 mb-6">경력기술서</h1>
 
-                    {/* 회사 정보 - 요청한 원문을 보존하여 반영 */}
-                    <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-xl">
-                        <h2 className="text-2xl font-bold mb-2">더존비즈온</h2>
-                        <p className="text-blue-100 mb-2">솔루션사업본부 솔루션개발팀</p>
-                        <div className="flex flex-wrap gap-4 text-base">
-                            <span>전자결재 Unit [2018.09 ~ 2022.06]</span>
+                    <div className="grid gap-6 lg:grid-cols-3">
+                        <div className="bg-slate-900 text-slate-50 rounded-2xl p-6 shadow-inner">
+                            <p className="text-sm uppercase tracking-wide text-slate-300 mb-2">👨‍💻 핵심 요약</p>
+                            <p className="text-lg font-semibold leading-relaxed">
+                                6년차 풀스택 개발자 | 그룹웨어 메일·전자결재 개발. 신규 프로젝트 설계부터 운영까지 라이프사이클 경험과 자동화·AI 통합을 통해
+                                측정 가능한 임팩트를 만들어낸 End-to-End 오너십 보유.
+                            </p>
+                            <p className="mt-4 text-sm text-slate-200">
+                                반복 업무 자동화·CS 95% 감소·성능 20배 개선·Spring AI 기반 MCP 구축 등
+                                문제 발견 → 자동화 → 성과 측정 사이클을 주도합니다.
+                            </p>
                         </div>
-                        <div className="flex flex-wrap gap-4 text-base">
-                            <span>메일 Unit [2024.07 ~ 재직중]</span>
+
+                        <div className="border border-slate-200 rounded-2xl p-6 bg-slate-50">
+                            <p className="text-sm font-semibold text-slate-500 mb-3">핵심 성과</p>
+                            <ul className="space-y-2 text-sm text-slate-700">
+                                {summaryHighlights.map((item) => (
+                                    <li key={item} className="flex gap-2">
+                                        <span className="text-indigo-500">•</span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                        <p className="text-blue-100 mt-2 text-base">- 1977년 설립, 소프트웨어 개발업, 사원 수 : 1755명</p>
-                        <TechBadges items={badges.header} className="mt-4" />
+
+                        {/* 회사 정보 - 요청한 원문을 보존하여 반영 */}
+                        <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-2xl shadow-lg">
+                            <h2 className="text-2xl font-bold mb-1">{companyProfile.name}</h2>
+                            <p className="text-blue-100 mb-2">{companyProfile.dept}</p>
+                            <p className="text-sm text-blue-100">{companyProfile.summary}</p>
+                            <div className="mt-4 space-y-1 text-base">
+                                {companyProfile.units.map((unit) => (
+                                    <p key={unit.label}>
+                                        {unit.label} <span className="text-blue-100">[{unit.period}]</span>
+                                    </p>
+                                ))}
+                            </div>
+                            <TechBadges items={badges.header} className="mt-4" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* 기술 스택 */}
+                <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span className="w-1 h-8 bg-gradient-to-b from-amber-500 to-orange-600 mr-3 rounded" />
+                        기술 스택
+                    </h2>
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        {stackCategories.map((stack) => (
+                            <div key={stack.title} className="p-4 rounded-xl border border-gray-200 bg-gray-50">
+                                <p className="font-semibold text-gray-900 mb-2">{stack.title}</p>
+                                <ul className="text-sm text-gray-700 space-y-1">
+                                    {stack.items.map((item) => (
+                                        <li key={item} className="flex items-start gap-2">
+                                            <span className="text-emerald-500">•</span>
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
@@ -101,24 +230,24 @@ export default function Career() {
                         <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
                             <p className="font-bold text-gray-900 mb-2">1.<Mark>그룹웨어 전자결재</Mark> 백엔드, 프론트엔드 개발 및 유지보수</p>
                             <p>- 기술 스택 : Java(Spring), Spring Boot, JSP, React, MySQL, Redis, Git, SVN, Docker, k8s</p>
-                            {/* <TechBadges items={badges.task1} /> */}
+                            <TechBadges items={badges.task1} /> 
                         </div>
 
                         <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
                             <p className="font-semibold text-gray-900 mb-2">2.그룹웨어 전자결재 <Mark>마이그레이션 개발 및 운영 담당</Mark></p>
                             <p>- 기술 스택: Linux, Spring Boot(JPA), React, MySQL, MSSQL, Oracle DB, Git</p>
-                            {/* <TechBadges items={badges.task2} /> */}
+                            <TechBadges items={badges.task2} /> 
                         </div>
 
                         <div className="p-5 rounded-xl border border-gray-200 bg-gray-50">
                             <p className="font-semibold text-gray-900 mb-2">3.<Mark>그룹웨어 메일</Mark> 개발 및 유지보수</p>
                             <p>- 기술 스택: Linux, Spring Boot, React, MySQL, Git, k8s, MailEngine(SMTP, POP, IMAP), ElasticSearch, Kafka</p>
-                            {/* <TechBadges items={badges.task3} /> */}
+                            <TechBadges items={badges.task3} />
                         </div>
                     </div>
                 </div>
 
-                {/* 핵심 역량 및 특징 - 원문 그대로 */}
+                {/* 핵심 역량 및 특징  */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <span className="w-1 h-8 bg-gradient-to-b from-indigo-500 to-purple-600 mr-3 rounded" />
@@ -126,48 +255,26 @@ export default function Career() {
                     </h2>
 
                     <div className="space-y-2 text-gray-800 text-base">
-                        <p>• 역할: <Mark>[클라우드(SaaS), 구축] 그룹웨어</Mark> 메일·전자결재 영역 <Mark>풀스택 개발·운영</Mark>, 대규모 데이터 마이그레이션 자동화 주도, <Mark>Spring AI 기반 MCP 서버를 구축 및 LLM Tool 호출을 구현</Mark></p>
-                        <p>• 강점: 모듈 핵심 기능 개발, 반복 업무 자동화, CS 이슈 선제 제거, 대규모 리팩토링 기획·실행, 운영 효율화</p>
-                        <p>• 핵심 기술: Spring Boot, React, MySQL, Kafka, ElasticSearch, Kubernetes, MailEngine(SMTP/POP/IMAP)</p>
-                        <p>• 주요 성과: <Mark>신규프로젝트 초기 기획~런칭 핵심 기능 개발</Mark> 및 개발 라이프사이클 경험, 마이그레이션 3일→2시간 단축, 자동화로 요청 1/10 수준 감소, 탈취 확인 요청 1/50 수준 감소, 유지보수 접수율 하락, 주요 기능 속도 최적화</p>
+                        <p>• 역할: <Mark>[클라우드(SaaS), 구축]</Mark> 그룹웨어 메일·전자결재 영역 풀스택 개발·운영, 대규모 데이터 마이그레이션 자동화 주도, <Mark>Spring AI 기반 MCP 서버 구축</Mark> 및 Tool 호출 표준화.</p>
+                        <p>• 강점: "반복되는 CS는 코드로 해결한다"는 원칙 아래 <Mark>문제 발견 → 자동화 → 성과 측정</Mark> 선순환을 실행하여 운영 비용을 수치화하고 경영진을 설득.</p>
+                        <p>• 핵심 기술: Spring Boot, React, MySQL, Kafka, ElasticSearch, Kubernetes, MailEngine(SMTP/POP/IMAP), AWS S3, Redis.</p>
+                        <p>• 주요 성과: 마이그레이션 3일→2시간, 탈취 확인 요청 90% 감소, 초기 로딩 20배 개선, 메모리 40% 절감, AI 검색 속도 60% 개선 등 측정 가능한 지표를 다수 확보.</p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6 mt-6">
-                        <div className="p-5 border border-blue-200 rounded-xl bg-blue-50/40">
-                            <h3 className="font-bold text-blue-700 mb-3">1) 운영 효율화 전문성</h3>
-                            <ul className="text-base text-blue-700 space-y-2 [&>li]:font-medium">
-                                <li>• <Mark>반복적인 CS 업무</Mark>를 선제적으로 식별하고 <Mark>자동화</Mark> 도구로 해소(요청·처리 리드타임 단축, 야간/주말 호출 감소).</li>
-                                <li>• 사용자 자가진단·자가처리 기능(발송 진행 확인, 반송 사유 가시화, 계정탈취 조회 등) 제공으로 1차 응대 부담 경감.</li>
-                                <li>• 인증서 등록/검증/만료 알림 일원화로 장애 리스크 사전 차단 및 운영 표준화.</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-5 border border-green-200 rounded-xl bg-green-50/40">
-                            <h3 className="font-bold text-green-700 mb-3">2) 대규모 시스템 리팩토링 경험</h3>
-                            <ul className="text-base text-gray-700 space-y-2 [&>li]:font-medium">
-                                <li>• 복잡한 레거시 코드 구조를 체계적으로 분석(의존·상태·렌더링 병목)하고 개선안 도출.</li>
-                                <li>• 목표/지표/로드맵을 문서화하여 <Mark>경영진을 설득</Mark>, 단계적 리팩토링을 실행해 <Mark>성능·유지보수성 동시 개선</Mark>.</li>
-                                <li>• 공통 UI/훅 표준화, 상태 최소화, 리스트 최적화 등으로 재사용성 및 온보딩 효율 상승.</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-5 border border-purple-200 rounded-xl bg-purple-50/40">
-                            <h3 className="font-bold text-purple-700 mb-3">3) 풀스택 개발 및 운영</h3>
-                            <ul className="text-base text-gray-700 space-y-2 [&>li]:font-medium">
-                                <li>• 프론트엔드(React)부터 백엔드(Spring Boot), 인프라(Kubernetes, Kafka, ElasticSearch)까지 전 영역 경험.</li>
-                                <li>• <Mark>초기 기획→개발→런칭→운영 전 단계 참여</Mark>로 기능 품질과 운영 안정성 균형 확보.</li>
-                                <li>• 대량/개별 발송, 반송, 포워딩, S3 연동 등 메일 핵심 도메인 기능을 직접 설계·구현.</li>
-                            </ul>
-                        </div>
-
-                        <div className="p-5 border border-orange-200 rounded-xl bg-orange-50/40">
-                            <h3 className="font-bold text-orange-700 mb-3">4) 문제 해결 중심 사고</h3>
-                            <ul className="text-base text-gray-700 space-y-2 [&>li]:font-medium">
-                                <li>• <Mark>현업 불편</Mark>을 능동적으로 <Mark>발굴해 개발</Mark> 건의 및 실행으로 전환(“문제-원인-대안-성과” 일관 프레임).</li>
-                                <li>• 데이터 기반 성과 측정(TTI, 요청 건수, 성공률, SLA)을 통해 효과 검증 및 지속 개선 사이클 운영.</li>
-                                <li>• 보안·컴플라이언스(계정탈취 탐지, 로그·권한 점검, 전자정부 프레임워크 적용)까지 고려한 안정성 강화.</li>
-                            </ul>
-                        </div>
+                    <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+                        {competencyCards.map((card) => (
+                            <div key={card.title} className="p-5 border border-gray-200 rounded-xl bg-gray-50/60">
+                                <h3 className="font-bold text-gray-900 mb-3">{card.title}</h3>
+                                <ul className="text-sm text-gray-700 space-y-2 [&>li]:font-medium">
+                                    {card.points.map((point) => (
+                                        <li key={point} className="flex gap-2">
+                                            <span className="text-indigo-500">•</span>
+                                            <span>{point}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
@@ -273,7 +380,7 @@ export default function Career() {
                                             rel="noopener"
                                             aria-label="메일 아키텍처 재설계 PDF, 새 창에서 열림"
                                         >
-                                            메일 아키텍처 재설계.pdf (새 창)
+                                            메일 아키텍처 재설계 기획서.pdf
                                         </a>
                                         </MarkLink>
                                         
@@ -366,7 +473,7 @@ export default function Career() {
                                 <ul className="mt-2 text-base text-gray-700 space-y-1 [&>li]:font-medium">
                                 <li>배경: 클라우드형 고객사 메일 <Mark>초기 접속</Mark>시 <Mark>10초 이상 소요</Mark>되어 최적화 진행</li>
                                 <li>개선: 초기 접속시 필수 기초데이터 영역 세분화 및 데이터 분리 및 백그라운드 싱크 및 쿼리·인덱스 개선</li>
-                                <li>성과: 메일 <Mark>초기 접속 및 갱신시 8~10초 -> 500ms 이내로 단축</Mark></li>
+                                <li>성과: 메일 <Mark>초기 접속 및 갱신시 8~10초 → 500ms 이내로 단축</Mark></li>
                                 </ul>
                             </div>
 
@@ -426,7 +533,7 @@ export default function Career() {
                                   </div>
                                 </li>
                             
-                                <li> 성과: <Mark>최대 메모리 사용량 100% -> 60% </Mark>로 감소 및 인증 로직 중복 제거로 변경 범위 축소, 코드 리뷰/배포 리드타임 단축과 결함율 감소, 운영 알림·장애 티켓 감소로 <Mark>운영 안정성 향상</Mark></li>
+                                <li> 성과: <Mark>최대 메모리 사용량 100% → 60% </Mark>로 감소 및 인증 로직 중복 제거로 변경 범위 축소, 코드 리뷰/배포 리드타임 단축과 결함율 감소, 운영 알림·장애 티켓 감소로 <Mark>운영 안정성 향상</Mark></li>
                               </ul>
                             </div>
 
