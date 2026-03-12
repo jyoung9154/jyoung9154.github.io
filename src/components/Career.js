@@ -14,7 +14,7 @@ function CompetencyCard({ number, title, content, colorClass }) {
             </div>
             <ul className="space-y-4">
                 {content.map((item, idx) => (
-                    <li key={idx} className="flex gap-3 text-slate-400 text-sm leading-relaxed">
+                    <li key={idx} className="flex gap-3 text-slate-300 font-medium text-sm leading-relaxed">
                         <span className="text-[#0DA6F2] mt-1.5">•</span>
                         <span>{item}</span>
                     </li>
@@ -36,7 +36,7 @@ function SubProjectItem({ title, date, background, improvement, result }) {
                 {background && (
                     <div className="flex gap-3">
                         <span className="text-[10px] font-black uppercase text-slate-500 mt-1 min-w-[50px]">배경</span>
-                        <p className="text-slate-400 text-sm leading-relaxed">{background}</p>
+                        <p className="text-slate-400 font-medium text-sm leading-relaxed">{background}</p>
                     </div>
                 )}
                 {improvement && (
@@ -48,7 +48,7 @@ function SubProjectItem({ title, date, background, improvement, result }) {
                 {result && (
                     <div className="flex gap-3">
                         <span className="text-[10px] font-black uppercase text-purple-500 mt-1 min-w-[50px]">성과</span>
-                        <p className="text-slate-400 text-sm leading-relaxed">{result}</p>
+                        <p className="text-slate-400 font-medium text-sm leading-relaxed">{result}</p>
                     </div>
                 )}
             </div>
@@ -87,7 +87,7 @@ export default function Career() {
                         경력 및 &nbsp;
                         <span className="text-gradient">전문성</span>
                     </h1>
-                    <p className="max-w-3xl text-xl text-slate-400 leading-relaxed">
+                    <p className="max-w-3xl text-xl text-slate-300 font-medium leading-relaxed">
                         AI 네이티브 전환을 주도하며 SaaS 클라우드 환경에서 대규모 인프라의 효율화를 추구하는 7년차 개발자입니다. 
                         더존비즈온(사원 수 1,755명)의 핵심 솔루션인 Amaranth 10의 안정적 운영과 차세대 AI 서비스 전환을 성공적으로 이끌고 있습니다.
                     </p>
@@ -99,7 +99,7 @@ export default function Career() {
                             <div className="flex-1">
                                 <h3 className="mb-6 text-2xl font-bold text-white">더존비즈온 / Full-Stack Developer</h3>
                                 <div className="space-y-4">
-                                    <p className="text-lg text-slate-400 mb-0 leading-relaxed">
+                                    <p className="text-lg text-slate-300 font-medium mb-0 leading-relaxed">
                                         [SaaS/구축] 그룹웨어 메일·전자결재 풀스택 개발 및 운영. <br />
                                         반복 업무 자동화로 <strong>CS 요청 1/10, 계정 탈취 조사 1/50</strong> 수준 감축. 
                                         경영진 설득을 통한 대규모 리팩토링 주도.
@@ -208,7 +208,7 @@ export default function Career() {
                             </div>
                             
                             <div className="space-y-12">
-                                <p className="text-xl text-slate-300 border-l-2 border-[#0DA6F2] pl-6 py-1 leading-relaxed">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-[#0DA6F2] pl-6 py-1 leading-relaxed">
                                     메일 시스템의 대규모 인프라를 기반으로 <strong>LLM, RAG, MCP</strong>를 도입하여 지능형 협업 솔루션으로의 전환을 주도하고, 시스템 전반의 최적화를 달성했습니다.
                                 </p>
                                 
@@ -319,7 +319,7 @@ export default function Career() {
                             </div>
                             
                             <div className="space-y-12">
-                                <p className="text-xl text-slate-300 border-l-2 border-white/10 pl-6 py-1 leading-relaxed">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-white/20 pl-6 py-1 leading-relaxed">
                                     Amaranth 10 전자결재 시스템의 성공적인 런칭을 주도하고, 대규모 고객사의 클라우드 이관 과정을 자동화하여 혁신적인 생산성 향상을 이루었습니다.
                                 </p>
                                 
@@ -367,7 +367,7 @@ export default function Career() {
                             </div>
                             
                             <div className="space-y-6">
-                                <p className="text-xl text-slate-300 border-l-2 border-white/10 pl-6 py-1 leading-relaxed">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-white/20 pl-6 py-1 leading-relaxed">
                                     특수 임무 수행을 통해 <strong>강인한 정신력, 신속한 판단력, 그리고 목표를 완수하는 실행력</strong>을 함양했습니다.
                                 </p>
                                 <SubProjectItem 
