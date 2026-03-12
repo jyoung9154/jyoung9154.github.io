@@ -1,64 +1,58 @@
 import React from 'react';
-import { ReactComponent as GitHubIcon } from '../assets/icons/github.svg';
-import { ReactComponent as MailIcon } from '../assets/icons/mail.svg';
-import { ReactComponent as WhatsAppIcon } from '../assets/icons/whatsapp.svg';
-import { ReactComponent as ResumeIcon } from '../assets/icons/resume.svg';
+import { SiGithub } from "react-icons/si";
+import { HiOutlineMail } from "react-icons/hi";
+import { RiMessage3Line } from "react-icons/ri";
+import { HiOutlineDocumentText } from "react-icons/hi2";
 
 export default function Footer() {
   return (
-    <footer className="flex items-center justify-center py-4">
-      <div className="flex items-center gap-8 mt-12 mb-12">
-        <a
-          className="group relative block w-10 h-10 text-black transition-transform duration-150 hover:-translate-y-1"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-title="GitHub"
-          href="https://github.com/jyoung9154"
-        >
-          <GitHubIcon className="w-10 h-10" aria-label="GitHub" />
-          <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-            GitHub
-          </span>
-        </a>
-
-        <a
-          className="group relative block w-10 h-10 text-black transition-transform duration-150 hover:-translate-y-1"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-title="E-mail"
-          href="mailto:jyoung_9154@naver.com"
-        >
-          <MailIcon className="w-10 h-10" viewBox="0 0 512 512" aria-label="E-mail" />
-          <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-            E-mail
-          </span>
-        </a>
-
-        <a
-          className="group relative block w-10 h-10 text-black transition-transform duration-150 hover:-translate-y-1"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-title="KakaoTalk"
-          href="https://open.kakao.com/o/seT0joLh"
-        >
-          <WhatsAppIcon className="w-10 h-10" viewBox="0 0 308 308" aria-label="WhatsApp" />
-          <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-            KakaoTalk
-          </span>
-        </a>
-
-        <a
-          className="group relative block w-10 h-10 text-black transition-transform duration-150 hover:-translate-y-1"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-title="이력서"
-          href="/assets/resume.pdf"
-        >
-          <ResumeIcon className="w-10 h-10" viewBox="0 0 512 512" aria-label="이력서" />
-          <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-            이력서
-          </span>
-        </a>
+    <footer className="border-t border-white/5 py-16 bg-[#101C22]">
+      <div className="max-w-[1200px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="flex flex-col items-center md:items-start gap-4">
+          <div className="flex items-center gap-3">
+            <div className="size-6 bg-[#0DA6F2] rounded flex items-center justify-center text-white">
+              <span className="material-symbols-outlined text-base">terminal</span>
+            </div>
+            <span className="text-xl font-bold tracking-tight text-white">Portfolio</span>
+          </div>
+          <p className="text-slate-500 text-sm">© 2026 Park JaeYoung.</p>
+        </div>
+        <div className="flex gap-10">
+          <a
+            href="https://github.com/jyoung9154"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-[#0DA6F2] transition-all hover:scale-110"
+            title="GitHub"
+          >
+            <SiGithub size={24} />
+          </a>
+          <a
+            href="mailto:jyoung_9154@naver.com"
+            className="text-slate-400 hover:text-[#0DA6F2] transition-all hover:scale-110"
+            title="E-mail"
+          >
+            <HiOutlineMail size={26} />
+          </a>
+          <a
+            href="https://open.kakao.com/o/seT0joLh"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-[#0DA6F2] transition-all hover:scale-110"
+            title="KakaoTalk"
+          >
+            <RiMessage3Line size={26} />
+          </a>
+          <a
+            href="/assets/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-[#0DA6F2] transition-all hover:scale-110"
+            title="Resume"
+          >
+            <HiOutlineDocumentText size={26} />
+          </a>
+        </div>
       </div>
     </footer>
   );
