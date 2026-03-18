@@ -1,39 +1,43 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import Logo from '../assets/images/JLogo.png';
-
 export default function Header() {
     return (
-        <header className="header-container clearfix">
-            <div className='header-inner'>
-                <a href="/" className="site-avatar">
-                    <img src={Logo} alt="Logo" />
-                </a>
-                <nav className="header-nav">
-                    <ul>
-                        <li>
-                            <NavLink to="/" exact activeClassName="nav-link-selected">
-                                Home
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/about" exact activeClassName="nav-link-selected">
-                                About
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/timeline" exact activeClassName="nav-link-selected">
-                                Timeline
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/career" exact activeClassName="nav-link-selected">
-                                Career
-                            </NavLink>
-                        </li>
-                    </ul>
+        <header className="nav-header">
+            <div className="container">
+                <div className="logo-area">
+                    <div className="logo-icon">
+                        <span className="material-symbols-outlined">terminal</span>
+                    </div>
+                    <NavLink to="/" className="logo-text">
+                        <span>포트폴리오</span>
+                    </NavLink>
+                </div>
+                <nav className="hidden md:flex">
+                    <NavLink to="/" exact activeClassName="active">
+                        홈
+                    </NavLink>
+                    <NavLink to="/about" activeClassName="active">
+                        소개
+                    </NavLink>
+                    <NavLink to="/timeline" activeClassName="active">
+                        타임라인
+                    </NavLink>
+                    <NavLink to="/career" activeClassName="active">
+                        경력
+                    </NavLink>
                 </nav>
+                <div className="flex items-center gap-4">
+                    <a 
+                      href="/assets/resume.pdf" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="btn-resume"
+                    >
+                        <span className="material-symbols-outlined text-sm">download</span>
+                        이력서
+                    </a>
+                </div>
             </div>
         </header>
     );

@@ -1,145 +1,103 @@
 import React, { useState } from 'react';
-
-
-const Mark = ({ children, className = "" }) => (
-    <span className={`px-1.5 py-0.5 rounded-md bg-indigo-50 text-rose-600 font-semibold ${className}`}>
-        {children}
-    </span>
-);
+import { MdOutlineSmartToy } from "react-icons/md";
+import { 
+    SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes, 
+    SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit 
+} from "react-icons/si";
 
 export default function About() {
     const [isHovered, setIsHovered] = useState(false);
 
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    };
-    
     return (
-        <div className="max-w-7xl mx-auto p-8 bg-white min-h-screen">
-            <div className="space-y-8">
-                <div className="text-center">
-                    <h1 className="text-4xl font-bold text-gray-800 mb-4">박재영</h1>
-                    <blockquote className="border-l-4 border-blue-500 pl-4 italic text-lg text-gray-600 bg-gray-50 py-3 rounded-r-lg">
-                        <p>💻 Full-stack Software Engineer | Java(Spring or Boot) + React</p>
-                    </blockquote>
-                </div>
-                
-                <div className="flex justify-center space-x-4 flex-wrap gap-2">
-                    <a href="https://github.com/jyoung9154" className="hover:opacity-80 transition-opacity">
-                        <img
-                            src="https://img.shields.io/github/followers/jyoung9154?label=follow&style=social"
-                            alt="GitHub: @jyoung9154"
-                            className="h-8"
-                        />
-                    </a>
-                    <a href="mailto:jyoung_9154@naver.com" className="hover:opacity-80 transition-opacity">
-                        <img
-                            src="https://img.shields.io/badge/jyoung_9154-@Naver-1EC800?logo=naver"
-                            alt="Naver: @jyoung_9154"
-                            className="h-8"
-                        />
-                    </a>
-                    <img
-                        src="https://img.shields.io/badge/luck9262-@Kakao-F7E600?logo=kakao"
-                        alt="Kakao: @luck9262"
-                        className="h-8"
-                    />
-                </div>
+        <div className="min-h-screen">
+            <main className="container-main">
+                <section className="mb-32">
+                    
+                    {/* Hero Profile Section */}
+                    <div className="premium-card mb-16 px-10 py-12">
+                        <div className="flex flex-col md:flex-row gap-12 items-center md:items-start text-center md:text-left">
+                            <div className="flex-1 w-full">
+                                <div className="mb-2">
+                                    <h3 className="text-4xl font-black mb-1 text-white">박재영</h3>
+                                    <p className="text-xl text-slate-400 font-medium">( Park Jae Young )</p>
+                                </div>
+                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0DA6F2]/10 border border-[#0DA6F2]/30 mb-8 mt-4">
+                                    <span className="material-symbols-outlined text-[#0DA6F2] text-sm">terminal</span>
+                                    <span className="text-sm font-bold text-[#0DA6F2] uppercase tracking-wider">Java Full-Stack Developer & Data Engineer</span>
+                                </div>
+                                
+                                <div className="space-y-6 text-lg text-slate-300 leading-relaxed max-w-3xl">
+                                    <p className="font-medium text-white">
+                                        프론트부터 백엔드, 배포 및 데이터 처리까지 <span className="text-[#0DA6F2] font-bold">풀스택 개발 가능</span>
+                                    </p>
+                                    <p>
+                                        전자결재/메일 시스템 개발, AI MCP 개발, DB & File 마이그레이션 등 <span className="text-white font-bold">실전 경험 중심의 문제 해결자</span>
+                                    </p>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-white/5">
+                                        <div className="flex items-start gap-4 justify-center md:justify-start">
+                                            <span className="text-2xl">🌍</span>
+                                            <p className="text-sm leading-snug text-slate-400 m-0">
+                                                세계 6대륙 40여 개국, 550일 여행 경험으로 <br /><span className="text-white">도전과 적응력 보유</span>
+                                            </p>
+                                        </div>
+                                        <div className="flex items-start gap-4 justify-center md:justify-start">
+                                            <span className="text-2xl">🪖</span>
+                                            <p className="text-sm leading-snug text-slate-400 m-0">
+                                                HID(정보사령부) 복무 — <br /><span className="text-white">신속한 판단 & 실행력</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                <div className="space-y-4 text-2xl text-gray-700 leading-relaxed">
-                    {/* <p className="text-lg font-semibold text-blue-600"></p>  */}
-                    <p>Java, Spring, React.js 등 다양한 기술 스택 보유하고 있으며 <Mark>클린코드 작성에 중점</Mark>을 두고 있습니다.</p>
-                    <p>또한, MySQL, MSSQL, Oracle DB와 같은 다양한 데이터베이스 환경에서의 작업 경험도 갖추고 있습니다. 그리고 리눅스 기반 시스템에서의 개발 및 배포 경험도 풍부하며, Docker, k8s를 활용한 컨테이너 기반의 개발 환경에도 능숙합니다. 이러한 기술 스택을 활용하여, 전자결재 시스템 개발뿐만 아니라, 메일 시스템 개발 등 다양한 프로젝트를 성공적으로 이끌었습니다.
-                        개발자로서의 <Mark>저의 강점</Mark>은 고착화되어 있는 <Mark>아날로그 시스템을 자동화</Mark>하는 것을 좋아합니다. 단순한 코딩 능력을 넘어서, 프로젝트의 요구 사항을 정확히 이해하고, 이를 기반으로 효율적이고 신뢰할 수 있는 소프트웨어 솔루션을 설계하고 구현할 수 있는 능력에 있습니다. 
-                        또한, 문제 해결 능력과 빠른 학습 능력을 바탕으로 새로운 기술 스택을 신속하게 습득하고 프로젝트에 적용하는 능력도 갖추고 있습니다.</p>
-                    <p>주어진 기회에서 최선을 다해 회사의 성장에 기여하고, 함께 일하는 동료들과 협력하여 프로젝트를 성공적으로 완수하는 데 주력하겠습니다. 새로운 기술에 대한 열정과 배움에 대한 열린 마음을 가지고, 끊임없이 성장하는 개발자가 되겠습니다.</p>
-                </div>
+                    {/* CTA and Links */}
+                    <div className="grid md:grid-cols-2 gap-8 mb-32">
+                        <a 
+                            href="/timeline" 
+                            className="premium-card no-underline group flex justify-between items-center py-10"
+                            onMouseEnter={() => setIsHovered(true)}
+                            onMouseLeave={() => setIsHovered(false)}
+                        >
+                            <h3 className="text-2xl font-bold group-hover:text-gradient transition-all mb-0">🖇️ 전체 프로젝트 타임라인</h3>
+                            <span className={`material-symbols-outlined text-4xl text-[#0DA6F2] transition-transform duration-500 ${isHovered ? 'translate-x-3' : ''}`}>arrow_forward</span>
+                        </a>
+                        <div className="flex gap-6 items-center flex-wrap">
+                            <a href="https://github.com/jyoung9154" target="_blank" rel="noopener noreferrer" className="premium-card py-6 flex-1 text-center hover:border-[#0DA6F2]/40 transition-all no-underline">
+                                <span className="block text-slate-500 text-xs font-bold uppercase tracking-widest mb-4">깃허브</span>
+                                <img src="https://img.shields.io/github/followers/jyoung9154?label=FOLLOW&style=for-the-badge&logo=github&color=333" alt="GitHub" className="mx-auto" />
+                            </a>
+                            <a href="mailto:jyoung_9154@naver.com" className="premium-card py-6 flex-1 text-center hover:border-[#0DA6F2]/40 transition-all no-underline">
+                                <span className="block text-slate-500 text-xs font-bold uppercase tracking-widest mb-4">이메일</span>
+                                <img src="https://img.shields.io/badge/Connect-Naver-1EC800?style=for-the-badge&logo=naver" alt="Naver" className="mx-auto" />
+                            </a>
+                        </div>
+                    </div>
 
-                <hr className="border-t-2 border-gray-200 my-8" />
-                
-                <a
-                    href="/timeline"
-                    className={`block text-center transition-all duration-300 ${isHovered ? 'transform scale-105' : ''}`}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
-                    style={{
-                        color: 'inherit',
-                        textDecoration: 'none',
-                        transition: 'none',
-                    }}
-                >
-                    <h2 className="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors">🖇️ 주요이력 🖇️</h2>
-                </a>
-                
-                <div className="space-y-6">
-                    <div className="flex flex-col md:flex-row gap-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border-l-4 border-blue-500 hover:shadow-md transition-shadow">
-                        <div className="text-sm font-semibold text-blue-600 md:w-64 flex-shrink-0">2024.06 ~ [재직중]</div>
-                        <div className="flex-1">
-                            <span className="font-bold text-gray-800">더존비즈온 근무 [그룹웨어 메일 개발 담당]</span>
+                    <div className="mb-32">
+                        <div className="flex items-center gap-4 mb-16">
+                            <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">경력 여정</h2>
+                            <div className="h-px flex-1 bg-white/5"></div>
+                        </div>
+                        
+                        <div className="space-y-6">
+                            {[
+                                { date: '2024.06 ~ NOW', title: '더존비즈온 (DOUZONE)', desc: '그룹웨어 Amaranth 10 메일 서비스 풀스택 및 AI 개발 담당', active: true },
+                                { date: '2022.09 ~ 2024.05', title: '세계여행', desc: '6대륙 41개국 세계 일주 - 견문 확장 및 글로벌 네트워킹' },
+                                { date: '2018.09 ~ 2022.06', title: '더존비즈온 (DOUZONE)', desc: '전자결재 시스템 개발 및 마이그레이션 자동화 전담' },
+                                { date: '2013.08 ~ 2017.11', title: '국군 정보사령부', desc: '특수작전부대(HID) 복무 - 리더십 및 목표 달성 역량 함양' },
+                            ].map((item, idx) => (
+                                <div key={idx} className={`p-8 rounded-3xl border ${item.active ? 'bg-[#0DA6F2]/5 border-[#0DA6F2]/20' : 'bg-white/5 border-white/5'} transition-all hover:bg-white/[0.07]`}>
+                                    <span className={`text-xs font-black tracking-widest uppercase mb-2 block ${item.active ? 'text-[#0DA6F2]' : 'text-slate-500'}`}>{item.date}</span>
+                                    <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                                    <p className="text-slate-400 mb-0">{item.desc}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                    <div className="flex flex-col md:flex-row gap-4 p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border-l-4 border-green-500 hover:shadow-md transition-shadow">
-                        <div className="text-sm font-semibold text-green-600 md:w-64 flex-shrink-0">2022.09 ~ 2024.05 [1년 8개월]</div>
-                        <div className="flex-1">
-                            <span className="font-bold text-gray-800">세계여행 [6대륙 41개국]</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row gap-4 p-4 bg-gradient-to-r from-purple-50 to-violet-50 rounded-lg border-l-4 border-purple-500 hover:shadow-md transition-shadow">
-                        <div className="text-sm font-semibold text-purple-600 md:w-64 flex-shrink-0">2018.09 ~ 2022.06 [3년 10개월]</div>
-                        <div className="flex-1">
-                            <span className="font-bold text-gray-800">더존비즈온 근무 [그룹웨어 전자결재 개발 담당]</span>
-                        </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row gap-4 p-4 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg border-l-4 border-orange-500 hover:shadow-md transition-shadow">
-                        <div className="text-sm font-semibold text-orange-600 md:w-64 flex-shrink-0">2013.08 ~ 2017.11 [4년 3개월]</div>
-                        <div className="flex-1">
-                            <span className="font-bold text-gray-800">국군 정보사령부 특수작전부대(HID) 근무</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <hr className="border-t-2 border-gray-200 my-8" />
-                
-                <div>
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">⚡ 기술 스택 ⚡</h2>
-                    <div className="overflow-x-auto shadow-lg rounded-lg">
-                    <table className="about-skills-table">
-                        <tr>
-                            <th>분야</th>
-                            <th>기술</th>
-                        </tr>
-                        <tr>
-                            <td>FrontEnd</td>
-                            <td>JavaScript, React</td>
-                        </tr>
-                        <tr>
-                            <td>BackEnd</td>
-                            <td>Java, Spring, Spring Boot, JPA, Kotlin </td>
-                        </tr>
-                        <tr>
-                            <td>Databases</td>
-                            <td>MySQL, Oracle, Microsoft SQL Server, Redis</td>
-                        </tr>
-                        <tr>
-                            <td>DevOps</td>
-                            <td>Docker, Nginx, Kubernetes</td>
-                        </tr>
-                        <tr>
-                            <td>Web technologies</td>
-                            <td>HTML, CSS, ES7+</td>
-                        </tr>
-                        <tr>
-                            <td>Etc</td>
-                            <td>AI, ElasticSearch, Kafka</td>
-                        </tr>
-                    </table>
-                    </div>
-                </div>
-            </div>
+                </section>
+            </main>
         </div>
     );
 }
