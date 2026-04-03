@@ -84,8 +84,8 @@ export default function Career() {
                         <span className="text-gradient">전문성</span>
                     </h1>
                     <p className="max-w-3xl text-xl text-slate-300 font-medium leading-relaxed">
-                        AI 네이티브 전환을 주도하며 SaaS 클라우드 환경에서 대규모 인프라의 효율화를 추구하는 {getCareerYearLabel()} 개발자입니다.
-                        더존비즈온(사원 수 1,755명)의 핵심 솔루션인 Amaranth 10의 안정적 운영과 차세대 AI 서비스 전환을 성공적으로 이끌고 있습니다.
+                        {getCareerYearLabel()} AI 풀스택 개발자로, 서비스 기획부터 런칭·운영까지 전 과정을 수행합니다. <br />
+                        LLM / RAG / MCP 기반 지능형 AI 솔루션 전환을 주도하고 있습니다.
                     </p>
                 </section>
                 {/* Summary Dashboard Card */}
@@ -93,17 +93,22 @@ export default function Career() {
                     <div className="premium-card">
                         <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
                             <div className="flex-1">
-                                <h3 className="mb-6 text-2xl font-bold text-white">더존비즈온 / Full-Stack Developer</h3>
-                                <div className="space-y-4">
-                                    <p className="text-lg text-slate-300 font-medium mb-0 leading-relaxed">
-                                        [SaaS/구축] 그룹웨어 메일·전자결재 풀스택 개발 및 운영. <br />
-                                        반복 업무 자동화로 <strong>CS 요청 1/10, 계정 탈취 조사 1/50</strong> 수준 감축.
-                                        경영진 설득을 통한 대규모 리팩토링 주도.
-                                    </p>
-                                    <div className="h-px w-full bg-white/5 my-4"></div>
-                                    <p className="text-lg font-bold text-white border-l-4 border-[#0DA6F2] pl-6 py-2 bg-[#0DA6F2]/5 rounded-r-xl">
-                                        초기 기획부터 런칭까지, LLM / RAG 기반 지능형 AI 솔루션 전환 주도
-                                    </p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                                        <span className="material-symbols-outlined text-[#0DA6F2] text-2xl mb-4 block">smart_toy</span>
+                                        <h4 className="text-white font-bold text-base mb-2">AI 전환 주도</h4>
+                                        <p className="text-slate-400 text-sm mb-0 leading-relaxed">LLM / RAG / MCP 기반<br />지능형 솔루션 설계 및 구축</p>
+                                    </div>
+                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                                        <span className="material-symbols-outlined text-[#0DA6F2] text-2xl mb-4 block">rocket_launch</span>
+                                        <h4 className="text-white font-bold text-base mb-2">Full Lifecycle</h4>
+                                        <p className="text-slate-400 text-sm mb-0 leading-relaxed">초기 기획 → 개발 → 런칭 → 운영<br />전 과정 수행</p>
+                                    </div>
+                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                                        <span className="material-symbols-outlined text-[#0DA6F2] text-2xl mb-4 block">cloud</span>
+                                        <h4 className="text-white font-bold text-base mb-2">SaaS 인프라</h4>
+                                        <p className="text-slate-400 text-sm mb-0 leading-relaxed">대규모 클라우드 시스템<br />운영 및 최적화</p>
+                                    </div>
                                 </div>
                             </div>
                             <div className="flex-shrink-0">
