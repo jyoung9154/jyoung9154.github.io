@@ -77,42 +77,38 @@ export default function Career() {
     return (
         <div className="min-h-screen">
             <main className="container-main">
-                {/* Hero Section */}
-                <section className="mb-32">
-                    <h1 className="mb-8">
+                {/* Hero + Summary 통합 Section */}
+                <section className="mb-20">
+                    <h1 className="mb-6">
                         경력 및 &nbsp;
                         <span className="text-gradient">전문성</span>
                     </h1>
-                    <p className="max-w-3xl text-xl text-slate-300 font-medium leading-relaxed">
-                        {getCareerYearLabel()} AI 풀스택 개발자로, 서비스 기획부터 런칭·운영까지 전 과정을 수행합니다. <br />
+                    <p className="max-w-3xl text-xl text-slate-300 font-medium leading-relaxed mb-14">
+                        {getCareerYearLabel()} AI 풀스택 개발자로, 서비스 기획부터 런칭·운영까지 전 과정을 수행합니다.
                         LLM / RAG / MCP 기반 지능형 AI 솔루션 전환을 주도하고 있습니다.
                     </p>
-                </section>
-                {/* Summary Dashboard Card */}
-                <section className="mb-20">
+
                     <div className="premium-card">
-                        <div className="flex flex-col lg:flex-row gap-12 lg:items-center">
-                            <div className="flex-1">
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
-                                        <span className="material-symbols-outlined text-[#0DA6F2] text-2xl mb-4 block">smart_toy</span>
-                                        <h4 className="text-white font-bold text-base mb-2">AI 전환 주도</h4>
-                                        <p className="text-slate-400 text-sm mb-0 leading-relaxed">LLM / RAG / MCP 기반<br />지능형 솔루션 설계 및 구축</p>
-                                    </div>
-                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
-                                        <span className="material-symbols-outlined text-[#0DA6F2] text-2xl mb-4 block">rocket_launch</span>
-                                        <h4 className="text-white font-bold text-base mb-2">Full Lifecycle</h4>
-                                        <p className="text-slate-400 text-sm mb-0 leading-relaxed">초기 기획 → 개발 → 런칭 → 운영<br />전 과정 수행</p>
-                                    </div>
-                                    <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
-                                        <span className="material-symbols-outlined text-[#0DA6F2] text-2xl mb-4 block">cloud</span>
-                                        <h4 className="text-white font-bold text-base mb-2">SaaS 인프라</h4>
-                                        <p className="text-slate-400 text-sm mb-0 leading-relaxed">대규모 클라우드 시스템<br />운영 및 최적화</p>
-                                    </div>
+                        <div className="flex flex-col lg:flex-row gap-10 lg:items-center">
+                            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-5">
+                                <div className="p-7 rounded-2xl bg-white/5 border border-white/5 flex flex-col gap-3">
+                                    <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">smart_toy</span>
+                                    <h4 className="text-white font-bold text-base mb-0">AI 전환 주도</h4>
+                                    <p className="text-slate-400 text-sm mb-0 leading-relaxed">LLM / RAG / MCP 기반 지능형 솔루션 설계 및 구축</p>
+                                </div>
+                                <div className="p-7 rounded-2xl bg-white/5 border border-white/5 flex flex-col gap-3">
+                                    <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">rocket_launch</span>
+                                    <h4 className="text-white font-bold text-base mb-0">Full Lifecycle</h4>
+                                    <p className="text-slate-400 text-sm mb-0 leading-relaxed">초기 기획 → 개발 → 런칭 → 운영, 전 과정 수행</p>
+                                </div>
+                                <div className="p-7 rounded-2xl bg-white/5 border border-white/5 flex flex-col gap-3">
+                                    <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">cloud</span>
+                                    <h4 className="text-white font-bold text-base mb-0">SaaS 인프라</h4>
+                                    <p className="text-slate-400 text-sm mb-0 leading-relaxed">대규모 클라우드 시스템 운영 및 최적화</p>
                                 </div>
                             </div>
-                            <div className="flex-shrink-0">
-                                <div className="px-10 py-8 rounded-3xl bg-[#0DA6F2]/10 border border-[#0DA6F2]/30 text-center">
+                            <div className="flex-shrink-0 flex justify-center">
+                                <div className="px-12 py-8 rounded-3xl bg-[#0DA6F2]/10 border border-[#0DA6F2]/30 text-center min-w-[180px]">
                                     <span className="block text-xs font-black text-[#0DA6F2] uppercase tracking-[3px] mb-3">AI Full-Stack Developer</span>
                                     <span className="block text-5xl font-black text-white">{getCareerYearLabel()}</span>
                                 </div>
