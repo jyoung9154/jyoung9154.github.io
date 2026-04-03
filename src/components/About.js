@@ -1,18 +1,33 @@
 import React, { useState } from 'react';
 import { MdOutlineSmartToy } from "react-icons/md";
-import { 
-    SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes, 
-    SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit 
+import {
+    SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes,
+    SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit
 } from "react-icons/si";
+import { getCareerYearLabel } from '../utils/careerUtils';
 
 export default function About() {
     const [isHovered, setIsHovered] = useState(false);
+
+    const techStacks = [
+        { name: "AI", icon: <MdOutlineSmartToy className="text-purple-600" />, bg: "bg-purple-100", text: "text-purple-700" },
+        { name: "Spring", icon: <SiSpring className="text-green-500" />, bg: "bg-green-100", text: "text-green-700" },
+        { name: "React", icon: <SiReact className="text-sky-500" />, bg: "bg-sky-100", text: "text-sky-700" },
+        { name: "MySQL", icon: <SiMysql className="text-blue-500" />, bg: "bg-blue-100", text: "text-blue-700" },
+        { name: "Docker", icon: <SiDocker className="text-sky-600" />, bg: "bg-sky-100", text: "text-sky-700" },
+        { name: "Kubernetes", icon: <SiKubernetes className="text-blue-600" />, bg: "bg-blue-100", text: "text-blue-700" },
+        { name: "Redis", icon: <SiRedis className="text-red-500" />, bg: "bg-red-100", text: "text-red-700" },
+        { name: "Kafka", icon: <SiApachekafka className="text-gray-800" />, bg: "bg-gray-100", text: "text-gray-800" },
+        { name: "ElasticSearch", icon: <SiElasticsearch className="text-yellow-500" />, bg: "bg-yellow-100", text: "text-yellow-700" },
+        { name: "Linux", icon: <SiLinux className="text-black" />, bg: "bg-gray-200", text: "text-gray-800" },
+        { name: "Git", icon: <SiGit className="text-orange-500" />, bg: "bg-orange-100", text: "text-orange-700" },
+    ];
 
     return (
         <div className="min-h-screen">
             <main className="container-main">
                 <section className="mb-32">
-                    
+
                     {/* Hero Profile Section */}
                     <div className="premium-card mb-16 px-10 py-12">
                         <div className="flex flex-col md:flex-row gap-12 items-center md:items-start text-center md:text-left">
@@ -25,7 +40,7 @@ export default function About() {
                                     <span className="material-symbols-outlined text-[#0DA6F2] text-sm">terminal</span>
                                     <span className="text-sm font-bold text-[#0DA6F2] uppercase tracking-wider">Java Full-Stack Developer & Data Engineer</span>
                                 </div>
-                                
+
                                 <div className="space-y-6 text-lg text-slate-300 leading-relaxed max-w-3xl">
                                     <p className="font-medium text-white">
                                         프론트부터 백엔드, 배포 및 데이터 처리까지 <span className="text-[#0DA6F2] font-bold">풀스택 개발 가능</span>
@@ -52,10 +67,53 @@ export default function About() {
                         </div>
                     </div>
 
+                    {/* Tech Stack Badges */}
+                    <div className="mb-16">
+                        <div className="flex items-center gap-4 mb-8">
+                            <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">기술 스택</h2>
+                            <div className="h-px flex-1 bg-white/5"></div>
+                        </div>
+                        <div className="flex flex-wrap gap-3 justify-center">
+                            {techStacks.map((stack, idx) => (
+                                <div
+                                    key={idx}
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-xl ${stack.bg} transition-all hover:scale-105 cursor-default shadow-md shadow-black/10`}
+                                >
+                                    <span className="text-lg">{stack.icon}</span>
+                                    <span className={`font-bold text-[10px] uppercase tracking-wider ${stack.text}`}>{stack.name}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Certifications */}
+                    <div className="mb-16">
+                        <div className="flex items-center gap-4 mb-8">
+                            <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">자격증</h2>
+                            <div className="h-px flex-1 bg-white/5"></div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="p-6 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-4">
+                                <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">verified</span>
+                                <div>
+                                    <h4 className="text-white font-bold mb-1">정보처리기사</h4>
+                                    <p className="text-slate-500 text-xs mb-0">2021.06 취득 · 국가 공인 기술 자격증</p>
+                                </div>
+                            </div>
+                            <div className="p-6 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-4">
+                                <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">verified</span>
+                                <div>
+                                    <h4 className="text-white font-bold mb-1">TOPCIT Lv.3</h4>
+                                    <p className="text-slate-500 text-xs mb-0">2021.10 취득 · ICT 역량 지수 표준화 시험</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* CTA and Links */}
                     <div className="grid md:grid-cols-2 gap-8 mb-32">
-                        <a 
-                            href="/timeline" 
+                        <a
+                            href="/timeline"
                             className="premium-card no-underline group flex justify-between items-center py-10"
                             onMouseEnter={() => setIsHovered(true)}
                             onMouseLeave={() => setIsHovered(false)}
@@ -80,10 +138,10 @@ export default function About() {
                             <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">경력 여정</h2>
                             <div className="h-px flex-1 bg-white/5"></div>
                         </div>
-                        
+
                         <div className="space-y-6">
                             {[
-                                { date: '2024.06 ~ NOW', title: '더존비즈온 (DOUZONE)', desc: '그룹웨어 Amaranth 10 메일 서비스 풀스택 및 AI 개발 담당', active: true },
+                                { date: '2024.07 ~ NOW', title: '더존비즈온 (DOUZONE)', desc: '그룹웨어 Amaranth 10 메일 서비스 풀스택 및 AI 개발 담당', active: true },
                                 { date: '2022.09 ~ 2024.05', title: '세계여행', desc: '6대륙 41개국 세계 일주 - 견문 확장 및 글로벌 네트워킹' },
                                 { date: '2018.09 ~ 2022.06', title: '더존비즈온 (DOUZONE)', desc: '전자결재 시스템 개발 및 마이그레이션 자동화 전담' },
                                 { date: '2013.08 ~ 2017.11', title: '국군 정보사령부', desc: '특수작전부대(HID) 복무 - 리더십 및 목표 달성 역량 함양' },

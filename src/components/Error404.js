@@ -8,13 +8,12 @@ function Error404() {
             <div className="link">
                 <img className="selfie" alt="" src={Image404} />
             </div>
-            <h1>Not found</h1>
+            <h1>페이지를 찾을 수 없습니다</h1>
             <p className="not-found-description">
-                Sorry it looks like we couldn&#39;t find the what you&#39;re looking for. Click the
-                button below to go back.
+                요청하신 페이지를 찾을 수 없습니다. 아래 버튼을 눌러 홈으로 돌아가 주세요.
             </p>
             <a href="/" className="link-button">
-                Return to the app
+                홈으로 돌아가기
             </a>
         </section>
     );
