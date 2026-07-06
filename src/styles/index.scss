@@ -9,17 +9,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
-  --primary: #DFB45A;
-  --primary-glow: rgba(223, 180, 90, 0.18);
-  --bg-dark: #0B0C10;
-  --bg-card: rgba(14, 16, 21, 0.6);
-  --bg-card-hover: rgba(18, 21, 27, 0.8);
-  --text-main: #ECEAE3; /* warm ink */
-  --text-dim: #C9C7C0;
-  --text-muted: #8E9099;
-  --border-light: rgba(236, 234, 227, 0.09); /* hairline */
-  --border-bright: rgba(236, 234, 227, 0.14);
-  --glass-dark: rgba(11, 12, 16, 0.72);
+  --primary: #0DA6F2;
+  --primary-glow: rgba(13, 166, 242, 0.4);
+  --bg-dark: #0A1116;
+  --bg-card: rgba(22, 36, 43, 0.6);
+  --bg-card-hover: rgba(28, 46, 54, 0.8);
+  --text-main: #F1F5F9;
+  --text-dim: #CBD5E1;
+  --text-muted: #94A3B8;
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-bright: rgba(255, 255, 255, 0.12);
+  --glass-dark: rgba(10, 17, 22, 0.85);
   --font-display: 'Space Grotesk', 'Noto Sans KR', monospace;
 
   --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
@@ -42,14 +42,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 
-  /* Cinematic single-source radial */
+  /* Premium Mesh Gradient Background */
   background-color: var(--bg-dark);
-  background-image: radial-gradient(1200px 600px at 50% -10%, rgba(223, 180, 90, 0.07), transparent 60%);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(13, 166, 242, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(117, 92, 222, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(13, 166, 242, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(117, 92, 222, 0.08) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
 ::selection {
-  color: var(--bg-dark);
+  color: #fff;
   background-color: var(--primary);
 }
 
@@ -125,6 +129,7 @@ strong {
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 0 20px var(--primary-glow);
     }
 
     .logo-text span {
@@ -173,7 +178,8 @@ strong {
   &:hover {
     transform: translateY(-4px);
     background: var(--bg-card-hover);
-    border-color: rgba(223, 180, 90, 0.45);
+    border-color: rgba(13, 166, 242, 0.3);
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(13, 166, 242, 0.1);
   }
 }
 
@@ -185,7 +191,7 @@ strong {
 
 .btn-resume {
   background: var(--primary);
-  color: var(--bg-dark) !important;
+  color: white !important;
   padding: 14px 32px;
   border-radius: 10px;
   font-weight: 700;
@@ -194,6 +200,7 @@ strong {
   align-items: center;
   gap: 12px;
   transition: all 0.3s ease;
+  box-shadow: 0 10px 25px var(--primary-glow);
   border: none;
   cursor: pointer;
 
@@ -209,8 +216,8 @@ strong {
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background: rgba(223, 180, 90, 0.08);
-  border: 1px solid rgba(223, 180, 90, 0.25);
+  background: rgba(13, 166, 242, 0.08);
+  border: 1px solid rgba(13, 166, 242, 0.25);
   border-radius: 100px;
   color: var(--primary);
   font-family: var(--font-display);
@@ -252,7 +259,7 @@ strong {
     transition: all 0.3s ease;
     
     &:hover {
-      background: rgba(223, 180, 90, 0.1);
+      background: rgba(13, 166, 242, 0.1);
       border-color: var(--primary);
       color: var(--primary);
       transform: translateY(-2px);
@@ -306,9 +313,9 @@ strong {
         left: 50%;
         width: 4px;
         height: 150px;
-        background: linear-gradient(to bottom, #DFB45A, transparent);
+        background: linear-gradient(to bottom, #0DA6F2, transparent);
         transform: translateX(-50%);
-        box-shadow: 0 0 20px rgba(223, 180, 90, 0.5);
+        box-shadow: 0 0 20px rgba(13, 166, 242, 0.5);
         animation: path-glow 4s infinite linear;
     }
 }
@@ -320,7 +327,7 @@ strong {
     100% { top: 110%; opacity: 0; }
 }
 
-.milestone-item {
+.mileslate-item {
     position: relative;
     width: 100%;
     margin-bottom: 80px;
@@ -328,19 +335,19 @@ strong {
     justify-content: flex-start;
     padding-left: 100px;
 
-    .milestone-content {
+    .mileslate-content {
         max-width: 800px;
         text-align: left;
     }
 
-    .milestone-node {
+    .mileslate-node {
         position: absolute;
         left: 31px;
         top: 0;
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: #DFB45A;
+        background: #0DA6F2;
         border: none;
         display: flex;
         align-items: center;
@@ -348,16 +355,16 @@ strong {
         z-index: 10;
         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         transform: translateX(-50%);
-        box-shadow: 0 0 0 4px var(--bg-dark);
+        box-shadow: 0 0 20px rgba(13, 166, 242, 0.3);
 
         span {
             font-size: 20px;
-            color: var(--bg-dark);
+            color: white;
         }
     }
 }
 
-.milestone-card {
+.mileslate-card {
     padding: 0;
     background: transparent;
     border: none;
@@ -370,7 +377,7 @@ strong {
         font-weight: 700;
         font-size: 14px;
         letter-spacing: 0.12em;
-        color: #DFB45A;
+        color: #0DA6F2;
         margin-bottom: 8px;
     }
 
@@ -400,19 +407,19 @@ strong {
         left: 40px;
     }
 
-    .milestone-item, .milestone-item.left {
+    .mileslate-item, .mileslate-item.left {
         justify-content: flex-start;
         padding-left: 80px;
         padding-right: 0;
         
-        .milestone-content {
+        .mileslate-content {
             margin-left: 0 !important;
             margin-right: 0 !important;
             text-align: left !important;
             max-width: 100%;
         }
 
-        .milestone-node {
+        .mileslate-node {
             left: -40px !important;
             right: auto !important;
             width: 48px;
@@ -441,7 +448,7 @@ strong {
     text-align: center;
     padding: 0 24px;
     box-sizing: border-box;
-    background: radial-gradient(900px 500px at 50% 110%, rgba(223, 180, 90, 0.06), transparent 60%), rgba(14, 16, 21, 0.92);
+    background: radial-gradient(900px 500px at 50% 110%, rgba(13, 166, 242, 0.06), transparent 60%), rgba(16, 28, 34, 0.92);
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
     overflow: hidden;
@@ -522,7 +529,7 @@ strong {
             opacity: 1;
             transform: none;
             color: var(--text-main) !important;
-            border-color: rgba(223, 180, 90, 0.45);
+            border-color: rgba(13, 166, 242, 0.45);
         }
     }
 }

@@ -16,8 +16,8 @@ function CompetencyCard({ number, title, content, colorClass }) {
             </div>
             <ul className="space-y-4">
                 {content.map((item, idx) => (
-                    <li key={idx} className="flex gap-3 text-stone-300 font-medium text-sm leading-relaxed">
-                        <span className="text-[#DFB45A] mt-1.5">•</span>
+                    <li key={idx} className="flex gap-3 text-slate-300 font-medium text-sm leading-relaxed">
+                        <span className="text-[#0DA6F2] mt-1.5">•</span>
                         <span>{item}</span>
                     </li>
                 ))}
@@ -37,20 +37,20 @@ function SubProjectItem({ title, date, background, improvement, result }) {
             <div className="space-y-4">
                 {background && (
                     <div className="flex gap-3">
-                        <span className="text-[10px] font-black uppercase text-stone-500 mt-1 min-w-[50px]">배경</span>
-                        <p className="text-stone-400 font-medium text-sm leading-relaxed">{background}</p>
+                        <span className="text-[10px] font-black uppercase text-slate-500 mt-1 min-w-[50px]">배경</span>
+                        <p className="text-slate-400 font-medium text-sm leading-relaxed">{background}</p>
                     </div>
                 )}
                 {improvement && (
                     <div className="flex gap-3">
-                        <span className="text-[10px] font-black uppercase text-[#DFB45A] mt-1 min-w-[50px]">개선</span>
-                        <p className="text-stone-300 text-sm leading-relaxed font-semibold">{improvement}</p>
+                        <span className="text-[10px] font-black uppercase text-[#0DA6F2] mt-1 min-w-[50px]">개선</span>
+                        <p className="text-slate-300 text-sm leading-relaxed font-semibold">{improvement}</p>
                     </div>
                 )}
                 {result && (
                     <div className="flex gap-3">
                         <span className="text-[10px] font-black uppercase text-purple-500 mt-1 min-w-[50px]">성과</span>
-                        <p className="text-stone-400 font-medium text-sm leading-relaxed">{result}</p>
+                        <p className="text-slate-400 font-medium text-sm leading-relaxed">{result}</p>
                     </div>
                 )}
             </div>
@@ -85,14 +85,14 @@ export default function Career() {
                                 경력 및 &nbsp;
                                 <span className="text-gradient">전문성</span>
                             </h1>
-                            <p className="max-w-2xl text-xl text-stone-300 font-medium leading-relaxed mb-0">
+                            <p className="max-w-2xl text-xl text-slate-300 font-medium leading-relaxed mb-0">
                                 {getCareerYearLabel()} AI 풀스택 개발자로, 서비스 기획부터 런칭·운영까지 전 과정을 수행합니다.
                                 LLM / RAG / MCP 기반 지능형 AI 솔루션 전환을 주도하고 있습니다.
                             </p>
                         </div>
                         <div className="flex-shrink-0">
-                            <div className="px-10 py-6 rounded-2xl bg-[#DFB45A]/10 border border-[#DFB45A]/30 text-center">
-                                <span className="block text-xs font-black text-[#DFB45A] uppercase tracking-[3px] mb-2">AI Full-Stack Developer</span>
+                            <div className="px-10 py-6 rounded-2xl bg-[#0DA6F2]/10 border border-[#0DA6F2]/30 text-center">
+                                <span className="block text-xs font-black text-[#0DA6F2] uppercase tracking-[3px] mb-2">AI Full-Stack Developer</span>
                                 <span className="block text-4xl font-black text-white">{getCareerYearLabel()}</span>
                             </div>
                         </div>
@@ -100,19 +100,19 @@ export default function Career() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                         <div className="premium-card flex flex-col gap-4 !rounded-2xl">
-                            <span className="material-symbols-outlined text-[#DFB45A] text-2xl">smart_toy</span>
+                            <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">smart_toy</span>
                             <h4 className="text-white font-bold text-base mb-0">AI 전환 주도</h4>
-                            <p className="text-stone-400 text-sm mb-0 leading-relaxed">LLM / RAG / MCP 기반 지능형 솔루션 설계 및 구축</p>
+                            <p className="text-slate-400 text-sm mb-0 leading-relaxed">LLM / RAG / MCP 기반 지능형 솔루션 설계 및 구축</p>
                         </div>
                         <div className="premium-card flex flex-col gap-4 !rounded-2xl">
-                            <span className="material-symbols-outlined text-[#DFB45A] text-2xl">rocket_launch</span>
+                            <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">rocket_launch</span>
                             <h4 className="text-white font-bold text-base mb-0">Full Lifecycle</h4>
-                            <p className="text-stone-400 text-sm mb-0 leading-relaxed">초기 기획 → 개발 → 런칭 → 운영, 전 과정 수행</p>
+                            <p className="text-slate-400 text-sm mb-0 leading-relaxed">초기 기획 → 개발 → 런칭 → 운영, 전 과정 수행</p>
                         </div>
                         <div className="premium-card flex flex-col gap-4 !rounded-2xl">
-                            <span className="material-symbols-outlined text-[#DFB45A] text-2xl">cloud</span>
+                            <span className="material-symbols-outlined text-[#0DA6F2] text-2xl">cloud</span>
                             <h4 className="text-white font-bold text-base mb-0">SaaS 인프라</h4>
-                            <p className="text-stone-400 text-sm mb-0 leading-relaxed">대규모 클라우드 시스템 운영 및 최적화</p>
+                            <p className="text-slate-400 text-sm mb-0 leading-relaxed">대규모 클라우드 시스템 운영 및 최적화</p>
                         </div>
                     </div>
                 </section>
@@ -121,7 +121,7 @@ export default function Career() {
                 <section className="mb-32">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5"></div>
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-stone-500 whitespace-nowrap">01. 핵심 역량 및 특징</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">01. 핵심 역량 및 특징</h2>
                         <div className="h-px flex-1 bg-white/5"></div>
                     </div>
 
@@ -186,7 +186,7 @@ export default function Career() {
                 <section className="mb-32">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5"></div>
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-stone-500 whitespace-nowrap">02. 주요 프로젝트</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">02. 주요 프로젝트</h2>
                         <div className="h-px flex-1 bg-white/5"></div>
                     </div>
 
@@ -197,13 +197,13 @@ export default function Career() {
                                 <div>
                                     <p className="date-text mb-2">2024.07 — 현재</p>
                                     <h3 className="company-title">그룹웨어 메일 솔루션 AI 기술 고도화 및 최적화</h3>
-                                    <p className="text-[#DFB45A] font-semibold text-sm">더존비즈온 (DOUZONE)</p>
+                                    <p className="text-[#0DA6F2] font-semibold text-sm">더존비즈온 (DOUZONE)</p>
                                 </div>
-                                <span className="material-symbols-outlined text-stone-600 group-hover:text-[#DFB45A] transition-colors text-3xl">smart_toy</span>
+                                <span className="material-symbols-outlined text-slate-600 group-hover:text-[#0DA6F2] transition-colors text-3xl">smart_toy</span>
                             </div>
 
                             <div className="space-y-12">
-                                <p className="text-xl text-stone-200 font-medium border-l-4 border-[#DFB45A] pl-6 py-1 leading-relaxed">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-[#0DA6F2] pl-6 py-1 leading-relaxed">
                                     메일 시스템의 대규모 인프라를 기반으로 <strong>LLM, RAG, MCP</strong>를 도입하여 지능형 협업 솔루션으로의 전환을 주도하고, 시스템 전반의 최적화를 달성했습니다.
                                 </p>
 
@@ -308,13 +308,13 @@ export default function Career() {
                                 <div>
                                     <p className="date-text mb-2">2018.09 — 2022.06</p>
                                     <h3 className="company-title">전자결재/메일 솔루션 개발 및 대규모 데이터 마이그레이션</h3>
-                                    <p className="text-[#DFB45A] font-semibold text-sm">더존비즈온 (DOUZONE)</p>
+                                    <p className="text-[#0DA6F2] font-semibold text-sm">더존비즈온 (DOUZONE)</p>
                                 </div>
-                                <span className="material-symbols-outlined text-stone-600 group-hover:text-[#DFB45A] transition-colors text-3xl">database</span>
+                                <span className="material-symbols-outlined text-slate-600 group-hover:text-[#0DA6F2] transition-colors text-3xl">database</span>
                             </div>
 
                             <div className="space-y-12">
-                                <p className="text-xl text-stone-200 font-medium border-l-4 border-white/20 pl-6 py-1 leading-relaxed">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-white/20 pl-6 py-1 leading-relaxed">
                                     Amaranth 10 전자결재 시스템의 성공적인 런칭을 주도하고, 대규모 고객사의 클라우드 이관 과정을 자동화하여 혁신적인 생산성 향상을 이루었습니다.
                                 </p>
 
@@ -356,7 +356,7 @@ export default function Career() {
                 <section className="mb-32">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5"></div>
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-stone-500 whitespace-nowrap">03. 개인 프로젝트 (GitHub)</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">03. 개인 프로젝트 (GitHub)</h2>
                         <div className="h-px flex-1 bg-white/5"></div>
                     </div>
                     <GitHubProjects />
@@ -366,7 +366,7 @@ export default function Career() {
                 <section className="mb-32">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5"></div>
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-stone-500 whitespace-nowrap">04. 기타 경험</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">04. 기타 경험</h2>
                         <div className="h-px flex-1 bg-white/5"></div>
                     </div>
 
@@ -376,13 +376,13 @@ export default function Career() {
                                 <div>
                                     <p className="date-text mb-2">2013.08 — 2017.11</p>
                                     <h3 className="company-title">정보사령부 (HID) 군 복무</h3>
-                                    <p className="text-[#DFB45A] font-semibold text-sm">대한민국 육군</p>
+                                    <p className="text-[#0DA6F2] font-semibold text-sm">대한민국 육군</p>
                                 </div>
-                                <span className="material-symbols-outlined text-stone-600 group-hover:text-[#DFB45A] transition-colors text-3xl">military_tech</span>
+                                <span className="material-symbols-outlined text-slate-600 group-hover:text-[#0DA6F2] transition-colors text-3xl">military_tech</span>
                             </div>
 
                             <div className="space-y-6">
-                                <p className="text-xl text-stone-200 font-medium border-l-4 border-white/20 pl-6 py-1 leading-relaxed">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-white/20 pl-6 py-1 leading-relaxed">
                                     특수 임무 수행을 통해 <strong>강인한 정신력, 신속한 판단력, 그리고 목표를 완수하는 실행력</strong>을 함양했습니다.
                                 </p>
                                 <SubProjectItem
