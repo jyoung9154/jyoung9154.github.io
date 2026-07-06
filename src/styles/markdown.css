@@ -278,7 +278,7 @@ h2,
 h3,
 h4 {
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
+  text-rendering: optimizeLegibility;
 }
 
 h1 {
@@ -592,7 +592,7 @@ pre {
   margin-bottom: 6rem;
   letter-spacing: 1px;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
+  text-rendering: optimizeLegibility;
 }
 
 .post > .date {
@@ -678,7 +678,7 @@ pre {
   text-transform: uppercase;
   text-align: center;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizelegibility;
+  text-rendering: optimizeLegibility;
   padding: 3px 9px;
   border-radius: 3px;
   font-size: 1.3rem;

@@ -18,6 +18,9 @@
     "unit-allowed-list": ["em", "rem", "%", "s", "ms", "px", "vh", "vw", "deg", "fr"],
     "no-descending-specificity": null,
     "selector-class-pattern": null,
+    "value-keyword-case": ["lower", {
+      "ignoreKeywords": ["optimizeLegibility", "BlinkMacSystemFont"]
+    }],
     "at-rule-no-unknown": [true, {
       "ignoreAtRules": ["function", "if", "each", "include", "mixin", "at-root", "tailwind", "apply", "layer", "screen", "variants", "import-normalize"]
     }],
