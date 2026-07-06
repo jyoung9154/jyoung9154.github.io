@@ -13,8 +13,8 @@ export default function Timeline() {
       title: '더존비즈온 (DOUZONE)',
       subtitle: '그룹웨어 Amaranth 10 메일 및 AI 고도화 개발',
       type: 'work',
-      color: '#0DA6F2',
-      glow: 'rgba(13, 166, 242, 0.4)',
+      color: '#DFB45A',
+      glow: 'rgba(223, 180, 90, 0.4)',
       icon: 'work'
     },
     {
@@ -64,8 +64,8 @@ export default function Timeline() {
       title: '더존비즈온 (DOUZONE)',
       subtitle: '그룹웨어 전자결재 시스템 개발 및 마이그레이션 자동화',
       type: 'work',
-      color: '#0DA6F2',
-      glow: 'rgba(13, 166, 242, 0.4)',
+      color: '#DFB45A',
+      glow: 'rgba(223, 180, 90, 0.4)',
       icon: 'history_edu'
     },
     {
@@ -105,11 +105,11 @@ export default function Timeline() {
       <main className="max-w-[1100px] mx-auto px-6 py-24">
         <section className="mb-20 text-left">
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-[2px] bg-[#0DA6F2]"></div>
-                <span className="text-[10px] font-black uppercase tracking-[3px] text-[#0DA6F2]">Milestones</span>
+                <div className="w-10 h-[2px] bg-[#DFB45A]"></div>
+                <span className="text-[10px] font-black uppercase tracking-[3px] text-[#DFB45A]">Milestones</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-black text-white mb-8 tracking-tighter">성장과 도전의 기록</h2>
-            <p className="text-slate-500 text-lg max-w-2xl leading-relaxed">
+            <p className="text-stone-500 text-lg max-w-2xl leading-relaxed">
                 소프트웨어 엔지니어로서의 성장과 문제 해결의 순간들을 담은 <br className="hidden md:block" />
                 박재영의 커리어 타임라인입니다.
             </p>
@@ -154,7 +154,7 @@ export default function Timeline() {
 
           {/* End Pulse Node */}
           <div className="milestone-item" style={{ marginBottom: 0 }}>
-             <div className="milestone-node" style={{ left: '-40px', opacity: 0.5, '--node-color': '#0DA6F2', '--node-glow': 'rgba(13, 166, 242, 0.2)' }}>
+             <div className="milestone-node" style={{ left: '-40px', opacity: 0.5, '--node-color': '#DFB45A', '--node-glow': 'rgba(223, 180, 90, 0.2)' }}>
                 <span className="material-symbols-outlined">flag</span>
              </div>
           </div>
