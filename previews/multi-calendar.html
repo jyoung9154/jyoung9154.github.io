@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Multi-calendar — 여러 캘린더를 하나로 모으는 PWA</title>
+<meta name="description" content="Multi-calendar: FCM 알림과 가계부를 갖춘 멀티 캘린더 통합 PWA 소개 페이지">
+<style>
+  :root{
+    --paper:#faf8f3;
+    --paper-dim:#f1ede3;
+    --ink:#1c1a17;
+    --ink-soft:#57524a;
+    --line:#dfd9cb;
+    --coral:#ff6a5c;
+    --teal:#149c8e;
+    --violet:#7b61d6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#17150f;
+      --paper-dim:#201d16;
+      --ink:#f3efe4;
+      --ink-soft:#b8b0a0;
+      --line:#38332a;
+      --coral:#ff8577;
+      --teal:#39c3b3;
+      --violet:#9c87ea;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#17150f; --paper-dim:#201d16; --ink:#f3efe4; --ink-soft:#b8b0a0;
+    --line:#38332a; --coral:#ff8577; --teal:#39c3b3; --violet:#9c87ea;
+  }
+  :root[data-theme="light"]{
+    --paper:#faf8f3; --paper-dim:#f1ede3; --ink:#1c1a17; --ink-soft:#57524a;
+    --line:#dfd9cb; --coral:#ff6a5c; --teal:#149c8e; --violet:#7b61d6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--coral);outline-offset:3px;border-radius:4px}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 0 0;
+    flex-wrap:wrap;gap:10px;
+  }
+  .brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;letter-spacing:-.01em}
+  .brand-dots{display:flex;gap:3px}
+  .brand-dots span{width:7px;height:7px;border-radius:50%;display:block}
+  .brand-dots span:nth-child(1){background:var(--coral)}
+  .brand-dots span:nth-child(2){background:var(--teal)}
+  .brand-dots span:nth-child(3){background:var(--violet)}
+  .status-chip{
+    font-size:12px;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:100px;
+    padding:5px 12px;white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding:56px 0 20px;display:grid;grid-template-columns:1fr;gap:36px}
+  .hero-copy .eyebrow{
+    font-size:12px;font-weight:700;color:var(--ink-soft);
+    letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px;
+  }
+  .hero-copy h1{
+    font-size:clamp(28px,4.6vw,44px);
+    line-height:1.2;letter-spacing:-.02em;font-weight:800;
+    margin:0 0 16px;
+  }
+  .hero-copy h1 .accent{
+    background:linear-gradient(90deg,var(--coral),var(--violet));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-copy p{font-size:16px;color:var(--ink-soft);max-width:52ch;margin:0 0 22px}
+  .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 18px;border-radius:10px;font-size:14px;font-weight:600;
+    text-decoration:none;border:1px solid var(--line);transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+  /* ---------- calendar signature ---------- */
+  .cal-card{
+    background:var(--paper-dim);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:20px;
+    position:relative;
+  }
+  .cal-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin-bottom:14px;padding:0 4px;
+    flex-wrap:wrap;gap:8px;
+  }
+  .cal-head .month{font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .cal-head .legend{display:flex;gap:14px;font-size:11px;color:var(--ink-soft)}
+  .cal-head .legend span{display:inline-flex;align-items:center;gap:5px}
+  .cal-head .legend i{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .leg-family{background:var(--coral)} .leg-work{background:var(--teal)} .leg-personal{background:var(--violet)}
+
+  .cal-grid{
+    display:grid;grid-template-columns:repeat(7,1fr);
+    gap:5px;
+  }
+  .cal-dow{
+    text-align:center;font-size:11px;color:var(--ink-soft);
+    padding-bottom:6px;font-weight:600;
+  }
+  .cal-cell{
+    aspect-ratio:1/1;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:5px 6px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    font-variant-numeric:tabular-nums;
+    position:relative;
+  }
+  .cal-cell .num{font-size:12px;font-weight:600;color:var(--ink)}
+  .cal-cell.dim .num{color:var(--ink-soft);font-weight:400}
+  .cal-dots{display:flex;gap:3px;flex-wrap:wrap}
+  .cal-dots i{width:6px;height:6px;border-radius:50%;display:block}
+  .dot-f{background:var(--coral)} .dot-w{background:var(--teal)} .dot-p{background:var(--violet)}
+
+  .cal-cell.focus{
+    border-color:var(--ink);
+    box-shadow:0 0 0 2px var(--paper), 0 0 0 3px var(--ink);
+  }
+  .cal-cell.focus .num{font-weight:800}
+
+  /* FCM toast mockup */
+  .toast{
+    position:absolute;
+    right:14px; top:-16px;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:12px;
+    padding:10px 14px;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+    max-width:230px;
+    animation:toast-in .5s ease-out both;
+  }
+  .toast .ico{
+    width:22px;height:22px;border-radius:6px;
+    background:linear-gradient(135deg,var(--coral),var(--violet));
+    flex:none;display:flex;align-items:center;justify-content:center;font-size:12px;
+  }
+  .toast .txt strong{display:block;font-size:12px;font-weight:700}
+  .toast .txt span{display:block;font-size:11px;opacity:.75;margin-top:1px}
+  @keyframes toast-in{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+  @media (max-width:640px){
+    .toast{position:static;margin-bottom:14px;max-width:none}
+    .cal-cell .num{font-size:11px}
+  }
+
+  /* ---------- sections ---------- */
+  section{padding:52px 0;border-top:1px solid var(--line)}
+  h2{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:0 0 6px}
+  .section-sub{color:var(--ink-soft);font-size:14px;margin:0 0 28px}
+
+  .feature-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:14px;
+  }
+  .feature{
+    border:1px solid var(--line);border-radius:14px;padding:18px;
+    background:var(--paper-dim);
+  }
+  .feature .f-dot{width:9px;height:9px;border-radius:50%;margin-bottom:12px}
+  .feature h3{font-size:14.5px;font-weight:700;margin:0 0 6px}
+  .feature p{font-size:13px;color:var(--ink-soft);margin:0}
+
+  @media (max-width:640px){
+    .feature-grid{grid-template-columns:1fr}
+  }
+
+  /* architecture */
+  .arch{
+    display:flex;align-items:stretch;gap:10px;flex-wrap:wrap;
+  }
+  .arch-box{
+    flex:1 1 130px;
+    border:1px solid var(--line);border-radius:12px;
+    padding:14px 12px;background:var(--paper-dim);
+    font-size:12.5px;
+  }
+  .arch-box .t{font-weight:700;font-size:13px;margin-bottom:4px}
+  .arch-box .d{color:var(--ink-soft);line-height:1.5}
+  .arch-arrow{display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:16px;flex:0 0 auto}
+  @media (max-width:640px){
+    .arch{flex-direction:column}
+    .arch-arrow{transform:rotate(90deg);padding:2px 0}
+  }
+
+  /* stack */
+  .stack-groups{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .stack-group h4{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);margin:0 0 10px;font-weight:700}
+  .badges{display:flex;flex-wrap:wrap;gap:8px}
+  .badge{
+    border:1px solid var(--line);border-radius:8px;
+    padding:6px 11px;font-size:12.5px;font-weight:600;background:var(--paper-dim);
+  }
+  @media (max-width:640px){.stack-groups{grid-template-columns:1fr}}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:30px 0 44px;
+    font-size:12.5px;color:var(--ink-soft);
+    display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center;
+  }
+  footer a{text-decoration:underline;text-underline-offset:3px}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <span class="brand-dots"><span></span><span></span><span></span></span>
+      Multi-calendar
+    </div>
+    <div class="status-chip">배포 준비 · 2026.03–05 · 84 commits</div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Multi-Calendar Integration PWA</p>
+      <h1>흩어진 일정을,<br><span class="accent">한 달력 안</span>에서 겹쳐 본다</h1>
+      <p>가족·업무·개인 캘린더를 하나의 화면으로 모으는 PWA입니다. 한 날짜 칸에 여러 색이 겹치면, 그날 여러 일정이 함께 있다는 뜻입니다. FCM 푸시로 놓치지 않고, 가계부로 지출까지 같이 관리합니다.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/jyoung9154/multi-calendar.app">GitHub 저장소 보기</a>
+      </div>
+    </div>
+
+    <div class="cal-card">
+      <div class="toast">
+        <span class="ico">🔔</span>
+        <span class="txt"><strong>가족 캘린더 알림</strong><span>오늘 저녁 7시, 가족 저녁식사 일정</span></span>
+      </div>
+      <div class="cal-head">
+        <span class="month">2026년 3월</span>
+        <span class="legend">
+          <span><i class="leg-family"></i>가족</span>
+          <span><i class="leg-work"></i>업무</span>
+          <span><i class="leg-personal"></i>개인</span>
+        </span>
+      </div>
+      <div class="cal-grid">
+        <div class="cal-dow">일</div><div class="cal-dow">월</div><div class="cal-dow">화</div>
+        <div class="cal-dow">수</div><div class="cal-dow">목</div><div class="cal-dow">금</div><div class="cal-dow">토</div>
+
+        <div class="cal-cell"><span class="num">1</span><span class="cal-dots"><i class="dot-p"></i></span></div>
+        <div class="cal-cell"><span class="num">2</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">3</span><span class="cal-dots"><i class="dot-w"></i></span></div>
+        <div class="cal-cell"><span class="num">4</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">5</span><span class="cal-dots"><i class="dot-f"></i><i class="dot-w"></i></span></div>
+        <div class="cal-cell"><span class="num">6</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">7</span><span class="cal-dots"><i class="dot-p"></i></span></div>
+
+        <div class="cal-cell"><span class="num">8</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">9</span><span class="cal-dots"><i class="dot-w"></i></span></div>
+        <div class="cal-cell"><span class="num">10</span><span class="cal-dots"><i class="dot-f"></i></span></div>
+        <div class="cal-cell"><span class="num">11</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">12</span><span class="cal-dots"><i class="dot-w"></i><i class="dot-p"></i></span></div>
+        <div class="cal-cell"><span class="num">13</span><span class="cal-dots"></span></div>
+        <div class="cal-cell focus"><span class="num">14</span><span class="cal-dots"><i class="dot-f"></i><i class="dot-w"></i><i class="dot-p"></i></span></div>
+
+        <div class="cal-cell"><span class="num">15</span><span class="cal-dots"><i class="dot-f"></i></span></div>
+        <div class="cal-cell"><span class="num">16</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">17</span><span class="cal-dots"><i class="dot-w"></i></span></div>
+        <div class="cal-cell"><span class="num">18</span><span class="cal-dots"><i class="dot-p"></i></span></div>
+        <div class="cal-cell"><span class="num">19</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">20</span><span class="cal-dots"><i class="dot-f"></i><i class="dot-p"></i></span></div>
+        <div class="cal-cell"><span class="num">21</span><span class="cal-dots"></span></div>
+
+        <div class="cal-cell"><span class="num">22</span><span class="cal-dots"><i class="dot-w"></i></span></div>
+        <div class="cal-cell"><span class="num">23</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">24</span><span class="cal-dots"><i class="dot-p"></i></span></div>
+        <div class="cal-cell"><span class="num">25</span><span class="cal-dots"><i class="dot-f"></i></span></div>
+        <div class="cal-cell"><span class="num">26</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">27</span><span class="cal-dots"><i class="dot-w"></i><i class="dot-f"></i></span></div>
+        <div class="cal-cell"><span class="num">28</span><span class="cal-dots"><i class="dot-p"></i></span></div>
+
+        <div class="cal-cell"><span class="num">29</span><span class="cal-dots"></span></div>
+        <div class="cal-cell"><span class="num">30</span><span class="cal-dots"><i class="dot-w"></i></span></div>
+        <div class="cal-cell"><span class="num">31</span><span class="cal-dots"><i class="dot-f"></i></span></div>
+        <div class="cal-cell dim"><span class="num">1</span><span class="cal-dots"></span></div>
+        <div class="cal-cell dim"><span class="num">2</span><span class="cal-dots"></span></div>
+        <div class="cal-cell dim"><span class="num">3</span><span class="cal-dots"></span></div>
+        <div class="cal-cell dim"><span class="num">4</span><span class="cal-dots"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2>왜 만들었나</h2>
+    <p class="section-sub" style="max-width:64ch">가족과 팀의 일정은 원래 여러 곳에 흩어져 있습니다. 각자의 캘린더를 따로 확인하다 보면 겹치는 일정을 놓치기 쉽습니다. Multi-calendar는 여러 캘린더를 한 화면에 모으고, 놓치지 않도록 알림까지 자동화합니다.</p>
+  </section>
+
+  <section>
+    <h2>핵심 기능</h2>
+    <p class="section-sub">배포 준비 단계까지 구현된 기능입니다.</p>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="f-dot" style="background:var(--coral)"></div>
+        <h3>멀티 캘린더 통합 뷰</h3>
+        <p>가족·업무·개인 캘린더를 하나의 월간 뷰에서 색으로 구분해 확인합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="f-dot" style="background:var(--teal)"></div>
+        <h3>FCM 푸시 알림</h3>
+        <p>Firebase Cloud Messaging으로 기기 토큰을 관리하고 일정 알림을 보냅니다.</p>
+      </div>
+      <div class="feature">
+        <div class="f-dot" style="background:var(--violet)"></div>
+        <h3>일정 등록 · 수정 · 삭제</h3>
+        <p>타임존 처리를 포함한 일정 CRUD를 지원합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="f-dot" style="background:var(--coral)"></div>
+        <h3>가계부(Ledger)</h3>
+        <p>일정과 함께 지출 내역을 기록하고 관리합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="f-dot" style="background:var(--teal)"></div>
+        <h3>PWA + 모바일 빌드</h3>
+        <p>PWA로 설치 가능하며, Capacitor로 모바일 앱 빌드까지 지원합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="f-dot" style="background:var(--violet)"></div>
+        <h3>Vercel Cron 스케줄</h3>
+        <p>정해진 시각에 실행되는 서버 작업을 Vercel Cron으로 처리합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>아키텍처</h2>
+    <p class="section-sub">요청과 알림이 흐르는 경로입니다.</p>
+    <div class="arch">
+      <div class="arch-box"><div class="t">Next.js 15 클라이언트</div><div class="d">PWA로 설치되는 웹 화면. Capacitor로 모바일 앱으로도 빌드됩니다.</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="t">Firebase Auth · Realtime DB</div><div class="d">로그인과 캘린더·일정·가계부 데이터를 저장합니다.</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="t">FCM</div><div class="d">기기 토큰을 관리하고 일정 알림을 푸시로 전송합니다.</div></div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box"><div class="t">Vercel Cron</div><div class="d">정기적으로 실행되어 예정된 알림을 트리거합니다.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>기술 스택</h2>
+    <div class="stack-groups">
+      <div class="stack-group">
+        <h4>프론트엔드</h4>
+        <div class="badges">
+          <span class="badge">Next.js 15</span>
+          <span class="badge">TypeScript</span>
+          <span class="badge">Tailwind CSS</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>백엔드 · 인프라</h4>
+        <div class="badges">
+          <span class="badge">Firebase Auth</span>
+          <span class="badge">Realtime DB</span>
+          <span class="badge">FCM</span>
+          <span class="badge">Vercel Cron</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>AI</h4>
+        <div class="badges">
+          <span class="badge">Google Gemini API</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <h4>모바일</h4>
+        <div class="badges">
+          <span class="badge">PWA</span>
+          <span class="badge">Capacitor</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Claude 등 LLM과의 AI 페어 프로그래밍(바이브코딩)으로 단독 개발 · © 2026 Park JaeYoung</span>
+    <a href="/">포트폴리오로 돌아가기</a>
+  </footer>
+</div>
+</body>
+</html>
