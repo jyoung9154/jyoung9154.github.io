@@ -1,9 +1,9 @@
 {
-  "threshold": 5,
-  "ignore": [
-    "**/.github/workflows/**",
-    "**/package-lock.json",
-    "**/yarn.lock",
-    "**/public/previews/**"
-  ]
+    "threshold": 5,
+    "ignore": [
+        "**/.github/workflows/**",
+        "**/package-lock.json",
+        "**/yarn.lock",
+        "**/public/previews/**"
+    ]
 }
