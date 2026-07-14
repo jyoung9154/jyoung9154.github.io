@@ -108,8 +108,8 @@ export default function Timeline() {
                 <div className="w-10 h-[2px] bg-[#0DA6F2]" />
                 <span className="text-[10px] font-black uppercase tracking-[3px] text-[#0DA6F2]">Milestones</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-8 tracking-tighter">성장과 도전의 기록</h2>
-            <p className="text-slate-500 text-lg max-w-2xl leading-relaxed">
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tighter">성장과 도전의 기록</h2>
+            <p className="text-slate-500 text-base md:text-lg max-w-2xl leading-relaxed">
                 소프트웨어 엔지니어로서의 성장과 문제 해결의 순간들을 담은 <br className="hidden md:block" />
                 박재영의 커리어 타임라인입니다.
             </p>
@@ -154,7 +154,7 @@ export default function Timeline() {
 
           {/* End Pulse Node */}
           <div className="mileslate-item" style={{ marginBottom: 0 }}>
-             <div className="mileslate-node" style={{ left: '-40px', opacity: 0.5, '--node-color': '#0DA6F2', '--node-glow': 'rgba(13, 166, 242, 0.2)' }}>
+             <div className="mileslate-node" style={{ opacity: 0.5, '--node-color': '#0DA6F2', '--node-glow': 'rgba(13, 166, 242, 0.2)' }}>
                 <span className="material-symbols-outlined">flag</span>
              </div>
           </div>

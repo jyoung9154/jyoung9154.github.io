@@ -419,13 +419,14 @@ strong {
 
 @media (max-width: 768px) {
     .cyber-path {
-        left: 40px;
+        left: 21px;
     }
 
     .mileslate-item, .mileslate-item.left {
         justify-content: flex-start;
-        padding-left: 80px;
+        padding-left: 56px;
         padding-right: 0;
+        margin-bottom: 52px;
 
         .mileslate-content {
             margin-left: 0 !important;
@@ -434,14 +435,23 @@ strong {
             max-width: 100%;
         }
 
+        /* 노드 중심을 진행선(left 21px) 위에 — 화면 밖 잘림 방지 */
         .mileslate-node {
-            left: -40px !important;
+            left: 21px !important;
             right: auto !important;
-            width: 48px;
-            height: 48px;
+            width: 42px;
+            height: 42px;
 
-            span { font-size: 18px; }
+            span { font-size: 17px; }
         }
+    }
+
+    .mileslate-card {
+        h3 { font-size: 21px; }
+
+        p { font-size: 15px; }
+
+        .m-date { font-size: 12px; }
     }
 }
 /* ==========================================================================
