@@ -37,6 +37,7 @@ jobs:
         env:
           VALIDATE_ALL_CODEBASE: false
           LINTER_RULES_PATH: .github/linters
+          FILTER_REGEX_EXCLUDE: .*(package-lock\.json|yarn\.lock).*
           JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
           TYPESCRIPT_ES_CONFIG_FILE: .eslintrc.json
           VALIDATE_TYPESCRIPT_STANDARD: false
@@ -66,7 +67,8 @@ jobs:
           CI: true
 
       - name: Run Tests
-        run: npm test
+        # 테스트 파일이 아직 없으므로 없을 때는 통과시킨다 (생기면 자동 실행)
+        run: npm test -- --passWithNoTests
         env:
           CI: true
 
