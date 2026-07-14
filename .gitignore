@@ -88,3 +88,4 @@ $RECYCLE.BIN/
 ## IDE generated files
 .idea
 gen
+report/
