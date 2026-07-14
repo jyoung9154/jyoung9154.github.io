@@ -1039,9 +1039,191 @@ strong {
   &:last-child { margin-bottom: 0; }
 }
 
+/* 문서 전환 탭 (화면 전용) */
+.r-doc-tabs {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-light);
+
+  .r-doc-tab {
+    padding: 7px 16px;
+    border-radius: 9px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.25s ease;
+
+    &:hover { color: white; }
+
+    &.active {
+      background: var(--primary);
+      color: white;
+    }
+  }
+}
+
+/* 문서 종류 라벨 (시트 우상단) */
+.r-doctype {
+  position: absolute;
+  top: 16mm;
+  right: 15mm;
+  font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: var(--r-faint);
+  border: 1px solid var(--r-line);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.resume-sheet { position: relative; }
+
+/* 경력기술서: 프로젝트 단위 상세 */
+.r-ch {
+  margin-bottom: 9mm;
+
+  &:last-child { margin-bottom: 0; }
+
+  .r-ch-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 2.5mm;
+
+    .r-entry-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .r-entry-role {
+      font-size: 0.78rem !important;
+      color: var(--r-faint) !important;
+      margin-top: 1px;
+    }
+  }
+
+  .r-ch-intro {
+    font-size: 0.82rem !important;
+    color: var(--r-sub) !important;
+    border-left: 3px solid var(--r-accent);
+    padding-left: 10px;
+    margin-bottom: 4mm !important;
+    max-width: 70ch;
+  }
+
+  .r-ch-tags {
+    margin-top: 3mm !important;
+    font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    font-size: 0.7rem !important;
+    color: var(--r-faint) !important;
+  }
+}
+
+.r-ch-item {
+  margin-bottom: 4.5mm;
+  break-inside: avoid;
+
+  &:last-child { margin-bottom: 0; }
+
+  .r-ch-item-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 1.5mm;
+
+    h4 {
+      font-size: 0.86rem;
+      font-weight: 700;
+      margin: 0;
+    }
+  }
+}
+
+.r-ch-rows {
+  margin: 0;
+
+  > div {
+    display: grid;
+    grid-template-columns: 12mm 1fr;
+    gap: 4mm;
+    margin-bottom: 1mm;
+  }
+
+  dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--r-faint);
+    padding-top: 1px;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--r-sub);
+    line-height: 1.6;
+  }
+
+  .r-ch-result {
+    color: var(--r-ink);
+    font-weight: 600;
+  }
+}
+
+/* 포트폴리오 문서: 대표 프로젝트 블록 */
+.r-pf {
+  margin-bottom: 7mm;
+  break-inside: avoid;
+
+  &:last-child { margin-bottom: 0; }
+
+  .r-pf-status {
+    display: inline-block;
+    font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--r-accent-ink);
+    border: 1px solid var(--r-line);
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-left: 8px;
+    vertical-align: 2px;
+  }
+
+  .r-pf-oneliner {
+    font-size: 0.84rem !important;
+    font-weight: 600 !important;
+    color: var(--r-ink) !important;
+    margin-bottom: 1.5mm !important;
+    max-width: 72ch;
+  }
+
+  .r-pf-meta {
+    margin-top: 1.5mm !important;
+    font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    font-size: 0.7rem !important;
+    color: var(--r-faint) !important;
+    word-break: break-all;
+  }
+}
+
 @media (max-width: 640px) {
   .resume-root { padding: 24px 8px 64px; }
   .resume-sheet { padding: 10mm 7mm; }
+
+  .r-doctype {
+    position: static;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
   .r-section { grid-template-columns: 1fr; gap: 2mm; }
   .r-header .r-name { font-size: 1.5rem; }
   .r-entry .r-entry-head { flex-direction: column; gap: 2px; }
@@ -1065,6 +1247,16 @@ strong {
   .resume-actions {
     display: none !important;
   }
+
+  .r-doctype {
+    top: 0;
+    right: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .r-ch { break-inside: auto; }
+  .r-ch .r-ch-head { break-after: avoid; }
 
   .resume-root { padding: 0; }
 

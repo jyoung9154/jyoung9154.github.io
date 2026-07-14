@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { getCareerYearLabel } from '../utils/careerUtils';
 import { resume } from '../data/resume';
+import DocShell, { Section } from './DocShell';
 
 /* 시그니처: 사람·AI 경계를 인코딩한 오케스트레이션 다이어그램
    ● 채운 원 = 사람이 판단, ○ 윤곽 박스 = AI 에이전트가 실행, ‖ = 검증 게이트 */
@@ -59,159 +60,102 @@ function WorkflowDiagram() {
     );
 }
 
-function Section({ label, flow, children }) {
-    return (
-        <section className={`r-section${flow ? ' r-section--flow' : ''}`}>
-            <span className="r-rail">{label}</span>
-            <div className="r-body">{children}</div>
-        </section>
-    );
-}
-
 export default function Resume() {
-    // 인쇄(PDF 저장) 시 브라우저가 문서 제목을 파일명으로 쓰므로 제출용 이름으로 바꿔둔다.
-    useEffect(() => {
-        const original = document.title;
-        const onBefore = () => { document.title = '박재영_이력서_AI풀스택개발자'; };
-        const onAfter = () => { document.title = original; };
-        window.addEventListener('beforeprint', onBefore);
-        window.addEventListener('afterprint', onAfter);
-        return () => {
-            window.removeEventListener('beforeprint', onBefore);
-            window.removeEventListener('afterprint', onAfter);
-            document.title = original;
-        };
-    }, []);
-
     return (
-        <div className="resume-root">
-            <div className="resume-actions">
-                <Link to="/career" className="r-back no-underline">
-                    <span className="material-symbols-outlined text-sm">arrow_back</span>
-                    포트폴리오로 돌아가기
-                </Link>
-                <div className="flex items-center gap-4">
-                    <span className="r-sync-note">
-                        버튼을 누른 뒤 인쇄 창에서 &lsquo;대상: PDF로 저장&rsquo;을 선택하면 파일로 다운로드됩니다
-                        <br />포트폴리오와 항상 동기화됩니다
-                    </span>
-                    <button type="button" className="btn-resume" onClick={() => window.print()}>
-                        <span className="material-symbols-outlined text-sm">download</span>
-                        PDF 다운로드
-                    </button>
+        <DocShell docType="이력서" filename="박재영_이력서_AI풀스택개발자">
+            <Section label="About">
+                <div className="r-about">
+                    {resume.about.map((line, i) => (
+                        <p className="r-about-line" key={line}>{i === 0 ? `${getCareerYearLabel()} ${line}` : line}</p>
+                    ))}
                 </div>
-            </div>
+            </Section>
 
-            <div className="resume-sheet">
-                <header className="r-header">
-                    <div>
-                        <h1 className="r-name">{resume.name.en}</h1>
-                        <p className="r-name-ko">{resume.name.ko} · {getCareerYearLabel()}</p>
-                    </div>
-                    <p className="r-title">{resume.title}</p>
-                    <p className="r-profile">{resume.profile}</p>
-                    <ul className="r-contacts">
-                        {resume.contacts.map(c => (
-                            <li key={c.label}>
-                                {c.href ? <a href={c.href} target="_blank" rel="noopener noreferrer">{c.label}</a> : c.label}
-                            </li>
-                        ))}
-                    </ul>
-                </header>
+            <Section label="Skills">
+                <div className="r-skill"><span className="r-skill-key">주력</span><span>{resume.skills.main}</span></div>
+                <div className="r-skill"><span className="r-skill-key">AI</span><span>{resume.skills.ai}</span></div>
+            </Section>
 
-                <Section label="About">
-                    <div className="r-about">
-                        {resume.about.map((line, i) => (
-                            <p className="r-about-line" key={line}>{i === 0 ? `${getCareerYearLabel()} ${line}` : line}</p>
-                        ))}
-                    </div>
-                </Section>
+            <Section label="How I Work">
+                <WorkflowDiagram />
+                <ul className="r-bullets">
+                    {resume.howIWork.map(item => (
+                        <li key={item.title}><strong>{item.title}</strong> — {item.desc}</li>
+                    ))}
+                </ul>
+                <p className="r-hiw-note">{resume.howIWorkNote}</p>
+            </Section>
 
-                <Section label="Skills">
-                    <div className="r-skill"><span className="r-skill-key">주력</span><span>{resume.skills.main}</span></div>
-                    <div className="r-skill"><span className="r-skill-key">AI</span><span>{resume.skills.ai}</span></div>
-                </Section>
-
-                <Section label="How I Work">
-                    <WorkflowDiagram />
-                    <ul className="r-bullets">
-                        {resume.howIWork.map(item => (
-                            <li key={item.title}><strong>{item.title}</strong> — {item.desc}</li>
-                        ))}
-                    </ul>
-                    <p className="r-hiw-note">{resume.howIWorkNote}</p>
-                </Section>
-
-                <Section label="Experience" flow>
-                    {resume.experience.map(exp => (
-                        <article className="r-entry" key={`${exp.company}-${exp.date}`}>
-                            <div className="r-entry-head">
-                                <div>
-                                    <h3 className="r-entry-title">{exp.company}</h3>
-                                    <p className="r-entry-role">{exp.role}</p>
-                                </div>
-                                <span className="r-date">{exp.date}</span>
+            <Section label="Experience" flow>
+                {resume.experience.map(exp => (
+                    <article className="r-entry" key={`${exp.company}-${exp.date}`}>
+                        <div className="r-entry-head">
+                            <div>
+                                <h3 className="r-entry-title">{exp.company}</h3>
+                                <p className="r-entry-role">{exp.role}</p>
                             </div>
-                            {exp.groups.map((group, gi) => (
-                                <div className="r-group" key={group.heading || gi}>
-                                    {group.heading && <h4 className="r-group-heading">{group.heading}</h4>}
-                                    <ul className="r-bullets">
-                                        {group.bullets.map(b => <li key={b}>{b}</li>)}
-                                    </ul>
-                                </div>
-                            ))}
-                        </article>
-                    ))}
-                </Section>
-
-                <Section label="Side Projects" flow>
-                    <p className="r-note">{resume.sideProjects.note}</p>
-                    <ul className="r-bullets">
-                        {resume.sideProjects.items.map(p => (
-                            <li key={p.name} className="r-proj">
-                                <span><strong>{p.name}</strong> — {p.desc} <span className="r-meta">· {p.tech} · {p.meta}</span></span>
-                                <span className="r-date">{p.date}</span>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="r-more">{resume.sideProjects.more}</p>
-                </Section>
-
-                <Section label="Open Source">
-                    <ul className="r-bullets">
-                        {resume.openSource.map(o => (
-                            <li key={o.name}>
-                                <strong><a href={o.href} target="_blank" rel="noopener noreferrer">{o.name}</a></strong> — {o.desc}
-                            </li>
-                        ))}
-                    </ul>
-                </Section>
-
-                <Section label="Education">
-                    {resume.education.map(e => (
-                        <div className="r-row" key={e.name}>
-                            <span>{e.name}</span>
-                            <span className="r-date">{e.date}</span>
+                            <span className="r-date">{exp.date}</span>
                         </div>
-                    ))}
-                </Section>
+                        {exp.groups.map((group, gi) => (
+                            <div className="r-group" key={group.heading || gi}>
+                                {group.heading && <h4 className="r-group-heading">{group.heading}</h4>}
+                                <ul className="r-bullets">
+                                    {group.bullets.map(b => <li key={b}>{b}</li>)}
+                                </ul>
+                            </div>
+                        ))}
+                    </article>
+                ))}
+                <p className="r-more">프로젝트별 배경·수행·성과 상세는 <Link to="/career-history">경력기술서</Link>에 정리되어 있습니다.</p>
+            </Section>
 
-                <Section label="Certifications">
-                    {resume.certifications.map(c => (
-                        <div className="r-row" key={c.name}>
-                            <span>{c.name}</span>
-                            <span className="r-date">{c.date}</span>
-                        </div>
+            <Section label="Side Projects" flow>
+                <p className="r-note">{resume.sideProjects.note}</p>
+                <ul className="r-bullets">
+                    {resume.sideProjects.items.map(p => (
+                        <li key={p.name} className="r-proj">
+                            <span><strong>{p.name}</strong> — {p.desc} <span className="r-meta">· {p.tech} · {p.meta}</span></span>
+                            <span className="r-date">{p.date}</span>
+                        </li>
                     ))}
-                </Section>
+                </ul>
+                <p className="r-more">프로젝트 구조·문제의식·링크는 <Link to="/portfolio">포트폴리오 문서</Link>에 정리되어 있습니다.</p>
+            </Section>
 
-                <Section label="Military">
-                    <div className="r-row">
-                        <span>{resume.military.name}</span>
-                        <span className="r-date">{resume.military.date}</span>
+            <Section label="Open Source">
+                <ul className="r-bullets">
+                    {resume.openSource.map(o => (
+                        <li key={o.name}>
+                            <strong><a href={o.href} target="_blank" rel="noopener noreferrer">{o.name}</a></strong> — {o.desc}
+                        </li>
+                    ))}
+                </ul>
+            </Section>
+
+            <Section label="Education">
+                {resume.education.map(e => (
+                    <div className="r-row" key={e.name}>
+                        <span>{e.name}</span>
+                        <span className="r-date">{e.date}</span>
                     </div>
-                </Section>
-            </div>
-        </div>
+                ))}
+            </Section>
+
+            <Section label="Certifications">
+                {resume.certifications.map(c => (
+                    <div className="r-row" key={c.name}>
+                        <span>{c.name}</span>
+                        <span className="r-date">{c.date}</span>
+                    </div>
+                ))}
+            </Section>
+
+            <Section label="Military">
+                <div className="r-row">
+                    <span>{resume.military.name}</span>
+                    <span className="r-date">{resume.military.date}</span>
+                </div>
+            </Section>
+        </DocShell>
     );
 }

@@ -6,6 +6,8 @@ import About from './About';
 import Timeline from './Timeline';
 import Career from './Career';
 import Resume from './Resume';
+import CareerHistory from './CareerHistory';
+import PortfolioDoc from './PortfolioDoc';
 import Header from './Header';
 import Footer from './Footer';
 import XEyes from "./XEyes";
@@ -35,6 +37,12 @@ export default function App() {
                 </Route>
                 <Route exact path="/resume">
                     <Resume />
+                </Route>
+                <Route exact path="/career-history">
+                    <CareerHistory />
+                </Route>
+                <Route exact path="/portfolio">
+                    <PortfolioDoc />
                 </Route>
                 <Route exact path="/">
                     <Home />
