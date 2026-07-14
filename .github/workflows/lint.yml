@@ -43,6 +43,8 @@ jobs:
           VALIDATE_TYPESCRIPT_STANDARD: false
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_MARKDOWN: false
+          # scss 스타일은 로컬 npm run stylelint(.stylelintrc)가 담당 — CI standard 규칙과 관례 불일치
+          VALIDATE_CSS: false
           DEFAULT_BRANCH: develop
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

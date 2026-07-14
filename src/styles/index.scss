@@ -125,7 +125,7 @@ strong {
     display: flex;
     align-items: center;
     gap: 16px;
-    
+
     .logo-icon {
       background: var(--primary);
       width: 44px;
@@ -164,7 +164,7 @@ strong {
       text-decoration: none;
       font-size: 1rem;
       transition: color 0.3s ease;
-      
+
       &:hover { color: white; }
       &.active {
         color: var(--primary);
@@ -240,7 +240,7 @@ strong {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  
+
   &::before {
     content: '';
     width: 6px; height: 6px;
@@ -262,7 +262,7 @@ strong {
   flex-wrap: wrap;
   gap: 12px !important;
   margin-top: 32px;
-  
+
   .tag {
     background: rgba(255, 255, 255, 0.03);
     color: var(--text-main);
@@ -272,7 +272,7 @@ strong {
     font-weight: 600;
     border: 1px solid var(--border-light);
     transition: all 0.3s ease;
-    
+
     &:hover {
       background: rgba(13, 166, 242, 0.1);
       border-color: var(--primary);
@@ -426,7 +426,7 @@ strong {
         justify-content: flex-start;
         padding-left: 80px;
         padding-right: 0;
-        
+
         .mileslate-content {
             margin-left: 0 !important;
             margin-right: 0 !important;
@@ -439,7 +439,7 @@ strong {
             right: auto !important;
             width: 48px;
             height: 48px;
-            
+
             span { font-size: 18px; }
         }
     }
