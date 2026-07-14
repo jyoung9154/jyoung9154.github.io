@@ -9,7 +9,7 @@ const TRAVEL = {
 
 // 스크롤 진행률(0~1)에 lerp 관성을 붙여 카운터·대륙 칩을 구동하는 시네마틱 섹션.
 // 리렌더 비용을 피하려고 state 대신 DOM textContent/클래스를 직접 갱신한다.
-export default function Travel() {
+export default function Travel({ eyebrow = 'World Trip' }) {
     const trackRef = useRef(null);
     const countriesRef = useRef(null);
     const citiesRef = useRef(null);
@@ -60,7 +60,7 @@ export default function Travel() {
     return (
         <section className="travel-track" id="travel" ref={trackRef}>
             <div className="travel-sticky">
-                <p className="travel-eyebrow">World Trip</p>
+                <p className="travel-eyebrow">{eyebrow}</p>
                 <h2 className="travel-title">
                     1년 8개월, <em>지구 한 바퀴</em>
                 </h2>

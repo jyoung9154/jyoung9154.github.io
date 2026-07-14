@@ -1,74 +1,31 @@
-# Personal Website
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Favailchet%2Favailchet.github.io.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Favailchet%2Favailchet.github.io?ref=badge_shield)
+# jyoung9154.github.io
 
-Personal webpage for showcasing my projects and having links to all my profiles.
+박재영(Park JaeYoung) 개인 이력서·포트폴리오 사이트. React(CRA) 기반 SPA, 다크 테마, GitHub Pages 배포.
 
-## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Favailchet%2Favailchet.github.io.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Favailchet%2Favailchet.github.io?ref=badge_large)
+**Live**: https://jyoung9154.github.io
 
-## Available Scripts
+## 페이지
 
-In the project directory, you can run:
+| 경로 | 내용 |
+| --- | --- |
+| `/` | 홈 (프로필 히어로) |
+| `/about` | 소개 · 기술 스택 · 자격증 · 경력 여정 |
+| `/timeline` | 학력 · 경력 타임라인 |
+| `/career` | 경력기술서 · 프로젝트 상세 · GitHub 프로젝트 |
 
-### `yarn start`
+## 스택
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+React 17 · react-router-dom v5 · Tailwind CSS v3 + SCSS(CSS 변수 테마) · GitHub API(프로젝트 섹션)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 개발
 
-### `yarn test`
+```bash
+npm install
+npm start        # http://localhost:3000
+npm run build    # 프로덕션 빌드 → build/
+npm run lint     # ESLint
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 배포
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+`develop` 브랜치에 push하면 GitHub Actions(`.github/workflows/deploy.yml`)가 빌드 후 `gh-pages` 브랜치로 배포한다. 수동 배포는 `npm run deploy`.

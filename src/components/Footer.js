@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { SiGithub } from "react-icons/si";
 import { HiOutlineMail } from "react-icons/hi";
 import { RiMessage3Line } from "react-icons/ri";
@@ -44,15 +45,13 @@ export default function Footer() {
           >
             <RiMessage3Line size={26} />
           </a>
-          <a
-            href="/assets/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/resume"
             className="text-slate-400 hover:text-[#0DA6F2] transition-all hover:scale-110"
             title="Resume"
           >
             <HiOutlineDocumentText size={26} />
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

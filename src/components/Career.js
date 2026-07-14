@@ -4,7 +4,9 @@ import {
     SiSpring, SiReact, SiMysql, SiDocker, SiKubernetes,
     SiRedis, SiApachekafka, SiElasticsearch, SiLinux, SiGit
 } from "react-icons/si";
+import { Link } from 'react-router-dom';
 import { getCareerYearLabel } from '../utils/careerUtils';
+import { aiProjects } from '../data/resume';
 import GitHubProjects from './GitHubProjects';
 
 function CompetencyCard({ number, title, content, colorClass }) {
@@ -15,8 +17,8 @@ function CompetencyCard({ number, title, content, colorClass }) {
                 <h3 className="text-xl font-bold text-white">{title}</h3>
             </div>
             <ul className="space-y-4">
-                {content.map((item, idx) => (
-                    <li key={idx} className="flex gap-3 text-slate-300 font-medium text-sm leading-relaxed">
+                {content.map((item) => (
+                    <li key={item} className="flex gap-3 text-slate-300 font-medium text-sm leading-relaxed">
                         <span className="text-[#0DA6F2] mt-1.5">•</span>
                         <span>{item}</span>
                     </li>
@@ -58,6 +60,43 @@ function SubProjectItem({ title, date, background, improvement, result }) {
     );
 }
 
+function AiProjectCard({
+    title, status, period, oneLiner, why, arch, tags, link, linkLabel = "프리뷰 보기",
+}) {
+    return (
+        <div className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-[#0DA6F2]/30 transition-all flex flex-col gap-4">
+            <div className="flex items-start justify-between gap-3">
+                <h4 className="text-white text-lg font-extrabold mb-0">{title}</h4>
+                <span className="flex-shrink-0 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#0DA6F2]/10 text-[#0DA6F2] border border-[#0DA6F2]/30">{status}</span>
+            </div>
+            <p className="date-text mb-0">{period}</p>
+            <p className="text-slate-200 text-sm font-semibold leading-relaxed mb-0">{oneLiner}</p>
+            <div className="flex gap-3">
+                <span className="text-[10px] font-black uppercase text-slate-500 mt-0.5 min-w-[50px]">Why</span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-0">{why}</p>
+            </div>
+            <div className="flex gap-3">
+                <span className="text-[10px] font-black uppercase text-[#0DA6F2] mt-0.5 min-w-[50px]">구조</span>
+                <p className="text-slate-400 text-sm leading-relaxed mb-0">{arch}</p>
+            </div>
+            <div className="tags-grid mt-auto pt-2">
+                {tags.map(tag => <span key={tag} className="tag">{tag}</span>)}
+            </div>
+            {link && (
+                <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0DA6F2] hover:text-sky-300 transition-colors no-underline"
+                >
+                    {linkLabel}
+                    <span className="material-symbols-outlined text-base">open_in_new</span>
+                </a>
+            )}
+        </div>
+    );
+}
+
 export default function Career() {
     const techStacks = [
         { name: "AI", icon: <MdOutlineSmartToy className="text-purple-600" />, bg: "bg-purple-100", text: "text-purple-700" },
@@ -73,6 +112,27 @@ export default function Career() {
         { name: "Git", icon: <SiGit className="text-orange-500" />, bg: "bg-orange-100", text: "text-orange-700" },
     ];
 
+    const howIWork = [
+        {
+            kicker: "구조 · Orchestration",
+            title: "혼자 일해도 팀처럼 굴러갑니다",
+            desc: "메인 세션은 설계·검토·통합만 맡고, 구현·테스트·리서치는 역할별 전용 서브에이전트에 위임합니다. 작업 난이도에 따라 상위·경량 모델을 라우팅해 품질과 비용을 함께 통제합니다.",
+            proof: "개인 프로젝트 10개 · 1,100+ 커밋 단독 수행",
+        },
+        {
+            kicker: "환경 · Systemization",
+            title: "같은 작업을 두 번 손으로 하지 않습니다",
+            desc: "훅(hook)으로 품질 게이트와 컨텍스트 관리를 자동화하고, 반복 작업은 재사용 가능한 스킬로 패키징하며, MCP 서버로 외부 도구를 연결합니다.",
+            proof: "AgentSkills — 직군별 AI 스킬 130+ 오픈소스",
+            link: "https://github.com/jyoung9154/AgentSkills",
+        },
+        {
+            kicker: "경계 · Boundary",
+            title: "어디서 사람이 판단할지를 설계합니다",
+            desc: "완전 자동화 대신, 시스템이 틀릴 수 있는 지점에 검증 게이트와 사람의 승인 노드를 배치합니다. 사내 JIRA-AI의 자동 패치가 5중 검증 게이트를 통과해야만 제안되는 이유입니다.",
+            proof: "패턴 즉답(LLM 0회)·직통·추론 3모드 라우팅 설계",
+        },
+    ];
 
     return (
         <div className="min-h-screen">
@@ -92,7 +152,7 @@ export default function Career() {
                         </div>
                         <div className="flex-shrink-0">
                             <div className="px-10 py-6 rounded-2xl bg-[#0DA6F2]/10 border border-[#0DA6F2]/30 text-center">
-                                <span className="block text-xs font-black text-[#0DA6F2] uppercase tracking-[3px] mb-2">AI Full-Stack Developer</span>
+                                <span className="block text-xs font-black text-[#0DA6F2] uppercase tracking-[3px] mb-2">AI-Native Full-Stack Developer</span>
                                 <span className="block text-4xl font-black text-white">{getCareerYearLabel()}</span>
                             </div>
                         </div>
@@ -115,14 +175,73 @@ export default function Career() {
                             <p className="text-slate-400 text-sm mb-0 leading-relaxed">대규모 클라우드 시스템 운영 및 최적화</p>
                         </div>
                     </div>
+
+                    <nav aria-label="섹션 바로가기" className="flex flex-wrap gap-3 mt-10">
+                        {[
+                            { href: '#how-i-work', label: '00. AI와 일하는 방식' },
+                            { href: '#competencies', label: '01. 핵심 역량' },
+                            { href: '#projects', label: '02. 주요 프로젝트' },
+                            { href: '#ai-projects', label: '03. 사이드 프로젝트' },
+                            { href: '#etc', label: '04. 기타 경험' },
+                        ].map(item => (
+                            <a key={item.href} href={item.href}
+                               className="px-4 py-2 rounded-full text-xs font-bold text-slate-400 bg-white/5 border border-white/10 hover:text-[#0DA6F2] hover:border-[#0DA6F2]/40 transition-colors no-underline">
+                                {item.label}
+                            </a>
+                        ))}
+                    </nav>
+                </section>
+
+                {/* How I Work with AI */}
+                <section id="how-i-work" className="mb-32 scroll-mt-24">
+                    <div className="flex items-center gap-4 mb-16">
+                        <div className="h-px flex-1 bg-white/5" />
+                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">00. AI와 일하는 방식</h2>
+                        <div className="h-px flex-1 bg-white/5" />
+                    </div>
+
+                    <p className="text-center max-w-3xl mx-auto text-xl text-slate-200 font-medium leading-relaxed mb-16">
+                        AI에게 일을 &lsquo;시키는&rsquo; 수준을 넘어, <strong>역할이 나뉜 AI 에이전트 팀을 설계해 운영합니다.</strong>{' '}
+                        저는 설계와 판단에 집중하고, 구현·테스트·조사는 에이전트에게 위임합니다.
+                    </p>
+
+                    <div className="grid md:grid-cols-3 gap-6 mb-12">
+                        {howIWork.map(card => (
+                            <div key={card.kicker} className="p-8 rounded-2xl bg-white/5 border border-white/5 hover:border-[#0DA6F2]/30 transition-all flex flex-col gap-4">
+                                <span className="text-[10px] font-black uppercase tracking-[3px] text-[#0DA6F2]">{card.kicker}</span>
+                                <h4 className="text-white text-lg font-extrabold mb-0">{card.title}</h4>
+                                <p className="text-slate-400 text-sm leading-relaxed mb-0">{card.desc}</p>
+                                <p className="mt-auto pt-4 border-t border-white/5 text-xs font-semibold text-slate-500 mb-0 flex items-start gap-2">
+                                    <span className="text-[#0DA6F2] mt-px">●</span>
+                                    <span>
+                                        {card.link
+                                            ? <a href={card.link} target="_blank" rel="noopener noreferrer" className="hover:text-[#0DA6F2] transition-colors no-underline text-inherit">{card.proof}</a>
+                                            : card.proof}
+                                    </span>
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <blockquote className="max-w-3xl mx-auto border-l-4 border-[#0DA6F2] pl-6 py-1 m-0">
+                        <p className="text-slate-300 text-base leading-relaxed mb-0">
+                            &ldquo;완벽한 자동화가 목표가 아닙니다. 막히는 지점을 아는 상태로 시스템을 계속 살아 있게 굴리는 것 —
+                            그래서 자동 패치는 검증 게이트와 사람의 승인 뒤에 둡니다.&rdquo;
+                        </p>
+                    </blockquote>
+
+                    <p className="text-center max-w-3xl mx-auto text-slate-500 text-sm leading-relaxed mt-10 mb-0">
+                        기술 스택도 중요하지만, AI 개발에서는 스택 그 자체보다 기술의 용어와 개발 플로우를 파악하는 능력이
+                        더 중요하다고 믿습니다. 도구가 바뀌어도 이 워크플로우로 새 기술을 빠르게 흡수합니다.
+                    </p>
                 </section>
 
                 {/* Core Competencies */}
-                <section className="mb-32">
+                <section id="competencies" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
                         <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">01. 핵심 역량 및 특징</h2>
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8 mb-16">
@@ -170,9 +289,9 @@ export default function Career() {
 
                     {/* Compact Tech Badges */}
                     <div className="flex flex-wrap gap-3 justify-center">
-                        {techStacks.map((stack, idx) => (
+                        {techStacks.map((stack) => (
                             <div
-                                key={idx}
+                                key={stack.name}
                                 className={`flex items-center gap-2 px-4 py-2 rounded-xl ${stack.bg} transition-all hover:scale-105 cursor-default shadow-md shadow-black/10`}
                             >
                                 <span className="text-lg">{stack.icon}</span>
@@ -183,14 +302,71 @@ export default function Career() {
                 </section>
 
                 {/* Project Details */}
-                <section className="mb-32">
+                <section id="projects" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
                         <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">02. 주요 프로젝트</h2>
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
                     </div>
 
                     <div className="space-y-12">
+                        {/* Project Card 0: JIRA-AI */}
+                        <article className="premium-card group">
+                            <div className="flex flex-col md:flex-row justify-between items-start mb-10 gap-6">
+                                <div>
+                                    <p className="date-text mb-2">2026 — 현재 · 사내 단독 개발 · 고도화 진행 중</p>
+                                    <h3 className="company-title">JIRA-AI — 이슈 자동 분석·응답 AI 시스템</h3>
+                                    <p className="text-[#0DA6F2] font-semibold text-sm">더존비즈온 (DOUZONE) · 1인 개발</p>
+                                </div>
+                                <span className="material-symbols-outlined text-slate-600 group-hover:text-[#0DA6F2] transition-colors text-3xl">support_agent</span>
+                            </div>
+
+                            <div className="space-y-12">
+                                <p className="text-xl text-slate-200 font-medium border-l-4 border-[#0DA6F2] pl-6 py-1 leading-relaxed">
+                                    &ldquo;쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가&rdquo; — 이 의문에서 시작했습니다.
+                                    문의 이슈가 등록되면 사내 지식·소스코드·운영로그를 대조해 근거 있는 1차 답변을 자동 생성하는 AI 시스템으로,
+                                    기획부터 아키텍처 설계, 개발까지 전 과정을 혼자 수행했으며 현재도 고도화하고 있습니다.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <SubProjectItem
+                                        title="LangGraph 기반 12-노드 오케스트레이션 설계"
+                                        date="아키텍처"
+                                        background="이슈 유형·난이도가 제각각이라 단일 프롬프트 호출로는 응답 품질과 비용을 통제할 수 없는 문제"
+                                        improvement="LangGraph 12-노드 그래프(반복 루프 3개 포함)로 분기 설계, 패턴 즉답(LLM 0회)·직통 모드(코드 분석)·일반 추론의 3가지 응답 모드 라우팅"
+                                        result="이슈 성격에 따라 LLM 호출을 최소화하면서 응답 품질 표준화"
+                                    />
+                                    <SubProjectItem
+                                        title="RAG 근거 수집 + 코드 5단계 깊이 추적"
+                                        date="핵심 기능"
+                                        background="근거 없는 AI 답변은 상담 품질을 오히려 저해"
+                                        improvement="설계문서·과거 이슈·소스코드·운영로그 4원천 RAG(Milvus 벡터 검색)와 Front→SQL 5단계 코드 추적으로 답변마다 근거 첨부"
+                                        result="근거 있는 1차 답변으로 반복 문의 대응 자동화"
+                                    />
+                                    <SubProjectItem
+                                        title="자동 패치 생성 + 5중 검증 게이트"
+                                        date="핵심 기능"
+                                        background="코드 수정이 필요한 이슈는 분석만으로는 처리 완결이 안 됨"
+                                        improvement="원인 코드 분석 후 패치를 자동 생성하고 5단계 검증 게이트를 통과해야 제안되도록 설계"
+                                        result="개발자 개입 전 단계까지 자동화 범위 확장"
+                                    />
+                                    <SubProjectItem
+                                        title="자가학습 루프 운영"
+                                        date="고도화 중"
+                                        background="동일 유형 문의가 반복되지만 지식이 사람 머릿속에만 축적"
+                                        improvement="성공 답변과 사람의 해결책을 패턴 지식으로 자동 축적하고, 12개월 미사용 지식은 자동 퇴역시키는 수명주기 설계"
+                                        result="운영할수록 즉답 비율이 올라가는 구조 확립"
+                                    />
+                                </div>
+
+                                <div className="tags-grid">
+                                    {["LangGraph", "Spring Boot 3.5", "Java 17", "Azure OpenAI", "Milvus", "MySQL", "Kafka", "Redis", "React 18", "MCP"].map(tag => (
+                                        <span key={tag} className="tag">{tag}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        </article>
+
                         {/* Project Card 1: AI & Mail High-Tech */}
                         <article className="premium-card group">
                             <div className="flex flex-col md:flex-row justify-between items-start mb-10 gap-6">
@@ -204,10 +380,25 @@ export default function Career() {
 
                             <div className="space-y-12">
                                 <p className="text-xl text-slate-200 font-medium border-l-4 border-[#0DA6F2] pl-6 py-1 leading-relaxed">
-                                    메일 시스템의 대규모 인프라를 기반으로 <strong>LLM, RAG, MCP</strong>를 도입하여 지능형 협업 솔루션으로의 전환을 주도하고, 시스템 전반의 최적화를 달성했습니다.
+                                    500만+ 사용자가 쓰는 그룹웨어 메일에 AI를 심는 일과, 그 밑의 인프라를 빠르고 안정적으로 만드는 일을 함께 합니다.
+                                    <strong> LLM, RAG, MCP</strong>를 도입하여 지능형 협업 솔루션으로의 전환을 주도하고, 시스템 전반의 최적화를 달성했습니다.
                                 </p>
 
                                 <div className="space-y-6">
+                                    <SubProjectItem
+                                        title="MSA 대용량 메일 아키텍처 및 프로토콜 개발"
+                                        date="인프라"
+                                        background="500만+ 사용자 트래픽을 받는 메일 코어의 처리량과 안정성 요구"
+                                        improvement="MSA(Kafka·Spring Cloud Stream) 기반 대용량 처리 아키텍처 설계, SMTP/POP/IMAP 프로토콜 개발, 게이트웨이 라우팅 자동화"
+                                        result="수신·발신 트래픽 라우팅 자동화로 운영 개입 최소화 및 운영 비용 절감"
+                                    />
+                                    <SubProjectItem
+                                        title="LLM 스마트 답장·메일 요약 서비스 출시"
+                                        date="AI 서비스"
+                                        background="메일 본문 분석이 느려 LLM 기능의 응답 체감 품질 저하"
+                                        improvement="텍스트 파싱·임베딩 파이프라인 최적화 및 스마트 답장 템플릿·메일 요약 서비스 출시"
+                                        result="메일 분석 시간 30초 → 4초 (86% 개선)"
+                                    />
                                     <SubProjectItem
                                         title="SSL 인증서 등록 자동화 개발"
                                         date="2024.10.01 — 2024.10.31"
@@ -324,14 +515,14 @@ export default function Career() {
                                         date="2018.12 — 2022.06"
                                         background="수동 마이그레이션으로 인한 막대한 시간 소요 및 휴먼 에러 발생 리스크"
                                         improvement="Spring Boot 기반 대규모 데이터/파일 이관 자동화 툴 설계 및 스트리밍 배치 처리 구현"
-                                        result="이관 소요 시간 97% 단축 (3일 → 2시간) 및 500여 개사 이상의 성공적 이관 달성"
+                                        result="이관 소요 시간 97% 단축 (3일 → 2시간), 500여 개사 성공 이관 — 사내 마이그레이션 표준 모델로 채택"
                                     />
                                     <SubProjectItem
                                         title="Amaranth 10 전자결재 시스템 구축"
                                         date="2019.11 — 2022.06"
                                         background="차세대 그룹웨어 출시를 위한 핵심 도메인(결재/문서함)의 신규 설계 및 개발 필요"
                                         improvement="결재함/문서함/양식 설정 등 핵심 로직 전담 개발 및 PDF 미리보기, 암호화 방식 고도화"
-                                        result="기획 단계부터 참여하여 제품의 성공적인 시장 안착 및 200여 건 이상의 유지보수 수행"
+                                        result="개발 초기 멤버로 전 라이프사이클에 메인 참여 — 제품의 성공적인 시장 안착 및 200여 건 이상의 유지보수 수행"
                                     />
                                     <SubProjectItem
                                         title="BizboxAlpha 유지보수 및 고도화"
@@ -352,22 +543,50 @@ export default function Career() {
                     </div>
                 </section>
 
-                {/* GitHub Personal Projects */}
-                <section className="mb-32">
+                {/* Personal AI Projects */}
+                <section id="ai-projects" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
-                        <div className="h-px flex-1 bg-white/5"></div>
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">03. 개인 프로젝트 (GitHub)</h2>
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
+                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">03. 사이드 프로젝트 — 어디까지 가는지의 증명</h2>
+                        <div className="h-px flex-1 bg-white/5" />
                     </div>
-                    <GitHubProjects />
+
+                    <p className="text-center max-w-3xl mx-auto text-slate-400 leading-relaxed mb-16">
+                        업무 외 시간에 위의 <strong className="text-slate-200">멀티에이전트 워크플로우</strong>만으로
+                        기획부터 아키텍처 설계, 배포·운영까지 단독 수행한 프로젝트들입니다.{' '}
+                        <strong className="text-slate-200">10개 프로젝트 · 1,100+ 커밋 · 최장 3개월 무중단 운영</strong> —
+                        회사 밖에서 아이디어가 어디까지 갈 수 있는지의 증명입니다.
+                    </p>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {aiProjects.map(project => (
+                            <AiProjectCard
+                                key={project.title}
+                                title={project.title}
+                                status={project.status}
+                                period={project.period}
+                                oneLiner={project.oneLiner}
+                                why={project.why}
+                                arch={project.arch}
+                                tags={project.tags}
+                                link={project.link}
+                                linkLabel={project.linkLabel}
+                            />
+                        ))}
+                    </div>
+
+                    <div className="mt-16">
+                        <p className="text-center text-xs font-black uppercase tracking-[3px] text-slate-600 mb-8">전체 GitHub 저장소</p>
+                        <GitHubProjects />
+                    </div>
                 </section>
 
                 {/* Other Experience */}
-                <section className="mb-32">
+                <section id="etc" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
                         <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">04. 기타 경험</h2>
-                        <div className="h-px flex-1 bg-white/5"></div>
+                        <div className="h-px flex-1 bg-white/5" />
                     </div>
 
                     <div className="space-y-12">
@@ -394,6 +613,19 @@ export default function Career() {
                                 />
                             </div>
                         </article>
+                    </div>
+                </section>
+
+                {/* Contact CTA */}
+                <section className="mb-20">
+                    <div className="premium-card text-center py-16">
+                        <h2 className="text-3xl md:text-4xl font-black text-white mb-4">함께 만들 준비가 되어 있습니다</h2>
+                        <p className="text-slate-400 max-w-xl mx-auto mb-10 leading-relaxed">포지션 제안이나 프로젝트 문의를 환영합니다. 아래 채널로 편하게 연락 주세요.</p>
+                        <div className="flex flex-wrap items-center justify-center gap-4">
+                            <a href="mailto:jyoung_9154@naver.com" className="inline-block rounded-lg bg-sky-500 px-8 py-3 font-semibold text-white transition-colors hover:bg-sky-400 no-underline">이메일 보내기</a>
+                            <a href="https://open.kakao.com/o/seT0joLh" target="_blank" rel="noopener noreferrer" className="inline-block rounded-lg bg-white/10 border border-white/10 px-8 py-3 font-semibold text-white transition-colors hover:border-[#0DA6F2]/40 hover:text-[#0DA6F2] no-underline">카카오톡 오픈채팅</a>
+                            <Link to="/resume" className="inline-block rounded-lg bg-white/10 border border-white/10 px-8 py-3 font-semibold text-white transition-colors hover:border-[#0DA6F2]/40 hover:text-[#0DA6F2] no-underline">이력서 보기</Link>
+                        </div>
                     </div>
                 </section>
             </main>

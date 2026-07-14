@@ -30,16 +30,12 @@ export default function Header() {
                     </NavLink>
                 </nav>
                 <div className="flex items-center gap-4">
-                    <a
-                      href="/assets/resume.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-resume"
-                    >
-                        <span className="material-symbols-outlined text-sm">download</span>
+                    <NavLink to="/resume" className="btn-resume">
+                        <span className="material-symbols-outlined text-sm">description</span>
                         이력서
-                    </a>
+                    </NavLink>
                     <button
+                        type="button"
                         className="md:hidden flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-white transition-all hover:bg-white/10"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="메뉴 열기"

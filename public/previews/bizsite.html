@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bizsite — 지도 URL 하나로 여는 우리 가게 홈페이지</title>
+<style>
+  :root{
+    --paper:#FBF7EE;
+    --paper-2:#F3ECDA;
+    --card:#FFFDF7;
+    --ink:#2A241C;
+    --ink-soft:#6E6455;
+    --ink-faint:#9A907E;
+    --green:#2E7D4F;
+    --green-deep:#1D5A38;
+    --green-pale:#E3EEE2;
+    --amber:#DD7E2B;
+    --amber-deep:#B45F19;
+    --amber-pale:#FBE8CE;
+    --line:#E7DCC2;
+    --radius:16px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .mono{
+    font-family:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,monospace;
+  }
+  a{color:inherit;}
+  img,svg{display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  :focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  /* background texture: faint dotted map grid */
+  .map-texture{
+    position:absolute;
+    inset:0;
+    background-image:radial-gradient(circle, #DACBA5 1px, transparent 1.4px);
+    background-size:22px 22px;
+    opacity:.35;
+    pointer-events:none;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative;
+    padding:64px 0 56px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:7px 14px 7px 10px;
+    border-radius:999px;
+    font-size:.82rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+  .badge .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 0 3px var(--green-pale);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.45;}
+  }
+  .hero h1{
+    margin:22px 0 16px;
+    font-size:clamp(2.1rem,5.2vw,3.5rem);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    line-height:1.14;
+    max-width:16ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--green-deep);
+    background:linear-gradient(transparent 62%, var(--amber-pale) 62%);
+  }
+  .hero p.lede{
+    max-width:52ch;
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+  .hero .why{
+    margin-top:6px;
+    font-size:.92rem;
+    color:var(--ink-soft);
+  }
+
+  /* ---------- TRANSFORM DEMO ---------- */
+  .transform{
+    position:relative;
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:20px;
+    align-items:center;
+  }
+  .demo-card{
+    position:relative;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:0 1px 2px rgba(42,36,28,.04), 0 12px 28px -18px rgba(42,36,28,.35);
+    overflow:hidden;
+  }
+  .demo-label{
+    position:absolute;
+    top:12px;
+    left:12px;
+    font-size:.7rem;
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    border-radius:999px;
+    z-index:2;
+  }
+  .demo-label.before{background:var(--paper-2);color:var(--ink-soft);}
+  .demo-label.after{background:var(--green-deep);color:#fff;}
+
+  /* before: map + url input */
+  .before-inner{
+    position:relative;
+    height:280px;
+    background:var(--green-pale);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+  }
+  .pin{
+    position:relative;
+    z-index:1;
+  }
+  .pin svg{width:46px;height:46px;}
+  .url-field{
+    position:relative;
+    z-index:1;
+    width:86%;
+    max-width:320px;
+    background:#fff;
+    border:1.5px solid var(--green);
+    border-radius:11px;
+    padding:11px 13px;
+    font-size:.8rem;
+    color:var(--green-deep);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    box-shadow:0 6px 16px -10px rgba(29,90,56,.5);
+  }
+  .url-field .caret{
+    display:inline-block;
+    width:1.5px;height:14px;
+    background:var(--green-deep);
+    animation:blink 1.1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  .url-field .txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+  /* arrow */
+  .arrow-col{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    padding:0 4px;
+  }
+  .arrow-col svg{width:40px;height:24px;color:var(--amber-deep);}
+  .arrow-col .cap{
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--amber-deep);
+    text-align:center;
+    line-height:1.35;
+    white-space:nowrap;
+  }
+
+  /* after: browser frame with mini site */
+  .browser-chrome{
+    height:26px;
+    background:var(--paper-2);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:0 12px;
+  }
+  .browser-chrome .cdot{width:8px;height:8px;border-radius:50%;}
+  .browser-chrome .c1{background:var(--amber);}
+  .browser-chrome .c2{background:var(--green);}
+  .browser-chrome .c3{background:var(--ink-faint);}
+  .browser-chrome .url{
+    margin-left:8px;
+    font-size:.62rem;
+    color:var(--ink-faint);
+    background:#fff;
+    border-radius:5px;
+    padding:2px 8px;
+  }
+  .site-mock{
+    height:254px;
+    padding:14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .site-mock .shop-name{
+    font-weight:800;
+    font-size:1.02rem;
+    color:var(--ink);
+  }
+  .site-mock .hours{
+    font-size:.72rem;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:6px;
+    width:fit-content;
+  }
+  .site-mock .menu-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:.74rem;
+    color:var(--ink-soft);
+    border-bottom:1px dashed var(--line);
+    padding-bottom:5px;
+  }
+  .site-mock .cta{
+    margin-top:auto;
+    align-self:flex-start;
+    background:var(--amber-deep);
+    color:#fff;
+    font-size:.74rem;
+    font-weight:700;
+    padding:7px 14px;
+    border-radius:8px;
+  }
+  .example-note{
+    text-align:center;
+    font-size:.74rem;
+    color:var(--ink-soft);
+    margin-top:12px;
+  }
+
+  @media (max-width:800px){
+    .transform{grid-template-columns:1fr;}
+    .arrow-col svg{transform:rotate(90deg);}
+    .arrow-col{padding:4px 0;}
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .eyebrow{
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--green-deep);
+    margin:0 0 10px;
+  }
+  h2{
+    font-size:clamp(1.5rem,3vw,2.05rem);
+    font-weight:800;
+    letter-spacing:-0.01em;
+    margin:0 0 34px;
+  }
+
+  /* features */
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .feature{
+    background:var(--card);
+    padding:26px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .feature .ico{
+    width:38px;height:38px;
+    border-radius:10px;
+    background:var(--green-pale);
+    color:var(--green-deep);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .feature .ico svg{width:20px;height:20px;}
+  .feature h3{
+    margin:0;
+    font-size:1rem;
+    font-weight:700;
+  }
+  .feature p{
+    margin:0;
+    font-size:.88rem;
+    color:var(--ink-soft);
+  }
+  @media (max-width:800px){
+    .feature-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:520px){
+    .feature-grid{grid-template-columns:1fr;}
+  }
+
+  /* architecture */
+  .arch-root{
+    border:1.5px solid var(--green-deep);
+    border-radius:var(--radius);
+    background:var(--card);
+    padding:22px;
+  }
+  .arch-root > .arch-title{
+    font-weight:800;
+    font-size:.95rem;
+    margin-bottom:4px;
+  }
+  .arch-root > .arch-sub{
+    font-size:.78rem;
+    color:var(--ink-soft);
+    margin-bottom:20px;
+  }
+  .arch-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .arch-col{
+    border:1px dashed var(--line);
+    border-radius:12px;
+    padding:14px;
+  }
+  .arch-col > .label{
+    font-size:.72rem;
+    font-weight:700;
+    color:var(--amber-deep);
+    text-transform:uppercase;
+    letter-spacing:.05em;
+    margin-bottom:10px;
+  }
+  .arch-box{
+    background:var(--paper-2);
+    border-radius:8px;
+    padding:10px 12px;
+    margin-bottom:8px;
+    font-size:.82rem;
+  }
+  .arch-box:last-child{margin-bottom:0;}
+  .arch-box .path{font-weight:700;color:var(--ink);}
+  .arch-box .desc{color:var(--ink-soft);font-size:.78rem;margin-top:2px;}
+  .arch-box.db{
+    background:var(--green-pale);
+  }
+  @media (max-width:640px){
+    .arch-cols{grid-template-columns:1fr;}
+  }
+
+  /* stack */
+  .stack-chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .chip{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:9px 16px;
+    border-radius:999px;
+    font-size:.86rem;
+    font-weight:600;
+    color:var(--ink);
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+  }
+  .chip .sw{width:8px;height:8px;border-radius:50%;}
+
+  /* footer */
+  footer{
+    padding:36px 0 44px;
+    border-top:1px solid var(--line);
+    text-align:center;
+  }
+  footer p{
+    margin:0 0 10px;
+    font-size:.82rem;
+    color:var(--ink-faint);
+  }
+  footer a{
+    font-size:.86rem;
+    font-weight:700;
+    color:var(--green-deep);
+    text-decoration:none;
+    border-bottom:1.5px solid var(--amber);
+    padding-bottom:1px;
+  }
+  footer a:hover{color:var(--amber-deep);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/>
+    <circle cx="12" cy="9.5" r="2.4"/>
+  </symbol>
+  <symbol id="i-tray" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 13h4l2 3h6l2-3h4"/>
+    <path d="M5 13 6.5 5.5A2 2 0 0 1 8.46 4h7.08a2 2 0 0 1 1.96 1.5L19 13"/>
+    <path d="M3 13v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5"/>
+  </symbol>
+  <symbol id="i-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3.5" y="4" width="17" height="6" rx="1.4"/>
+    <rect x="3.5" y="13" width="7.5" height="7" rx="1.4"/>
+    <rect x="13" y="13" width="7.5" height="7" rx="1.4"/>
+  </symbol>
+  <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 14 20 4"/>
+    <path d="M15 4h5v5"/>
+    <path d="M18 13v5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h5"/>
+  </symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="13" r="8"/>
+    <path d="M12 13 15.5 9"/>
+    <path d="M8.5 4.5h7"/>
+  </symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/>
+  </symbol>
+  <symbol id="i-arrow" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 12h32"/>
+    <path d="M26 4l10 8-10 8"/>
+  </symbol>
+</svg>
+
+<header class="hero">
+  <div class="map-texture" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;">
+    <span class="badge"><span class="dot" aria-hidden="true"></span>개발 중 · 2026.05 · 약 9,700줄</span>
+    <h1>네이버·카카오 지도 링크 하나로<br><em>가게 홈페이지</em>가 열립니다</h1>
+    <p class="lede">사업장 지도 URL을 붙여넣으면 상호명·주소·영업시간·메뉴를 자동으로 모아 홈페이지 초안을 만듭니다. 업종에 맞는 템플릿을 고르고 발행 버튼을 누르면 끝입니다.</p>
+    <p class="why">왜 만들었나 — 소상공인이 개발자 없이 지도 링크 하나로 자기 홈페이지를 가질 수 있도록.</p>
+
+    <div class="transform">
+      <div class="demo-card">
+        <span class="demo-label before">BEFORE · 지도 URL</span>
+        <div class="before-inner">
+          <div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="#1D5A38" stroke-width="1.6"><use href="#i-pin"/></svg></div>
+          <div class="url-field mono">
+            <span class="txt">map.naver.com/p/entry/place/1928471</span>
+            <span class="caret" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-col">
+        <svg viewBox="0 0 40 24" aria-hidden="true"><use href="#i-arrow"/></svg>
+        <span class="cap">자동 수집 · 템플릿 적용<br>즉시 발행</span>
+      </div>
+
+      <div class="demo-card">
+        <span class="demo-label after">AFTER · /s/slug</span>
+        <div class="browser-chrome">
+          <span class="cdot c1"></span><span class="cdot c2"></span><span class="cdot c3"></span>
+          <span class="url mono">bizsite.site/s/oo-bunsik</span>
+        </div>
+        <div class="site-mock">
+          <div class="shop-name">○○분식</div>
+          <div class="hours">매일 11:00–21:00 · 매주 월요일 휴무</div>
+          <div class="menu-row"><span>떡볶이</span><span>4,500원</span></div>
+          <div class="menu-row"><span>순대</span><span>4,000원</span></div>
+          <div class="menu-row"><span>튀김</span><span>3,000원</span></div>
+          <span class="cta">전화 주문하기</span>
+        </div>
+      </div>
+    </div>
+    <p class="example-note">* ○○분식, 메뉴, 영업시간은 화면 구성을 보여주기 위한 가상의 예시입니다.</p>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <p class="eyebrow">핵심 기능</p>
+    <h2>지도 링크 하나가 홈페이지가 되기까지</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="ico"><svg><use href="#i-pin"/></svg></div>
+        <h3>지도 URL 파싱</h3>
+        <p>네이버·카카오 지도 링크를 붙여넣으면 사업장 페이지 구조를 해석합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg><use href="#i-tray"/></svg></div>
+        <h3>사업장 정보 자동 수집</h3>
+        <p>스크래퍼가 상호명, 주소, 영업시간, 메뉴 같은 정보를 지도 페이지에서 모아옵니다.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg><use href="#i-layout"/></svg></div>
+        <h3>카테고리별 템플릿 선택</h3>
+        <p>업종에 맞는 템플릿을 골라 홈페이지 레이아웃을 정합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg><use href="#i-link"/></svg></div>
+        <h3>/s/[slug] 즉시 발행</h3>
+        <p>정해진 주소로 바로 배포되는 홈페이지 URL을 받습니다.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg><use href="#i-gauge"/></svg></div>
+        <h3>관리 콘솔</h3>
+        <p>admin 콘솔에서 발행된 사이트의 정보를 확인하고 관리합니다.</p>
+      </div>
+      <div class="feature">
+        <div class="ico"><svg><use href="#i-spark"/></svg></div>
+        <h3>AI 소개문 요약</h3>
+        <p>수집된 정보를 바탕으로 가게 소개 문구 초안을 AI가 요약해 제공합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <p class="eyebrow">아키텍처</p>
+    <h2>pnpm 모노레포 구조</h2>
+    <div class="arch-root">
+      <div class="arch-title mono">bizsite-platform/</div>
+      <div class="arch-sub">Next.js · pnpm 워크스페이스 · apps와 packages로 분리</div>
+      <div class="arch-cols">
+        <div class="arch-col">
+          <div class="label">apps/</div>
+          <div class="arch-box">
+            <div class="path mono">admin</div>
+            <div class="desc">발행된 사이트를 관리하는 콘솔</div>
+          </div>
+          <div class="arch-box">
+            <div class="path mono">sites</div>
+            <div class="desc">/s/[slug] 로 발행되는 사업장 홈페이지</div>
+          </div>
+        </div>
+        <div class="arch-col">
+          <div class="label">packages/</div>
+          <div class="arch-box">
+            <div class="path mono">types</div>
+            <div class="desc">apps 전반이 공유하는 타입 정의</div>
+          </div>
+          <div class="arch-box db">
+            <div class="path mono">db</div>
+            <div class="desc">Prisma · JSON 파일 기반 SSOT</div>
+          </div>
+          <div class="arch-box">
+            <div class="path mono">ui</div>
+            <div class="desc">admin·sites가 함께 쓰는 UI 컴포넌트</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <p class="eyebrow">기술 스택</p>
+    <h2>무엇으로 짰나</h2>
+    <div class="stack-chips">
+      <span class="chip"><span class="sw" style="background:#2E7D4F"></span>Next.js</span>
+      <span class="chip"><span class="sw" style="background:#DD7E2B"></span>pnpm 모노레포</span>
+      <span class="chip"><span class="sw" style="background:#2E7D4F"></span>Prisma</span>
+      <span class="chip"><span class="sw" style="background:#DD7E2B"></span>JSON 파일 기반 SSOT</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Claude 등 LLM과의 AI 페어 프로그래밍(바이브코딩)으로 단독 개발 · © 2026 Park JaeYoung</p>
+  <a href="/">포트폴리오로 돌아가기</a>
+</footer>
+
+</body>
+</html>

@@ -137,13 +137,22 @@ strong {
       font-weight: 800;
       color: white;
       letter-spacing: -0.5px;
+      white-space: nowrap;
     }
   }
 
+  @media (max-width: 480px) {
+    .container { padding: 0 20px; }
+
+    .logo-area { gap: 10px; }
+
+    .btn-resume { padding: 12px 18px; }
+  }
+
   nav {
-    display: flex;
+    /* display는 Tailwind(hidden md:flex)가 결정한다 — 여기서 flex를 강제하면 모바일에서 숨김이 깨진다 */
     gap: 40px;
-    
+
     a {
       color: var(--text-dim);
       font-weight: 600;
@@ -192,6 +201,7 @@ strong {
 .btn-resume {
   background: var(--primary);
   color: white !important;
+  white-space: nowrap;
   padding: 14px 32px;
   border-radius: 10px;
   font-weight: 700;
@@ -546,4 +556,558 @@ strong {
     color: var(--text-muted) !important;
     opacity: 0.7;
     margin: 0;
+}
+
+/* ==========================================================================
+   Military service: HID scroll-scrub section
+   진행선(mil-fill) 자체가 특수임무 수행 기간 — 스크롤로 차오르고 노드가 점등된다.
+   레이아웃 뼈대(travel-track/sticky/eyebrow/counters)는 Travel 클래스를 재사용.
+   ========================================================================== */
+.mil-path {
+    position: relative;
+    width: min(720px, 86vw);
+    height: 110px;
+    margin: 6px 0 30px;
+}
+
+.mil-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mil-fill {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 3px;
+    width: calc(var(--p, 0) * 1%);
+    transform: translateY(-1px);
+    background: linear-gradient(to right, rgba(13, 166, 242, 0.15), #0DA6F2);
+    box-shadow: 0 0 14px rgba(13, 166, 242, 0.5);
+    border-radius: 2px;
+}
+
+.mil-node {
+    position: absolute;
+    left: calc(var(--pos, 0) * 1%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mil-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--bg-dark);
+        border: 1px solid var(--border-bright);
+        transition: all 0.5s ease;
+    }
+
+    .mil-node-date {
+        position: absolute;
+        bottom: calc(50% + 16px);
+        font-family: var(--font-display);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        color: var(--text-muted);
+        white-space: nowrap;
+        transition: color 0.5s ease;
+    }
+
+    .mil-node-label {
+        position: absolute;
+        top: calc(50% + 16px);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--text-muted);
+        white-space: nowrap;
+        transition: color 0.5s ease;
+    }
+
+    &.on {
+        .mil-dot {
+            background: #0DA6F2;
+            border-color: #0DA6F2;
+            box-shadow: 0 0 12px rgba(13, 166, 242, 0.7);
+        }
+
+        .mil-node-date { color: #0DA6F2; }
+
+        .mil-node-label { color: var(--text-main); }
+    }
+}
+
+.mil-mission {
+    position: absolute;
+    left: 56%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--border-bright);
+    background: rgba(10, 17, 22, 0.92);
+    font-family: var(--font-display);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    opacity: 0.35;
+    transition: all 0.5s ease;
+    z-index: 1;
+
+    &.on {
+        opacity: 1;
+        color: var(--text-main);
+        border-color: rgba(13, 166, 242, 0.45);
+    }
+}
+
+@media (max-width: 640px) {
+    .mil-path {
+        width: 100%;
+        max-width: 300px;
+        height: 230px;
+        margin: 4px 0 24px;
+    }
+
+    .mil-line {
+        left: 6px;
+        right: auto;
+        top: 0;
+        width: 1px;
+        height: 100%;
+    }
+
+    .mil-fill {
+        left: 6px;
+        top: 0;
+        width: 3px;
+        height: calc(var(--p, 0) * 1%);
+        transform: translateX(-1px);
+        background: linear-gradient(to bottom, rgba(13, 166, 242, 0.15), #0DA6F2);
+    }
+
+    .mil-node {
+        /* 첫 자식(dot, 12px)의 중심이 left 6px 선 위에 오도록 노드는 0에서 시작 */
+        left: 0;
+        top: calc(var(--pos, 0) * 1%);
+        transform: translateY(-50%);
+        justify-content: flex-start;
+        gap: 12px;
+
+        .mil-node-date {
+            position: static;
+            order: 2;
+        }
+
+        .mil-node-label {
+            position: static;
+            order: 3;
+        }
+    }
+
+    .mil-mission {
+        left: 6px;
+        top: 56%;
+        transform: translate(16px, -50%);
+    }
+}
+
+/* ==========================================================================
+   Resume: print-first A4 document (/resume)
+   다크 사이트 위에 종이 한 장이 떠 있는 구조. 수치·날짜는 Space Grotesk.
+   ========================================================================== */
+.resume-root {
+  --r-ink: #0F172A;
+  --r-sub: #475569;
+  --r-faint: #94A3B8;
+  --r-line: #E2E8F0;
+  --r-accent: #0DA6F2;
+  --r-accent-ink: #0369A1;
+
+  min-height: 100vh;
+  padding: 48px 16px 96px;
+}
+
+.resume-actions {
+  max-width: 210mm;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .r-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+
+    &:hover { color: white; }
+  }
+
+  .r-sync-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+  }
+}
+
+.resume-sheet {
+  background: #fff;
+  color: var(--r-ink);
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 16mm 15mm;
+  border-radius: 4px;
+  box-shadow: 0 40px 90px -24px rgba(0, 0, 0, 0.85);
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+
+  h1, h2, h3, h4 { color: var(--r-ink); }
+
+  p, li {
+    color: var(--r-sub) !important;
+    font-size: 0.82rem !important;
+    font-weight: 400 !important;
+    line-height: 1.68;
+    margin-bottom: 0;
+  }
+
+  strong {
+    color: var(--r-ink) !important;
+    font-weight: 700 !important;
+  }
+
+  a {
+    color: var(--r-accent-ink);
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.r-header {
+  padding-bottom: 7mm;
+
+  .r-name {
+    font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .r-name-ko {
+    font-size: 0.9rem !important;
+    color: var(--r-faint) !important;
+    margin-top: 2px;
+  }
+
+  .r-title {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    color: var(--r-ink) !important;
+    margin-top: 12px;
+    border-left: 3px solid var(--r-accent);
+    padding-left: 12px;
+  }
+
+  .r-profile {
+    font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+    font-size: 0.74rem !important;
+    color: var(--r-faint) !important;
+    margin-top: 10px;
+  }
+
+  .r-contacts {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    margin: 14px 0 0;
+    padding: 0;
+
+    li {
+      font-family: 'Space Grotesk', 'Noto Sans KR', sans-serif;
+      font-size: 0.74rem !important;
+      color: var(--r-sub) !important;
+      margin-bottom: 0;
+
+      & + li::before {
+        content: '·';
+        margin: 0 10px;
+        color: var(--r-faint);
+      }
+    }
+  }
+}
+
+.r-section {
+  display: grid;
+  grid-template-columns: 30mm 1fr;
+  gap: 6mm;
+  padding: 6mm 0;
+  border-top: 1px solid var(--r-line);
+
+  .r-rail {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--r-accent-ink);
+    padding-top: 2px;
+  }
+}
+
+.r-diagram {
+  width: 100%;
+  max-width: 165mm;
+  height: auto;
+  display: block;
+  margin: 2px 0 12px;
+
+  text { font-family: 'Noto Sans KR', 'Inter', sans-serif; }
+}
+
+.r-about { max-width: 62ch; }
+
+.r-about-line {
+  margin-bottom: 1.6mm !important;
+
+  &:last-child {
+    margin-bottom: 0 !important;
+    color: var(--r-faint) !important;
+  }
+}
+
+.r-skill {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 4px;
+  font-size: 0.82rem;
+  color: var(--r-sub);
+
+  &:last-child { margin-bottom: 0; }
+
+  .r-skill-key {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--r-accent-ink);
+    min-width: 30px;
+    flex-shrink: 0;
+  }
+}
+
+.r-hiw-note {
+  margin-top: 3mm !important;
+  padding-top: 2.5mm;
+  border-top: 1px dashed var(--r-line);
+  font-size: 0.76rem !important;
+  color: var(--r-faint) !important;
+  max-width: 68ch;
+}
+
+.r-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    position: relative;
+    padding-left: 14px;
+    margin-bottom: 5px;
+
+    &::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--r-faint);
+    }
+  }
+}
+
+.r-bullets li.r-proj {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+
+  .r-date { margin-left: auto; }
+}
+
+.r-entry {
+  margin-bottom: 7mm;
+
+  &:last-child { margin-bottom: 0; }
+
+  .r-entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 3mm;
+  }
+
+  .r-entry-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .r-entry-role {
+    font-size: 0.78rem !important;
+    color: var(--r-faint) !important;
+    margin-top: 1px;
+  }
+
+  .r-group {
+    margin-bottom: 4mm;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  .r-group-heading {
+    font-size: 0.84rem;
+    font-weight: 700;
+    margin: 0 0 2mm;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--r-accent);
+      margin-right: 8px;
+      vertical-align: 2px;
+    }
+  }
+}
+
+.r-date {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--r-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.r-note {
+  font-size: 0.74rem !important;
+  color: var(--r-faint) !important;
+  margin-bottom: 3mm !important;
+}
+
+.r-meta {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.72rem;
+  color: var(--r-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.r-more {
+  font-size: 0.74rem !important;
+  color: var(--r-faint) !important;
+  margin-top: 2mm !important;
+}
+
+.r-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 4px;
+
+  span { font-size: 0.82rem; }
+
+  &:last-child { margin-bottom: 0; }
+}
+
+@media (max-width: 640px) {
+  .resume-root { padding: 24px 8px 64px; }
+  .resume-sheet { padding: 10mm 7mm; }
+  .r-section { grid-template-columns: 1fr; gap: 2mm; }
+  .r-header .r-name { font-size: 1.5rem; }
+  .r-entry .r-entry-head { flex-direction: column; gap: 2px; }
+  .r-row { flex-direction: column; gap: 0; }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 13mm 12mm;
+  }
+
+  html, body {
+    background: #fff !important;
+    background-image: none !important;
+    font-size: 15px !important;
+  }
+
+  .nav-header,
+  footer,
+  .resume-actions {
+    display: none !important;
+  }
+
+  .resume-root { padding: 0; }
+
+  .resume-sheet {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* A4 2페이지 안착용 밀도 조정 */
+  .r-section { padding: 3.5mm 0; }
+  .r-entry { margin-bottom: 4mm; }
+  .r-bullets li { margin-bottom: 2px; }
+  .r-row { margin-bottom: 2px; }
+  .r-header { padding-bottom: 5mm; }
+  .r-diagram { max-width: 150mm; margin-bottom: 8px; }
+
+  .r-section,
+  .r-group {
+    break-inside: avoid;
+  }
+
+  /* 긴 섹션(Experience)은 통째로 밀지 않고 그룹 단위로만 나눈다 */
+  .r-section--flow,
+  .r-section--flow .r-entry {
+    break-inside: auto;
+  }
+
+  .r-entry-head {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+
+  .r-bullets li.r-proj {
+    break-inside: avoid;
+  }
+
+  .r-diagram,
+  .r-group-heading::before,
+  .r-header .r-title {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

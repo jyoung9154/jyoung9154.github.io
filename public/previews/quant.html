@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quant Auto Trader — 무인 자기치유 퀀트 매매 시스템</title>
+<style>
+  :root{
+    --bg:#0b0e14;
+    --panel:#111623;
+    --panel-2:#151c2c;
+    --border:#232c40;
+    --text:#e7ebf3;
+    --dim:#8c96ac;
+    --mute:#5b6478;
+    --green:#26d789;
+    --red:#ff5c5c;
+    --amber:#ffb648;
+    --mono: ui-monospace, 'SF Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+    --sans: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(38,215,137,0.07), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 0%, rgba(255,182,72,0.06), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--green);color:#04120c;}
+
+  :focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- top status bar ---------- */
+  .statusbar{
+    border-bottom:1px solid var(--border);
+    background:rgba(11,14,20,0.7);
+  }
+  .statusbar .wrap{
+    display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;
+    padding:12px 24px;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--dim);
+    letter-spacing:0.02em;
+  }
+  .dot-live{
+    display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 0 0 rgba(38,215,137,0.6);
+    animation:pulse 1.8s infinite;
+    margin-right:6px;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(38,215,137,0.55);}
+    70%{box-shadow:0 0 0 6px rgba(38,215,137,0);}
+    100%{box-shadow:0 0 0 0 rgba(38,215,137,0);}
+  }
+  .statusbar strong{color:var(--green);font-weight:600;}
+  .statusbar .sep{color:var(--mute);}
+
+  /* ---------- hero ---------- */
+  header.hero{padding:64px 0 40px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--amber);
+    letter-spacing:0.06em;
+    margin:0 0 18px;
+  }
+  h1{
+    font-size:clamp(2.1rem, 5.4vw, 3.6rem);
+    line-height:1.12;
+    margin:0 0 18px;
+    letter-spacing:-0.02em;
+    font-weight:800;
+  }
+  .lede{
+    font-size:clamp(1rem, 2vw, 1.15rem);
+    color:var(--dim);
+    max-width:620px;
+    margin:0 0 8px;
+  }
+
+  /* ---------- signature: 5 agent node board ---------- */
+  .board{
+    margin-top:44px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    overflow:hidden;
+  }
+  .board-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+    border-bottom:1px solid var(--border);
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--dim);
+  }
+  .board-head .chips{display:flex;gap:6px;}
+  .board-head .chips span{width:8px;height:8px;border-radius:50%;background:var(--border);}
+
+  .nodes{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:1px;
+    background:var(--border);
+  }
+  .node{
+    background:var(--panel);
+    padding:18px 16px 16px;
+    display:flex;flex-direction:column;gap:10px;
+    min-width:0;
+  }
+  .node .name{
+    font-weight:700;font-size:0.92rem;
+  }
+  .node .name-en{
+    font-family:var(--mono);
+    font-size:0.66rem;
+    color:var(--mute);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .node svg{display:block;width:100%;height:34px;}
+  .node .ticker{
+    font-family:var(--mono);
+    font-size:0.98rem;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .node .ticker.up{color:var(--green);}
+  .node .ticker.down{color:var(--red);}
+  .node .ticker.flat{color:var(--amber);}
+  .node .tag{
+    font-family:var(--mono);
+    font-size:0.68rem;
+    color:var(--dim);
+  }
+  .node .state{
+    display:flex;align-items:center;gap:6px;
+    font-family:var(--mono);
+    font-size:0.66rem;
+    color:var(--green);
+    margin-top:auto;
+  }
+  .node .state.state-warn{color:var(--amber);}
+  .state .sd{width:5px;height:5px;border-radius:50%;background:currentColor;}
+
+  /* ---------- sections ---------- */
+  section{padding:56px 0;border-top:1px solid var(--border);}
+  .sec-label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--amber);
+    letter-spacing:0.06em;
+    margin:0 0 10px;
+  }
+  h2{
+    font-size:clamp(1.4rem, 3vw, 1.9rem);
+    margin:0 0 28px;
+    letter-spacing:-0.01em;
+  }
+
+  .features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+  .feature{
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:10px;
+    padding:20px;
+  }
+  .feature h3{
+    margin:0 0 8px;font-size:1rem;
+    display:flex;align-items:center;gap:8px;
+  }
+  .feature p{margin:0;color:var(--dim);font-size:0.9rem;}
+  .feature .ic{font-family:var(--mono);color:var(--green);font-size:0.85rem;}
+
+  /* ---------- self-healing loop ---------- */
+  .loop{
+    display:flex;align-items:center;justify-content:center;
+    gap:0;flex-wrap:wrap;
+    padding:8px 0 4px;
+  }
+  .loop-node{
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:10px;
+    padding:18px 20px;
+    width:190px;
+    text-align:center;
+  }
+  .loop-node .num{
+    font-family:var(--mono);color:var(--mute);font-size:0.7rem;
+  }
+  .loop-node h4{margin:6px 0 6px;font-size:1rem;}
+  .loop-node p{margin:0;color:var(--dim);font-size:0.82rem;}
+  .loop-arrow{
+    color:var(--mute);
+    font-family:var(--mono);
+    font-size:1.2rem;
+    padding:0 10px;
+  }
+  .loop-back{
+    width:100%;
+    display:flex;justify-content:center;align-items:center;gap:10px;
+    margin-top:14px;
+    font-family:var(--mono);
+    color:var(--mute);
+    font-size:0.74rem;
+  }
+  .loop-back .arc{color:var(--amber);font-size:1rem;}
+
+  .cascade{
+    margin-top:34px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:10px;
+    padding:20px;
+  }
+  .cascade-box{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    padding:10px 14px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--panel-2);
+  }
+  .cascade-box.hi{border-color:var(--green);color:var(--green);}
+  .cascade-box.esc{border-color:var(--amber);color:var(--amber);}
+  .cascade-note{color:var(--dim);font-size:0.85rem;flex:1 1 220px;}
+
+  .storage-note{
+    margin-top:18px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--dim);
+  }
+  .storage-note code{color:var(--dim);}
+
+  /* ---------- stack ---------- */
+  .stack{
+    display:flex;gap:12px;flex-wrap:wrap;
+  }
+  .stack-chip{
+    border:1px solid var(--border);
+    background:var(--panel);
+    border-radius:8px;
+    padding:14px 18px;
+    font-family:var(--mono);
+    font-size:0.88rem;
+    display:flex;align-items:center;gap:10px;
+  }
+  .stack-chip .sw{width:8px;height:8px;border-radius:2px;background:var(--green);}
+  .stack-chip:nth-child(2) .sw{background:var(--amber);}
+  .stack-chip:nth-child(3) .sw{background:var(--red);}
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:36px 0 48px;
+    border-top:1px solid var(--border);
+    color:var(--dim);
+    font-size:0.82rem;
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  footer a{
+    color:var(--dim);
+    text-decoration:none;
+    border-bottom:1px solid var(--border);
+  }
+  footer a:hover{color:var(--green);border-color:var(--green);}
+
+  @media (max-width:760px){
+    .nodes{grid-template-columns:repeat(2,1fr);}
+    .features{grid-template-columns:1fr;}
+    .loop{flex-direction:column;}
+    .loop-arrow{transform:rotate(90deg);padding:6px 0;}
+  }
+  @media (max-width:480px){
+    .nodes{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="statusbar">
+  <div class="wrap">
+    <span><span class="dot-live" aria-hidden="true"></span><strong>운영 중</strong></span>
+    <span class="sep">·</span>
+    <span>2026.04 — 05</span>
+    <span class="sep">·</span>
+    <span>219 commits</span>
+    <span class="sep">·</span>
+    <span>3주 개발</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">PROJECT / QUANT AUTO TRADER</p>
+    <h1>사람 없이 밤새 매매하고,<br>스스로 전략을 고쳐 쓴다.</h1>
+    <p class="lede">5개 LLM 에이전트가 병렬로 매매하고, 수익률 악화를 스스로 감지해 전략을 재튜닝하는 무인 퀀트 트레이딩 시스템.</p>
+
+    <div class="board">
+      <div class="board-head">
+        <span>AGENT BOARD · 5 STRATEGIES</span>
+        <div class="chips" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+      <div class="nodes">
+
+        <div class="node">
+          <div><div class="name">모멘텀</div><div class="name-en">momentum</div></div>
+          <svg viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="상승 추세 스파크라인">
+            <polyline points="0,28 15,26 30,22 45,23 60,15 75,12 90,6 100,4" fill="none" stroke="#26d789" stroke-width="2"/>
+          </svg>
+          <div class="ticker up">+4.2%</div>
+          <div class="tag">추세 추종 진입</div>
+          <div class="state"><span class="sd"></span>ACTIVE</div>
+        </div>
+
+        <div class="node">
+          <div><div class="name">역발상</div><div class="name-en">contrarian</div></div>
+          <svg viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="하락 후 반등 스파크라인">
+            <polyline points="0,6 15,14 30,24 45,28 60,22 75,14 90,10 100,8" fill="none" stroke="#ff5c5c" stroke-width="2"/>
+          </svg>
+          <div class="ticker up">+1.8%</div>
+          <div class="tag">과매도 구간 역진입</div>
+          <div class="state"><span class="sd"></span>ACTIVE</div>
+        </div>
+
+        <div class="node">
+          <div><div class="name">신호</div><div class="name-en">signal</div></div>
+          <svg viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="지표 기반 등락 스파크라인">
+            <polyline points="0,18 12,10 24,20 36,8 48,22 60,12 72,24 84,10 100,16" fill="none" stroke="#ffb648" stroke-width="2"/>
+          </svg>
+          <div class="ticker down">-2.6%</div>
+          <div class="tag">지표 기반 진입 판단</div>
+          <div class="state state-warn"><span class="sd"></span>RE-TUNING</div>
+        </div>
+
+        <div class="node">
+          <div><div class="name">변동성</div><div class="name-en">volatility</div></div>
+          <svg viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="변동성 스파이크 스파크라인">
+            <polyline points="0,20 10,4 20,26 30,10 40,22 50,6 60,24 70,12 80,18 90,8 100,20" fill="none" stroke="#ffb648" stroke-width="2"/>
+          </svg>
+          <div class="ticker flat">+0.3%</div>
+          <div class="tag">변동폭 확대 구간 포착</div>
+          <div class="state"><span class="sd"></span>ACTIVE</div>
+        </div>
+
+        <div class="node">
+          <div><div class="name">DCA</div><div class="name-en">dollar-cost avg</div></div>
+          <svg viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="분할 매수 완만한 상승 스파크라인">
+            <polyline points="0,26 20,24 40,20 60,17 80,13 100,10" fill="none" stroke="#26d789" stroke-width="2"/>
+          </svg>
+          <div class="ticker up">+0.9%</div>
+          <div class="tag">정기 분할 매수</div>
+          <div class="state"><span class="sd"></span>ACTIVE</div>
+        </div>
+
+      </div>
+    </div>
+    <p style="margin:10px 4px 0;font-size:.72rem;color:#8a93a8;">* 보드의 수치·스파크라인은 대시보드 화면 구성을 보여주기 위한 예시입니다.</p>
+  </header>
+
+  <section id="features">
+    <p class="sec-label">CORE FEATURES</p>
+    <h2>핵심 기능</h2>
+    <div class="features">
+      <div class="feature">
+        <h3><span class="ic">▲</span>5전략 병렬 매매</h3>
+        <p>모멘텀·역발상·신호·변동성·DCA, 성격이 다른 5개 전략이 동시에 독립 운용된다.</p>
+      </div>
+      <div class="feature">
+        <h3><span class="ic">◈</span>수익률 악화 자동 감지 → 재튜닝</h3>
+        <p>성과가 나빠지는 흐름을 시스템이 스스로 감지하고, 사람 개입 없이 전략 파라미터를 재조정한다.</p>
+      </div>
+      <div class="feature">
+        <h3><span class="ic">⇄</span>Cascade LLM 라우팅</h3>
+        <p>Gemini Flash로 우선 처리하고, 판단이 어려운 경우에만 Claude Sonnet으로 승격한다.</p>
+      </div>
+      <div class="feature">
+        <h3><span class="ic">▣</span>실시간 대시보드</h3>
+        <p>Glassmorphism UI로 5개 에이전트의 상태를 한 화면에서 확인한다.</p>
+      </div>
+      <div class="feature">
+        <h3><span class="ic">◆</span>운영 데이터 자동 축적</h3>
+        <p>모든 판단과 재튜닝 이력이 <code>.self_healing</code> 폴더에 쌓여 다음 판단의 근거가 된다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <p class="sec-label">ARCHITECTURE</p>
+    <h2>자기치유 루프</h2>
+
+    <div class="loop">
+      <div class="loop-node">
+        <div class="num">01</div>
+        <h4>감지</h4>
+        <p>전략별 수익률 악화 흐름을 상시 모니터링</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-node">
+        <div class="num">02</div>
+        <h4>재튜닝</h4>
+        <p>악화 원인에 맞춰 해당 전략의 파라미터를 재조정</p>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-node">
+        <div class="num">03</div>
+        <h4>재배치</h4>
+        <p>조정된 전략을 다시 실거래에 투입</p>
+      </div>
+    </div>
+    <div class="loop-back"><span class="arc">↺</span> 재배치 이후 다시 감지 단계로 순환</div>
+
+    <div class="cascade">
+      <div class="cascade-box hi">Gemini Flash</div>
+      <div class="loop-arrow" aria-hidden="true">→</div>
+      <div class="cascade-box esc">Claude Sonnet</div>
+      <p class="cascade-note">1차 판단은 Gemini Flash가 처리하고, 판단이 까다로운 경우에만 Claude Sonnet으로 승격해 비용과 속도를 균형 잡는다.</p>
+    </div>
+
+    <p class="storage-note">감지·재튜닝 이력은 매 사이클 <code>.self_healing</code> 폴더에 자동 축적된다.</p>
+  </section>
+
+  <section id="stack">
+    <p class="sec-label">STACK</p>
+    <h2>기술 스택</h2>
+    <div class="stack">
+      <div class="stack-chip"><span class="sw"></span>Python</div>
+      <div class="stack-chip"><span class="sw"></span>LLM Agent</div>
+      <div class="stack-chip"><span class="sw"></span>Supabase</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>Claude 등 LLM과의 AI 페어 프로그래밍(바이브코딩)으로 단독 개발 · © 2026 Park JaeYoung</span>
+      <a href="/">포트폴리오로 돌아가기</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

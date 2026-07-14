@@ -1,0 +1,8 @@
+# 한국어 산문 문서(스펙·README)에 맞춘 markdownlint 완화 설정
+# super-linter(lint.yml)의 LINTER_RULES_PATH가 이 디렉터리를 읽는다.
+MD013: false # line-length — 한국어 문장에 80자 제한은 비현실적
+MD032: false # 리스트 앞뒤 빈 줄 강제
+MD033: false # 인라인 HTML 허용
+MD034: false # bare URL 허용
+MD036: false # 강조를 소제목처럼 쓰는 패턴 허용
+MD041: false # 첫 줄 H1 강제 해제

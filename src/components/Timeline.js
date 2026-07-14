@@ -105,7 +105,7 @@ export default function Timeline() {
       <main className="max-w-[1100px] mx-auto px-6 py-24">
         <section className="mb-20 text-left">
             <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-[2px] bg-[#0DA6F2]"></div>
+                <div className="w-10 h-[2px] bg-[#0DA6F2]" />
                 <span className="text-[10px] font-black uppercase tracking-[3px] text-[#0DA6F2]">Milestones</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-black text-white mb-8 tracking-tighter">성장과 도전의 기록</h2>
@@ -116,9 +116,9 @@ export default function Timeline() {
         </section>
 
         <div className="timeline-container !max-w-full">
-          <div className="cyber-path"></div>
+          <div className="cyber-path" />
 
-          {timelineData.map((item, idx) => (
+          {timelineData.map((item) => (
             <div
                 key={item.id}
                 className="mileslate-item"

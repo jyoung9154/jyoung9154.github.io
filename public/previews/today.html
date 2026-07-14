@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan P: 투데이 — 잠금화면 너머의 오늘 하루</title>
+<style>
+  :root{
+    --sky-top:#eef5ff;
+    --sky-bot:#ffffff;
+    --navy:#12203d;
+    --navy-soft:#4a5b7c;
+    --navy-fixed:#12203d;
+    --mint:#20c997;
+    --mint-deep:#047857;
+    --line:#d9e6f5;
+    --card:#ffffff;
+    --chip-bg:#e7f1ff;
+    --chip-blue:#2f6fed;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-bot) 420px,var(--sky-bot) 100%);
+    color:var(--navy);
+    font-family:'Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  a{color:var(--mint-deep);}
+  a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+    outline:3px solid var(--chip-blue);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:64px 24px 40px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+    align-items:center;
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.02em;
+    color:var(--mint-deep);
+    background:#e5faf2;
+    border:1px solid #bdeeda;
+    padding:6px 14px;
+    border-radius:999px;
+    margin-bottom:20px;
+  }
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);}
+  h1{
+    font-size:clamp(32px,5vw,48px);
+    line-height:1.2;
+    margin:0 0 18px;
+    font-weight:800;
+    letter-spacing:-0.01em;
+  }
+  h1 .accent{color:var(--mint-deep);}
+  .lede{
+    font-size:17px;
+    color:var(--navy-soft);
+    max-width:46ch;
+    margin:0 0 28px;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:13px;
+  }
+  .meta-pill{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:7px 13px;
+    border-radius:999px;
+    color:var(--navy-soft);
+    font-weight:600;
+  }
+  .meta-pill b{color:var(--navy);}
+
+  /* ---------- PHONE MOCKUP ---------- */
+  .phone-stage{
+    display:flex;
+    justify-content:center;
+    perspective:1200px;
+  }
+  .phone{
+    width:250px;
+    height:520px;
+    background:var(--navy-fixed);
+    border-radius:38px;
+    padding:12px;
+    box-shadow:
+      0 30px 60px -20px rgba(18,32,61,.35),
+      0 10px 24px -10px rgba(18,32,61,.25);
+    position:relative;
+    transform:rotate(-2deg);
+  }
+  .phone::before{
+    content:"";
+    position:absolute;
+    top:12px;left:50%;
+    transform:translateX(-50%);
+    width:70px;height:20px;
+    background:var(--navy-fixed);
+    border-radius:0 0 14px 14px;
+    z-index:3;
+  }
+  .screen{
+    width:100%;height:100%;
+    background:linear-gradient(180deg,#f3f8ff 0%,#ffffff 55%);
+    border-radius:28px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+  }
+  .status-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 18px 4px;
+    font-size:11px;
+    font-weight:700;
+    color:var(--navy);
+  }
+  .status-bar .icons{display:flex;gap:4px;font-size:10px;opacity:.7;}
+  .app-head{
+    padding:10px 18px 14px;
+  }
+  .app-head .date{font-size:11px;color:var(--navy-soft);font-weight:600;margin-bottom:2px;}
+  .app-head .today{font-size:22px;font-weight:800;letter-spacing:-.01em;}
+  .folder-chips{
+    display:flex;
+    gap:6px;
+    padding:0 18px 12px;
+    overflow:hidden;
+  }
+  .chip{
+    font-size:10.5px;
+    font-weight:700;
+    padding:5px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+  .chip.blue{background:var(--chip-bg);color:var(--chip-blue);}
+  .chip.mint{background:#e2f9f0;color:var(--mint-deep);}
+  .chip.gray{background:#eef1f6;color:var(--navy-soft);}
+  .task-list{
+    flex:1;
+    padding:2px 14px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .task{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:10px 12px;
+    box-shadow:0 2px 6px rgba(18,32,61,.04);
+  }
+  .task .box{
+    width:18px;height:18px;
+    border-radius:6px;
+    border:2px solid #c7d5e8;
+    flex-shrink:0;
+    position:relative;
+  }
+  .task.done .box{
+    background:var(--mint);
+    border-color:var(--mint);
+  }
+  .task.done .box::after{
+    content:"";
+    position:absolute;
+    left:4px;top:1px;
+    width:5px;height:9px;
+    border:solid #fff;
+    border-width:0 2px 2px 0;
+    transform:rotate(40deg);
+  }
+  .task .label{font-size:12px;font-weight:600;color:var(--navy);}
+  .task.done .label{color:#9fb0c9;text-decoration:line-through;}
+  .task .time{margin-left:auto;font-size:10px;color:var(--navy-soft);font-weight:600;}
+  .plan-p-tag{
+    margin:2px 14px 16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#101b33;
+    border-radius:14px;
+    padding:10px 12px;
+  }
+  .plan-p-tag .icon{
+    width:22px;height:22px;
+    border-radius:7px;
+    background:linear-gradient(135deg,var(--mint),#0aa876);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;flex-shrink:0;
+  }
+  .plan-p-tag .txt{font-size:10.5px;color:#dce6f7;font-weight:600;line-height:1.35;}
+  .plan-p-tag .txt b{color:#fff;}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0;}
+  .section-head{margin-bottom:36px;}
+  .kicker{
+    font-size:12.5px;
+    font-weight:800;
+    letter-spacing:.08em;
+    color:var(--mint-deep);
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  h2{font-size:clamp(24px,3.4vw,32px);margin:0 0 8px;font-weight:800;letter-spacing:-.01em;}
+  .section-sub{color:var(--navy-soft);font-size:15px;max-width:56ch;}
+
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+  }
+  .feature-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:24px;
+  }
+  .feature-card .ico{
+    width:40px;height:40px;
+    border-radius:11px;
+    background:#e5faf2;
+    display:flex;align-items:center;justify-content:center;
+    font-size:19px;
+    margin-bottom:14px;
+  }
+  .feature-card h3{font-size:16.5px;margin:0 0 8px;font-weight:800;}
+  .feature-card p{font-size:14px;color:var(--navy-soft);margin:0;}
+
+  /* architecture */
+  .diagram{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:32px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:0;
+    flex-wrap:wrap;
+  }
+  .diagram-node{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    width:190px;
+  }
+  .diagram-node .badge{
+    width:56px;height:56px;
+    border-radius:16px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+    margin-bottom:10px;
+  }
+  .diagram-node.today .badge{background:linear-gradient(135deg,var(--mint),#0aa876);color:#fff;}
+  .diagram-node.planp .badge{background:var(--navy-fixed);color:#fff;}
+  .diagram-node strong{font-size:14.5px;font-weight:800;}
+  .diagram-node span{font-size:12px;color:var(--navy-soft);margin-top:3px;}
+  .diagram-link{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    padding:0 12px;
+    min-width:120px;
+  }
+  .diagram-link .line{
+    width:100%;
+    height:2px;
+    background:repeating-linear-gradient(90deg,var(--mint) 0 8px,transparent 8px 14px);
+    position:relative;
+  }
+  .diagram-link .line::after{
+    content:"";
+    position:absolute;right:-1px;top:-4px;
+    border:5px solid transparent;
+    border-left-color:var(--mint);
+  }
+  .diagram-link small{font-size:11px;color:var(--navy-soft);font-weight:700;text-align:center;}
+
+  .arch-note{
+    margin-top:18px;
+    font-size:13.5px;
+    color:var(--navy-soft);
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 16px;
+  }
+  .arch-note b{color:var(--navy);}
+
+  .stack-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .stack-pill{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px 18px;
+    font-size:14px;
+    font-weight:700;
+    color:var(--navy);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .stack-pill .sw{width:8px;height:8px;border-radius:50%;background:var(--mint);}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0 48px;
+    text-align:center;
+    font-size:13px;
+    color:var(--navy-soft);
+  }
+  footer a{
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1px solid currentColor;
+  }
+  footer p{margin:0 0 8px;}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;padding-top:44px;}
+    .phone-stage{order:-1;margin-bottom:8px;}
+    .phone{transform:none;width:220px;height:460px;}
+    .feature-grid{grid-template-columns:1fr;}
+    .diagram{flex-direction:column;}
+    .diagram-link{transform:rotate(90deg);min-width:60px;margin:6px 0;}
+    .diagram-link small{transform:rotate(-90deg);width:120px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root{
+      --sky-top:#0d1626;
+      --sky-bot:#0a1220;
+      --navy:#f0f4fb;
+      --navy-soft:#a9b8d1;
+      --line:#223252;
+      --card:#131f36;
+      --chip-bg:#152a4a;
+      --chip-blue:#7fb1ff;
+      --mint-deep:#0ea472;
+    }
+    body{background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-bot) 420px,var(--sky-bot) 100%);}
+    .eyebrow{background:#0f2a20;border-color:#1c4535;}
+    .screen{background:linear-gradient(180deg,#101a2e 0%,#0c1524 55%);}
+    .app-head .today,.status-bar{color:#eef3fb;}
+    .task{background:#182742;border-color:#25375c;}
+    .task .label{color:#eef3fb;}
+    .chip.gray{background:#1c2a44;color:#a9b8d1;}
+    .plan-p-tag{background:#0a1424;}
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="hero" style="padding-top:64px;">
+    <div>
+      <span class="eyebrow"><span class="dot"></span>개발 중 · v0.1-dev</span>
+      <h1>폰을 켜는 순간,<br><span class="accent">오늘</span>이 시작된다</h1>
+      <p class="lede">Plan P: 투데이는 Plan P(잠금화면 영어회화 앱)와 연동되는 투두·일정 관리 앱이다. 잠금화면 학습 위에 하루 일정까지 얹어, 폰을 켜는 순간을 생산성 허브로 만든다.</p>
+      <div class="meta-row">
+        <span class="meta-pill">📅 <b>2026.07</b></span>
+        <span class="meta-pill">🔧 <b>45</b> commits</span>
+        <span class="meta-pill">⏱ <b>3일</b> 개발</span>
+      </div>
+    </div>
+    <div class="phone-stage">
+      <div class="phone" role="img" aria-label="Plan P: 투데이 앱 화면 목업 — 오늘 일정 리스트와 폴더 칩, Plan P 연동 카드">
+        <div class="screen">
+          <div class="status-bar">
+            <span>9:41</span>
+            <span class="icons">●●●▮</span>
+          </div>
+          <div class="app-head">
+            <div class="date">7월 13일 월요일</div>
+            <div class="today">오늘</div>
+          </div>
+          <div class="folder-chips">
+            <span class="chip blue">💼 업무</span>
+            <span class="chip mint">📚 공부</span>
+            <span class="chip gray">🏠 개인</span>
+          </div>
+          <div class="task-list">
+            <div class="task done">
+              <span class="box"></span>
+              <span class="label">아침 회의 자료 정리</span>
+              <span class="time">09:00</span>
+            </div>
+            <div class="task">
+              <span class="box"></span>
+              <span class="label">투데이 v0.1 온보딩 다듬기</span>
+              <span class="time">11:30</span>
+            </div>
+            <div class="task">
+              <span class="box"></span>
+              <span class="label">Room DB 마이그레이션 확인</span>
+              <span class="time">14:00</span>
+            </div>
+            <div class="task done">
+              <span class="box"></span>
+              <span class="label">영어 카드 5개 학습</span>
+              <span class="time">18:00</span>
+            </div>
+          </div>
+          <div class="plan-p-tag">
+            <span class="icon">🔒</span>
+            <span class="txt">Plan P <b>설치됨</b> · 잠금화면에 오늘 일정 함께 표시</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-head">
+      <div class="kicker">Features</div>
+      <h2>하루를 정리하는 네 가지 방식</h2>
+      <p class="section-sub">투두와 일정, 폴더, 그리고 처음 쓰는 사람을 위한 안내까지.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="ico">✅</div>
+        <h3>투두·일정 관리</h3>
+        <p>오늘 할 일과 일정을 한 화면에서 체크하며 관리한다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ico">🔒</div>
+        <h3>Plan P 연동</h3>
+        <p>AndroidManifest의 패키지 쿼리로 Plan P 설치 여부를 확인한다. 설치돼 있으면 잠금화면 영어 카드와 함께 동작하고, 없으면 투데이가 그 자리를 양보한다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ico">🗂️</div>
+        <h3>폴더 그룹핑</h3>
+        <p>업무, 공부, 개인처럼 성격이 다른 일정을 폴더로 묶어 구분한다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="ico">🧭</div>
+        <h3>온보딩 가이드</h3>
+        <p>처음 앱을 여는 사용자에게 핵심 흐름을 짧게 안내한다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="section-head">
+      <div class="kicker">Architecture</div>
+      <h2>Plan P 생태계의 스핀오프</h2>
+      <p class="section-sub">투데이는 독립적으로 동작하지만, Plan P가 설치돼 있으면 패키지 쿼리로 이를 감지해 잠금화면 경험을 확장한다.</p>
+    </div>
+    <div class="diagram">
+      <div class="diagram-node planp">
+        <div class="badge">🔒</div>
+        <strong>Plan P</strong>
+        <span>잠금화면 영어회화</span>
+      </div>
+      <div class="diagram-link">
+        <div class="line"></div>
+        <small>패키지 쿼리로 설치 감지</small>
+      </div>
+      <div class="diagram-node today">
+        <div class="badge">✅</div>
+        <strong>투데이</strong>
+        <span>투두·일정 관리</span>
+      </div>
+    </div>
+    <p class="arch-note"><b>설치 시</b> 잠금화면에 영어 카드와 오늘 일정이 함께 표시된다. <b>미설치 시</b> 투데이는 해당 기능을 양보하고 투두·일정 관리만 독립적으로 제공한다.</p>
+  </section>
+
+  <section id="stack">
+    <div class="section-head">
+      <div class="kicker">Tech Stack</div>
+      <h2>기술 스택</h2>
+    </div>
+    <div class="stack-row">
+      <span class="stack-pill"><span class="sw"></span>Kotlin</span>
+      <span class="stack-pill"><span class="sw"></span>Jetpack Compose</span>
+      <span class="stack-pill"><span class="sw"></span>Room 로컬 DB</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Claude 등 LLM과의 AI 페어 프로그래밍(바이브코딩)으로 단독 개발 · © 2026 Park JaeYoung</p>
+  <a href="/">포트폴리오로 돌아가기</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Auto_Thread — 레포를 4개 SNS로 잇는 자동 홍보 파이프라인</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="GitHub 저장소를 Gemini로 분석해 Threads·X·Bluesky·Mastodon에 자동으로 게시하는 파이프라인" />
+<style>
+  :root {
+    --bg: #f4f4f2;
+    --surface: #ffffff;
+    --ink: #14161a;
+    --ink-soft: #55585f;
+    --line: #dfded9;
+    --line-soft: #e8e7e2;
+    --github: #24292f;
+    --gemini-a: #4c8dff;
+    --gemini-b: #b06cf2;
+    --threads: #5b5fef;
+    --x: #23252a;
+    --bluesky: #2aa8e8;
+    --mastodon: #b455e0;
+  }
+  :root[data-theme="dark"] {
+    --bg: #17181b;
+    --surface: #202226;
+    --ink: #f2f2ef;
+    --ink-soft: #a6a8ad;
+    --line: #34363b;
+    --line-soft: #2a2c30;
+    --github: #c9d1d9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17181b;
+      --surface: #202226;
+      --ink: #f2f2ef;
+      --ink-soft: #a6a8ad;
+      --line: #34363b;
+      --line-soft: #2a2c30;
+      --github: #c9d1d9;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow-x: hidden; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono {
+    font-family: ui-monospace, 'SF Mono', 'Menlo', monospace;
+  }
+  a { color: inherit; }
+  :focus-visible {
+    outline: 2px solid var(--gemini-a);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    padding: 28px 0 0;
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-family: ui-monospace, 'SF Mono', monospace;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    padding: 6px 12px;
+    border-radius: 999px;
+  }
+  .status-pill .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #34c076;
+  }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 56px 0 8px; }
+  .eyebrow {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(30px, 5.2vw, 46px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+    font-weight: 800;
+    max-width: 15ch;
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin: 0 0 6px;
+  }
+
+  /* ---------- stat callout ---------- */
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin: 34px 0 46px;
+    padding: 22px 26px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  .stat { min-width: 120px; }
+  .stat .num {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .stat .num .accent { color: var(--gemini-a); }
+  .stat .label {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  /* ---------- pipeline flow (signature) ---------- */
+  .flow {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    padding: 8px 0 40px;
+  }
+  .flow-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .flow-arrow svg { width: 26px; height: 26px; }
+
+  /* repo card */
+  .repo-card {
+    width: 220px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .repo-card .repo-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+  .repo-card .octo {
+    width: 22px; height: 22px; flex-shrink: 0;
+    color: var(--github);
+  }
+  .repo-card .repo-name {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .repo-card .repo-sub {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .repo-card .repo-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--ink-soft);
+    font-family: ui-monospace, 'SF Mono', monospace;
+  }
+
+  /* gemini node */
+  .gemini-node {
+    width: 74px; height: 74px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gemini-a), var(--gemini-b));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 6px 20px -8px rgba(76, 141, 255, 0.55);
+  }
+  .gemini-node svg { width: 34px; height: 34px; }
+  .gemini-label {
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    font-family: ui-monospace, 'SF Mono', monospace;
+  }
+
+  /* posts column: branch graph */
+  .posts-col {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-left: 22px;
+    position: relative;
+  }
+  .posts-col::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 20px;
+    bottom: 20px;
+    width: 1.5px;
+    background: var(--line);
+  }
+  .post-card {
+    position: relative;
+    width: 260px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+  .post-card::before {
+    content: "";
+    position: absolute;
+    left: -22px;
+    top: 22px;
+    width: 20px;
+    height: 1.5px;
+    background: var(--line);
+  }
+  .post-card::after {
+    content: "";
+    position: absolute;
+    left: -2.5px;
+    top: 19px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--dot);
+  }
+  .post-card.threads { --dot: var(--threads); }
+  .post-card.x { --dot: var(--x); }
+  .post-card.bluesky { --dot: var(--bluesky); }
+  .post-card.mastodon { --dot: var(--mastodon); }
+
+  .post-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .post-avatar {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--dot);
+    flex-shrink: 0;
+  }
+  .post-handle {
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .post-app {
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    margin-left: auto;
+  }
+  .post-body {
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+  .post-icons {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 44px 0; border-top: 1px solid var(--line-soft); }
+  .section-head { margin-bottom: 28px; }
+  .section-eyebrow {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    margin: 0 0 8px;
+  }
+  h2 {
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    margin: 0;
+    font-weight: 800;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .feature-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+  }
+  .feature-card h3 {
+    font-size: 15px;
+    margin: 0 0 6px;
+    font-weight: 700;
+  }
+  .feature-card p {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .step {
+    display: flex;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .step:first-child { border-top: none; }
+  .step .idx {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding-top: 2px;
+    flex-shrink: 0;
+    width: 26px;
+  }
+  .step h3 {
+    font-size: 14.5px;
+    margin: 0 0 4px;
+    font-weight: 700;
+  }
+  .step p {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .stack-tag {
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 12.5px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 14px;
+  }
+
+  footer {
+    border-top: 1px solid var(--line-soft);
+    padding: 30px 0 46px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  footer .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  footer a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 640px) {
+    .flow { flex-direction: column; gap: 14px; }
+    .flow-col { align-items: center; }
+    .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+    .repo-card, .post-card { width: 100%; max-width: 320px; }
+    .posts-col { width: 100%; align-items: stretch; padding-left: 20px; }
+    .feature-grid { grid-template-columns: 1fr; }
+    h1 { max-width: none; }
+    footer .wrap { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="brand">Auto_Thread</span>
+    <span class="status-pill"><span class="dot"></span>3개월 무중단 운영 중</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">GITHUB → GEMINI → 4개 SNS 자동 게시 파이프라인</p>
+    <h1>레포를 커밋하면, 4개 SNS에 알아서 홍보 글이 올라간다</h1>
+    <p class="lede">
+      GitHub 저장소를 Gemini가 읽고 분석해, Threads·X·Bluesky·Mastodon에 올릴
+      홍보 콘텐츠를 자동으로 만들고 게시합니다. 개발자가 손대지 않아도
+      프로젝트 홍보가 계속되도록 만든 파이프라인입니다.
+    </p>
+
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num"><span class="accent">3개월</span> 무중단</div>
+        <div class="label">2026.04 — 07</div>
+      </div>
+      <div class="stat">
+        <div class="num">300</div>
+        <div class="label">commits</div>
+      </div>
+      <div class="stat">
+        <div class="num">4개</div>
+        <div class="label">SNS 동시 게시</div>
+      </div>
+      <div class="stat">
+        <div class="num">4개</div>
+        <div class="label">GitHub Actions 워크플로우</div>
+      </div>
+    </div>
+
+    <!-- signature: pipeline flow -->
+    <div class="flow">
+      <div class="flow-col">
+        <div class="repo-card">
+          <div class="repo-top">
+            <svg class="octo" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38
+                0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13
+                -.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07
+                -1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82
+                .64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08
+                2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01
+                2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+            </svg>
+            <span class="repo-name">auto_thread</span>
+          </div>
+          <div class="repo-sub">Node.js 20 · ESM · GitHub Actions</div>
+          <div class="repo-meta">
+            <span>⬆ push</span>
+            <span>⏱ schedule</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <div class="flow-col">
+        <div>
+          <div class="gemini-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2c.6 4.6 2.4 7.4 7 8-4.6.6-6.4 3.4-7 8-.6-4.6-2.4-7.4-7-8 4.6-.6 6.4-3.4 7-8Z"/></svg>
+          </div>
+          <div class="gemini-label">Gemini 분석</div>
+        </div>
+      </div>
+
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </div>
+
+      <div class="flow-col">
+        <div class="posts-col">
+          <div class="post-card threads">
+            <div class="post-head">
+              <span class="post-avatar"></span>
+              <span class="post-handle">auto_thread</span>
+              <span class="post-app">Threads</span>
+            </div>
+            <div class="post-body">새 커밋 반영: dry-run 모드 안정화. 저장소 링크는 프로필에 👇</div>
+            <div class="post-icons"><span>♡</span><span>💬</span><span>↻</span></div>
+          </div>
+
+          <div class="post-card x">
+            <div class="post-head">
+              <span class="post-avatar"></span>
+              <span class="post-handle">auto_thread</span>
+              <span class="post-app">X</span>
+            </div>
+            <div class="post-body">Gemini가 레포를 읽고 이 글을 씁니다. 사람 손 없이 3개월째.</div>
+            <div class="post-icons"><span>💬</span><span>↻</span><span>♡</span></div>
+          </div>
+
+          <div class="post-card bluesky">
+            <div class="post-head">
+              <span class="post-avatar"></span>
+              <span class="post-handle">auto-thread.bsky.social</span>
+              <span class="post-app">Bluesky</span>
+            </div>
+            <div class="post-body">GitHub Actions 워크플로우 4개로 굴러가는 홍보 파이프라인.</div>
+            <div class="post-icons"><span>💬</span><span>↻</span><span>♡</span></div>
+          </div>
+
+          <div class="post-card mastodon">
+            <div class="post-head">
+              <span class="post-avatar"></span>
+              <span class="post-handle">@auto_thread@mstdn.social</span>
+              <span class="post-app">Mastodon</span>
+            </div>
+            <div class="post-body">최소 의존성으로 4개 플랫폼에 동시 게시하는 구조입니다.</div>
+            <div class="post-icons"><span>↻</span><span>⭐</span><span>💬</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-eyebrow">핵심 기능</p>
+      <h2>파이프라인이 하는 일</h2>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>GitHub 레포 자동 분석</h3>
+        <p>Gemini가 저장소 코드와 커밋 내역을 읽어 홍보 콘텐츠의 소재로 삼습니다.</p>
+      </div>
+      <div class="feature-card">
+        <h3>4개 SNS 동시 게시</h3>
+        <p>Threads, X, Bluesky, Mastodon에 한 번의 실행으로 함께 올립니다.</p>
+      </div>
+      <div class="feature-card">
+        <h3>워크플로우 4개로 완전 자동화</h3>
+        <p>GitHub Actions 워크플로우 4개가 분석부터 게시까지 전체를 실행합니다.</p>
+      </div>
+      <div class="feature-card">
+        <h3>dry-run 모드</h3>
+        <p>실제로 게시하기 전에 생성된 콘텐츠를 미리 확인할 수 있습니다.</p>
+      </div>
+      <div class="feature-card">
+        <h3>최소 의존성</h3>
+        <p>dotenv 수준의 가벼운 의존성만으로 동작합니다.</p>
+      </div>
+      <div class="feature-card">
+        <h3>3개월 무중단 운영</h3>
+        <p>2026년 4월부터 7월까지 중단 없이 계속 돌아가고 있습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-eyebrow">아키텍처</p>
+      <h2>한 번의 실행이 지나가는 5단계</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="idx mono">01</span>
+        <div><h3>트리거</h3><p>GitHub Actions 워크플로우가 push 또는 예약된 스케줄로 실행됩니다.</p></div>
+      </div>
+      <div class="step">
+        <span class="idx mono">02</span>
+        <div><h3>레포 분석</h3><p>Gemini API가 저장소 코드와 커밋 내역을 읽고 맥락을 파악합니다.</p></div>
+      </div>
+      <div class="step">
+        <span class="idx mono">03</span>
+        <div><h3>콘텐츠 생성</h3><p>Threads·X·Bluesky·Mastodon 각 플랫폼에 맞는 홍보 문구를 만듭니다.</p></div>
+      </div>
+      <div class="step">
+        <span class="idx mono">04</span>
+        <div><h3>dry-run 미리보기</h3><p>실제 게시 전, 생성된 콘텐츠를 확인할 수 있는 모드를 거칩니다.</p></div>
+      </div>
+      <div class="step">
+        <span class="idx mono">05</span>
+        <div><h3>동시 게시</h3><p>4개 SNS에 콘텐츠를 함께 게시하며 한 사이클이 끝납니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="section-eyebrow">기술 스택</p>
+      <h2>가볍게 유지한 구성</h2>
+    </div>
+    <div class="stack-row">
+      <span class="stack-tag">Node.js 20 (ESM)</span>
+      <span class="stack-tag">GitHub Actions</span>
+      <span class="stack-tag">Gemini API</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Claude 등 LLM과의 AI 페어 프로그래밍(바이브코딩)으로 단독 개발 · © 2026 Park JaeYoung</span>
+    <a href="/">포트폴리오로 돌아가기</a>
+  </div>
+</footer>
+
+</body>
+</html>
