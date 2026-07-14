@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import useScrollScrub from '../hooks/useScrollScrub';
 
 const MILITARY = {
     months: 51, // 2013.08 — 2017.11
@@ -18,48 +19,21 @@ export default function Military({ eyebrow = 'Military Service — HID' }) {
     const pathRef = useRef(null);
     const missionRef = useRef(null);
 
-    useEffect(() => {
-        let target = 0;
-        let progress = 0;
-        let rafId;
-
-        const readScroll = () => {
-            const el = trackRef.current;
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const max = el.offsetHeight - window.innerHeight;
-            target = max > 0 ? Math.min(1, Math.max(0, -rect.top / max)) : 0;
-        };
-
-        const tick = () => {
-            progress += (target - progress) * 0.1;
-            const p = progress;
-            if (monthsRef.current) {
-                monthsRef.current.textContent = Math.round(MILITARY.months * p);
-            }
-            if (pathRef.current) {
-                pathRef.current.style.setProperty('--p', (p * 100).toFixed(2));
-                const nodes = pathRef.current.querySelectorAll('.mil-node');
-                nodes.forEach((node, i) => {
-                    node.classList.toggle('on', p >= MILITARY.nodes[i].at);
-                });
-            }
-            if (missionRef.current) {
-                missionRef.current.classList.toggle('on', p > 0.35);
-            }
-            rafId = requestAnimationFrame(tick);
-        };
-
-        readScroll();
-        window.addEventListener('scroll', readScroll, { passive: true });
-        window.addEventListener('resize', readScroll);
-        rafId = requestAnimationFrame(tick);
-        return () => {
-            window.removeEventListener('scroll', readScroll);
-            window.removeEventListener('resize', readScroll);
-            cancelAnimationFrame(rafId);
-        };
-    }, []);
+    useScrollScrub(trackRef, p => {
+        if (monthsRef.current) {
+            monthsRef.current.textContent = Math.round(MILITARY.months * p);
+        }
+        if (pathRef.current) {
+            pathRef.current.style.setProperty('--p', (p * 100).toFixed(2));
+            const nodes = pathRef.current.querySelectorAll('.mil-node');
+            nodes.forEach((node, i) => {
+                node.classList.toggle('on', p >= MILITARY.nodes[i].at);
+            });
+        }
+        if (missionRef.current) {
+            missionRef.current.classList.toggle('on', p > 0.35);
+        }
+    });
 
     return (
         <section className="travel-track" id="military" ref={trackRef}>

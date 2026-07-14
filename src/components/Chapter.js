@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import useScrollScrub, { toggleSequential } from '../hooks/useScrollScrub';
 
 // Travel/Military와 동일한 스크롤 스크럽 시네마틱의 범용 버전 — 데이터만 바꿔 챕터로 재사용한다.
 // counters: {to, suffix?, label} = 스크롤로 차오르는 수치, {text, label} = 고정 텍스트.
@@ -7,47 +8,15 @@ export default function Chapter({ id, eyebrow, title, counters, chips, caption }
     const countersRef = useRef(null);
     const chipsRef = useRef(null);
 
-    useEffect(() => {
-        let target = 0;
-        let progress = 0;
-        let rafId;
-
-        const readScroll = () => {
-            const el = trackRef.current;
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
-            const max = el.offsetHeight - window.innerHeight;
-            target = max > 0 ? Math.min(1, Math.max(0, -rect.top / max)) : 0;
-        };
-
-        const tick = () => {
-            progress += (target - progress) * 0.1;
-            const p = progress;
-            if (countersRef.current) {
-                const nums = countersRef.current.querySelectorAll('[data-to]');
-                for (let i = 0; i < nums.length; i += 1) {
-                    nums[i].textContent = Math.round(Number(nums[i].dataset.to) * p) + (nums[i].dataset.suffix || '');
-                }
+    useScrollScrub(trackRef, p => {
+        if (countersRef.current) {
+            const nums = countersRef.current.querySelectorAll('[data-to]');
+            for (let i = 0; i < nums.length; i += 1) {
+                nums[i].textContent = Math.round(Number(nums[i].dataset.to) * p) + (nums[i].dataset.suffix || '');
             }
-            if (chipsRef.current) {
-                const items = chipsRef.current.children;
-                for (let i = 0; i < items.length; i += 1) {
-                    items[i].classList.toggle('on', p * items.length > i + 0.5);
-                }
-            }
-            rafId = requestAnimationFrame(tick);
-        };
-
-        readScroll();
-        window.addEventListener('scroll', readScroll, { passive: true });
-        window.addEventListener('resize', readScroll);
-        rafId = requestAnimationFrame(tick);
-        return () => {
-            window.removeEventListener('scroll', readScroll);
-            window.removeEventListener('resize', readScroll);
-            cancelAnimationFrame(rafId);
-        };
-    }, []);
+        }
+        if (chipsRef.current) toggleSequential(chipsRef.current, p);
+    });
 
     return (
         <section className="travel-track" id={id} ref={trackRef}>
