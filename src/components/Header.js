@@ -47,7 +47,7 @@ export default function Header() {
                 </div>
             </div>
             {isMenuOpen && (
-                <nav className="md:hidden absolute top-[90px] left-0 right-0 bg-[rgba(10,17,22,0.97)] backdrop-blur-2xl border-b border-white/5 px-6 py-6 flex flex-col gap-4 z-[999]">
+                <nav className="md:hidden absolute top-full left-0 right-0 bg-[rgba(10,17,22,0.97)] backdrop-blur-2xl border-b border-white/5 px-6 py-6 flex flex-col gap-4 z-[999]">
                     <NavLink to="/" exact activeClassName="active" onClick={() => setIsMenuOpen(false)}>홈</NavLink>
                     <NavLink to="/about" activeClassName="active" onClick={() => setIsMenuOpen(false)}>소개</NavLink>
                     <NavLink to="/timeline" activeClassName="active" onClick={() => setIsMenuOpen(false)}>타임라인</NavLink>

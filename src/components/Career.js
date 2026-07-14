@@ -197,7 +197,7 @@ export default function Career() {
                 <section id="how-i-work" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5" />
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">00. AI와 일하는 방식</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[2px] md:tracking-[4px] text-slate-500 text-center md:whitespace-nowrap">00. AI와 일하는 방식</h2>
                         <div className="h-px flex-1 bg-white/5" />
                     </div>
 
@@ -241,7 +241,7 @@ export default function Career() {
                 <section id="competencies" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5" />
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">01. 핵심 역량 및 특징</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[2px] md:tracking-[4px] text-slate-500 text-center md:whitespace-nowrap">01. 핵심 역량 및 특징</h2>
                         <div className="h-px flex-1 bg-white/5" />
                     </div>
 
@@ -306,7 +306,7 @@ export default function Career() {
                 <section id="projects" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5" />
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">02. 주요 프로젝트</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[2px] md:tracking-[4px] text-slate-500 text-center md:whitespace-nowrap">02. 주요 프로젝트</h2>
                         <div className="h-px flex-1 bg-white/5" />
                     </div>
 
@@ -355,7 +355,7 @@ export default function Career() {
                 <section id="ai-projects" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5" />
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">03. 사이드 프로젝트 — 어디까지 가는지의 증명</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[2px] md:tracking-[4px] text-slate-500 text-center md:whitespace-nowrap">03. 사이드 프로젝트 — 어디까지 가는지의 증명</h2>
                         <div className="h-px flex-1 bg-white/5" />
                     </div>
 
@@ -393,7 +393,7 @@ export default function Career() {
                 <section id="etc" className="mb-32 scroll-mt-24">
                     <div className="flex items-center gap-4 mb-16">
                         <div className="h-px flex-1 bg-white/5" />
-                        <h2 className="text-sm font-black uppercase tracking-[4px] text-slate-500 whitespace-nowrap">04. 기타 경험</h2>
+                        <h2 className="text-sm font-black uppercase tracking-[2px] md:tracking-[4px] text-slate-500 text-center md:whitespace-nowrap">04. 기타 경험</h2>
                         <div className="h-px flex-1 bg-white/5" />
                     </div>
 

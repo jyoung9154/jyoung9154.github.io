@@ -26,7 +26,8 @@
 }
 
 html {
-  font-size: 18px !important;
+  /* 모바일 16px → 데스크톱 18px 유동 스케일: rem 기반 타이포·여백이 함께 줄어든다 */
+  font-size: clamp(16px, 15px + 0.25vw, 18px) !important;
   scroll-behavior: smooth;
   background-color: var(--bg-dark);
 }
@@ -64,17 +65,21 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   color: white;
   margin-top: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
-h1 { font-size: 4rem; font-weight: 800; }
-h2 { font-size: 2.5rem; font-weight: 800; }
-h3 { font-size: 1.75rem; font-weight: 700; }
+h1 { font-size: clamp(2.3rem, 1.4rem + 4vw, 4rem); font-weight: 800; }
+h2 { font-size: clamp(1.7rem, 1.2rem + 2.2vw, 2.5rem); font-weight: 800; }
+h3 { font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem); font-weight: 700; }
 
 p, li {
   color: var(--text-dim) !important;
   font-size: 1.05rem !important;
   font-weight: 500 !important; /* Made slightly thicker */
   margin-bottom: 1.25rem;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 strong {
@@ -101,7 +106,7 @@ strong {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-light);
-  height: 90px;
+  height: clamp(64px, 5vw + 48px, 90px);
   display: flex;
   align-items: center;
   transition: all 0.3s ease;
@@ -133,7 +138,7 @@ strong {
     }
 
     .logo-text span {
-      font-size: 1.5rem;
+      font-size: clamp(1.1rem, 0.9rem + 1vw, 1.5rem);
       font-weight: 800;
       color: white;
       letter-spacing: -0.5px;
@@ -179,7 +184,7 @@ strong {
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid var(--border-bright);
   border-radius: 14px;
-  padding: 48px;
+  padding: clamp(22px, 4vw, 48px);
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
@@ -195,7 +200,7 @@ strong {
 .container-main {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 100px 40px;
+  padding: clamp(48px, 4vw + 32px, 100px) clamp(20px, 4vw, 40px);
 }
 
 .btn-resume {

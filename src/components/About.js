@@ -56,8 +56,8 @@ export default function About() {
         <div className="min-h-screen">
             {/* 인사 — 여정이 시작되기 전, 지금의 나 */}
             <main className="container-main !pb-16">
-                <div className="premium-card px-10 py-12">
-                    <div className="flex flex-col md:flex-row gap-12 items-center md:items-start text-center md:text-left">
+                <div className="premium-card px-6 py-10 md:px-10 md:py-12">
+                    <div className="flex flex-col md:flex-row gap-12 items-start text-left">
                         <div className="flex-1 w-full">
                             <div className="mb-2">
                                 <h3 className="text-4xl font-black mb-1 text-white">박재영</h3>
