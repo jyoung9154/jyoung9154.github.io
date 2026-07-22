@@ -5,6 +5,7 @@ import { resume } from '../data/resume';
 
 const DOCS = [
     { to: '/resume', label: '이력서' },
+    { href: '/resume-v2.html', label: '상세 이력서' },
     { to: '/career-history', label: '경력기술서' },
     { to: '/portfolio', label: '포트폴리오' },
 ];
@@ -35,7 +36,11 @@ export default function DocShell({ docType, filename, children }) {
                         포트폴리오로
                     </Link>
                     <nav className="r-doc-tabs" aria-label="문서 선택">
-                        {DOCS.map(doc => (
+                        {DOCS.map(doc => doc.href ? (
+                            <a key={doc.href} href={doc.href} className="r-doc-tab">
+                                {doc.label}
+                            </a>
+                        ) : (
                             <NavLink key={doc.to} to={doc.to} className="r-doc-tab" activeClassName="active">
                                 {doc.label}
                             </NavLink>
