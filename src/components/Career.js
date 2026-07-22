@@ -345,6 +345,18 @@ export default function Career() {
                                             <span key={tag} className="tag">{tag}</span>
                                         ))}
                                     </div>
+
+                                    {project.link && (
+                                        <a
+                                            href={project.link}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0DA6F2] hover:text-sky-300 transition-colors no-underline"
+                                        >
+                                            {project.linkLabel || '프리뷰 보기'}
+                                            <span className="material-symbols-outlined text-base">open_in_new</span>
+                                        </a>
+                                    )}
                                 </div>
                             </article>
                         ))}

@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>JIRA-AI 시스템 프리뷰 — 이슈 하나가 답변이 되기까지</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='6' cy='16' r='4' fill='%232a55c9'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%230e8074'/%3E%3Ccircle cx='26' cy='16' r='4' fill='%236d4fc3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+/* ─────────────────────────────────────────────
+   JIRA-AI SYSTEM PREVIEW — "노선도" 디자인 시스템
+   base: cool paper / ink slate / 노선색 6종
+   ───────────────────────────────────────────── */
+:root{
+  --ink:#16222e;
+  --ink2:#43536a;
+  --muted:#7c8aa0;
+  --faint:#a8b4c6;
+  --paper:#f3f6f8;
+  --card:#ffffff;
+  --line:#dde4ec;
+  --line-soft:#e9eef3;
+
+  /* 노선색 — 색은 장식이 아니라 처리 단계 */
+  --l1:#2a55c9;  /* 접수선 */
+  --l2:#0e8074;  /* 근거선 */
+  --l3:#c26f10;  /* 코드 지선 */
+  --l4:#2b8a41;  /* 합성·게시선 */
+  --l5:#c93a52;  /* 검증선 */
+  --l6:#6d4fc3;  /* 학습 환류선 */
+
+  --l1-soft:#eaeffb; --l2-soft:#e6f3f1; --l3-soft:#faf0e2;
+  --l4-soft:#e8f4ea; --l5-soft:#fbeaee; --l6-soft:#f0ecfa;
+
+  --mono:ui-monospace,"SF Mono","Cascadia Code","JetBrains Mono","D2Coding",Consolas,monospace;
+  --sans:"Pretendard Variable",Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,-apple-system,sans-serif;
+
+  --radius:14px;
+  --shadow:0 1px 2px rgba(22,34,46,.05),0 12px 34px rgba(22,34,46,.07);
+  --wrap:1120px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.72;
+  word-break:keep-all;
+  -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+::selection{background:#cfe0ff}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+:is(a,button,[tabindex]):focus-visible{outline:2px solid var(--l1);outline-offset:3px;border-radius:6px}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+.mono{font-family:var(--mono)}
+[id]{scroll-margin-top:76px}
+p .mono,p code,li code{white-space:nowrap}
+
+/* ── 스크롤 리빌 ── */
+.fx{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.25,1)}
+.fx.in{opacity:1;transform:none}
+.fx-g > *{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.25,1)}
+.fx-g.in > *{opacity:1;transform:none}
+.fx-g.in > *:nth-child(1){transition-delay:.03s}
+.fx-g.in > *:nth-child(2){transition-delay:.1s}
+.fx-g.in > *:nth-child(3){transition-delay:.17s}
+.fx-g.in > *:nth-child(4){transition-delay:.24s}
+.fx-g.in > *:nth-child(5){transition-delay:.31s}
+.fx-g.in > *:nth-child(6){transition-delay:.38s}
+.fx-g.in > *:nth-child(7){transition-delay:.45s}
+.fx-g.in > *:nth-child(8){transition-delay:.52s}
+
+/* ─────────────── 헤더 ─────────────── */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(243,246,248,.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{display:flex;align-items:center;gap:26px;height:56px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-weight:700;font-size:.92rem;letter-spacing:.04em;text-decoration:none}
+.brand .dots{display:inline-flex;gap:3px}
+.brand .dots i{width:8px;height:8px;border-radius:50%;display:block}
+.brand .dots i:nth-child(1){background:var(--l1)}
+.brand .dots i:nth-child(2){background:var(--l2)}
+.brand .dots i:nth-child(3){background:var(--l4)}
+.brand .dots i:nth-child(4){background:var(--l6)}
+.topnav{display:flex;gap:2px;margin-left:auto;overflow-x:auto}
+.topnav a{
+  text-decoration:none;font-size:.82rem;color:var(--ink2);font-weight:600;
+  padding:7px 11px;border-radius:8px;white-space:nowrap;
+}
+.topnav a:hover{background:#e7edf3;color:var(--ink)}
+.topbar .stamp{font-family:var(--mono);font-size:.68rem;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+@media (max-width:900px){.topbar .stamp{display:none}}
+
+/* ─────────────── 히어로 ─────────────── */
+.hero{padding:clamp(56px,9vh,104px) 0 8px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:.72rem;font-weight:700;
+  letter-spacing:.16em;color:var(--ink2);margin-bottom:22px;
+}
+.eyebrow::before{content:"";width:26px;height:5px;border-radius:3px;background:linear-gradient(90deg,var(--l1),var(--l2))}
+.hero h1{
+  font-size:clamp(2rem,5.4vw,3.55rem);
+  font-weight:800;letter-spacing:-.035em;line-height:1.22;
+  max-width:21ch;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(0deg,#d8e4fb 0 34%,transparent 34%);
+  border-radius:2px;padding:0 2px;
+}
+.hero .lede{
+  margin-top:22px;max-width:62ch;font-size:1.06rem;color:var(--ink2);
+}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.chip{
+  font-size:.78rem;font-weight:600;color:var(--ink2);
+  background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:5px 13px;
+}
+.chip b{color:var(--ink);font-weight:700}
+
+/* ─────────────── 노선도 (시그니처) ─────────────── */
+.mapband{margin:44px 0 0;padding-bottom:8px}
+.mapband .wrap{max-width:1720px}
+.mapcard{
+  background:var(--card);border:1px solid var(--line);border-radius:20px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.maphead{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:16px 22px;border-bottom:1px solid var(--line-soft);
+}
+.maphead .t{font-weight:800;font-size:.95rem;letter-spacing:-.01em}
+.maphead .hint{font-size:.78rem;color:var(--muted)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-left:auto}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.66rem;color:var(--ink2);letter-spacing:.02em}
+.legend i{width:14px;height:4px;border-radius:2px;display:inline-block}
+.legend .dash{background:repeating-linear-gradient(90deg,currentColor 0 3px,transparent 3px 6px);height:2px}
+.mapwin{position:relative}
+.mapwin::after{
+  content:"";position:absolute;top:0;right:0;bottom:0;width:56px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.92));
+  opacity:1;transition:opacity .3s;
+}
+.mapwin.at-end::after{opacity:0}
+.mapscroll{overflow-x:auto;overscroll-behavior-x:contain}
+.mapscroll svg{display:block;min-width:1560px;width:100%;height:auto}
+.scrollhint{
+  position:absolute;right:14px;bottom:10px;pointer-events:none;
+  font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.08em;
+  color:var(--muted);background:rgba(255,255,255,.85);border:1px solid var(--line-soft);
+  border-radius:999px;padding:3px 10px;transition:opacity .3s;
+}
+.mapwin.at-end .scrollhint{opacity:0}
+
+.stn{cursor:pointer}
+.stn circle.core{fill:#fff;stroke-width:3.5;transition:transform .18s ease}
+.stn:hover circle.core,.stn:focus-visible circle.core{transform:scale(1.28);transform-origin:center;transform-box:fill-box}
+.stn.on circle.core{fill:var(--ink)}
+.stn text{pointer-events:none}
+.stn .nm{font-family:var(--sans);font-weight:700;font-size:12.5px;fill:var(--ink)}
+.stn .id{font-family:var(--mono);font-size:9.5px;fill:var(--muted);letter-spacing:.02em}
+.zone-label{font-family:var(--mono);font-size:10.5px;fill:#0e8074;letter-spacing:.14em;font-weight:700}
+.loop-label{font-family:var(--mono);font-size:10px;font-weight:700}
+.map-note{font-family:var(--mono);font-size:9.5px;fill:var(--muted)}
+.ticket{filter:drop-shadow(0 2px 4px rgba(42,85,201,.45))}
+
+/* 역 상세 패널 */
+.stnpanel{
+  border-top:1px solid var(--line-soft);
+  padding:20px 22px 22px;
+  display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:start;
+  min-height:132px;
+}
+.stnpanel .badge{
+  grid-row:span 2;
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-weight:700;font-size:.72rem;color:#fff;
+  background:var(--l1);
+}
+.stnpanel h3{font-size:1.02rem;font-weight:800;letter-spacing:-.01em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.stnpanel h3 code{font-family:var(--mono);font-size:.72rem;color:var(--muted);font-weight:600}
+.stnpanel p{font-size:.9rem;color:var(--ink2);max-width:80ch}
+.stnpanel .dev{
+  grid-column:2;margin-top:8px;
+  font-family:var(--mono);font-size:.72rem;color:var(--ink2);
+  background:var(--paper);border:1px solid var(--line-soft);border-radius:8px;
+  padding:8px 12px;line-height:1.6;
+}
+.stnpanel .dev b{color:var(--ink)}
+@media (max-width:640px){
+  .stnpanel{grid-template-columns:1fr}
+  .stnpanel .badge{grid-row:auto}
+  .stnpanel .dev{grid-column:1}
+}
+
+/* ─────────────── 수치 스트립 ─────────────── */
+.stats{margin:40px 0 0}
+.stats .grid{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  background:var(--line);gap:1px;
+}
+.stat{background:var(--card);padding:20px 18px 18px}
+.stat .n{font-size:1.7rem;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.stat .n small{font-size:.85rem;font-weight:700;color:var(--ink2)}
+.stat .l{font-size:.76rem;color:var(--muted);margin-top:4px}
+.stat .tick{width:18px;height:4px;border-radius:2px;margin-bottom:12px}
+@media (max-width:960px){.stats .grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:560px){.stats .grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ─────────────── 공통 섹션 ─────────────── */
+.sec{padding:clamp(64px,10vh,116px) 0 0}
+.sec-head{max-width:70ch;margin-bottom:36px}
+.sec-eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.15em;
+  color:var(--ink2);margin-bottom:14px;
+}
+.sec-eyebrow i{width:22px;height:5px;border-radius:3px;display:inline-block}
+.sec h2{font-size:clamp(1.45rem,3vw,2.05rem);font-weight:800;letter-spacing:-.03em;line-height:1.3}
+.sec .sub{margin-top:12px;color:var(--ink2);font-size:.98rem;max-width:62ch}
+
+/* ─────────────── 응답 3모드 ─────────────── */
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mode{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 24px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:10px;
+}
+.mode::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--mc,var(--l2))}
+.mode .cost{
+  align-self:flex-start;
+  font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.08em;
+  color:var(--mc);background:var(--mcs);border-radius:6px;padding:4px 9px;
+}
+.mode h3{font-size:1.05rem;font-weight:800;letter-spacing:-.01em}
+.mode p{font-size:.88rem;color:var(--ink2)}
+.mode .when{font-size:.78rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:auto}
+.mode .when b{color:var(--ink2)}
+@media (max-width:880px){.modes{grid-template-columns:1fr}}
+
+/* ─────────────── 근거 수집 ─────────────── */
+.evidence{display:grid;grid-template-columns:1fr 1.15fr;gap:38px;align-items:start}
+.ev-copy p+p{margin-top:14px}
+.ev-copy p{color:var(--ink2);font-size:.95rem}
+.ev-copy strong{color:var(--ink)}
+.trace{
+  margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;
+}
+.trace .t{font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;color:var(--l3);margin-bottom:10px}
+.trace .path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:.76rem;font-weight:600;color:var(--ink2)}
+.trace .path b{background:var(--l3-soft);color:#8a4f0c;border-radius:6px;padding:3px 8px;font-weight:700}
+.trace .path span{color:var(--faint)}
+.trace .cap{font-size:.74rem;color:var(--muted);margin-top:10px}
+.sources{display:flex;flex-direction:column;gap:10px}
+.src{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;
+}
+.src .k{
+  grid-row:span 2;width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:1.02rem;
+  background:var(--paper);border:1px solid var(--line-soft);
+}
+.src .n{font-weight:700;font-size:.9rem;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.src .n code{font-family:var(--mono);font-size:.66rem;color:var(--muted);font-weight:600}
+.src .d{font-size:.8rem;color:var(--ink2)}
+.toolnote{margin-top:14px;font-size:.78rem;color:var(--muted)}
+.toolnote code{font-family:var(--mono);font-size:.72rem;background:var(--card);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px;color:var(--ink2)}
+@media (max-width:880px){.evidence{grid-template-columns:1fr}}
+
+/* ─────────────── 안전장치 ─────────────── */
+.guards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.guard{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:20px 18px;display:flex;flex-direction:column;gap:8px;
+}
+.guard code{
+  font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--l5);
+  background:var(--l5-soft);align-self:flex-start;border-radius:6px;padding:3px 8px;
+  letter-spacing:.01em;
+}
+.guard h3{font-size:.94rem;font-weight:800;letter-spacing:-.01em}
+.guard p{font-size:.8rem;color:var(--ink2)}
+@media (max-width:1020px){.guards{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.guards{grid-template-columns:1fr}}
+
+/* ─────────────── 두 독자, 두 답변 ─────────────── */
+.answers{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.reader{
+  font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.12em;
+  color:var(--ink2);margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.reader i{width:9px;height:9px;border-radius:50%;display:inline-block;background:var(--l4)}
+.mockwrap{position:relative}
+.mock-tag{
+  position:absolute;top:-11px;right:14px;z-index:2;
+  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.1em;
+  color:var(--muted);background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:3px 10px;
+}
+/* Jira 댓글 목업 */
+.jira-mock{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;font-size:.84rem;
+}
+.jm-head{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid var(--line-soft);background:#fafcfd}
+.jm-avatar{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--l1),var(--l2));display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem}
+.jm-who{font-weight:700;font-size:.82rem}
+.jm-when{font-size:.7rem;color:var(--muted)}
+.jm-body{padding:16px}
+.jm-panel{border:1px solid #cfe0f5;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.jm-panel .ph{background:#e8f1fc;color:#1a4f9c;font-weight:800;font-size:.78rem;padding:8px 12px}
+.jm-panel .pb{padding:12px;color:var(--ink2);display:flex;flex-direction:column;gap:9px}
+.jm-panel .pb p{line-height:1.65}
+.jm-panel .pb b{color:var(--ink)}
+.jm-link{color:#1a4f9c;text-decoration:underline;text-underline-offset:2px;font-weight:600}
+.jm-actions{display:flex;gap:8px;padding:0 16px 16px}
+.jm-btn{font-size:.74rem;font-weight:700;border:1px solid var(--line);background:var(--paper);border-radius:7px;padding:5px 12px;color:var(--ink2);cursor:default}
+/* dev-report 목업 */
+.dev-mock{
+  background:#1d2733;border:1px solid #31404f;border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;color:#dbe4ee;font-size:.82rem;
+}
+.dm-head{display:flex;align-items:center;gap:10px;padding:13px 16px;border-bottom:1px solid #31404f}
+.dm-key{font-family:var(--mono);font-weight:700;color:#8fb8ff;font-size:.8rem;text-decoration:underline;text-underline-offset:3px}
+.dm-badge{font-family:var(--mono);font-size:.62rem;font-weight:700;color:#ffb38a;background:rgba(240,138,72,.14);border:1px solid rgba(240,138,72,.4);border-radius:6px;padding:2px 8px;letter-spacing:.06em}
+.dm-badge.g{color:#8fe3a8;background:rgba(76,201,120,.12);border-color:rgba(76,201,120,.4)}
+.dm-body{padding:16px;display:flex;flex-direction:column;gap:13px}
+.dm-sec .st{font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.14em;color:#7f93a8;margin-bottom:6px}
+.dm-sec p{color:#b9c7d6;font-size:.8rem;line-height:1.65}
+.dm-tree{font-family:var(--mono);font-size:.72rem;line-height:1.85;color:#a9bacb;background:#16202a;border:1px solid #2b3947;border-radius:8px;padding:10px 13px;overflow-x:auto;white-space:pre}
+.dm-tree .prj{color:#8fb8ff;font-weight:700}
+.dm-tree .typ{color:#7f93a8;font-size:.62rem;border:1px solid #3a4a5b;border-radius:4px;padding:0 5px;margin-left:6px}
+.dm-diff{font-family:var(--mono);font-size:.7rem;line-height:1.8;background:#16202a;border:1px solid #2b3947;border-radius:8px;padding:10px 13px;overflow-x:auto;white-space:pre}
+.dm-diff .del{color:#ff9b9b}
+.dm-diff .add{color:#8fe3a8}
+.ans-notes{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.ans-note{font-size:.74rem;color:var(--ink2);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px}
+@media (max-width:880px){.answers{grid-template-columns:1fr}}
+
+/* ─────────────── 커맨드 & 게이트 ─────────────── */
+.cmds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:44px}
+.cmd{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;
+}
+.cmd .type{
+  font-family:var(--mono);font-size:1rem;font-weight:700;color:var(--ink);
+  background:var(--paper);border:1px solid var(--line);border-radius:9px;
+  padding:9px 14px;display:flex;align-items:center;gap:10px;
+}
+.cmd .type::before{content:"💬";font-size:.85rem}
+.cmd h3{font-size:.96rem;font-weight:800}
+.cmd p{font-size:.82rem;color:var(--ink2)}
+.cmd .who{font-size:.72rem;color:var(--muted);margin-top:auto;border-top:1px dashed var(--line);padding-top:9px}
+@media (max-width:880px){.cmds{grid-template-columns:1fr}}
+
+.gatelab{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);padding:clamp(22px,3.4vw,34px);
+}
+.gatelab .lab-head{display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.gatelab h3{font-size:1.15rem;font-weight:800;letter-spacing:-.02em}
+.gatelab .lab-sub{font-size:.85rem;color:var(--ink2);max-width:56ch;margin-top:4px}
+.playbtn{
+  margin-left:auto;border:none;border-radius:10px;
+  background:var(--ink);color:#fff;font-weight:700;font-size:.85rem;
+  padding:11px 20px;display:inline-flex;align-items:center;gap:8px;
+  transition:transform .15s ease,opacity .2s;
+}
+.playbtn:hover{transform:translateY(-1px)}
+.playbtn[disabled]{opacity:.45;cursor:default;transform:none}
+.gates{display:flex;flex-direction:column;gap:8px}
+.gate{
+  display:grid;grid-template-columns:30px auto 1fr auto;gap:4px 14px;align-items:center;
+  border:1px solid var(--line-soft);border-radius:11px;padding:13px 16px;
+  transition:border-color .3s,background .3s;
+}
+.gate .st{
+  width:22px;height:22px;border-radius:50%;border:2px solid var(--faint);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;color:#fff;transition:.3s;
+}
+.gate .gid{font-family:var(--mono);font-size:.7rem;font-weight:700;color:var(--muted);letter-spacing:.04em}
+.gate .gn{font-weight:700;font-size:.88rem}
+.gate .gd{grid-column:3 / 5;font-size:.76rem;color:var(--muted)}
+.gate .verdict{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--faint)}
+.gate.pass{border-color:#bfe3c8;background:#f4fbf5}
+.gate.pass .st{background:var(--l4);border-color:var(--l4)}
+.gate.pass .st::before{content:"✓"}
+.gate.pass .verdict{color:var(--l4)}
+.gate.now{border-color:var(--l3);background:var(--l3-soft)}
+.gate.now .st{border-color:var(--l3);border-style:dashed;animation:spin 1.1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mr-done{
+  margin-top:14px;border:1px solid #bfe3c8;background:#f0faf2;border-radius:12px;
+  padding:16px 18px;display:flex;gap:14px;align-items:flex-start;
+  opacity:.35;transition:opacity .5s;
+}
+.mr-done.on{opacity:1}
+.mr-done .ic{font-size:1.2rem}
+.mr-done b{font-size:.9rem}
+.mr-done p{font-size:.78rem;color:var(--ink2);margin-top:2px}
+.mr-done code{font-family:var(--mono);font-size:.72rem;color:var(--l4);font-weight:700}
+.gate-foot{margin-top:16px;font-size:.76rem;color:var(--muted)}
+
+/* ─────────────── 학습 루프 ─────────────── */
+.learn{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.cyclewrap svg{display:block;width:100%;height:auto;max-width:480px;margin:0 auto}
+.cycle-node{font-weight:800;font-size:13px;fill:var(--ink)}
+.cycle-sub{font-family:var(--mono);font-size:9px;fill:var(--muted)}
+.cycle-mid{font-family:var(--mono);font-weight:700;font-size:10.5px;fill:var(--l6);letter-spacing:.08em}
+.learn-list{display:flex;flex-direction:column;gap:12px}
+.learn-item{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;
+  display:grid;grid-template-columns:auto 1fr;gap:2px 14px;
+}
+.learn-item .tag{
+  grid-row:span 2;align-self:start;
+  font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.05em;
+  color:var(--l6);background:var(--l6-soft);border-radius:7px;padding:5px 9px;margin-top:2px;
+  white-space:nowrap;
+}
+.learn-item b{font-size:.9rem}
+.learn-item p{font-size:.8rem;color:var(--ink2)}
+.learn-item p code{font-family:var(--mono);font-size:.72rem;color:var(--ink2);background:var(--paper);border-radius:4px;padding:0 5px}
+@media (max-width:880px){.learn{grid-template-columns:1fr}}
+
+/* ─────────────── 아키텍처 ─────────────── */
+.arch{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.modstack{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.mod{
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:14px 18px;display:flex;align-items:baseline;gap:14px;position:relative;
+}
+.mod code{font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--ink);min-width:64px}
+.mod span{font-size:.78rem;color:var(--ink2)}
+.mod-arrow{
+  align-self:center;height:22px;width:2px;background:var(--faint);position:relative;
+}
+.mod-arrow::after{
+  content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);
+  border:5px solid transparent;border-top-color:var(--faint);
+}
+.modstack .cap{font-size:.76rem;color:var(--muted);margin-top:12px;text-align:center}
+.arch-side{display:flex;flex-direction:column;gap:22px}
+.arch-side h3{font-size:.95rem;font-weight:800;margin-bottom:10px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag-i{
+  font-size:.76rem;font-weight:600;color:var(--ink2);
+  background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 11px;
+}
+.tag-i b{color:var(--ink)}
+.extend{display:flex;flex-direction:column;gap:10px}
+.ext{
+  background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 16px;
+  font-size:.8rem;color:var(--ink2);
+}
+.ext b{color:var(--ink);display:block;font-size:.84rem;margin-bottom:2px}
+.ext code{font-family:var(--mono);font-size:.7rem;background:var(--paper);border:1px solid var(--line-soft);border-radius:5px;padding:1px 6px}
+@media (max-width:880px){.arch{grid-template-columns:1fr}}
+
+/* ─────────────── 시작하기 ─────────────── */
+.starts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.startcard{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow);padding:28px;
+}
+.startcard .for{
+  font-family:var(--mono);font-size:.66rem;font-weight:700;letter-spacing:.14em;
+  color:#fff;border-radius:7px;padding:4px 10px;display:inline-block;margin-bottom:16px;
+}
+.startcard h3{font-size:1.1rem;font-weight:800;letter-spacing:-.01em;margin-bottom:16px}
+.steps{list-style:none;display:flex;flex-direction:column;gap:0;counter-reset:step}
+.steps li{
+  counter-increment:step;position:relative;
+  padding:0 0 18px 40px;font-size:.86rem;color:var(--ink2);
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:0;top:1px;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--paper);border:1.5px solid var(--line);
+  font-family:var(--mono);font-size:.72rem;font-weight:700;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+}
+.steps li:not(:last-child)::after{
+  content:"";position:absolute;left:12.5px;top:29px;bottom:2px;width:1.5px;background:var(--line);
+}
+.steps b{color:var(--ink)}
+.steps code{font-family:var(--mono);font-size:.76rem;background:var(--paper);border:1px solid var(--line-soft);border-radius:5px;padding:0 6px}
+@media (max-width:880px){.starts{grid-template-columns:1fr}}
+
+/* ─────────────── 푸터 ─────────────── */
+footer{margin-top:clamp(70px,11vh,120px);border-top:1px solid var(--line);background:var(--card)}
+footer .wrap{padding:34px clamp(20px,4vw,40px) 44px;display:flex;gap:26px;flex-wrap:wrap;align-items:flex-start}
+footer .fbrand{font-family:var(--mono);font-weight:700;font-size:.85rem}
+footer p{font-size:.78rem;color:var(--muted);max-width:58ch}
+footer .right{margin-left:auto;text-align:right}
+footer code{font-family:var(--mono);font-size:.72rem;color:var(--ink2)}
+@media (max-width:700px){footer .right{margin-left:0;text-align:left}}
+
+/* ─────────────── 인쇄 ─────────────── */
+@media print{
+  .fx,.fx-g > *{opacity:1 !important;transform:none !important}
+  .topbar{position:static}
+}
+
+/* ─────────────── 모션 축소 ─────────────── */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  .fx,.fx-g > *{opacity:1;transform:none}
+  .ticket{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ───────── 상단 바 ───────── -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      JIRA-AI
+    </a>
+    <nav class="topnav" aria-label="섹션 이동">
+      <a href="#journey">여정</a>
+      <a href="#thinking">동작 원리</a>
+      <a href="#guard">안전장치</a>
+      <a href="#answers">두 개의 답</a>
+      <a href="#commands">커맨드</a>
+      <a href="#arch">아키텍처</a>
+      <a href="#start">시작하기</a>
+    </nav>
+    <span class="stamp">SYSTEM PREVIEW · 2026.07</span>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ───────── 히어로 ───────── -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">JIRA AI SERVICE — SYSTEM PREVIEW</p>
+    <h1 class="fx">이슈 하나가 답변이 되기까지, <em>열두 정거장</em>이 있습니다.</h1>
+    <p class="lede fx">Jira AI Service는 접수된 문의 이슈를 사내 지식·과거 이력·소스 코드와 대조해
+      <strong>근거 있는 1차 답변</strong>을 다는 AI 동료입니다.
+      이 페이지는 기능 나열 대신, 그 AI가 <strong>어떻게 생각하고 · 무엇을 검증하고 · 어떻게 배우는지</strong>를 안내합니다.</p>
+    <div class="chips fx-g">
+      <span class="chip">대상 <b>상담사 · 설계자 · 개발자 · 운영자</b></span>
+      <span class="chip">형태 <b>Jira 댓글 자동응답 + 개발자 문서 + 운영 대시보드</b></span>
+      <span class="chip">기준 <b>2026-07 소스 코드 검증</b></span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 노선도 (시그니처) ───────── -->
+<section class="mapband" id="journey" aria-label="이슈 처리 노선도">
+  <div class="wrap">
+    <div class="mapcard fx">
+      <div class="maphead">
+        <span class="t">이슈 처리 노선도</span>
+        <span class="hint">역을 누르면 그 단계에서 일어나는 일을 보여줍니다</span>
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--l1)"></i>접수</span>
+          <span><i style="background:var(--l2)"></i>근거 수집</span>
+          <span><i style="background:var(--l3)"></i>코드 분석 지선</span>
+          <span><i style="background:var(--l4)"></i>합성 · 게시</span>
+          <span><i class="dash" style="color:var(--l5)"></i>반복 루프</span>
+          <span><i class="dash" style="color:var(--l6)"></i>학습 환류</span>
+        </div>
+      </div>
+      <div class="mapwin">
+      <div class="mapscroll" tabindex="0" aria-label="노선도 가로 스크롤 영역">
+        <svg viewBox="0 0 1820 470" role="group" aria-label="이슈가 접수부터 학습까지 지나는 처리 단계 지도">
+          <!-- 그래프 구간 배경 밴드 -->
+          <rect x="508" y="86" width="1088" height="330" rx="18" fill="#0e8074" opacity="0.045"/>
+          <rect x="508" y="86" width="1088" height="330" rx="18" fill="none" stroke="#0e8074" stroke-opacity=".25" stroke-dasharray="3 6"/>
+          <text class="zone-label" x="530" y="112">LANGGRAPH — 12-노드 그래프 구간</text>
+
+          <!-- 지식 저장소 칩 (학습 환류 목적지) -->
+          <g>
+            <rect x="150" y="30" width="270" height="42" rx="12" fill="var(--l6-soft)" stroke="#6d4fc3" stroke-opacity=".5"/>
+            <text x="285" y="51" text-anchor="middle" style="font-family:var(--mono);font-size:11px;font-weight:700;fill:#4f378f">패턴 지식 · RAG 문서 저장소</text>
+            <text x="285" y="64" text-anchor="middle" class="map-note">PATTERN_KNOWLEDGE · rag-docs/</text>
+          </g>
+          <!-- 학습 환류: 학습 → 저장소 -->
+          <path d="M 1750 244 C 1750 60, 760 6, 424 44" fill="none" stroke="var(--l6)" stroke-width="2.5" stroke-dasharray="5 7" opacity=".7"/>
+          <path d="M 434 40 L 421 42.5 L 431 51" fill="none" stroke="var(--l6)" stroke-width="2.5" opacity=".8"/>
+          <!-- 저장소 → 다음 분석(parallel_collect) -->
+          <path d="M 240 72 C 240 192, 510 240, 736 251" fill="none" stroke="var(--l6)" stroke-width="2" stroke-dasharray="4 7" opacity=".55"/>
+          <path d="M 727 244 L 740 251.5 L 728 257" fill="none" stroke="var(--l6)" stroke-width="2" opacity=".7"/>
+          <text class="map-note" x="330" y="178" fill="#6d4fc3">처리 결과가 다음 분석의 근거가 됩니다</text>
+
+          <!-- ── 본선 트랙 ── -->
+          <path id="trk-l1" d="M 70 260 L 555 260" fill="none" stroke="var(--l1)" stroke-width="7" stroke-linecap="round"/>
+          <path id="trk-l2" d="M 555 260 L 1240 260" fill="none" stroke="var(--l2)" stroke-width="7" stroke-linecap="round"/>
+          <path id="trk-l4" d="M 1240 260 L 1750 260" fill="none" stroke="var(--l4)" stroke-width="7" stroke-linecap="round"/>
+
+          <!-- 코드 분석 지선 -->
+          <path d="M 850 260 C 878 260, 872 150, 905 150 L 1185 150 C 1218 150, 1212 260, 1240 260"
+                fill="none" stroke="var(--l3)" stroke-width="6" stroke-linecap="round"/>
+          <!-- code_trace 자기 루프 -->
+          <path d="M 1038 143 C 1020 100, 1072 100, 1054 143" fill="none" stroke="var(--l3)" stroke-width="3" stroke-dasharray="4 5"/>
+          <text class="loop-label" x="1046" y="92" text-anchor="middle" fill="var(--l3)">추적 반복 ≤5</text>
+
+          <!-- additional_call 루프 (합성 보강) -->
+          <path d="M 1340 262 C 1340 330, 1300 342, 1290 342 C 1280 342, 1240 330, 1240 262"
+                fill="none" stroke="var(--l4)" stroke-width="3" stroke-dasharray="4 5"/>
+          <text class="loop-label" x="1290" y="368" text-anchor="middle" fill="var(--l4)">추가 조회 ≤3</text>
+
+          <!-- review 교정 루프 -->
+          <path d="M 1445 262 C 1445 440, 1240 440, 1240 262" fill="none" stroke="var(--l5)" stroke-width="3" stroke-dasharray="4 5"/>
+          <text class="loop-label" x="1343" y="438" text-anchor="middle" fill="var(--l5)">검수 교정 ≤3</text>
+
+          <!-- 움직이는 티켓 -->
+          <g class="ticket" aria-hidden="true">
+            <circle r="7" fill="var(--l1)" stroke="#fff" stroke-width="2.5">
+              <animateMotion dur="24s" repeatCount="indefinite"
+                path="M 70 260 L 850 260 C 878 260, 872 150, 905 150 L 1185 150 C 1218 150, 1212 260, 1240 260 L 1750 260"/>
+            </circle>
+          </g>
+
+          <!-- ── 역 (JS가 .stn 클릭 바인딩) ── -->
+          <!-- 접수 구간 -->
+          <g class="stn" data-id="issue" tabindex="0" role="button" aria-label="이슈 등록 역 설명 보기">
+            <circle class="core" cx="70" cy="260" r="10" stroke="var(--l1)"/>
+            <text class="nm" x="70" y="296" text-anchor="middle">이슈 등록</text>
+            <text class="id" x="70" y="312" text-anchor="middle">Jira issue_created</text>
+          </g>
+          <g class="stn" data-id="webhook" tabindex="0" role="button" aria-label="웹훅 수신 역 설명 보기">
+            <circle class="core" cx="165" cy="260" r="9" stroke="var(--l1)"/>
+            <text class="nm" x="165" y="230" text-anchor="middle">웹훅 수신</text>
+            <text class="id" x="165" y="214" text-anchor="middle">/webhook/jira</text>
+          </g>
+          <g class="stn" data-id="queue" tabindex="0" role="button" aria-label="지연 큐 역 설명 보기">
+            <circle class="core" cx="262" cy="260" r="9" stroke="var(--l1)"/>
+            <text class="nm" x="262" y="296" text-anchor="middle">지연 큐</text>
+            <text class="id" x="262" y="312" text-anchor="middle">15m / spam 10s</text>
+          </g>
+          <g class="stn" data-id="filter" tabindex="0" role="button" aria-label="필터 역 설명 보기">
+            <circle class="core" cx="360" cy="260" r="9" stroke="var(--l1)"/>
+            <text class="nm" x="360" y="230" text-anchor="middle">필터 게이트</text>
+            <text class="id" x="360" y="214" text-anchor="middle">whitelist</text>
+          </g>
+          <g class="stn" data-id="preanalysis" tabindex="0" role="button" aria-label="사전분석 역 설명 보기">
+            <circle class="core" cx="458" cy="260" r="9" stroke="var(--l1)"/>
+            <text class="nm" x="458" y="296" text-anchor="middle">사전분석 · 패턴 대조</text>
+            <text class="id" x="458" y="312" text-anchor="middle">tier match</text>
+          </g>
+
+          <!-- 그래프 본선 -->
+          <g class="stn" data-id="prefetch" tabindex="0" role="button" aria-label="prefetch 역 설명 보기">
+            <circle class="core" cx="555" cy="260" r="9" stroke="var(--l2)"/>
+            <text class="nm" x="555" y="230" text-anchor="middle">선제 조회</text>
+            <text class="id" x="555" y="214" text-anchor="middle">prefetch</text>
+          </g>
+          <g class="stn" data-id="policy" tabindex="0" role="button" aria-label="policy_filter 역 설명 보기">
+            <circle class="core" cx="652" cy="260" r="9" stroke="var(--l2)"/>
+            <text class="nm" x="652" y="296" text-anchor="middle">정책 필터</text>
+            <text class="id" x="652" y="312" text-anchor="middle">policy_filter</text>
+          </g>
+          <g class="stn" data-id="collect" tabindex="0" role="button" aria-label="parallel_collect 역 설명 보기">
+            <circle class="core" cx="750" cy="260" r="9" stroke="var(--l2)"/>
+            <text class="nm" x="750" y="230" text-anchor="middle">병렬 수집</text>
+            <text class="id" x="750" y="214" text-anchor="middle">parallel_collect</text>
+          </g>
+          <g class="stn" data-id="checksource" tabindex="0" role="button" aria-label="check_source_needed 역 설명 보기">
+            <circle class="core" cx="850" cy="260" r="10" stroke="var(--l2)"/>
+            <text class="nm" x="850" y="296" text-anchor="middle">소스 필요 분기</text>
+            <text class="id" x="850" y="312" text-anchor="middle">check_source_needed</text>
+          </g>
+
+          <!-- 코드 지선 -->
+          <g class="stn" data-id="codesearch" tabindex="0" role="button" aria-label="code_search 역 설명 보기">
+            <circle class="core" cx="946" cy="150" r="9" stroke="var(--l3)"/>
+            <text class="nm" x="946" y="182" text-anchor="middle">코드 검색</text>
+            <text class="id" x="946" y="198" text-anchor="middle">code_search</text>
+          </g>
+          <g class="stn" data-id="codetrace" tabindex="0" role="button" aria-label="code_trace 역 설명 보기">
+            <circle class="core" cx="1046" cy="150" r="9" stroke="var(--l3)"/>
+            <text class="nm" x="1046" y="182" text-anchor="middle">코드 추적</text>
+            <text class="id" x="1046" y="198" text-anchor="middle">code_trace</text>
+          </g>
+          <g class="stn" data-id="codereport" tabindex="0" role="button" aria-label="code_report 역 설명 보기">
+            <circle class="core" cx="1146" cy="150" r="9" stroke="var(--l3)"/>
+            <text class="nm" x="1146" y="182" text-anchor="middle">분석 보고서</text>
+            <text class="id" x="1146" y="198" text-anchor="middle">code_report</text>
+          </g>
+
+          <!-- 합성 이후 -->
+          <g class="stn" data-id="synthesis" tabindex="0" role="button" aria-label="synthesis 역 설명 보기">
+            <circle class="core" cx="1240" cy="260" r="12" stroke="var(--l4)"/>
+            <text class="nm" x="1210" y="246" text-anchor="end">답변 합성</text>
+            <text class="id" x="1210" y="230" text-anchor="end">synthesis</text>
+          </g>
+          <g class="stn" data-id="checkneeds" tabindex="0" role="button" aria-label="check_needs 역 설명 보기">
+            <circle class="core" cx="1340" cy="260" r="9" stroke="var(--l4)"/>
+            <text class="nm" x="1340" y="230" text-anchor="middle">보강 판단</text>
+            <text class="id" x="1340" y="214" text-anchor="middle">check_needs</text>
+          </g>
+          <g class="stn" data-id="additional" tabindex="0" role="button" aria-label="additional_call 역 설명 보기">
+            <circle class="core" cx="1290" cy="342" r="8" stroke="var(--l4)"/>
+            <text class="nm" x="1290" y="330" text-anchor="middle" style="font-size:11.5px">추가 도구 호출</text>
+            <text class="id" x="1290" y="392" text-anchor="middle" opacity="0">additional_call</text>
+          </g>
+          <g class="stn" data-id="review" tabindex="0" role="button" aria-label="review 역 설명 보기">
+            <circle class="core" cx="1445" cy="260" r="10" stroke="var(--l5)"/>
+            <text class="nm" x="1445" y="230" text-anchor="middle">자체 검수</text>
+            <text class="id" x="1445" y="214" text-anchor="middle">review</text>
+          </g>
+          <g class="stn" data-id="parse" tabindex="0" role="button" aria-label="parse_result 역 설명 보기">
+            <circle class="core" cx="1545" cy="260" r="9" stroke="var(--l4)"/>
+            <text class="nm" x="1545" y="296" text-anchor="middle">결과 정리</text>
+            <text class="id" x="1545" y="312" text-anchor="middle">parse_result</text>
+          </g>
+          <g class="stn" data-id="publish" tabindex="0" role="button" aria-label="게시 역 설명 보기">
+            <circle class="core" cx="1650" cy="260" r="10" stroke="var(--l4)"/>
+            <text class="nm" x="1650" y="230" text-anchor="middle">댓글 + 문서 게시</text>
+            <text class="id" x="1650" y="214" text-anchor="middle">comment · dev-report</text>
+          </g>
+          <g class="stn" data-id="learn" tabindex="0" role="button" aria-label="학습 환류 역 설명 보기">
+            <circle class="core" cx="1750" cy="260" r="10" stroke="var(--l6)"/>
+            <text class="nm" x="1750" y="296" text-anchor="middle">학습 환류</text>
+            <text class="id" x="1750" y="312" text-anchor="middle">learning-events</text>
+          </g>
+        </svg>
+      </div>
+      <span class="scrollhint" aria-hidden="true">⟷ 옆으로 넘겨 전체 노선 보기</span>
+      </div>
+      <div class="stnpanel" id="stnpanel" aria-live="polite">
+        <div class="badge" id="sp-badge">MAP</div>
+        <h3 id="sp-title">역을 눌러보세요 <code id="sp-code">19개 정거장 · 3개 반복 루프 · 1개 환류선</code></h3>
+        <p id="sp-desc">웹훅 수신부터 자가학습까지, 이슈 하나가 지나가는 실제 경로입니다. 노선 색은 처리 단계를, 점선은 반복과 환류를 뜻합니다. 반복에는 모두 상한이 있습니다 — 시스템은 무한히 고민하지 않습니다.</p>
+        <div class="dev" id="sp-dev"><b>개발자 노트</b> — 본선·지선·루프는 <b>JiraGraphWorkflow.buildGraph()</b>의 노드·엣지 정의를 그대로 옮긴 것입니다. 모든 루프는 카운터 + MAX 상수로 종결이 보장됩니다.</div>
+      </div>
+    </div>
+
+    <!-- 수치 스트립 -->
+    <div class="stats fx-g">
+      <div class="grid">
+        <div class="stat"><i class="tick" style="background:var(--l2)"></i><div class="n">12</div><div class="l">그래프 노드 (정거장)</div></div>
+        <div class="stat"><i class="tick" style="background:var(--l2)"></i><div class="n">14</div><div class="l">AI가 쥔 MCP 도구</div></div>
+        <div class="stat"><i class="tick" style="background:var(--l4)"></i><div class="n">3</div><div class="l">응답 모드 (비용 차등)</div></div>
+        <div class="stat"><i class="tick" style="background:var(--l5)"></i><div class="n">5</div><div class="l">AI 패치 검증 게이트</div></div>
+        <div class="stat"><i class="tick" style="background:var(--l6)"></i><div class="n">2</div><div class="l">자가학습 루프 (Case A/B)</div></div>
+        <div class="stat"><i class="tick" style="background:var(--l1)"></i><div class="n">15<small>분</small></div><div class="l">기본 지연 큐 (스팸 10초)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 응답 3모드 ───────── -->
+<section class="sec" id="thinking">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l4)"></i>구간 02 — 생각의 경제학</p>
+      <h2>같은 질문에 같은 비용을 쓰지 않습니다</h2>
+      <p class="sub">모든 문의를 대형 모델에 던지는 대신, 확신의 정도에 따라 세 갈래로 나눠 응답합니다.
+        검증된 지식일수록 빠르고 싸게, 처음 보는 문제일수록 깊고 신중하게.</p>
+    </div>
+    <div class="modes fx-g">
+      <article class="mode" style="--mc:var(--l1);--mcs:var(--l1-soft)">
+        <span class="cost">LLM 호출 0회</span>
+        <h3>① 패턴 · 정책 즉답</h3>
+        <p>과거에 검증된 패턴 지식과 대조해 매칭 점수 <b>90점 이상</b>이면 그래프에 들어가지 않고 즉시 답합니다.
+          70점대는 답변에 "검토 요청" 표시를 함께 답니다. 운영자가 등록한 정책 응답도 이 단계에서 바로 반환됩니다.</p>
+        <p class="when"><b>언제:</b> 반복 문의 · 공지성 질문 · 정책 안내</p>
+      </article>
+      <article class="mode" style="--mc:var(--l3);--mcs:var(--l3-soft)">
+        <span class="cost">보고서 직변환</span>
+        <h3>② 직통 모드</h3>
+        <p>코드 추적이 원인을 <b>소스/로직 결함</b>으로 확정하면, LLM에게 다시 글을 쓰게 하지 않고
+          코드 분석 보고서를 그대로 Jira 형식으로 변환해 답합니다. 분석이 곧 답변입니다.</p>
+        <p class="when"><b>언제:</b> 원인 파일·라인까지 특정된 코드 결함</p>
+      </article>
+      <article class="mode" style="--mc:var(--l2);--mcs:var(--l2-soft)">
+        <span class="cost">LLM + 도구 14종</span>
+        <h3>③ 일반 추론 모드</h3>
+        <p>모듈별 시스템 프롬프트와 수집된 근거를 컨텍스트로, <b>도구를 쥔 LLM</b>이 답을 합성합니다.
+          이미 선제 조회로 얻은 도구는 목록에서 빼서 중복 호출을 막습니다.</p>
+        <p class="when"><b>언제:</b> 처음 보는 문제 · 복합 원인 · 진단이 필요한 문의</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 근거 수집 ───────── -->
+<section class="sec" id="evidence">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l2)"></i>구간 03 — 근거 수집</p>
+      <h2>아는 척하지 않도록 설계했습니다</h2>
+    </div>
+    <div class="evidence">
+      <div class="ev-copy fx">
+        <p>답변을 쓰기 전에 시스템은 먼저 <strong>찾아봅니다</strong>. 사내 설계 문서와 매뉴얼, 같은 증상의 과거 이슈,
+          그리고 필요하면 실제 소스 코드와 운영 로그까지 — 모두 답변의 각주가 됩니다.</p>
+        <p>문서 검색은 <strong>키워드 매칭과 임베딩 유사도를 합산하는 하이브리드 방식</strong>입니다.
+          모듈별 README에서 키워드를 재추출해 검색어를 넓히고, 코드 인덱스 문서는 별도 트랙으로 관리합니다.</p>
+        <p>코드가 의심되면 <strong>계층을 따라 내려갑니다.</strong> 화면에서 시작해 SQL까지, 한 층씩 원인을 추적하고
+          그 결과를 원인 유형(<span class="mono" style="font-size:.8em">SOURCE / LOGIC / CONFIG / DATA</span>)으로 분류한 보고서를 남깁니다.</p>
+        <div class="trace">
+          <div class="t">DEEP TRACING — 코드 계층 추적</div>
+          <div class="path">
+            <b>Front</b><span>→</span><b>Controller</b><span>→</span><b>Service</b><span>→</span><b>Mapper</b><span>→</span><b>SQL</b>
+          </div>
+          <p class="cap">GitLab 코드 검색 + Loki 운영 로그 + 코드 인덱스 문서를 교차하며 최대 5회 반복 추적합니다.</p>
+        </div>
+      </div>
+      <div class="sources fx-g">
+        <div class="src"><span class="k">📄</span><span class="n">RAG 설계 문서 <code>searchDesignDocs</code></span><span class="d">모듈별 md 설계문서·매뉴얼 — 키워드+임베딩 하이브리드 검색</span></div>
+        <div class="src"><span class="k">🗂️</span><span class="n">과거 Jira 이슈 <code>searchJiraIssues · getIssueDetail</code></span><span class="d">같은 증상을 이미 해결한 이슈를 JQL로 찾아 근거로 인용</span></div>
+        <div class="src"><span class="k">🧬</span><span class="n">GitLab 소스 코드 <code>searchGitLabFiles · getGitLabFileContent</code></span><span class="d">모듈↔프로젝트 매핑을 따라 실제 코드를 열어 확인</span></div>
+        <div class="src"><span class="k">📈</span><span class="n">Loki 운영 로그</span><span class="d">고객사·모듈별 레이블로 실제 에러 로그를 조회 (SaaS 멀티테넌시 매핑)</span></div>
+        <div class="src"><span class="k">🌐</span><span class="n">네트워크 진단 <code>lookupDns · testSslCertificate …</code></span><span class="d">DNS/PTR/포트/SSL/아웃룩 연동을 직접 점검해 메일 장애를 판별</span></div>
+        <div class="src"><span class="k">✉️</span><span class="n">스팸 장비 <code>searchSpamMailHistory …</code></span><span class="d">차단 이력 조회부터 재발송·예외 허용까지 — 결과가 확실하면 그래프를 통째로 우회</span></div>
+        <div class="src"><span class="k">🖼️</span><span class="n">첨부 파일</span><span class="d">스크린샷은 Vision으로, 메일 파일(.msg)·이미지는 파서·OCR로 읽어 본문과 함께 분석</span></div>
+      </div>
+    </div>
+    <p class="toolnote fx">도구는 <code>@McpModule</code> + <code>@Tool</code> 애노테이션만 붙이면 자동 등록되며, 모듈별 활성 도구·선제/후천 호출 여부는 모두 DB 설정이라 재시작 없이 바뀝니다. 현재 활성 도구 14종.</p>
+  </div>
+</section>
+
+<!-- ───────── 안전장치 ───────── -->
+<section class="sec" id="guard">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l5)"></i>구간 04 — 신뢰 엔지니어링</p>
+      <h2>환각은 프롬프트가 아니라 시스템으로 막습니다</h2>
+      <p class="sub">"AI를 믿지 말 것"이 이 시스템의 설계 전제입니다. 겸손은 상수로 박혀 있습니다.</p>
+    </div>
+    <div class="guards fx-g">
+      <div class="guard"><code>MAX_REVIEW_COUNT = 3</code><h3>스스로 검수하고 교정</h3><p>게시 전 review 노드가 답변을 검수하고, 문제가 있으면 합성을 다시 시킵니다. 최대 3회 — 무한 고민은 없습니다.</p></div>
+      <div class="guard"><code>McpAnswerCleaner</code><h3>허위 섹션 삭제</h3><p>도구를 실제로 호출하지 않았는데 LLM이 "조회 결과" 섹션을 지어내면, 그 섹션을 통째로 제거합니다.</p></div>
+      <div class="guard"><code>INSUFFICIENT_INFO</code><h3>모르면 반려</h3><p>본문이 부실해 근거를 만들 수 없으면 답을 지어내는 대신 필요한 정보를 물어보며 정중히 반려합니다.</p></div>
+      <div class="guard"><code>empty_rules = DENY</code><h3>화이트리스트 필터</h3><p>운영자가 필터 규칙으로 등록한 프로젝트·모듈만 분석합니다. 등록되지 않은 이슈는 AI가 손대지 않습니다.</p></div>
+      <div class="guard"><code>G3: 사용례 0건 → 거부</code><h3>패치 환각 검증</h3><p>AI가 만든 코드 패치의 새 식별자를 GitLab 전체에서 교차 검색해, 사용례가 없으면 환각으로 보고 폐기합니다.</p></div>
+      <div class="guard"><code>Semaphore(5)</code><h3>동시 처리 제한</h3><p>Jira 서버를 밀어붙이지 않도록 동시 분석을 5건으로 제한하고, API 호출 간 딜레이를 둡니다.</p></div>
+      <div class="guard"><code>DLT + retry</code><h3>실패를 삼키지 않음</h3><p>분석 실패는 데드레터 토픽에 적재해 이력으로 남기고, 1시간 뒤 재접수합니다. 조용히 사라지는 이슈는 없습니다.</p></div>
+      <div class="guard"><code>CircuitBreaker</code><h3>외부 장애 격리</h3><p>Jira·GitLab·LLM 등 외부 연동은 서킷브레이커로 보호되고, 차단 중의 실패도 분석 이력에 기록됩니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 두 독자, 두 답변 ───────── -->
+<section class="sec" id="answers">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l4)"></i>구간 05 — 답변 이원화</p>
+      <h2>한 번의 분석, 두 개의 답</h2>
+      <p class="sub">같은 분석 결과라도 읽는 사람이 다르면 답도 달라야 합니다.
+        Jira 댓글은 상담사·설계자의 언어로, 상세 분석 문서는 개발자의 언어로 씁니다.</p>
+    </div>
+    <div class="answers">
+      <div class="fx">
+        <p class="reader"><i></i>READER 1 — 상담사 · 설계자 (Jira 댓글)</p>
+        <div class="mockwrap">
+          <span class="mock-tag">예시 화면</span>
+          <div class="jira-mock" aria-label="Jira 댓글 예시">
+            <div class="jm-head">
+              <span class="jm-avatar">🤖</span>
+              <div><div class="jm-who">JIRA-AI</div><div class="jm-when">방금 전 · 자동응답</div></div>
+            </div>
+            <div class="jm-body">
+              <div class="jm-panel">
+                <div class="ph">🤖 AI 자동응답 · 결재 문서가 열리지 않는 문제</div>
+                <div class="pb">
+                  <p>안녕하세요. 문의하신 증상을 확인했습니다.</p>
+                  <p><b>원인</b> — 6월 배포분에서 결재 상세 화면이 특정 문서 유형을 불러올 때 목록 데이터를 잘못 참조하는 문제가 확인되었습니다.</p>
+                  <p><b>안내</b> — 동일 증상의 과거 처리 사례를 근거로 개발팀에 수정을 전달했습니다. 고객사에는 "수정 반영 예정"으로 회신해 주시면 됩니다.</p>
+                  <p>🔎 근거: 유사 이슈 2건 · 사내 매뉴얼 1건 · <a class="jm-link" href="#answers" onclick="return false">개발자용 상세 분석 문서 →</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="jm-actions">
+              <button class="jm-btn" type="button" tabindex="-1">👍 도움됨</button>
+              <button class="jm-btn" type="button" tabindex="-1">👎 도움 안됨</button>
+              <button class="jm-btn" type="button" tabindex="-1">💬 !재분석</button>
+            </div>
+          </div>
+        </div>
+        <div class="ans-notes">
+          <span class="ans-note">API·명령어 지시 금지 — 프롬프트 규칙 + 게시 전 검수로 이중 차단</span>
+          <span class="ans-note">비개발 언어 · 고객 회신에 바로 쓸 수 있는 문장</span>
+        </div>
+      </div>
+      <div class="fx">
+        <p class="reader"><i style="background:var(--l3)"></i>READER 2 — 개발자 (dev-report 문서)</p>
+        <div class="mockwrap">
+          <span class="mock-tag">예시 화면</span>
+          <div class="dev-mock" aria-label="개발자 문서 예시">
+            <div class="dm-head">
+              <span class="dm-key">CSA10-1234</span>
+              <span class="dm-badge">SOURCE_ISSUE</span>
+              <span class="dm-badge g">추적 완료 · depth 3</span>
+            </div>
+            <div class="dm-body">
+              <div class="dm-sec">
+                <div class="st">ROOT CAUSE</div>
+                <p>결재 상세 조회 시 문서유형 분기에서 목록 상태를 재사용해 null 참조 발생. 6월 리팩터링에서 초기화 순서가 바뀐 것이 원인.</p>
+              </div>
+              <div class="dm-sec">
+                <div class="st">RELATED FILES — GitLab 프로젝트별</div>
+                <div class="dm-tree"><span class="prj">approval-front</span> <span class="typ">FRONTEND</span>
+├─ src/pages/appr/ApprDetail.tsx
+└─ src/stores/apprListStore.ts
+<span class="prj">approval-api</span> <span class="typ">BACKEND</span>
+└─ …/appr/service/ApprQueryService.java</div>
+              </div>
+              <div class="dm-sec">
+                <div class="st">SUGGESTED PATCH</div>
+                <div class="dm-diff"><span class="del">- const doc = listStore.current;</span>
+<span class="add">+ const doc = detailStore.load(docId);</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ans-notes">
+          <span class="ans-note">원인 배지 · 파일 트리 · 패치 제안 · 실제 Jira 이슈 링크</span>
+          <span class="ans-note">링크는 trace 소유권 검증 + 위험 URL 스킴 차단</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 커맨드 & MR 게이트 ───────── -->
+<section class="sec" id="commands">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l3)"></i>구간 06 — 사람과 일하는 법</p>
+      <h2>댓글 한 줄이 AI를 부립니다</h2>
+      <p class="sub">담당자는 대시보드에 들어갈 필요 없이, 이슈 댓글에 커맨드를 입력해 AI에게 일을 시킵니다.</p>
+    </div>
+    <div class="cmds fx-g">
+      <article class="cmd">
+        <span class="type mono">!재분석</span>
+        <h3>다시 분석하기</h3>
+        <p>이슈를 처음부터 다시 분석해 최신 답변으로 갱신합니다. 첨부나 설명을 보강한 뒤 실행하면 답변 품질이 올라갑니다.</p>
+        <p class="who">누구나 · 이슈 댓글에서</p>
+      </article>
+      <article class="cmd">
+        <span class="type mono">!수정요청</span>
+        <h3>AI에게 패치 맡기기</h3>
+        <p>코드 결함으로 분석된 이슈에서 AI가 수정 패치를 만들고, 아래 5중 검증을 통과하면 GitLab MR로 접수합니다. <b>머지는 언제나 사람이 합니다.</b></p>
+        <p class="who">담당자 · 코드 결함(SOURCE/LOGIC/CONFIG) 분석 건에서</p>
+      </article>
+      <article class="cmd">
+        <span class="type mono">!지식저장</span>
+        <h3>내 답변을 지식으로</h3>
+        <p>담당자가 단 해결 답변을 AI가 지식 문서로 정리해 프로젝트별 지식(<span class="mono" style="font-size:.85em">issue-knowledge/{KEY}</span>)으로 저장합니다. 검색 반영은 운영자 승인 후에.</p>
+        <p class="who">담당자 · 해결 답변을 단 이슈에서</p>
+      </article>
+    </div>
+
+    <!-- 게이트 랩 -->
+    <div class="gatelab fx">
+      <div class="lab-head">
+        <div>
+          <h3>!수정요청 — AI가 짠 코드는, AI를 의심하는 5중 게이트를 지나야 합니다</h3>
+          <p class="lab-sub">어느 게이트에서든 탈락하면 MR은 만들어지지 않고, 탈락 사유가 그대로 댓글로 보고됩니다.</p>
+        </div>
+        <button class="playbtn" id="gateplay" type="button">▶ 검증 과정 재생</button>
+      </div>
+      <div class="gates" id="gates" aria-live="polite">
+        <div class="gate" data-g="0">
+          <span class="st" aria-hidden="true"></span>
+          <span class="gid">G0</span><span class="gn">대상 파일 확보</span><span class="verdict">대기</span>
+          <span class="gd">분석 보고서가 지목한 파일이 타깃 브랜치에 실제로 존재하는지 확인 (경로 세그먼트 단위 매칭)</span>
+        </div>
+        <div class="gate" data-g="1">
+          <span class="st" aria-hidden="true"></span>
+          <span class="gid">G1</span><span class="gn">패치 정합성</span><span class="verdict">대기</span>
+          <span class="gd">수정 전 코드가 원본과 일치해야 적용 — 불일치 시 LLM 재생성 최대 2회 후 탈락</span>
+        </div>
+        <div class="gate" data-g="2">
+          <span class="st" aria-hidden="true"></span>
+          <span class="gid">G2</span><span class="gn">구문 균형</span><span class="verdict">대기</span>
+          <span class="gd">괄호·문자열·주석 균형이 원본보다 나빠지면 탈락</span>
+        </div>
+        <div class="gate" data-g="3">
+          <span class="st" aria-hidden="true"></span>
+          <span class="gid">G3</span><span class="gn">API 실재성 (환각 검증)</span><span class="verdict">대기</span>
+          <span class="gd">패치가 새로 도입한 식별자를 GitLab 전체에서 교차 검색 — 사용례 0건이면 환각 의심으로 거부</span>
+        </div>
+        <div class="gate" data-g="4">
+          <span class="st" aria-hidden="true"></span>
+          <span class="gid">G4</span><span class="gn">LLM 리뷰 패널 3인</span><span class="verdict">대기</span>
+          <span class="gd">회귀 위험 · 원인 부합 · 최소 변경, 서로 다른 관점의 리뷰어 3명 중 2명 이상 승인해야 통과</span>
+        </div>
+      </div>
+      <div class="mr-done" id="mrdone">
+        <span class="ic">🔀</span>
+        <div>
+          <b>GitLab MR 생성 — <code>ai-fix/CSA10-1234 → devqa</code></b>
+          <p>검증 리포트와 패치 근거가 MR 본문에 첨부됩니다. "이 MR은 AI가 생성했습니다 — 머지 전 담당자 리뷰가 필요합니다."</p>
+        </div>
+      </div>
+      <p class="gate-foot">dry-run 모드에서는 MR 없이 검증 결과만 댓글로 보고합니다. 기능 전체는 <span class="mono">source_fix.enabled</span> 설정으로 켜고 끕니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 자가학습 ───────── -->
+<section class="sec" id="learning">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l6)"></i>구간 07 — 자가학습 루프</p>
+      <h2>쓸수록 똑똑해지고, 안 쓰면 잊습니다</h2>
+      <p class="sub">답변의 끝은 폐기가 아니라 환류입니다. 성공한 답변과 사람의 해결책이 패턴 지식으로 쌓이고,
+        오래 안 쓰인 지식은 스스로 퇴역합니다.</p>
+    </div>
+    <div class="learn">
+      <div class="cyclewrap fx" aria-hidden="true">
+        <svg viewBox="0 0 480 440">
+          <!-- 순환 링 -->
+          <circle cx="240" cy="220" r="140" fill="none" stroke="var(--l6)" stroke-width="2.5" stroke-dasharray="6 8" opacity=".55"/>
+          <!-- 시계방향 화살표 4방 (45°/135°/225°/315° 접선 방향) -->
+          <g fill="var(--l6)" opacity=".8">
+            <polygon points="0,-7 12,0 0,7" transform="translate(339,121) rotate(45)"/>
+            <polygon points="0,-7 12,0 0,7" transform="translate(339,319) rotate(135)"/>
+            <polygon points="0,-7 12,0 0,7" transform="translate(141,319) rotate(225)"/>
+            <polygon points="0,-7 12,0 0,7" transform="translate(141,121) rotate(315)"/>
+          </g>
+          <!-- 중심 -->
+          <text class="cycle-mid" x="240" y="212" text-anchor="middle">PATTERN_KNOWLEDGE</text>
+          <text class="cycle-sub" x="240" y="230" text-anchor="middle">패턴 지식 저장소 · 임베딩 벡터</text>
+          <!-- 노드 4개 -->
+          <g>
+            <rect x="165" y="42" width="150" height="46" rx="12" fill="var(--card)" stroke="var(--line)"/>
+            <text class="cycle-node" x="240" y="62" text-anchor="middle">① 답변 게시</text>
+            <text class="cycle-sub" x="240" y="77" text-anchor="middle">AI comment + dev-report</text>
+          </g>
+          <g>
+            <rect x="330" y="197" width="146" height="46" rx="12" fill="var(--card)" stroke="var(--line)"/>
+            <text class="cycle-node" x="403" y="217" text-anchor="middle">② 사람의 판정</text>
+            <text class="cycle-sub" x="403" y="232" text-anchor="middle">도움됨/안됨 · Done 처리</text>
+          </g>
+          <g>
+            <rect x="165" y="352" width="150" height="46" rx="12" fill="var(--card)" stroke="var(--line)"/>
+            <text class="cycle-node" x="240" y="372" text-anchor="middle">③ 패턴 등록</text>
+            <text class="cycle-sub" x="240" y="387" text-anchor="middle">Case A · Case B</text>
+          </g>
+          <g>
+            <rect x="6" y="197" width="146" height="46" rx="12" fill="var(--card)" stroke="var(--line)"/>
+            <text class="cycle-node" x="79" y="217" text-anchor="middle">④ 즉시 재사용</text>
+            <text class="cycle-sub" x="79" y="232" text-anchor="middle">Tier 매칭 ≥90 즉답</text>
+          </g>
+          <!-- Decay 밸브 -->
+          <path d="M 348 330 C 392 358, 434 348, 456 314" fill="none" stroke="var(--l5)" stroke-width="2" stroke-dasharray="3 5"/>
+          <polygon points="0,-6 10,0 0,6" fill="var(--l5)" transform="translate(456,314) rotate(-58)"/>
+          <text class="cycle-sub" x="430" y="372" text-anchor="middle" fill="var(--l5)" style="font-weight:700">DECAY — 퇴역 밸브</text>
+        </svg>
+      </div>
+      <div class="learn-list fx-g">
+        <div class="learn-item"><span class="tag">CASE A</span><b>AI가 성공하면, 그 답이 패턴이 됩니다</b><p>분석에 성공한 답변은 학습 이벤트로 발행되어 패턴 지식에 자동 등록됩니다.</p></div>
+        <div class="learn-item"><span class="tag">CASE B</span><b>사람이 해결하면, 그 해결책을 배웁니다</b><p>이슈가 Done으로 전환되면 담당자의 해결 내용을 학습합니다. 이때는 분석 없이 학습만 수행합니다.</p></div>
+        <div class="learn-item"><span class="tag">TIER</span><b>다음 이슈부터 바로 씁니다</b><p>새 이슈는 제목 10 · 본문 70 · 모듈 10 · 유형 5 · 제품 5점 가중치로 패턴과 대조되어, <code>≥90</code> 즉답 / <code>≥70</code> 검토 요청 딱지와 함께 답합니다.</p></div>
+        <div class="learn-item"><span class="tag">DECAY</span><b>안 쓰는 지식은 퇴역시킵니다</b><p>12개월간 적중 없으면 우선순위 <code>-10</code>, "도움 안됨" 피드백은 <code>-20</code>. 임계 이하로 내려간 패턴은 비활성화됩니다.</p></div>
+        <div class="learn-item"><span class="tag">승인제</span><b>사람이 최종 게이트입니다</b><p>자동 등록된 패턴은 대시보드 "검토 대기" 탭에서 운영자가 승인·거부하고, <span class="mono" style="font-size:.85em">!지식저장</span> 문서의 검색 반영도 승인 후 이뤄집니다.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 아키텍처 ───────── -->
+<section class="sec" id="arch">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--ink2)"></i>구간 08 — 아키텍처</p>
+      <h2>다섯 개의 층, 한 방향의 의존</h2>
+      <p class="sub">단일 Spring Boot 프로세스 안에서 5개 모듈이 위에서 아래로만 의존합니다.
+        아래층은 위층의 존재를 모릅니다 — 커넥터는 파이프라인을 모르고, 데이터 계층은 아무도 모릅니다.</p>
+    </div>
+    <div class="arch">
+      <div class="modstack fx-g">
+        <div class="mod"><code>api</code><span>REST 컨트롤러 30개 · 인증/인가(JWT · 3단계 역할) · SSE 스트림</span></div>
+        <div class="mod-arrow" aria-hidden="true"></div>
+        <div class="mod"><code>core</code><span>파이프라인 오케스트레이션 · LangGraph 워크플로우 · 패턴 매칭 · 자가학습</span></div>
+        <div class="mod-arrow" aria-hidden="true"></div>
+        <div class="mod"><code>mcp</code><span>외부 시스템 커넥터 (Jira · GitLab · Wiki · Loki · 스팸장비) · 서킷브레이커</span></div>
+        <div class="mod-arrow" aria-hidden="true"></div>
+        <div class="mod"><code>infra</code><span>Kafka · Redis · Milvus · 관측성(OTel 트레이싱 + Prometheus)</span></div>
+        <div class="mod-arrow" aria-hidden="true"></div>
+        <div class="mod"><code>domain</code><span>엔티티 · MyBatis 매퍼 · Flyway 마이그레이션(V34) — 외부 I/O 없는 순수 계층</span></div>
+        <p class="cap">↓ 단방향 의존 — 순환 없음</p>
+      </div>
+      <div class="arch-side">
+        <div class="fx">
+          <h3>런타임 스택</h3>
+          <div class="tags">
+            <span class="tag-i"><b>Java 17</b> · Spring Boot 3.5</span>
+            <span class="tag-i"><b>LangGraph4j</b> + Spring AI</span>
+            <span class="tag-i"><b>Azure OpenAI</b> gpt-4o (gpt-5.x 전환 대비)</span>
+            <span class="tag-i"><b>MySQL 8</b> + MyBatis</span>
+            <span class="tag-i"><b>Kafka</b> 이벤트 버스 + DLT</span>
+            <span class="tag-i"><b>Redis</b> 지연 큐 · 캐시</span>
+            <span class="tag-i"><b>Milvus</b> 벡터 검색(보조)</span>
+            <span class="tag-i"><b>React 18</b> 대시보드 · nginx 단일 진입점</span>
+          </div>
+        </div>
+        <div class="fx">
+          <h3>확장 포인트 — 개발자용</h3>
+          <div class="extend">
+            <div class="ext"><b>새 도구 붙이기 = 애노테이션 2개</b>클래스에 <code>@McpModule("모듈")</code>, 메서드에 <code>@Tool(description)</code> — 기동 시 자동 스캔되어 그 모듈의 LLM에게 쥐어집니다.</div>
+            <div class="ext"><b>새 지식 넣기 = md 파일 1개</b><code>rag-docs/{모듈}/</code> 에 마크다운을 두면 하이브리드 검색 대상이 됩니다. 대시보드에서 트리 편집·업로드 가능.</div>
+            <div class="ext"><b>튜닝 = 재시작 없음</b>프롬프트 · 선제/후천 호출 · 임계값 · 가중치가 전부 DB 동적 설정(SYSTEM_CONFIG)이라 대시보드에서 바로 반영됩니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── 시작하기 ───────── -->
+<section class="sec" id="start">
+  <div class="wrap">
+    <div class="sec-head fx">
+      <p class="sec-eyebrow"><i style="background:var(--l1)"></i>구간 09 — 탑승 안내</p>
+      <h2>시작하기</h2>
+    </div>
+    <div class="starts fx-g">
+      <div class="startcard">
+        <span class="for" style="background:var(--l1)">FOR USERS — 문의 · 상담 · 설계</span>
+        <h3>이슈를 쓰면, 나머지는 노선이 알아서</h3>
+        <ol class="steps">
+          <li><b>이슈를 등록합니다.</b> 모듈을 정확히 고르고 증상·화면·시점을 구체적으로 쓸수록 답이 좋아집니다. 스크린샷 첨부도 AI가 읽습니다.</li>
+          <li><b>잠시 뒤 AI 댓글이 달립니다.</b> 기본 15분 지연 후 분석이 시작됩니다(스팸 문의는 10초). 원인 · 안내 · 근거 링크가 함께 옵니다.</li>
+          <li><b>피드백을 남깁니다.</b> 👍 도움됨 / 👎 도움 안됨 — 이 한 번의 클릭이 다음 답변의 품질을 바꿉니다.</li>
+          <li><b>필요하면 커맨드로 시킵니다.</b> 정보 보강 후 <code>!재분석</code>, 해결 답변을 지식으로 남기려면 <code>!지식저장</code>.</li>
+        </ol>
+      </div>
+      <div class="startcard">
+        <span class="for" style="background:var(--l2)">FOR OPERATORS · DEVELOPERS</span>
+        <h3>새 모듈을 노선에 올리는 법</h3>
+        <ol class="steps">
+          <li><b>필터 규칙부터 등록합니다.</b> 화이트리스트 방식이라 <code>필터 규칙</code>에 없는 프로젝트·모듈은 AI가 분석하지 않습니다.</li>
+          <li><b>모듈 온보딩 마법사를 따라갑니다.</b> GitLab 프로젝트 매핑과 RAG 문서 업로드까지 단계별로 안내합니다.</li>
+          <li><b>모듈 프롬프트와 MCP 호출을 설정합니다.</b> 선제(Prefetch)/후천(Postfetch) 도구 호출은 DB 설정 — 재시작이 필요 없습니다.</li>
+          <li><b>패턴 "검토 대기"를 주기적으로 승인합니다.</b> 자가학습이 쌓은 후보를 사람이 최종 판정합니다.</li>
+          <li><b>도구가 부족하면 직접 만듭니다.</b> <code>@McpModule</code> + <code>@Tool</code> 두 애노테이션이면 자동 등록됩니다.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="fbrand">JIRA-AI · SYSTEM PREVIEW</div>
+      <p>이 문서의 노드 이름 · 반복 상한 · 임계값 · 게이트 구성은 2026-07 시점 소스 코드에서 검증한 값입니다.<br>
+      상세 기술문서: <code>docs/README.md</code> (통합 기술문서) · 대시보드 <b>사용법 가이드</b> 메뉴</p>
+    </div>
+    <div class="right">
+      <p><code>LangGraph 12 nodes</code> · <code>MCP tools 14</code> · <code>verify gates 5</code><br>
+      더존비즈온 · Jira AI Service</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ───────── 역 상세 데이터 ───────── */
+const LINES = {
+  l1:{c:"var(--l1)", n:"접수"},
+  l2:{c:"var(--l2)", n:"수집"},
+  l3:{c:"var(--l3)", n:"코드"},
+  l4:{c:"var(--l4)", n:"합성"},
+  l5:{c:"var(--l5)", n:"검수"},
+  l6:{c:"var(--l6)", n:"학습"}
+};
+const STN = {
+  issue:{line:"l1", name:"이슈 등록", code:"jira:issue_created",
+    desc:"고객 문의가 Jira 이슈로 등록되는 순간 여정이 시작됩니다. 모듈 선택과 증상 설명이 구체적일수록 뒤 정거장들의 판단이 정확해집니다.",
+    dev:"WebhookController(/api/v1/webhook/jira)는 issue_created 이벤트만 통과시키고 issue_updated 등은 스킵합니다."},
+  webhook:{line:"l1", name:"웹훅 수신", code:"WebhookController",
+    desc:"이슈 생성 즉시 웹훅이 도착합니다. 같은 이슈의 중복 웹훅과 시스템 계정이 만든 이슈(무한 루프 방지)를 걸러낸 뒤 바로 200을 반환하고, 실제 분석은 비동기로 넘깁니다.",
+    dev:"WebhookDedupService(TTL 5분) · SystemUserFilter · FilterRuleCacheService 3중 방어 후 지연 큐 적재."},
+  queue:{line:"l1", name:"지연 큐", code:"Redis ZSet · 15m / spam 10s",
+    desc:"바로 분석하지 않고 기본 15분을 기다립니다. 스팸(메일 차단) 문의는 급하니 10초 패스트레인을 탑니다. 만기가 되면 Kafka 이벤트 버스로 발행됩니다.",
+    dev:"WebhookDelayedQueueService — Redis Sorted Set에 만기시각을 score로 적재, WebhookDelayScheduler가 만기분을 Kafka(WEBHOOK_EVENTS)로 발행."},
+  filter:{line:"l1", name:"필터 게이트", code:"FilterEngine · whitelist",
+    desc:"운영자가 등록한 프로젝트·모듈만 통과하는 화이트리스트 개찰구입니다. 동시 처리도 5건으로 제한해 Jira 서버를 보호합니다. 이슈가 '완료' 전환이었다면 분석 대신 학습(Case B)만 수행합니다.",
+    dev:"Kafka consumer(FilterEngine): 글로벌 일시정지 → 시스템계정 차단 → Semaphore(5) → 필터규칙(Redis 캐시 20분). Done 전환이면 LEARNING_CASE_B 이벤트만 발행."},
+  preanalysis:{line:"l1", name:"사전분석 · 패턴 대조", code:"PreAnalysis · 3-Tier match",
+    desc:"본격 분석 전에 싸게 끝낼 수 있는지 봅니다. 검증된 패턴 지식과 대조해 점수가 높으면(90점) 즉시 답하고, 본문이 너무 부실하면 정보를 요청하며 반려합니다. 스팸 조회 결과가 확실하면 그래프 전체를 우회합니다.",
+    dev:"PipelineOrchestrator STEP1~1.5: 파싱 → 사전분석(즉답 가능 시 조기 종료) → 정제(부족 시 INSUFFICIENT_INFO) → Prefetch → bypassLangGraph 판단."},
+  prefetch:{line:"l2", name:"선제 조회", code:"prefetch node",
+    desc:"그래프의 첫 정거장. LLM이 고민하기 전에 가벼운 정보(네트워크 진단, 스팸 이력 등)를 미리 수집해 프롬프트에 깔아 둡니다.",
+    dev:"PrefetchConfigService가 모듈별 활성 도구를 DB(mcp_prefetch_config)에서 조회해 호출, 결과는 prefetchResults 맵으로 state에 저장."},
+  policy:{line:"l2", name:"정책 필터", code:"policy_filter node",
+    desc:"운영자가 정해 둔 정책(공지·안내·처리 규칙)에 해당하는 문의인지 LLM으로 판별합니다. 매칭되면 뒤의 합성 단계가 LLM 호출 없이 정책 응답을 즉시 반환합니다.",
+    dev:"PolicyFilterEngine.evaluate(issue, modulePrompt) — 매칭 시 paneledResponse를 state에 주입, synthesis가 그대로 반환."},
+  collect:{line:"l2", name:"병렬 수집", code:"parallel_collect node",
+    desc:"답변의 재료를 모으는 정거장. 사내 RAG 문서와 같은 증상의 과거 Jira 이슈를 동시에 검색합니다. 모듈 README에서 키워드를 재추출해 검색을 넓힙니다.",
+    dev:"키워드 우선순위 operationKeywords > refinedKeywords > 이슈파싱. 운영 RAG(하이브리드 점수) + 유사 Jira 검색 결과를 정제해 state에 적재."},
+  checksource:{line:"l2", name:"소스 필요 분기", code:"check_source_needed node",
+    desc:"문서만으로 답이 되는지, 소스 코드까지 봐야 하는지 갈라지는 환승역입니다. 근거들이 코드 결함을 가리키면 코드 분석 지선으로 진입합니다.",
+    dev:"운영 RAG 결과 + 코드인덱스 검색(threshold 0.50)을 합쳐 source 지표 2개 이상이면 needsSourceSearch=true."},
+  codesearch:{line:"l3", name:"코드 검색", code:"code_search node",
+    desc:"코드 지선의 첫 역. 코드 인덱스 문서 · GitLab 코드 · Loki 운영 로그를 교차 검색해 의심 지점을 좁힙니다.",
+    dev:"code-index RAG + GitLab 검색 + LokiProgressiveSearcher/GitLabLokiReActOrchestrator 결합, LLM 1차 판독."},
+  codetrace:{line:"l3", name:"코드 추적", code:"code_trace node · ≤5",
+    desc:"화면 → 컨트롤러 → 서비스 → 매퍼 → SQL, 호출 계층을 한 층씩 따라 내려가며 원인을 추적합니다. 스스로 '더 내려가야 한다'고 판단하면 같은 역을 다시 돕니다 — 최대 5바퀴.",
+    dev:"needsCodeTrace && codeTraceDepth<MAX_CODE_TRACE_DEPTH(5) 동안 자기 루프. 다음 추적 대상은 nextTraceTargets로 전달."},
+  codereport:{line:"l3", name:"분석 보고서", code:"code_report node",
+    desc:"추적 결과를 보고서로 정리하고 원인 유형(SOURCE/LOGIC/CONFIG/DATA)을 분류합니다. 이 보고서가 개발자 문서와 !수정요청 패치의 원재료가 됩니다.",
+    dev:"extractRootCauseType으로 ROOT_CAUSE_TYPE 파싱. 보고서가 있으면 원인 무관하게 SOURCE_FIX_CANDIDATE에 선저장(dev-report 재료)."},
+  synthesis:{line:"l4", name:"답변 합성", code:"synthesis node",
+    desc:"모든 노선이 모이는 중앙역. 정책 매칭이면 즉답, 코드 결함 확정이면 보고서 직변환, 그 외에는 도구를 쥔 LLM이 근거를 인용하며 답을 씁니다.",
+    dev:"3모드: ① policyMatch 즉시 반환(LLM 미호출) ② 직통 모드(보고서→Jira Wiki Markup) ③ 일반 모드(모듈별 ToolCallback 바인딩, temperature 0.2)."},
+  checkneeds:{line:"l4", name:"보강 판단", code:"check_needs node",
+    desc:"쓴 답을 보고 '더 조회해야 정확해지는가'를 판단합니다. 답변 속 키워드가 추가 도구 조건에 걸리면 도구를 더 부르고 다시 합성합니다 — 최대 3회.",
+    dev:"AdditionalCallConfigService.getEnabledKeywordsByModule로 키워드 매칭 → additional_call → synthesis 재진입 (≤MAX_ADDITIONAL_CALL_COUNT)."},
+  additional:{line:"l4", name:"추가 도구 호출", code:"additional_call node",
+    desc:"보강 판단이 지목한 도구를 호출해 결과를 컨텍스트에 더하고, 합성역으로 되돌아갑니다.",
+    dev:"ParamExtractorRegistry로 파라미터 추출 후 도구 호출, 결과를 synthesis 컨텍스트로 환원."},
+  review:{line:"l5", name:"자체 검수", code:"review node · ≤3",
+    desc:"게시 전 마지막 관문. 답변이 독자 규칙(상담사·설계자에게 API 지시 금지 등)과 품질 기준을 지켰는지 검수하고, 어긋나면 교정 지시와 함께 합성역으로 돌려보냅니다 — 최대 3회.",
+    dev:"needsCorrection && reviewCount<MAX_REVIEW_COUNT(3) 동안 synthesis 재호출. STEP0 위반은 교정 대신 즉시 INSUFFICIENT_INFO 반려."},
+  parse:{line:"l4", name:"결과 정리", code:"parse_result node",
+    desc:"그래프의 종착 정거장. 최종 답변과 메타데이터를 정리해 후처리(허위 섹션 제거 · 보조 정보 · 후천 조회)로 넘깁니다.",
+    dev:"그래프 밖 STEP3~7: 검증·분류 → 보조정보 → 허위 섹션 제거(McpAnswerCleaner) → Postfetch → 2차 보강."},
+  publish:{line:"l4", name:"댓글 + 문서 게시", code:"comment · /dev-report",
+    desc:"하나의 분석에서 두 개의 답이 나갑니다. Jira 댓글은 상담사·설계자의 언어로, 링크된 dev-report 문서는 개발자의 언어(원인 배지 · 파일 트리 · 패치 제안)로.",
+    dev:"댓글 게시 + 상태 전환 + 레이블, JIRA_ANALYSIS_LOG upsert(trace_id), dev_answer는 게시 후 LLM이 별도 생성해 SOURCE_FIX_CANDIDATE에 저장."},
+  learn:{line:"l6", name:"학습 환류", code:"learning-events",
+    desc:"종점이자 시발점. 처리 결과가 학습 이벤트로 발행되어 패턴 지식에 쌓이고, 다음 이슈는 이 지식과 먼저 대조됩니다. 노선은 원환선입니다.",
+    dev:"Case A(AI 성공 → 자동 등록) + Case B(Done 전환 → 사람 해결책 학습). 등록 패턴은 대시보드 '검토 대기'에서 승인제 운영."}
+};
+
+const panel = {
+  badge:document.getElementById("sp-badge"),
+  title:document.getElementById("sp-title"),
+  code:document.getElementById("sp-code"),
+  desc:document.getElementById("sp-desc"),
+  dev:document.getElementById("sp-dev")
+};
+let currentStn=null;
+function showStn(id){
+  const d=STN[id]; if(!d) return;
+  if(currentStn) currentStn.classList.remove("on");
+  currentStn=document.querySelector(`.stn[data-id="${id}"]`);
+  if(currentStn) currentStn.classList.add("on");
+  panel.badge.style.background=LINES[d.line].c;
+  panel.badge.textContent=LINES[d.line].n;
+  panel.title.firstChild.textContent=d.name+" ";
+  panel.code.textContent=d.code;
+  panel.desc.textContent=d.desc;
+  panel.dev.innerHTML="<b>개발자 노트</b> — "+d.dev;
+}
+document.querySelectorAll(".stn").forEach(g=>{
+  g.addEventListener("click",()=>showStn(g.dataset.id));
+  g.addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "){e.preventDefault();showStn(g.dataset.id);}
+  });
+});
+
+/* ───────── 노선도 가로 스크롤 힌트 ───────── */
+const mapwin=document.querySelector(".mapwin");
+const mapscroll=document.querySelector(".mapscroll");
+function updateMapEdge(){
+  const end=mapscroll.scrollLeft+mapscroll.clientWidth >= mapscroll.scrollWidth-8;
+  mapwin.classList.toggle("at-end",end);
+}
+mapscroll.addEventListener("scroll",updateMapEdge,{passive:true});
+addEventListener("resize",updateMapEdge);
+updateMapEdge();
+
+/* ───────── 게이트 재생 ───────── */
+const gates=[...document.querySelectorAll(".gate")];
+const playBtn=document.getElementById("gateplay");
+const mrDone=document.getElementById("mrdone");
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let playing=false;
+function resetGates(){
+  gates.forEach(g=>{g.classList.remove("pass","now");g.querySelector(".verdict").textContent="대기";});
+  mrDone.classList.remove("on");
+}
+async function playGates(){
+  if(playing) return; playing=true;
+  playBtn.disabled=true; resetGates();
+  const wait=ms=>new Promise(r=>setTimeout(r,reduced?0:ms));
+  const verdicts=["파일 실존 확인","exact 매칭","균형 정상","사용례 교차 확인","3/3 승인"];
+  for(let i=0;i<gates.length;i++){
+    gates[i].classList.add("now");
+    gates[i].querySelector(".verdict").textContent="검증 중…";
+    await wait(700);
+    gates[i].classList.remove("now");
+    gates[i].classList.add("pass");
+    gates[i].querySelector(".verdict").textContent="통과 · "+verdicts[i];
+    await wait(160);
+  }
+  await wait(250);
+  mrDone.classList.add("on");
+  playBtn.textContent="↺ 다시 재생";
+  playBtn.disabled=false; playing=false;
+}
+playBtn.addEventListener("click",playGates);
+
+/* ───────── 스크롤 리빌 ───────── */
+if(!reduced){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});
+  },{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+  document.querySelectorAll(".fx,.fx-g").forEach(el=>io.observe(el));
+}else{
+  document.querySelectorAll(".fx,.fx-g").forEach(el=>el.classList.add("in"));
+}
+</script>
+</body>
+</html>

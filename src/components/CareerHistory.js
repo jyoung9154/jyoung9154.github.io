@@ -68,7 +68,12 @@ export default function CareerHistory() {
                             </div>
                         ))}
 
-                        <p className="r-ch-tags">{project.tags.join(' · ')}</p>
+                        <p className="r-ch-tags">
+                            {project.tags.join(' · ')}
+                            {project.link && (
+                                <> · <a href={`https://jyoung9154.github.io${project.link}`} target="_blank" rel="noopener noreferrer">{`https://jyoung9154.github.io${project.link}`}</a></>
+                            )}
+                        </p>
                     </article>
                 ))}
             </Section>

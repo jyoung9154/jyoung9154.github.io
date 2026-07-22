@@ -44,6 +44,8 @@ const careerProjects = [
             },
         ],
         tags: ['LangGraph', 'Spring Boot 3.5', 'Java 17', 'Azure OpenAI', 'Milvus', 'MySQL', 'Kafka', 'Redis', 'React 18', 'MCP'],
+        link: '/previews/jira-ai.html',
+        linkLabel: '시스템 프리뷰 보기',
     },
     {
         id: 'mail',
