@@ -302,13 +302,13 @@
                 <figure class="diagram">
 <pre class="mermaid">
 timeline
-  title 개발 이력 타임라인 (재직 기간과 커밋 확인 기간)
-  2018.09 ~ 2022.06 : 더존비즈온 전자결재팀 : Amaranth 10 전자결재 (커밋 2019.11 ~ 2022.06) : 데이터 이관 도구 (커밋 2021.04 ~ 2022.06)
+  title 개발 이력 타임라인
+  2018.09 ~ 2022.06 : 더존비즈온 전자결재팀 : Amaranth 10 전자결재 (2019.11 ~ 2022.06) : 데이터 이관 도구 (2021.04 ~ 2022.06)
   2022.09 ~ 2024.05 : World Travel 6대륙 41개국 550일
-  2024.07 ~ 2026.08 : 더존비즈온 메일팀 : Amaranth 10 메일 3계층·프런트 (커밋 2024.08 ~ 2026.08) : Bizbox Alpha 레거시 메일 (커밋 2024.10 ~ 2025.06)
-  2026.04 ~ 현재 : AI 워크플로 전담 : JIRA-AI 분석·자동화 (커밋 2026.04 ~) : IssueFlow 범용 엔진 (커밋 2026.09 ~)
+  2024.07 ~ 2026.08 : 더존비즈온 메일팀 : Amaranth 10 메일 3계층·프런트 (2024.08 ~ 2026.08) : Bizbox Alpha 레거시 메일 (2024.10 ~ 2025.06)
+  2026.04 ~ 현재 : AI 워크플로 전담 : JIRA-AI 분석·자동화 (2026.04 ~) : IssueFlow 범용 엔진 (2026.09 ~)
 </pre>
-                    <figcaption>재직 기간은 본인 기재이며, 괄호 안은 커밋이 실제로 확인되는 기간</figcaption>
+                    <figcaption>괄호 안은 해당 작업이 실제로 진행된 기간</figcaption>
                 </figure>
             </aside>
         </div>
@@ -326,9 +326,9 @@ timeline
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>Java 17 · Spring Boot · LangGraph4j 1.7 · Spring AI · Azure OpenAI · Kafka · Redis · MariaDB/Flyway · React 18 + TypeScript</p>
-                    <span>커밋 2026.04 ~ 2026.09 · 937건 (원격에서 다시 확인한 건 904건)</span>
+                    <span>2026.04 ~ 2026.09</span>
                 </div>
-                <strong>사내 단독 개발</strong>
+                <strong>1인 개발 · 운영중</strong>
             </div>
             <p class="flow-note">모든 분석은 유사 이슈·사내 지식·GitLab 소스 수집을 선행합니다. 근거가 부족한 답변은 재조사 후에도 미충족 시 통과하지 않습니다. 미검증 지식은 검색에 노출되지 않고, 실패한 분석은 60분 뒤 재접수됩니다. 무토큰 요청은 401, 권한 부족은 403이며 테스트로 고정했습니다. 외부 시스템 등록은 담당자 승인과 예약 시점 재검증 없이 실행되지 않습니다.</p>
             <p class="flow-note">미완 항목도 있습니다. 답변 정확도 개선폭과 담당자 처리시간 단축은 측정하지 못해 수치를 기재하지 않았습니다.</p>
@@ -510,7 +510,7 @@ stateDiagram-v2
                 </div>
             </div>
             <div class="evidence-note">
-                <p>이 항목 커밋 937건 중 428건에 Claude 계열 공동 저자 트레일러가 있습니다. 제가 한 일은 문제를 정하고, 승인과 재확인과 상한을 어디에 둘지 정하고, 결함을 찾아 다시 검수하고, 테스트로 경계를 고정하는 것이었습니다. 코드를 한 줄씩 다 손으로 친 건 아닙니다.</p>
+                <p>이 항목은 AI 코딩 도구와 함께 작업했고 해당 커밋에 공동 저자로 기록했습니다. 제가 맡은 것은 문제 정의, 승인·재검증·상한의 배치 지점 결정, 결함 발견과 재검수, 테스트를 통한 경계 고정입니다.</p>
             </div>
         </article>
     </section>
@@ -527,9 +527,9 @@ stateDiagram-v2
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>Java 17 · Spring Boot · PostgreSQL/Flyway · MCP · React 18 + @xyflow/react</p>
-                    <span>커밋 2026.09 · 로컬 전용 94건 (baseline, snapshot, 분할 커밋 포함)</span>
+                    <span>2026.09 ~ 현재 · 1인 개발</span>
                 </div>
-                <strong>로컬 개발 단계</strong>
+                <strong>1인 개발</strong>
             </div>
             <p class="flow-note">Jira 이슈 1건이 저장된 워크플로를 API부터 저장소까지 완주합니다. 쓰기 도구는 기본 dry-run이며 실제 실행은 원장을 경유하고, 이를 테스트로 확인했습니다. step·시간·AI 호출·token·cost 상한을 넘으면 중단합니다(노드 경계 검사라 최대 N-1회 초과 가능). 비밀은 정의 JSON에 평문으로 남지 않으며, 승인은 링크 미리보기(GET)만으로 확정되지 않습니다.</p>
             <p class="flow-note">도구별 노드 대신 서버가 `tools/list`로 선언하는 목록을 읽는 `mcp.tool` 노드 하나로 통일했습니다. 서버가 `readOnlyHint`를 제공하지 않으면 쓰기로 간주합니다. 첫 슬라이스는 AI 합성 없이 조회·파싱·분기·기록만으로 관통시킨 뒤 검증 단계를 추가했습니다. 원격 반영·배포, 외부 MCP 서버 상호운용 테스트, 옛 secret 일괄 재암호화는 미수행입니다. 시나리오 1건 추가 소요 시간도 아직 측정하지 못했습니다.</p>
@@ -595,7 +595,7 @@ sequenceDiagram
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>Spring Boot · 전자정부 프레임워크 · MyBatis/MariaDB · Kafka · Redis · Elasticsearch 7/8 · OpenSearch 2 · SMTP/IMAP/POP3 · Tika · Kubernetes · S3</p>
-                    <span>커밋 2024.08 ~ 2026.08 · 백엔드 3저장소 855건 (머지 제외 575건) · authored MR 36건</span>
+                    <span>2024.08 ~ 2026.08 · 백엔드 3저장소</span>
                 </div>
                 <strong>3계층 개발</strong>
             </div>
@@ -724,7 +724,7 @@ sequenceDiagram
                 </div>
 
                 <div class="hist-item">
-                    <div class="hist-head"><h4>그 밖에 커밋으로 확인한 것</h4><span class="hist-date">2024.08 ~ 2026.07</span></div>
+                    <div class="hist-head"><h4>그 밖에 확인된 작업</h4><span class="hist-date">2024.08 ~ 2026.07</span></div>
                     <div class="hist-rows">
                         <p><b class="hl hl-im">수행</b><span>2024.08~11 전자정부 프레임워크 적용과 컨트롤러 업무 로직의 서비스 이전(18개 파일). 2025.06 Gradle 6.9 → 8.10, JDK 17 전환. 2025.02 메일 통계 게이트웨이 API, 2025.04 S3 오브젝트 스토리지 설정, 2025.01 상담·법무 모듈 메일 반출 연계 개발. 2025.07 90일 기준선·14일 최대·당일 발송량을 SQL로 계산하는 탈취 의심 조회, 2026.03 Outlook 1,000건 초과 발송 차단 추가. 2025.09 메일함 카운트의 Redis 부분 조회 전환, 2025.10 자동응답 RFC 3834 헤더 부여, 2025.11 groupSeq 기반 K8s 서비스 라우팅과 AuthAspect 도입. 2025.12 Elasticsearch 마이그레이션의 bulk 요청·클라이언트 누적 해소. 메일엔진은 2024.09 SSL 인증서 동기화·백업, 2025.03 keystore 실패 시 DB 재구성, 2024.11 요청 포트 기반 방화벽 확인, 2026.06 ThreadLocal Cipher 적용. 2026.07 임시저장 첨부의 ECM 전송 시 선두 손상 문제 해결과 단위 테스트 추가</span></p>
                         <p><b class="hl hl-lm">한계</b><span>"메일 속도 개선" 커밋에 벤치마크가 없어 수치 미기재. OOM은 방어 코드 추가 수준이며 완전 해결로 기술하지 않음. 인증서 초기 커밋 로그의 비밀번호 노출 구간은 정리 필요</span></p>
@@ -746,7 +746,7 @@ sequenceDiagram
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>React 16 · Webpack 5 · SSE · Web Crypto</p>
-                    <span>커밋 2024.09 ~ 2026.08 · 653건 · authored MR 44건 (머지 40건)</span>
+                    <span>2024.09 ~ 2026.08</span>
                 </div>
                 <strong>프런트 개발</strong>
             </div>
@@ -774,10 +774,10 @@ sequenceDiagram
             </figure>
             <div class="hist-list">
                 <div class="hist-item">
-                    <div class="hist-head"><h4>커밋으로 확인한 것</h4><span class="hist-date">2024.09 ~ 2026.08</span></div>
+                    <div class="hist-head"><h4>확인된 작업</h4><span class="hist-date">2024.09 ~ 2026.08</span></div>
                     <div class="hist-rows">
                         <p><b class="hl hl-im">수행</b><span>2024.09~10 JKS 인증서 업로드 화면과 SSE 진행 메시지 개발. 2025.03 목록·본문·빈 상태·페이지 이동의 컴포넌트 분리, 2025.09 초기 메뉴·부가정보·카운트 API 분리와 인쇄 전달 데이터 축소. 2025.11 발송상태 배지·시간 툴팁 추가와 원문 부재 건의 발송실패 표기. 2025.12 ONE AI 검증 팝업·SSE·승인 플래그 연결. 2026.02 AI 정리 메일의 선택 삭제·읽음 처리·수신차단 화면, 2026.03 주소 기반 자동분류 규칙과 기존 메일 이동, 2026.04~08 delivery-status·빈 Return-Path·X-Failed-Recipients 헤더 기반 반송 판별, 2026.07 CRA → Webpack 5 전환, 2026.08 대기발송 큐와 Web Crypto 거래 ID 개발</span></p>
-                        <p><b class="hl hl-lm">한계</b><span>1만 줄 이상 추가된 커밋에 기존 코드 이동분이 포함되어 신규 작성량으로 계상하지 않음. 자동분류는 주소 규칙 기반이며 AI 분류가 아님. 리뷰·온보딩 효율 미측정</span></p>
+                        <p><b class="hl hl-lm">한계</b><span>대규모 추가 커밋에 기존 코드 이동분이 포함되어 신규 작성량으로 계상하지 않음. 자동분류는 주소 규칙 기반이며 AI 분류가 아님. 리뷰·온보딩 효율 미측정</span></p>
                     </div>
                 </div>
             </div>
@@ -796,7 +796,7 @@ sequenceDiagram
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>Spring MVC · JSP · JKS/KeyStore · XML DOM · RestTemplate multipart</p>
-                    <span>커밋 2024.10 ~ 2025.06 · 3저장소 49건 (머지 제외 38건은 diff를 전부 읽었습니다)</span>
+                    <span>2024.10 ~ 2025.06 · 3저장소</span>
                 </div>
                 <strong>Admin – Mailbox 연동</strong>
             </div>
@@ -846,7 +846,7 @@ sequenceDiagram
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>Spring MVC · MyBatis(MariaDB · Oracle) · React · 마이크로프런트</p>
-                    <span>커밋 2019.11 ~ 2022.06 · 4저장소 1,259건 · diff를 읽은 대표 커밋 25건</span>
+                    <span>2019.11 ~ 2022.06 · 4저장소</span>
                 </div>
                 <strong>초기 멤버</strong>
             </div>
@@ -874,7 +874,7 @@ sequenceDiagram
             </figure>
             <div class="hist-list">
                 <div class="hist-item">
-                    <div class="hist-head"><h4>커밋으로 확인한 것</h4><span class="hist-date">2019.11 ~ 2022.06</span></div>
+                    <div class="hist-head"><h4>확인된 작업</h4><span class="hist-date">2019.11 ~ 2022.06</span></div>
                     <div class="hist-rows">
                         <p><b class="hl hl-im">수행</b><span>2019.11 일괄결재 요청 파싱과 사용자 컨텍스트, 2019.12 참조문서·열람자 API 전환. 2020.01 인수인계 관리 API와 검색 조건, 2020.02 결재 Role 관리 API(페이징·선택 삭제), 2020.05 자주 쓰는 양식의 자동·수동 구성, 2020.06 공통 Excel 내보내기, 2020.08 문서 열람 권한 API와 그리드 진입 통제, 2020.10 부서 결재선 전용 양식의 일괄결재 비밀번호 확인. 2021.02 필수 결재선 속성, 2021.03 결재선 상태 표시와 접수 승인·반려 API 연결, 2021.05 결재 취소 시 직전 결재자 보정, 2021.07 재기안 후결 제외(두 DB 동시), 2021.08 이전문서 ECM 첨부 다운로드, 2021.12 임시보관 선택·일괄 상신. 2022.01 결재 프로세스 메뉴 권한 전달, 2022.03 상신문서 전체·진행·종결 필터, 2022.05 외부 연동 참조문서 ID 전달</span></p>
                         <p><b class="hl hl-lm">한계</b><span>"결재양식관리 성능 개선" 커밋은 실제로는 상태·속성 참조 정리이며 측정치 부재. 전자결재 전체 단독 설계로 기술하지 않음</span></p>
@@ -896,7 +896,7 @@ sequenceDiagram
                 <div>
                     <h3>무엇이 되게 했나</h3>
                     <p>Spring Boot · JPA · WebFlux SSE · RoutingDataSource · JSch SFTP</p>
-                    <span>커밋 2021.04 ~ 2022.06 · eapmt 99건 + migtool 19건 (같은 SHA는 한 번만 셌습니다)</span>
+                    <span>2021.04 ~ 2022.06</span>
                 </div>
                 <strong>이관 도구 설계·개발</strong>
             </div>
@@ -917,7 +917,7 @@ flowchart TD
             </figure>
             <div class="hist-list">
                 <div class="hist-item">
-                    <div class="hist-head"><h4>커밋으로 확인한 것</h4><span class="hist-date">2021.04 ~ 2022.06</span></div>
+                    <div class="hist-head"><h4>확인된 작업</h4><span class="hist-date">2021.04 ~ 2022.06</span></div>
                     <div class="hist-rows">
                         <p><b class="hl hl-im">수행</b><span>2021.04 JPA 복합 키(@IdClass) 매핑, SSE 진행 전달(Channel, MigInfoChannels), SFTP 양식 파일 탐색 개발. 2022.04 그룹별 목적지 DataSource, 2022.05 본문 이관 단계 분리와 시작 페이지 지정, 2022.06 테이블 간 페이지 상태 초기화와 타입 기반 서비스 선택 적용. 수신자 삭제의 묶음 호출 전환은 2020.10 backend-eap</span></p>
                         <p><b class="hl hl-lm">한계</b><span>SSE 채널 키가 1L로 고정되어 작업별 분리 미지원. 양식 변환은 SFTP 탐색까지만 확인. 무손실 이관 보장이 아니라 중단 지점 재개를 지원하는 수준</span></p>
