@@ -30,8 +30,8 @@ export default function Header() {
                     </NavLink>
                 </nav>
                 <div className="flex items-center gap-4">
-                    {/* 정적 페이지(public/resume-v2.html)라 SPA 라우터를 타지 않는 일반 앵커 사용 */}
-                    <a href="/resume-v2.html" className="btn-resume">
+                    {/* 정적 페이지(public/resume-v3.html)라 SPA 라우터를 타지 않는 일반 앵커 사용 */}
+                    <a href="/resume-v3.html" className="btn-resume">
                         <span className="material-symbols-outlined text-sm">description</span>
                         이력서
                     </a>

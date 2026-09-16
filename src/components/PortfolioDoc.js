@@ -13,13 +13,13 @@ function absoluteLink(link) {
 // 회사 프로젝트(JIRA-AI)를 포트폴리오 사례 형식으로 압축 — 상세는 경력기술서가 정본
 const jiraAi = careerProjects.find(p => p.id === 'jira-ai');
 const companyProject = {
-    title: 'JIRA-AI — 이슈 자동 분석·응답 AI 시스템',
+    title: 'JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템',
     status: '사내 단독 개발',
     period: jiraAi.dateLabel,
     oneLiner:
-        '문의 이슈가 등록되면 사내 지식·소스코드·운영로그를 대조해 근거 있는 1차 답변을 자동 생성하는 AI 시스템 — 기획부터 아키텍처 설계·개발까지 전 과정을 혼자 수행',
+        '문의 이슈가 등록되면 사내 지식과 GitLab 소스, 비슷한 이슈를 대조해 근거가 붙은 1차 답변을 달고, 반복되는 운영 요청은 담당자 승인만 받아 처리하는 AI 시스템. 기획부터 설계, 개발까지 맡았습니다',
     why: '"쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가"라는 의문에서 출발',
-    arch: 'LangGraph 12-노드 오케스트레이션(패턴 즉답 LLM 0회·직통·추론 3모드 라우팅), 4원천 RAG(Milvus) + 코드 5단계 추적, 자동 패치 5중 검증 게이트, 자가학습 루프',
+    arch: 'LangGraph4j 15노드 워크플로(근거 수집, 코드 검색, 합성, 검수, 재하강), GitLab 소스로 만드는 RAG 코드 인덱스, 담당자 지식 승인 격리, Kafka DLT 지연 재접수, JWT 역할 규칙과 SSO, 메일 도메인 구축 승인 상태 기계',
     tags: jiraAi.tags,
     link: jiraAi.link,
 };

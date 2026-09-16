@@ -5,7 +5,8 @@ import { resume } from '../data/resume';
 
 const DOCS = [
     { to: '/resume', label: '이력서' },
-    { href: '/resume-v2.html', label: '상세 이력서' },
+    { href: '/resume-v3.html', label: '상세 이력서' },
+    { href: '/portfolio-v3.html', label: '흐름도 포트폴리오' },
     { to: '/career-history', label: '경력기술서' },
     { to: '/portfolio', label: '포트폴리오' },
 ];

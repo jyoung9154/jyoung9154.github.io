@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="박재영 — AI-Native Full-Stack Developer & Agentic Workflow Engineer 이력서 V2">
+    <title>박재영 | AI-Native Full-Stack Developer</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <style>
+    :root{color:#152033;background:#f7f8fb;font-family:"Pretendard Variable",Pretendard,Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-synthesis:none;text-rendering:optimizeLegibility}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-width:320px;word-break:keep-all;overflow-wrap:break-word}
+    a{color:inherit;text-decoration:none}
+    .app{min-height:100vh;background:#f7f8fb}
+    .nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px clamp(20px,5vw,72px);border-bottom:1px solid rgba(205,211,224,.82);background:#ffffffe6;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+    .brand{font-weight:800}
+    .nav-links{display:flex;gap:28px;color:#647086;font-size:14px;font-weight:650}
+    .nav-links a:hover{color:#1f6feb}
+    .nav-actions{display:flex;flex-wrap:wrap;gap:8px}
+    button.button{cursor:pointer;font-family:inherit}
+    .button{display:inline-flex;min-height:44px;align-items:center;justify-content:center;gap:9px;border-radius:8px;padding:11px 16px;font-size:14px;font-weight:750;transition:transform .18s ease,border-color .18s ease,background .18s ease,color .18s ease}
+    .button:hover{transform:translateY(-1px)}
+    .button-dark{background:#152033;color:#fff}
+    .button-primary{background:#1f6feb;color:#fff;box-shadow:0 16px 32px #1f6feb38}
+    .button-outline{border:1px solid #d7ddea;background:#fff}
+    .button-light{background:#fff;color:#152033}
+    .button-footer-outline{border:1px solid rgba(255,255,255,.25);color:#fff}
+    .hero{border-bottom:1px solid #dfe4ee;background:linear-gradient(135deg,rgba(31,111,235,.1),transparent 34%),linear-gradient(315deg,rgba(20,184,166,.12),transparent 30%),#fff}
+    .hero-inner{display:grid;grid-template-columns:minmax(220px,.58fr) minmax(0,1fr);align-items:stretch;gap:48px;max-width:1180px;margin:0 auto;padding:clamp(72px,9vw,118px) 24px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#1f6feb;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .lead,.support{max-width:760px;color:#46556b;line-height:1.8}
+    .lead{margin:28px 0 0;font-size:clamp(18px,2vw,21px)}
+    .support{margin:12px 0 0;font-size:16px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .quick-panel,.panel,.career-card,.project-card,.education-card{border:1px solid #dfe4ee;border-radius:8px;background:#fff;box-shadow:0 16px 40px #1520330f}
+    .quick-panel{align-self:start;padding:28px}
+    .hero-photo-frame{align-self:stretch;justify-self:center;width:min(100%,340px);aspect-ratio:4/5;overflow:hidden;border:1px solid #dfe4ee;border-radius:8px;background:#eef5ff;box-shadow:0 24px 54px #1520331f}
+    .hero-photo{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+    .profile-panel{align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:28px}
+    .profile-panel h1{margin:18px 0 0;color:#101827;font-size:clamp(24px,3.8vw,30px);line-height:1.12}
+    .profile-panel h1 span{display:block;margin-top:8px;color:#1f6feb;font-size:clamp(15px,2.2vw,18px)}
+    .profile-panel .lead,.profile-panel .support{max-width:none}
+    .profile-panel .lead{margin-top:22px;font-size:clamp(13px,1.7vw,15px)}
+    .profile-panel .support{font-size:13px}
+    .profile-note{margin-top:18px;border-top:1px solid #dfe4ee;padding-top:18px}
+    .profile-note p{margin:0;color:#59677e;font-size:12px;line-height:1.7}
+    .profile-note p+p{margin-top:8px}
+    .profile-panel .button{font-size:12px}
+    .quick-profile-grid{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+    .quick-profile-item{min-height:112px;border:1px solid #dfe4ee;border-radius:8px;background:#fff;padding:18px;box-shadow:0 16px 40px #1520330f}
+    .quick-profile-item strong,.quick-profile-item span{display:block}
+    .quick-profile-item strong{margin-bottom:8px;color:#1f6feb;font-size:14px}
+    .quick-profile-item span{color:#59677e;font-size:14px;line-height:1.55}
+    .quick-profile-item span span{display:inline}
+    .section{max-width:1180px;margin:0 auto;padding:72px 24px}
+    .section-band{max-width:none;border-block:1px solid #dfe4ee;background:#fff}
+    .section-band>*{max-width:1180px;margin-inline:auto}
+    .section-title{margin-bottom:30px}
+    .section-title h2{margin:12px 0 0;color:#101827;font-size:clamp(30px,4vw,44px);line-height:1.15}
+    .section-title p{max-width:760px;margin:12px 0 0;color:#66748a;line-height:1.75}
+    .about-grid{display:grid;grid-template-columns:2fr 1fr;gap:22px}
+    .panel{padding:24px}
+    .panel h3,.career-card h3,.project-card h3,.education-card h3{margin:0;color:#101827}
+    .panel p,.panel li,.career-card p,.career-card li,.project-card p,.project-card li,.education-card p{color:#59677e;line-height:1.72}
+    .panel-wide p{margin:0;font-size:16px}
+    .panel-wide p+p{margin-top:14px}
+    .panel-accent,.soft-accent{background:#eef5ff;border-color:#cfe0ff}
+    .check-list,.three-grid ul,.skill-detail ul{list-style:none;margin:16px 0 0;padding:0}
+    .check-list li{display:flex;align-items:flex-start;gap:10px;margin-top:12px}
+    .check-list li strong{color:#101827}
+    .check-list svg{flex:0 0 auto;color:#1f6feb;margin-top:4px}
+    .career-card,.project-card,.education-card{padding:28px}
+    .career-list{display:grid;gap:22px}
+    .card-heading,.project-head,.education-card{display:flex;justify-content:space-between;gap:24px}
+    .card-heading p{margin:8px 0 2px;color:#1f6feb;font-size:18px;font-weight:750}
+    .card-heading span,.education-card>span{color:#66748a;font-size:14px}
+    .card-heading strong{align-self:flex-start;border-radius:999px;background:#fff;padding:9px 13px;color:#39475c;font-size:14px;box-shadow:inset 0 0 0 1px #dfe4ee;white-space:nowrap}
+    .career-description{max-width:900px;margin:24px 0 0}
+    .card-links{margin:10px 0 0}
+    .card-links a{display:inline-flex;align-items:center;gap:6px;color:#1f6feb;font-size:14px;font-weight:750}
+    .card-links a:hover{text-decoration:underline}
+    .three-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
+    .three-grid>div,.project-detail>div{border-radius:8px;background:#f5f7fb;padding:18px}
+    .three-grid h4{margin:0 0 12px;color:#101827}
+    .three-grid li{display:flex;align-items:flex-start;gap:7px;margin-top:7px;font-size:14px;line-height:1.5}
+    .three-grid li::before{content:"";flex:0 0 auto;width:5px;height:5px;border-radius:50%;background:#59677e;margin-top:8px}
+    .text-stack{display:grid;gap:8px}
+    .text-stack p{margin:0;font-size:14px;line-height:1.58}
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{display:inline-flex;align-items:center;min-height:30px;border:1px solid #d7ddea;border-radius:999px;background:#fff;padding:6px 10px;color:#47566c;font-size:13px;font-weight:650}
+    .project-list{display:grid;gap:22px}
+    .project-card{transition:transform .18s ease,box-shadow .18s ease}
+    .project-card:hover{transform:translateY(-2px);box-shadow:0 22px 54px #1520331a}
+    .project-head p{max-width:840px;margin:10px 0 0}
+    .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+    .meta-row span{border-radius:999px;background:#eef5ff;padding:6px 10px;color:#1f6feb;font-size:12px;font-weight:800}
+    .meta-row span+span{background:#f0f2f6;color:#66748a}
+    .icon-actions{display:flex;gap:8px}
+    .icon-actions a{display:inline-flex;width:42px;height:42px;align-items:center;justify-content:center;border:1px solid #d7ddea;border-radius:8px;color:#59677e;flex:0 0 auto}
+    .icon-actions a:hover{border-color:#a9c7ff;color:#1f6feb}
+    .project-card>.pill-row{margin-top:18px}
+    .project-summary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+    .project-summary-card{border:1px solid #dfe4ee;border-radius:8px;background:#f8fafc;padding:16px 18px}
+    .project-summary-card strong{display:block;color:#1f6feb;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .project-summary-card p{margin:10px 0 0;color:#46556b;font-size:14px;line-height:1.65}
+    .project-screenshots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:20px}
+    .project-screenshots.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .project-screenshots figure{overflow:hidden;margin:0;border:1px solid #dfe4ee;border-radius:8px;background:#f8fafc}
+    .project-screenshots img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;transition:transform .18s ease}
+    .project-screenshots figcaption{border-top:1px solid #dfe4ee;background:#fff;padding:9px 11px;color:#59677e;font-size:12px;font-weight:700}
+    .shot:not(.missing){cursor:zoom-in}
+    .shot:not(.missing):hover img{transform:scale(1.02)}
+    .lightbox{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px}
+    .lightbox-backdrop{position:absolute;inset:0;border:0;background:#0a0f19d1;cursor:zoom-out}
+    .lightbox-content{position:relative;z-index:1;display:grid;width:min(1120px,100%);max-height:calc(100vh - 48px);place-items:center;gap:14px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:#101827;padding:54px 58px 18px;box-shadow:0 28px 80px #00000061}
+    .lightbox-content img{display:block;max-width:100%;max-height:calc(100vh - 180px);border-radius:8px;background:#fff;object-fit:contain}
+    .lightbox-content p{margin:0;color:#d7ddea;font-size:13px;font-weight:700;text-align:center}
+    .lightbox-close,.lightbox-nav{position:absolute;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:#ffffff1a;color:#fff;cursor:pointer}
+    .lightbox-close:hover,.lightbox-nav:hover{background:#ffffff2e}
+    .lightbox-close{top:14px;right:14px;width:40px;height:40px}
+    .lightbox-nav{top:50%;width:44px;height:44px;transform:translateY(-50%)}
+    .lightbox-nav-prev{left:12px}
+    .lightbox-nav-next{right:12px}
+    /* 이미지 플레이스홀더 — 파일이 없으면 안내 박스, public/resume-v2/에 파일을 넣으면 자동 표시 */
+    .ph{display:none}
+    .shot.missing img{display:none}
+    .shot.missing .ph{display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;aspect-ratio:16/9;padding:10px;text-align:center;background:repeating-linear-gradient(45deg,#f1f5f9,#f1f5f9 8px,#f8fafc 8px,#f8fafc 16px)}
+    .ph strong{font-size:10px;color:#1f6feb;letter-spacing:.08em;text-transform:uppercase}
+    .ph code{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px;color:#47566c;background:#fff;border:1px solid #d7ddea;border-radius:6px;padding:2px 6px}
+    .ph span{font-size:11px;color:#66748a;line-height:1.45}
+    .extra-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+    .extra-grid h4{margin:0 0 6px;color:#101827}
+    .extra-list{list-style:none;margin:0;padding:0}
+    .extra-list li{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid #eef1f6;font-size:14px;line-height:1.55}
+    .extra-list li:last-child{border-bottom:0}
+    .extra-list a{color:#101827;font-weight:750}
+    .extra-list a:hover{color:#1f6feb}
+    .extra-list .desc{color:#59677e}
+    .extra-list .tag{flex:0 0 auto;color:#8a94a8;font-size:12px;white-space:nowrap}
+    .repo-more{display:inline-flex;align-items:center;gap:5px;margin-left:8px;vertical-align:2px;border:1px solid #cfe0ff;background:#eef5ff;color:#1f6feb;border-radius:999px;padding:3px 10px;font-size:11.5px;font-weight:750}
+    .repo-more:hover{background:#e0edff}
+    .hist-tags{margin-top:14px}
+    .hist-list{display:grid;gap:10px;margin-top:20px}
+    .hist-item{border:1px solid #eef1f6;border-radius:8px;background:#f8fafc;padding:16px 18px}
+    .hist-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+    .hist-head h4{margin:0;color:#101827;font-size:15px}
+    .hist-date{color:#8a94a8;font-size:12px;font-weight:700;white-space:nowrap}
+    .hist-rows{display:grid;gap:6px;margin-top:10px}
+    .hist-rows p{display:flex;gap:9px;align-items:flex-start;margin:0;font-size:13.5px;line-height:1.6;color:#59677e}
+    .hl{flex:0 0 auto;display:inline-flex;min-width:36px;justify-content:center;border-radius:6px;padding:2px 7px;font-size:11px;font-weight:800;margin-top:3px}
+    .hl-bg{background:#f0f2f6;color:#66748a}
+    .hl-im{background:#eef5ff;color:#1f6feb}
+    .hl-rs{background:#ecfdf5;color:#059669}
+    .skill-summary,.skill-detail{max-width:1180px}
+    .skill-detail svg{color:#1f6feb}
+    .skill-detail h3{margin-top:14px}
+    .skill-detail li{margin-top:10px}
+    .education-list{display:grid;gap:16px}
+    .education-card{align-items:flex-start;flex-wrap:wrap}
+    .education-card p{margin:8px 0 0;color:#1f6feb;font-weight:750}
+    .education-card .pill-row{flex-basis:100%}
+    .footer{background:#101827;color:#fff;padding:58px 24px}
+    .footer>div{max-width:1180px;margin:0 auto}
+    .footer p{max-width:none;margin:0;font-size:clamp(20px,2.6vw,30px);font-weight:850;line-height:1.3}
+    @media screen and (max-width:860px){
+        .nav{align-items:flex-start}
+        .nav-links{display:none}
+        .hero-inner,.about-grid,.three-grid,.extra-grid{grid-template-columns:1fr}
+        .hero-inner{padding-top:56px}
+        .hero-photo-frame{max-width:420px;height:auto}
+        .hero-photo{height:auto;aspect-ratio:4/5}
+        .quick-profile-grid,.project-screenshots,.project-screenshots.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+        .project-summary-grid{grid-template-columns:1fr}
+        .project-head,.card-heading{flex-direction:column}
+        .card-heading strong{white-space:normal}
+        .quick-panel{width:100%}
+    }
+    @media screen and (max-width:520px){
+        .nav{padding-inline:16px}
+        .button{width:100%}
+        .nav .button{width:auto;padding-inline:12px}
+        .section,.hero-inner{padding-inline:16px}
+        .career-card,.project-card,.education-card,.panel,.quick-panel{padding:20px}
+        .hero-photo-frame{max-width:none}
+        .profile-panel h1{font-size:30px}
+        .quick-profile-grid,.project-screenshots,.project-screenshots.cols-3{grid-template-columns:1fr}
+        .lightbox{padding:12px}
+        .lightbox-content{max-height:calc(100vh - 24px);padding:52px 12px 14px}
+        .lightbox-content img{max-height:calc(100vh - 160px)}
+        .lightbox-nav{top:auto;bottom:52px;width:40px;height:40px;transform:none}
+        .lightbox-nav-prev{left:14px}
+        .lightbox-nav-next{right:14px}
+    }
+    @media print{
+        *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+        :root{background:#fff}
+        body{zoom:.55}
+        .app{min-height:auto}
+        .nav,.lightbox{display:none!important}
+        figure.img-missing{display:none}
+        .section,.section-band{padding:22px 16px}
+        .hero-inner{padding:30px 16px;gap:24px}
+        .career-card,.project-card,.education-card,.panel{padding:20px}
+        .three-grid{margin-top:16px}
+        .career-description{margin:16px 0 0}
+        .career-list,.project-list{gap:16px}
+        .quick-panel,.panel,.career-card,.project-card,.education-card,.hero-photo-frame,.quick-profile-item{box-shadow:none}
+        .project-card:hover{transform:none;box-shadow:none}
+        .hist-item,.project-summary-card,.project-screenshots figure,.three-grid>div,.education-card,.quick-profile-item,.bot,.card-heading,.about-grid .panel,.skill-summary .panel,.skill-detail .panel,.project-card,.project-list .panel{break-inside:avoid}
+        .section-title,.card-heading,.project-head{break-after:avoid}
+        #projects{break-before:page}
+        .card-links,.icon-actions,.repo-more{display:none}
+        .actions a[href*="github.com"]::after{content:" · github.com/jyoung9154";font-size:12px;font-weight:600}
+        .profile-panel .actions a[href^="mailto:"]::after{content:" · jyoung_9154@naver.com";font-size:12px;font-weight:700}
+    }
+    @page{size:A4;margin:12mm}
+    
+    /* v3 additions */
+    .hl-lm{background:#fff7ed;color:#c2410c}
+    .hist-rows p code,.three-grid li code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:#f0f2f6;border-radius:4px;padding:0 4px}
+    .hist-rows p>span{min-width:0}
+    .hl-cr{background:#f0fdf4;color:#15803d}
+    .evidence-note{margin-top:22px;border:1px dashed #cfe0ff;border-radius:8px;background:#f8fbff;padding:16px 18px;color:#46556b;font-size:13.5px;line-height:1.65}
+    .evidence-note strong{color:#1f6feb}
+    .evidence-note p{margin:0}
+    .evidence-note p+p{margin-top:6px}
+    .diagram{margin:18px 0 0;border:1px solid #dfe4ee;border-radius:8px;background:#fff;padding:18px 18px 12px;overflow-x:auto}
+    .diagram pre.mermaid{margin:0;display:flex;justify-content:center;min-height:120px;font-size:14px}
+    .diagram pre.mermaid svg{max-width:100%;height:auto}
+    .diagram figcaption{margin-top:10px;color:#59677e;font-size:12.5px;font-weight:700;text-align:center}
+    .diagram-grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .diagram-grid .diagram{margin-top:14px}
+    .flow-note{margin:12px 0 0;color:#59677e;font-size:13.5px;line-height:1.65}
+    .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+    .toc a{border:1px solid #d7ddea;border-radius:999px;background:#fff;padding:7px 12px;color:#39475c;font-size:13px;font-weight:700}
+    .toc a:hover{border-color:#a9c7ff;color:#1f6feb}
+    .sha{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:#66748a;background:#f0f2f6;border-radius:6px;padding:1px 6px}
+    .status-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .status-row span{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
+    .st-ok{background:#ecfdf5;color:#059669}
+    .st-na{background:#fff7ed;color:#c2410c}
+    @media print{.diagram{break-inside:avoid;box-shadow:none}.toc{display:none}}
+
+    </style>
+
+</head>
+<body>
+<main class="app">
+    <nav class="nav">
+        <a href="#top" class="brand">박재영</a>
+        <div class="nav-links">
+            <a href="#career">Career</a>
+            <a href="#history">History</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+        </div>
+        <div class="nav-actions">
+            <button type="button" class="button button-outline" onclick="window.print()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+                PDF 다운로드
+            </button>
+            <a href="/portfolio-v3.html" class="button button-outline">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                포트폴리오
+            </a>
+            <a href="mailto:jyoung_9154@naver.com" class="button button-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                Contact
+            </a>
+        </div>
+    </nav>
+
+    <section id="top" class="hero">
+        <div class="hero-inner">
+            <div class="hero-photo-frame">
+                <img class="hero-photo" src="/resume-v2/profile.jpg" alt="박재영 프로필 사진">
+            </div>
+            <aside class="quick-panel profile-panel">
+                <h1>박재영<span>AI-Native Full-Stack Developer &amp; Agentic Workflow Engineer</span></h1>
+                <p class="lead">그룹웨어(전자결재, 메일)를 만드는 일을 오래 했습니다. 지금은 Jira 이슈를 AI가 먼저 읽고 근거를 붙여 답을 달아주는 시스템을 만들고 있습니다.</p>
+                <p class="support">기획부터 개발, 검증까지 역할을 나눈 AI 에이전트에게 맡기고, 판단과 마무리는 제가 합니다. 설계에서 배포와 자동화까지 끝까지 책임지는 편입니다.</p>
+                <div class="profile-note">
+                    <p>판단은 사람이, 설계·구현·테스트·리서치는 역할별 에이전트가 — 시스템이 틀릴 수 있는 지점에는 검증 게이트를 배치합니다.</p>
+                    <p>여기 적은 실무 내용은 제 GitLab 커밋을 하나하나 다시 확인한 것만 남겼습니다. 재 본 적 없는 숫자는 넣지 않았습니다.</p>
+                    <p>긍정적이고 밝은 ENFP — "안 되는 건 없다, 안 할 뿐이지"라는 마인드로 일합니다.</p>
+                </div>
+                <div class="actions">
+                    <a href="mailto:jyoung_9154@naver.com" class="button button-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                        Email
+                    </a>
+                    <a href="https://github.com/jyoung9154" target="_blank" rel="noreferrer" class="button button-outline">
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                        GitHub
+                    </a>
+                </div>
+            </aside>
+            <div class="quick-profile-grid">
+                <div class="quick-profile-item"><strong>직무</strong><span>AI-Native Full-Stack Developer / Agentic Workflow Engineer</span></div>
+                <div class="quick-profile-item"><strong>주요 기술</strong><span>Java, Spring Boot, React, LangGraph4j, MCP, RAG, Kafka, Kubernetes</span></div>
+                <div class="quick-profile-item"><strong>실무 경험</strong><span>더존비즈온 <span data-career-years>6년차</span>. 전자결재팀에서 시작해 메일팀을 거쳐 지금은 AI 워크플로를 맡고 있습니다</span></div>
+                <div class="quick-profile-item"><strong>강점</strong><span>사람이 판단할 자리를 남겨두는 AI 설계, 메일 서버 3계층을 직접 손본 경험, 시작한 건 끝까지 내놓는 것</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-title">
+            <div class="eyebrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                About
+            </div>
+            <h2>같은 일을 두 번 하지 않도록, 시스템으로 만드는 개발자</h2>
+        </div>
+        <div class="about-grid">
+            <article class="panel panel-wide">
+                <p>전자결재팀에서 시작해 메일팀을 거쳐, 지금은 LLM·RAG·MCP 기반 AI 워크플로우 개발을 전담합니다. <br>기업 고객이 매일 쓰는 그룹웨어를 만들다 보니, 빠른 것보다 안 깨지는 걸 먼저 생각하게 됐습니다. 좋아졌다는 말은 코드와 테스트로 보여줄 수 있을 때만 씁니다.</p>
+                <p>프로젝트 별 역할을 할당한 AI 에이전트 팀을 설계해 기획–개발–검증 전 과정을 수행합니다. 기술 스택 그 자체보다 기술의 용어와 개발 플로우를 파악하는 능력이 더 중요하다고 생각합니다.</p>
+                <p>이 이력서는 성과를 부풀리지 않기로 하고 다시 썼습니다. 예전 버전에 있던 "30초에서 4초", "500만 사용자" 같은 숫자는 근거를 찾지 못해서 뺐습니다. 대신 무엇이 어떻게 달라졌는지, 그리고 아직 못 한 게 무엇인지 같이 적었습니다.</p>
+            </article>
+            <article class="panel panel-accent">
+                <h3>핵심 강점</h3>
+                <ul class="check-list">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span><strong>설계자–워커 멀티에이전트 체계</strong> <br> — 난이도별 모델 라우팅으로 품질과 비용을 동시 통제</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span><strong>개발 환경의 시스템화</strong> <br> — 훅 기반 품질 게이트, 스킬 패키징, MCP 도구 연결</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span><strong>실패를 숨기지 않는 설계</strong> <br> — 실패한 작업은 버리지 않고 보관했다가 다시 처리하고, 애매하면 사람 검토로 넘깁니다</span>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                        <span><strong>근거로 말하기</strong> <br> — 커밋과 테스트로 확인한 것만 적고, 재 보지 않은 숫자는 쓰지 않습니다</span>
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section id="career" class="section section-band">
+        <div class="section-title">
+            <div class="eyebrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                Career
+            </div>
+            <h2>실무 경험</h2>
+            <p>그룹웨어 서버 밑단부터 사내 AI 시스템까지, 실제로 운영되는 서비스 안에서 한 일들입니다. 기간은 재직 기준이고, 항목마다 커밋이 남은 기간은 History에 따로 적었습니다.</p>
+        </div>
+        <div class="career-list">
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>더존비즈온 (DOUZONE)</h3>
+                        <p>메일팀 → AI 워크플로 전담</p>
+                        <span>2024.07 ~ 현재</span>
+                    </div>
+                    <strong>Full-Stack Developer</strong>
+                </div>
+                <p class="career-description">메일에 AI를 붙이는 일과, 그 아래에 있는 게이트웨이, 업무 서버, SMTP/IMAP/POP3 엔진을 안정적으로 굴리는 일을 같이 합니다. 2026년 4월부터는 Jira 이슈를 AI가 먼저 분석해 답을 달고, 반복되는 운영 요청은 담당자 승인만 받아 처리하는 JIRA-AI를 혼자 만들고 있습니다.</p>
+                <p class="card-links">
+                    <a href="/portfolio-v3.html#jira-ai">JIRA-AI 워크플로 흐름도 보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </p>
+                <div class="three-grid">
+                    <div>
+                        <h4>주요 업무</h4>
+                        <ul>
+                            <li>JIRA-AI를 기획부터 개발까지 맡았습니다. LLM을 한 번 부르던 구조를 LangGraph4j 15노드 워크플로로 키웠습니다.</li>
+                            <li>GitLab 소스를 읽어 RAG용 코드 인덱스를 만들고, 담당자 답변은 승인을 거친 뒤에만 지식으로 쓰이게 했습니다.</li>
+                            <li>메일 도메인 구축 요청을 Jira에서 받아 담당자 승인, 예약 시점 재확인, 등록, 실패 시 보상까지 상태로 관리하는 자동화를 만들었습니다.</li>
+                            <li>메일 MCP 게이트웨이와 업무 API를 만들어 A10.ONE 에이전트가 메일을 읽을 수 있게 했고, AI 내부유출 검증을 발송 승인에 연결했습니다.</li>
+                            <li>Kafka로 발송결과를 추적하고, 계정탈취가 의심되는 계정을 조회하고, 대량 삭제 잡을 만들고, 메일엔진 SSL 인증서를 자동으로 반영하게 했습니다.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>기술 환경</h4>
+                        <div class="pill-row"><span class="pill">Java 17</span><span class="pill">Spring Boot 3</span><span class="pill">Spring AI</span><span class="pill">LangGraph4j</span><span class="pill">Azure OpenAI</span><span class="pill">MCP</span><span class="pill">Kafka</span><span class="pill">Redis</span><span class="pill">MariaDB</span><span class="pill">Elasticsearch · OpenSearch</span><span class="pill">Kubernetes</span><span class="pill">React 18 · TypeScript</span></div>
+                    </div>
+                    <div class="soft-accent">
+                        <h4>직접 확인할 수 있는 결과</h4>
+                        <ul>
+                            <li>근거가 모자란 답은 다시 조사한 뒤에도 통과하지 못합니다.</li>
+                            <li>검증 전 지식은 검색에 섞이지 않고, 실패한 분석은 60분 뒤 다시 처리됩니다.</li>
+                            <li>누구나 부를 수 있던 API를 JWT와 역할 규칙으로 막고 테스트로 고정했습니다.</li>
+                            <li>발송 상태가 보낸메일함에 보이고, 운영자가 대량 삭제를 중간에 멈출 수 있습니다.</li>
+                            <li>GitLab에 MR 80건을 올려 74건이 머지됐습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>더존비즈온 (DOUZONE)</h3>
+                        <p>전자결재팀</p>
+                        <span>2018.09 ~ 2022.06</span>
+                    </div>
+                    <strong>Full-Stack Developer</strong>
+                </div>
+                <p class="career-description">Amaranth 10 전자결재의 개발 초기 멤버였습니다. 결재함, 문서함, 양식 설정 로직을 만들었고, 옛 제품에서 새 제품으로 결재 문서를 옮기는 이관 도구도 만들었습니다. 사람이 손으로 옮기다 생기는 실수와 시간을 줄여 보려고 시작한 일이었습니다.</p>
+                <p class="card-links">
+                    <a href="/portfolio-v3.html#eap">전자결재·이관 도구 흐름도 보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </p>
+                <div class="three-grid">
+                    <div>
+                        <h4>주요 업무</h4>
+                        <ul>
+                            <li>결재 취소, 재기안, 접수 승인과 반려 같은 결재 처리 로직과 문서 열람 권한 API를 만들었습니다.</li>
+                            <li>자주 쓰는 양식, 결재 Role, 인수인계 관리 같은 관리자 기능과 문서함 조회 기능을 개발했습니다.</li>
+                            <li>이관 도구에서는 그룹별로 목적지 DB를 고르고, 테이블 단위로 페이지를 나눠 옮기고, 진행 상황을 SSE로 보여주게 했습니다.</li>
+                            <li>BizboxAlpha 결재 로직 유지보수에도 참여했습니다.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>기술 환경</h4>
+                        <div class="pill-row"><span class="pill">Java</span><span class="pill">Spring MVC</span><span class="pill">Spring Boot</span><span class="pill">MyBatis</span><span class="pill">JPA</span><span class="pill">MariaDB</span><span class="pill">Oracle</span><span class="pill">React</span><span class="pill">WebFlux SSE</span><span class="pill">JSch SFTP</span></div>
+                    </div>
+                    <div class="soft-accent">
+                        <h4>직접 확인할 수 있는 결과</h4>
+                        <ul>
+                            <li>첨부나 댓글을 열기 전에 권한을 먼저 확인하도록 바꿨습니다.</li>
+                            <li>결재선의 반려, 보류, 거부가 구분되어 보이고, 재기안할 때 후결자가 따라오지 않습니다.</li>
+                            <li>이관은 지정한 페이지부터 다시 시작할 수 있고, 테이블이 바뀔 때 이전 진행값이 남지 않습니다.</li>
+                            <li>2019년 11월부터 2022년 6월까지 전자결재 저장소 4곳에 제 커밋 1,259건이 남아 있습니다.</li>
+                        </ul>
+                    </div>
+                </div>
+            </article>
+
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>World Travel</h3>
+                        <p>Global Perspective Building</p>
+                        <span>2022.09 ~ 2024.05</span>
+                    </div>
+                    <strong>6대륙 41개국 550일</strong>
+                </div>
+                <p class="career-description">550일간 6대륙 41개국을 여행하며 문화적 유연성, 도전정신, 글로벌 커뮤니케이션을 쌓았습니다. "안 되는 건 없다"는 마인드는 이 시기에 검증됐습니다.</p>
+            </article>
+        </div>
+    </section>
+
+    <section id="history" class="section">
+        <div class="section-title">
+            <div class="eyebrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                Career History
+            </div>
+            <h2>프로젝트별 상세 — 배경 · 수행 · 성과</h2>
+            <p>왜 시작했고, 무엇을 했고, 결과가 어떻게 남았는지 순서로 적었습니다. 아직 못 한 것도 같이 남겼습니다. <br>날짜는 커밋이 남아 있는 기간입니다.</p>
+        </div>
+        <div class="career-list">
+
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템</h3>
+                        <p>더존비즈온 (DOUZONE) · 사내 단독 개발</p>
+                        <span>2026.04 ~ 현재 · 고도화 진행 중</span>
+                    </div>
+                    <strong>기획–설계–개발</strong>
+                </div>
+                <p class="career-description">"쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가" — 이 의문에서 시작했습니다. 문의 이슈가 등록되면 사내 지식과 GitLab 소스, 비슷한 이슈를 대조해 근거가 붙은 1차 답변을 달고, 메일 도메인 구축처럼 반복되는 요청은 담당자 승인만 받아 처리합니다. 기획부터 설계, 개발까지 제가 했고, 코드는 AI 코딩 도구와 함께 썼습니다. 그 사실은 커밋에 공동 저자로 남겨 두었습니다.</p>
+                <p class="card-links">
+                    <a href="/portfolio-v3.html#jira-ai">구조도 · 15노드 그래프 · 승인 상태도 보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </p>
+                <div class="pill-row hist-tags"><span class="pill">LangGraph4j 1.7</span><span class="pill">Spring Boot 3</span><span class="pill">Java 17</span><span class="pill">Spring AI</span><span class="pill">Azure OpenAI</span><span class="pill">MariaDB · Flyway</span><span class="pill">Kafka</span><span class="pill">Redis</span><span class="pill">React 18 · TypeScript</span><span class="pill">MCP</span></div>
+                <div class="hist-list">
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>LangGraph4j 15노드 조건부 워크플로</h4><span class="hist-date">아키텍처 · 2026.04 ~</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>처음엔 LLM을 한 번 부르고 끝이었습니다. 이슈마다 난이도가 달라서 어떤 건 근거를 더 찾아야 했고 어떤 건 답을 다시 검수해야 했는데, 한 번 호출로는 그걸 통제할 수 없었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>agent, tools, parse_result 세 노드 루프로 시작해 수집과 검수 서브그래프, 설정 기반 MCP 호출을 붙여 15노드까지 늘렸습니다. 비슷한 이슈 조회는 LLM에게 맡기지 않고 항상 실행되는 단계로 뺐습니다. 맡겨 두면 가끔 건너뛰었기 때문입니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>근거가 모자라면 다시 수집하고, 검수에서 떨어지면 다시 합성하고, 근거 부족으로 반려되면 코드 보고 단계로 한 번 되돌아갑니다. 되돌아가는 횟수에는 상한이 있습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>정확도가 얼마나 좋아졌는지는 아직 재지 못했습니다. 초기 커밋에서 빠뜨린 검수 edge는 다음 커밋에서 이었습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>GitLab 소스 → RAG 코드 인덱스 자동 생성</h4><span class="hist-date">핵심 기능 · 2026.07 ~ 08</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>소스 전체를 프롬프트에 넣을 수는 없었습니다. 그리고 LLM은 없는 파일 경로를 그럴듯하게 지어냅니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>허용 확장자만 고르고 build, dist, test 폴더는 빼고, 후보 500개에서 30개를 고르게 했습니다. LLM이 고른 경로는 원래 후보 목록에 실제로 있는지 다시 확인합니다. 지식 문서와 코드 인덱스는 폴더를 나눴고, 옛 경로는 폴백으로 남겼습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>없는 경로가 답에 섞이는 일을 구조로 막았습니다. 폴더를 옮기는 중에도 검색이 깨지지 않는 걸 테스트로 확인했습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>만들어진 인덱스가 얼마나 정확한지는 재지 못했습니다. Milvus도 붙여 봤는데 서버를 세우지 못해 걷어냈고, 지금은 파일 기반 RAG입니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>담당자 지식의 승인 대기 격리</h4><span class="hist-date">품질 통제 · 2026.07</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>담당자가 단 해결 답변을 지식으로 쌓고 싶었습니다. 그런데 검증되지 않은 지식이 다음 답변의 근거가 되면 틀린 게 그대로 굳습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span><code>!지식저장</code> 댓글이 오면 마크다운 문서로 만들어 <code>_pending</code> 폴더에 넣습니다. 관리자가 검토해서 옮겨야 검색에 잡힙니다. 프로젝트 필터가 이 폴더를 걸러내는 걸 테스트로 고정했습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>처음 버전은 "검색 반영 전"이라고 안내하면서 실제로는 읽힐 수 있는 경로에 저장하고 있었습니다. 그걸 발견하고 고쳤습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>관리자가 실제로 승인 이동을 얼마나 했는지는 운영 기록이 없습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>장시간 파이프라인 실패의 DLT 보존과 지연 재접수</h4><span class="hist-date">안정성 · 2026.07</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>분석 하나가 수십 초 걸립니다. 실패하면 1초, 2초, 4초 뒤에 다시 시도하는데, 같은 이유로 또 실패하고 비용만 들었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>파이프라인 실패는 바로 DLT로 보내고, 스케줄러가 60분 지난 메시지를 꺼내 retryCount를 올려 원래 토픽에 다시 넣습니다. offset은 그 뒤에 커밋합니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>실패를 잃어버리지 않고 나중에 다시 처리합니다. retryCount가 올라가는 건 테스트로 확인했습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>재발행 뒤 커밋 전에 죽으면 중복이 생길 수 있습니다. at-least-once입니다. 그래서 exactly-once라고 말하지 않습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>인증·SSO·테넌트 경계</h4><span class="hist-date">보안 · 2026.07 ~ 09</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>API가 permit-all이었습니다. 대시보드에서는 Axios 요청과 SSE가 동시에 401을 받으면 회전형 refresh token을 둘이 같이 써서 한쪽이 무효가 됐습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>JWT 필터를 넣고 ADMIN, OPERATOR, VIEWER 경로 규칙을 만들었습니다. 토큰 갱신은 공유 Promise 하나로 묶었습니다. A10 SSO는 Redis에 10분짜리 nonce를 두고 cookie state를 상수 시간으로 비교한 뒤 한 번만 소비합니다. 사용자 키도 (group_seq, login_id) 복합 키로 바꿨습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>토큰이 없으면 401, VIEWER가 ADMIN 경로를 치면 403, OPERATOR가 실행하면 200. 테스트로 고정했습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>운영 SSO 로그인이 실제로 됐는지, 키 관리와 침투 테스트는 이 커밋으로 말할 수 없습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 도메인 구축 자동화</h4><span class="hist-date">업무 자동화 · 2026.08</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>메일 도메인 구축 요청은 계속 들어오는데 사람이 처리하다 빠뜨리는 일이 있었습니다. 그렇다고 외부 시스템에 쓰는 작업을 무조건 자동으로 돌리는 건 위험했습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>접수, 승인 대기, 예약, 사전 점검, 등록, 그리고 완료, 취소, 수동검토, 실패 상태를 만들었습니다. webhook에 찍힌 사람을 믿지 않고 Jira를 다시 조회해 실제 담당자인지 확인합니다. 예약 시점에 이슈가 바뀌었는지도 다시 봅니다. 보상 삭제가 실패하면 사람 검토로 넘깁니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>접수부터 등록, 보상까지 한 커밋(90개 파일)으로 관통했습니다. 그 뒤로 중복 라우팅, rollback, rate limit을 손봤습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>등록 성공률과 처리량은 아직 숫자로 없습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>AI 패치의 정적 검증 게이트 (source-fix)</h4><span class="hist-date">별도 lineage · 2026.07</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>코드 결함으로 판정된 이슈는 분석만으로 끝나지 않습니다. 그런데 LLM이 만든 패치를 그대로 쓰는 건 위험했습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>패치가 원문과 정확히 맞는지, 괄호가 균형인지, 갑자기 생긴 식별자가 있는지 순수 함수로 검사합니다. GitLab에 branch, commit, MR을 만드는 connector도 붙였습니다. 처음엔 모든 예외를 "없는 브랜치"로 삼켰는데, 7분 뒤 커밋에서 404만 그렇게 처리하도록 고쳤습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>실패가 조용히 묻히지 않습니다. 재기동하면 미완료 작업을 다시 발행하고, Redis lock으로 중복 실행을 막습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>parser가 아니라 휴리스틱입니다. 컴파일이 되는지, 의미가 보존되는지는 보장하지 않습니다. 이 저장소는 remote가 없어서 배포 여부도 말할 수 없습니다.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>IssueFlow — 범용 워크플로 엔진</h3>
+                        <p>더존비즈온 (DOUZONE) · 로컬 개발 단계</p>
+                        <span>2026.09 ~ 현재</span>
+                    </div>
+                    <strong>설계–구현</strong>
+                </div>
+                <p class="career-description">JIRA-AI를 만들면서 도구나 시나리오가 늘 때마다 코드를 더 쓰는 게 싫어졌습니다. 노드 그래프를 정의하면 Jira 조회, 조건 분기, MCP 도구가 조합돼 실행되고, 승인과 예약과 비밀은 엔진이 챙기는 것을 목표로 만들고 있습니다. 아직 제 로컬에만 있습니다.</p>
+                <p class="card-links">
+                    <a href="/portfolio-v3.html#issueflow">엔진 구조 · MCP 노드 시퀀스 보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </p>
+                <div class="pill-row hist-tags"><span class="pill">Java 17</span><span class="pill">Spring Boot</span><span class="pill">PostgreSQL · Flyway</span><span class="pill">MCP</span><span class="pill">React 18</span><span class="pill">@xyflow/react</span></div>
+                <div class="hist-list">
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>첫 실행 가능한 세로 슬라이스</h4><span class="hist-date">2026.09</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>엔진, API, 저장소, 화면을 따로따로 만들면 합칠 때 문제가 터집니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>API에서 저장된 워크플로를 불러 엔진으로 돌리고, Jira를 조회하고 파싱하고 분기해서 PostgreSQL에 기록하는 것까지 한 번에 뚫었습니다. 본문이 짧으면 답을 추측하지 않고 정보 요청 경로로 보냅니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>Jira 이슈 하나가 워크플로를 끝까지 통과해 상태, 실패 노드, 토큰, 노드별 건수가 남습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>커밋 제목엔 "운영 Jira"라고 썼지만 운영 로그를 확인한 건 아닙니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>서버가 도구를 선언하는 동적 MCP 노드</h4><span class="hist-date">2026.09</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>도구마다 노드를 만들면 MCP 서버가 늘수록 코드도 늘어납니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>initialize, tools/list, tools/call, JSON과 SSE 응답을 처리하는 클라이언트를 Java 표준 HttpClient로 만들고, 서버가 알려주는 도구 목록을 읽는 <code>mcp.tool</code> 노드 하나로 통일했습니다. 서버가 readOnlyHint를 주지 않으면 쓰기로 보고 기본은 dry-run, 실제 실행은 원장을 거칩니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>dry-run, read-only 즉시 실행, 원장 경유, JSON 타입 복원, 실패 포트 분기를 테스트로 고정했습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>응답을 한 번에 읽어서, 연결을 안 닫는 SSE 서버를 만나면 timeout까지 기다립니다. 외부 서버와 실제로 맞춰 본 적은 없습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>엔진 예산 상한 · 비밀 · 승인</h4><span class="hist-date">2026.09</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>AI 노드가 폭주하거나, 비밀이 JSON에 평문으로 남거나, 승인 링크 미리보기만으로 승인이 되는 건 막아야 했습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>step, 시간, AI 호출, token, cost에 상한을 두고 대기 후 재개와 retry를 넣었습니다. 비밀은 AES-GCM으로 저장하고 credential id만 참조합니다. 승인은 서명된 POST와 DB claim으로만 됩니다. 근거 문서가 없는 AI 답변은 점수와 상관없이 hold입니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>재검수하면서 설정 API 필드 불일치, 토큰 평문 저장, 근거 없이 100점 통과되는 결함을 찾아 고쳤습니다. 관련 테스트 13개가 같이 들어갔습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>예산은 노드 경계에서 검사해서 최대 N-1회 넘어갈 수 있습니다. 옛 secret은 평문 호환으로 남아 있습니다.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>그룹웨어 메일 솔루션 — 백엔드·엔진·프런트</h3>
+                        <p>더존비즈온 (DOUZONE) · 메일팀</p>
+                        <span>2024.07 ~ 2026.08 · Amaranth 10 · Bizbox Alpha</span>
+                    </div>
+                    <strong>3계층 + 프런트</strong>
+                </div>
+                <p class="career-description">메일은 게이트웨이(mail), 업무 서버(mailbox), SMTP/IMAP/POP3 엔진(mailengine) 셋으로 나뉘어 있고 프런트는 React 마이크로프런트입니다. 발송 결과가 안 보이고, 계정 탈취를 늦게 알고, 오래된 메일 정리와 인증서 교체가 수작업이던 문제를 하나씩 손봤습니다. AI와 MCP는 새 시스템을 세우지 않고 이 흐름 위에 얹었습니다.</p>
+                <p class="card-links">
+                    <a href="/portfolio-v3.html#mail">3계층 구조도 · 발송결과 · 삭제 잡 · AI 검증 흐름 보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </p>
+                <div class="pill-row hist-tags"><span class="pill">Spring Boot</span><span class="pill">전자정부 프레임워크</span><span class="pill">MyBatis · MariaDB</span><span class="pill">Kafka</span><span class="pill">Redis</span><span class="pill">Elasticsearch 7/8 · OpenSearch 2</span><span class="pill">SMTP · IMAP · POP3</span><span class="pill">Tika</span><span class="pill">Kubernetes</span><span class="pill">S3</span><span class="pill">React 16</span><span class="pill">Webpack 5</span></div>
+                <div class="hist-list">
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>전자정부 프레임워크 적용과 계층 분리</h4><span class="hist-date">2024.08 ~ 2024.11 · 2025.06</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>공공 고객사 요구로 전자정부 프레임워크를 얹어야 했습니다. 그런데 컨트롤러 안에 세션 검사, 파라미터 처리, 업무 호출, 오류 매핑이 다 섞여 있었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>Spring Boot 2.4를 2.7로 올리고 프레임워크 라이브러리를 적용했습니다. 컨트롤러에 있던 업무 로직을 서비스 인터페이스와 구현체로 옮겼습니다. 18개 파일이 움직였습니다. 2025년 6월엔 Gradle 6.9를 8.10으로, JDK를 17로 올렸습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>기존 API는 그대로 두고 계층 경계만 다시 세웠습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>옮긴 양이 커서 모든 API가 전과 똑같이 동작한다고 이 커밋 하나로 말할 수는 없습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>SSL 인증서 등록 자동화와 복구</h4><span class="hist-date">2024.09 ~ 2025.06 · Amaranth 10 + Bizbox Alpha</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>인증서 갱신/적용을 터미널에서 수동으로 처리하며 반복적인 지연 및 다운타임 리스크 존재</span></p>
+                            <p><b class="hl hl-im">수행</b><span>관리자 화면에서 JKS를 올리면 비밀번호와 유효기간을 검사합니다. 엔진은 시작할 때 mailbox에서 인증서를 받아 기존 파일을 날짜별로 백업하고 SMTP, IMAP, POP3 서버에 적용합니다. keystore 파일이 깨져도 DB에 있는 데이터로 다시 만들어 뜨게 했습니다. 레거시 제품은 Admin에서 Mailbox로 multipart로 넘겨 XML 설정을 갱신합니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>인증서 파일을 서버마다 손으로 복사하지 않아도 됩니다. 파일이 문제여도 서버가 안 뜨는 일은 피할 수 있습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>CS가 몇 건 줄었는지는 재 본 게 없습니다. 초기 커밋 로그에 비밀번호가 찍히는 코드가 있어서 정리해야 합니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 허용정책 설정 기능</h4><span class="hist-date">2024.12 · Bizbox Alpha</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>릴레이 설정 및 스팸 장비 연동 시 개발팀 직접 DB 등록에 따른 병목 발생</span></p>
+                            <p><b class="hl hl-im">수행</b><span>송신 릴레이, 수신 허용 IP, 스팸 장비 설정을 관리자 화면에서 보고 저장할 수 있게 했습니다. XML을 고치고 전용 로그를 남기고, 프로세스 기동은 권한이 있는 Mailbox 쪽으로 넘겼습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>고객지원팀이 개발팀을 거치지 않고 직접 설정합니다. 무엇이 언제 어떻게 바뀌었는지 로그로 남습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>endpoint 안쪽의 인증 확인, XML 파서 하드닝, 서버측 업로드 제한은 아직 과제입니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 탈취 의심 조회</h4><span class="hist-date">2024.10 · 2025.07 · 2026.03</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>로그 실시간 확인에 대한 수동 대응 리소스 과다. 관리자가 평소와 다르게 많이 보내는 계정을 빨리 알아야 했습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>레거시에서는 발송 로그 파일 크기로 후보를 뽑았습니다. Amaranth 10에서는 90일 기준선, 최근 14일 최대, 오늘 발송량을 SQL 윈도 함수로 계산해 규칙에 걸리는 계정을 조회합니다. 나중에 Outlook에서 1,000건 넘게 보내는 것도 차단했습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>관리자가 서버 로그를 열지 않고 화면에서 의심 계정과 기간을 봅니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>확인 요청이 얼마나 줄었는지는 재지 않았습니다. 임계값은 코드에 박혀 있고 오탐률도 모릅니다. 차단이 아니라 조회입니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 통계 API · S3 오브젝트 스토리지</h4><span class="hist-date">2025.02 ~ 2025.05</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>조직 단위 통계를 볼 진입점이 없었고, 더존 클라우드가 아닌 오브젝트 스토리지를 쓰는 고객사도 있었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>groupSeq를 검사해 mailbox 통계 API로 넘기는 게이트웨이를 만들었습니다. S3 스토리지 오브젝트 설정과 Endpoint를 붙였고, 상담·법무 모듈로 메일을 내보내는 연계 API도 만들었습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>관리 화면에서 조직 단위 통계를 보고, S3 호환 스토리지 환경에서도 메일이 돕니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>예전 이력서에 있던 망분리 연계는 커밋을 찾지 못해 뺐습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>발송 진행 확인 — Kafka 발송결과 추적</h4><span class="hist-date">2025.05 · 2025.11</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>메일 발송 상태 확인 요청 문의가 많아 개발 진행</span></p>
+                            <p><b class="hl hl-im">수행</b><span>mailSendResult 토픽을 만들고 컨슈머가 결과를 DB에 쌓습니다. 목록을 조회할 때 UID를 한 번에 조회해 상태를 붙이고, 프런트 상세 화면에 배지와 발송·승인·실제 발송 시간을 보여줍니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>보낸메일함에서 발송 상태가 보입니다. 결과가 없으면 UNKNOWN으로 표시합니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>파티션이 1개이고 재처리와 중복 처리는 따로 봐야 합니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 BackEnd 속도 개선 — 카운트 경량 조회와 초기화 흐름 분리</h4><span class="hist-date">2025.09</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>클라우드형 고객사 메일 초기 접속이 느려 최적화 진행</span></p>
+                            <p><b class="hl hl-im">수행</b><span>메일함 카운트를 갱신할 때마다 메일함 객체를 전부 만들던 것을, Redis JSON에서 필요한 필드만 읽는 경로로 바꿨습니다. 프런트에서는 메뉴, 부가정보, 카운트 API를 나누고 환경설정을 props로 내려줬습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>카운트 갱신마다 만들던 객체 생성이 사라졌고, 필요한 데이터만 갱신합니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>예전엔 "10초에서 1초"라고 썼는데, 벤치마크가 없어서 이번엔 숫자를 빼고 구조 변화만 적었습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 MCP·AI 게이트웨이</h4><span class="hist-date">2025.10 ~ 2026.02</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>그룹웨어에 LLM이 들어오면서 모듈마다 AI 인터페이스를 맞춰야 했습니다. 에이전트가 사용자의 메일에 접근할 인증된 통로도 없었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span><code>mcp/{apiCode}</code> 하나로 들어오게 하고, 세션을 검사해 사용자 문맥을 넣고, 중첩된 파라미터를 평탄화해 mailbox로 넘깁니다. mailbox에는 검색, 상세, 부재기간, 연관메일 API를 만들었고, 연관메일은 MESSAGE_ID reference 체인을 CTE로 따라갑니다. A10.ONE이 도구 목록을 발견할 수 있는 메타데이터 응답도 만들었습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>에이전트는 로그인한 사용자 문맥으로만 메일을 봅니다. 도구가 늘어도 apiCode만 늘어납니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>검색 속도 개선 수치는 재지 않았습니다. 메타데이터 초안엔 오타와 매핑 불일치가 남아 있어서 후속 수정 대상입니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>AI 내부유출 검증과 발송 승인 연결</h4><span class="hist-date">2025.12</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>밖으로 나가는 메일에 개인정보나 민감정보가 섞이는지 보내기 전에 점검하고, 승인 정책에 연결해야 했습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>본문과 URL을 모으고 PDF, Office, 텍스트 첨부는 Tika로 뽑아 ONE AI에 묻습니다. 승인이 필요하면 <code>x-approval-ai</code> 헤더를 붙이고, mailbox는 이 헤더로 승인메일을 판정해 승인자 알림에 분석 결과를 보여줍니다. 프런트는 검증 팝업과 SSE 진행 표시를 맡습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>프런트에서 게이트웨이, AI, mailbox 승인까지 세 저장소를 관통하는 흐름이 생겼습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>모델이 얼마나 정확한지는 재지 않았습니다. 첨부를 메모리로 통째로 읽는 구현과 예외를 삼키는 저장 호출이 당시 diff에 남아 있습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>대량 메일 삭제 잡과 검색 정합성 · ES 마이그레이션 OOM 방어</h4><span class="hist-date">2025.11 ~ 2025.12</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>오래된 메일을 한 번에 지우면 운영이 흔들립니다. DB에서 지운 메일이 캐시와 검색에 남는 것도 문제였고, 대량 색인 마이그레이션에서는 요청과 클라이언트가 쌓였습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>삭제 플래그와 실제 삭제를 별도 잡으로 나눴습니다. 도메인마다 하나만 돌고, UID를 배치로 조회해 트랜잭션 단위로 갱신하고, deadlock이나 lock wait이 나면 최대 3번 다시 시도합니다. 중지와 진행률 조회 API를 두고, 끝나면 Redis와 Elasticsearch 7/8, OpenSearch 2 인덱스를 정리합니다. 마이그레이션 쪽은 bulk 요청을 비우고 클라이언트를 닫게 고쳤습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>운영자가 진행 상태를 보면서 중간에 멈출 수 있습니다. 세 검색엔진이 같은 삭제 계약을 씁니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>잡 상태가 메모리에 있어서 재시작하면 사라집니다. 인덱스 이름이 하드코딩된 곳이 있습니다. 메모리 절감률은 재지 않았습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>운영 안정성 — 자동응답 루프 억제 · K8s 라우팅 · 인증 AOP · 동시 복호화</h4><span class="hist-date">2025.10 ~ 2026.06</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>부재응답과 자동전달 메일이 서로 답장을 무한히 주고받는 문제, 조직마다 서비스 경로가 달라지는 문제, 여러 프로토콜 스레드가 Cipher 하나를 같이 쓰다 깨지는 문제가 있었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>자동응답에 RFC 3834 <code>Auto-Submitted</code> 헤더와 Exchange 호환 헤더를 붙였습니다. groupSeq로 K8s 서비스를 고르는 라우팅을 공통 HTTP, 다운로드, ECM 업로드 경로에 넣었고, 인증은 AuthAspect로 모았습니다. 전역 Cipher는 ThreadLocal로 바꿨습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>표준 헤더를 존중하는 메일 서버 사이에서는 핑퐁이 멈춥니다. 멀티테넌트 라우팅이 한곳에 모였고, 복호화가 스레드마다 따로 돕니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>모든 외부 메일 서버가 헤더를 존중하는 건 아닙니다. 동시성 재현 테스트는 커밋에 없습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>임시저장 첨부의 ECM 이관 손상 방지</h4><span class="hist-date">2026.07</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>임시저장을 반복하면 같은 첨부를 offset으로 다시 잘라서 앞부분이 깨지는 장애가 있었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>첨부를 한 번만 추출해 seed 파일로 고정하고, 길이와 magic byte를 확인한 뒤 ECM에 한 번 올려 fileId만 저장합니다. 비정상 응답은 전용 예외로 처리하고, 임시 디렉터리와 static mock으로 단위 테스트를 붙였습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>재현 가능했던 손상 원인을 구조에서 없앴습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>그 뒤에 magic byte 검사를 빼고, revert하고, 항목 단위로 격리하는 커밋이 이어졌습니다. 한 커밋을 최종 모습이라고 보진 않습니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>메일 FrontEnd — 목록·본문 분리 · AI 정리 · 자동분류 · 반송 판별 · 대기발송 · Webpack 5</h4><span class="hist-date">2025.03 ~ 2026.08</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>레거시 구조로 인한 유지보수 가중, 렌더링 성능 저하로 인한 사용자 불편. 보낸 메일을 되돌릴 수 없고, 반송 판별이 제목만 보고, 빌드는 CRA에 묶여 있었습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>목록, 본문, 빈 상태, 페이지 이동을 컴포넌트로 나눴습니다. AI가 정리한 메일을 골라 지우고 읽음 처리하는 화면, 주소 기반 자동분류 규칙과 기존 메일 이동, delivery-status나 Return-Path 헤더로 반송을 가리는 로직을 만들었습니다. 보내기를 누르면 0~60초 기다렸다 취소할 수 있는 큐도 만들었고, react-scripts를 걷어내고 Webpack 5로 직접 빌드하게 했습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>보낸 직후 취소가 되고, 발송 실패와 반송이 화면에 보이고, 사용자가 스스로 분류 규칙을 만듭니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>대기발송 큐는 브라우저 메모리에 있어서 창을 닫으면 보장이 없습니다. 리뷰나 온보딩 효율 같은 건 재 본 적이 없어서 적지 않았습니다. Webpack 전환은 한 번 되돌린 뒤 다시 적용했습니다.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="career-card">
+                <div class="card-heading">
+                    <div>
+                        <h3>전자결재/메일 솔루션 개발 및 대규모 데이터 마이그레이션</h3>
+                        <p>더존비즈온 (DOUZONE) · 전자결재팀</p>
+                        <span>2018.09 ~ 2022.06 · 커밋 확인 2019.11 ~ 2022.06</span>
+                    </div>
+                    <strong>B2B 그룹웨어</strong>
+                </div>
+                <p class="career-description">Amaranth 10 전자결재의 결재 처리, 권한, 양식, 문서함 기능을 백엔드와 React 화면 양쪽에서 만들었습니다. 옛 제품(BizboxAlpha, Suite)에서 새 제품으로 결재 문서를 옮기는 이관 도구도 이때 만들었습니다.</p>
+                <p class="card-links">
+                    <a href="/portfolio-v3.html#eap">열람 권한 시퀀스 · 이관 흐름도 보기
+                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                    </a>
+                </p>
+                <div class="pill-row hist-tags"><span class="pill">Java</span><span class="pill">Spring MVC · Spring Boot</span><span class="pill">MyBatis</span><span class="pill">JPA</span><span class="pill">MariaDB · Oracle</span><span class="pill">React</span><span class="pill">WebFlux SSE</span></div>
+                <div class="hist-list">
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>데이터 마이그레이션 자동화 툴 개발</h4><span class="hist-date">2021.04 ~ 2022.06</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>수동 마이그레이션으로 인한 막대한 시간 소요 및 휴먼 에러 발생 리스크. 중간에 실패하면 처음부터 다시 돌려야 했습니다.</span></p>
+                            <p><b class="hl hl-im">수행</b><span>JPA 복합 키를 매핑하고, 그룹별로 목적지 DB를 고르는 RoutingDataSource를 붙였습니다. 테이블 단위로 페이지를 나눠 옮기면서 진행 상황을 SSE로 보냅니다. 본문은 별도 단계로 뺐고, 시작 페이지를 지정해 중간부터 다시 돌릴 수 있게 했습니다. 수신자 삭제는 건별 호출에서 묶음 호출로 바꿨습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>중간에 멈춰도 지정한 페이지부터 이어서 돌립니다. 진행 상황이 화면에 보입니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>예전엔 "3일에서 2시간", "500여 개사"라고 썼는데 측정 자료를 찾지 못해 뺐습니다. 재개는 되지만 멱등이나 무손실을 보장하는 건 아닙니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>Amaranth 10 전자결재 시스템 구축</h4><span class="hist-date">2019.11 ~ 2022.06</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>차세대 그룹웨어 출시를 위한 핵심 도메인(결재/문서함)의 신규 설계 및 개발 필요</span></p>
+                            <p><b class="hl hl-im">수행</b><span>문서 열람 권한 API를 만들고 공통 그리드가 첨부와 댓글을 열기 전에 그걸 부르게 했습니다. 결재선에 반려, 보류, 거부가 구분되어 보이게 하고, 결재 취소 때 직전 결재자를 맞게 잡고, 재기안에서 후결자를 빼는 조건을 MariaDB와 Oracle 매퍼에 같이 넣었습니다. 접수 승인과 반려, 자주 쓰는 양식, 결재 Role과 인수인계 관리 API, 공통 Excel 내보내기, 문서함 필터도 만들었습니다.</span></p>
+                            <p><b class="hl hl-rs">성과</b><span>결재 처리, 권한, 양식, 문서함이 백엔드와 화면 양쪽에서 이어집니다. 저장소 4곳에 커밋 1,259건이 남아 있습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>"성능 개선"이라는 제목의 커밋이 있지만 실측이 없어서 성과로 적지 않았습니다. 파일을 내려주는 API 자체의 접근 통제는 따로 봐야 합니다.</span></p>
+                        </div>
+                    </div>
+                    <div class="hist-item">
+                        <div class="hist-head"><h4>BizboxAlpha 유지보수 및 고도화</h4><span class="hist-date">2018.09 ~ 2021.03</span></div>
+                        <div class="hist-rows">
+                            <p><b class="hl hl-bg">배경</b><span>대규모 고객사가 사용하는 레거시 시스템의 안정적 운영 및 기능 확장 요구</span></p>
+                            <p><b class="hl hl-im">수행</b><span>주요 결재 로직을 유지보수하고 단계적으로 고도화하는 일에 참여했습니다.</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>이 기간 커밋은 지금 GitLab에 남아 있지 않아서 건수나 성과를 적지 않았습니다.</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="evidence-note">
+                    <p><strong>어떻게 확인했나</strong> GitLab 프로젝트 894개를 뒤져 제 이메일로 남은 커밋 4,007건을 모으고, 그중 100여 건은 diff를 직접 다시 읽었습니다. 예전 이력서에 있던 처리시간, 메모리, 사용자 수 같은 숫자는 측정 자료를 찾지 못해 뺐습니다. 2018년과 2023년은 남은 커밋이 없어 그 기간을 비워 두었습니다.</p>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="section-title">
+            <div class="eyebrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+                Projects
+            </div>
+            <h2>사이드 프로젝트</h2>
+            <p>2025년 12월부터 멀티에이전트 워크플로우로 기획, 개발, 배포, 운영을 혼자 해 본 것들입니다. 대표 4개만 실었고, 판매·운영 중인 제품은 비공개 저장소입니다.</p>
+        </div>
+        <div class="project-list">
+
+            <article class="project-card">
+                <div class="project-head">
+                    <div>
+                        <div class="meta-row"><span>01</span><span>Personal Project</span><span>2026.06 — 07</span><span>판매중</span></div>
+                        <h3>Hostay - 단기임대 통합 관리 플랫폼</h3>
+                        <p>국내외 8개 숙박 플랫폼(에어비앤비·부킹닷컴·직방 등)의 예약·차단·정산·채팅을 한 화면에서 관리하는 통합 PMS입니다.</p>
+                    </div>
+                    <div class="icon-actions">
+                        <a href="https://hostay.vercel.app/preview.html" target="_blank" rel="noreferrer" aria-label="Hostay 프리뷰">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="pill-row"><span class="pill">자동 차단</span><span class="pill">PMS</span><span class="pill">iCal 연동</span><span class="pill">자동 정산</span><span class="pill">공유 링크</span><span class="pill">Next.js</span></div>
+                <div class="project-summary-grid">
+                    <div class="project-summary-card"><strong>프로젝트 목적</strong><p>다중 플랫폼 숙소 운영 시 오버부킹 위험과 정산·메시지 분산 문제를 해소하기 위해 만들었습니다.</p></div>
+                    <div class="project-summary-card"><strong>핵심 기술</strong><p>캘린더 모아보기, 자동차단, iCal 양방향 연동, 수수료 자동 정산, 역할별 공유 링크</p></div>
+                </div>
+                <div class="project-screenshots cols-3" aria-label="Hostay 화면 이미지">
+                    <figure><div class="shot"><img src="/resume-v2/hostay-1.png" alt="예약 캘린더 — 플랫폼별 예약이 색상 블록으로 보이는 달력" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/hostay-1.png</code><span>예약 캘린더 — 플랫폼별 예약이 색상 블록으로 보이는 달력</span></div></div><figcaption>통합 예약 캘린더</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/hostay-2.png" alt="전체 예약 조회 — 플랫폼별 예약·정산 상태 표" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/hostay-2.png</code><span>전체 예약 조회 — 플랫폼별 예약·정산 상태 표</span></div></div><figcaption>통합 예약 조회</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/hostay-3.png" alt="수익 분석 — 총 매출·순이익·ADR과 월별 비교 차트" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/hostay-3.png</code><span>수익 분석 — 총 매출·순이익·ADR과 월별 비교 차트</span></div></div><figcaption>수익·정산 분석</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/hostay-4.png" alt="채널 연동 — 플랫폼별 iCal 동기화 설정 카드" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/hostay-4.png</code><span>채널 연동 — 플랫폼별 iCal 동기화 설정 카드</span></div></div><figcaption>채널 연동 (iCal)</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/hostay-5.png" alt="자동 차단 현황 — 채널별 차단 진행 흐름" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/hostay-5.png</code><span>자동 차단 현황 — 채널별 차단 진행 흐름</span></div></div><figcaption>자동 차단 현황</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/hostay-6.png" alt="역할별 공유 링크 — 청소·운영·세무사 권한 관리" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/hostay-6.png</code><span>역할별 공유 링크 — 청소·운영·세무사 권한 관리</span></div></div><figcaption>역할별 공유 링크</figcaption></figure>
+                </div>
+                <div class="three-grid">
+                    <div>
+                        <h4>주요 기능</h4>
+                        <ul>
+                            <li>8개 숙박 플랫폼의 예약·차단·정산·채팅 통합 관리</li>
+                            <li>통합 캘린더 + iCal 연동</li>
+                            <li>예약 확정 시 타 채널 자동 차단</li>
+                            <li>수수료 자동 정산·CSV 내보내기</li>
+                            <li>역할별 공유 링크 (권한·만료·PIN)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>구현 포인트</h4>
+                        <ul>
+                            <li>Next.js 풀스택 단독 구현 — 한 달 내 판매 가능한 제품으로 완성</li>
+                            <li>플랫폼별 iCal 피드 양방향 동기화 파이프라인</li>
+                            <li>채널별 수수료 규칙 기반 정산 자동 계산</li>
+                            <li>권한·만료·PIN을 조합한 역할별 공유 링크 설계</li>
+                        </ul>
+                    </div>
+                    <div class="soft-accent">
+                        <h4>문제 해결 경험</h4>
+                        <div class="text-stack">
+                            <p>여러 플랫폼에 같은 숙소를 올리면 오버부킹 위험과 정산·메시지 분산이 고질적인 문제였습니다.</p>
+                            <p>예약 확정 시 다른 채널을 자동 차단해 오버부킹을 원천적으로 막았습니다.</p>
+                            <p>채널별 수수료 정산과 채팅을 한 화면으로 모아 운영 동선을 줄였습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-head">
+                    <div>
+                        <div class="meta-row"><span>02</span><span>Personal Project</span><span>2026.04 — 05</span><span>운영 중</span></div>
+                        <h3>Show Me The Money - 코인 자동 트레이딩 시스템</h3>
+                        <p>각각의 매매 전략을 가진 시뮬레이터 에이전트가 매매하고, 수익률 악화를 스스로 감지해 실시간 전략을 재튜닝하는 무인 퀀트 시스템입니다.</p>
+                    </div>
+                    <div class="icon-actions">
+                        <a href="/previews/quant.html" target="_blank" rel="noreferrer" aria-label="Show Me The Money 프리뷰">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="pill-row"><span class="pill">Python</span><span class="pill">LLM Agent</span><span class="pill">Supabase</span><span class="pill">자가치유</span><span class="pill">Cascade 라우팅</span></div>
+                <div class="project-summary-grid">
+                    <div class="project-summary-card"><strong>프로젝트 목적</strong><p>사람 개입 없이 시장 변화에 적응하는 자기치유(self-healing) 트레이딩 구조를 검증하기 위해 만들었습니다.</p></div>
+                    <div class="project-summary-card"><strong>핵심 기술</strong><p>Python, Cascade LLM 라우팅(Gemini Flash → Claude Sonnet), Supabase</p></div>
+                </div>
+                <div class="project-screenshots cols-3" aria-label="Show Me The Money 화면 이미지">
+                    <figure><div class="shot"><img src="/resume-v2/quant-1.png" alt="관제소 대시보드 — 실계좌 KPI·코인 차트 캡처" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/quant-1.png</code><span>관제소 대시보드 — 실계좌 KPI·코인 차트 캡처</span></div></div><figcaption>관제소 대시보드</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/quant-2.png" alt="행동대원 — 전략별 봇 카드·수익률 리더보드" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/quant-2.png</code><span>행동대원 — 전략별 봇 카드·수익률 리더보드</span></div></div><figcaption>AI 행동대원 (Hive Nodes)</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/quant-3.png" alt="LangGraph 4-노드 판단 흐름·모델 라우팅" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/quant-3.png</code><span>LangGraph 4-노드 판단 흐름·모델 라우팅</span></div></div><figcaption>Cascade LLM 파이프라인</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/quant-4.png" alt="자가치유 — 트리거·튜닝·백테스트·롤백 흐름" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/quant-4.png</code><span>자가치유 — 트리거·튜닝·백테스트·롤백 흐름</span></div></div><figcaption>자가치유 엔진 (Self-Growth)</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/quant-5.png" alt="매매 로그 — 봇별 체결 내역·사유 테이블" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/quant-5.png</code><span>매매 로그 — 봇별 체결 내역·사유 테이블</span></div></div><figcaption>매매 로그·안전장치</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/quant-6.png" alt="스케줄러·Supabase 데이터 구성" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/quant-6.png</code><span>스케줄러·Supabase 데이터 구성</span></div></div><figcaption>데이터·스케줄</figcaption></figure>
+                </div>
+                <div class="three-grid">
+                    <div>
+                        <h4>주요 기능</h4>
+                        <ul>
+                            <li>모멘텀·역발상·신호·변동성·DCA 5개 전략 병렬 매매</li>
+                            <li>수익률 악화 자동 감지 → 전략 파라미터 재튜닝</li>
+                            <li>Cascade LLM 라우팅 — Gemini Flash 우선, 필요 시 Claude Sonnet 승격</li>
+                            <li>Supabase 저장 + 실시간 대시보드</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>구현 포인트</h4>
+                        <ul>
+                            <li>전략별 독립 노드 설계로 병렬 매매·개별 재튜닝 구조 확보</li>
+                            <li>운영 기록을 자동 축적해 재튜닝 근거로 사용하는 데이터 루프</li>
+                            <li>비용 민감 구간은 저비용 모델, 판단 구간만 상위 모델 호출</li>
+                            <li>3주 개발 후 무인 운영 전환</li>
+                        </ul>
+                    </div>
+                    <div class="soft-accent">
+                        <h4>문제 해결 경험</h4>
+                        <div class="text-stack">
+                            <p>고정 전략은 시장이 변하면 수익률이 무너지고, 사람이 개입해 다시 튜닝해야 했습니다.</p>
+                            <p>성과 악화를 시스템이 스스로 감지해 전략을 재튜닝하는 자기치유 구조로 풀었습니다.</p>
+                            <p>운영할수록 재튜닝 근거 데이터가 쌓이는 루프를 만들어 무인 운영을 유지하고 있습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-head">
+                    <div>
+                        <div class="meta-row"><span>03</span><span>Personal Project</span><span>2026.07</span><span>출시 준비</span></div>
+                        <h3>Plan P</h3>
+                        <p>계획해도 계획대로 되지 않는 P들을 위한 영어회화 앱 — 화면을 켤 때마다 잠금화면에 영어 문장이 뜨고, 소리 내어 말해야 잠금이 해제됩니다.</p>
+                    </div>
+                    <div class="icon-actions">
+                        <a href="/previews/plan-p.html" target="_blank" rel="noreferrer" aria-label="Plan P 프리뷰">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="pill-row"><span class="pill">Android</span><span class="pill">Kotlin</span><span class="pill">Jetpack Compose</span><span class="pill">Room DB</span><span class="pill">음성인식</span><span class="pill">Play Billing</span></div>
+                <div class="project-summary-grid">
+                    <div class="project-summary-card"><strong>프로젝트 목적</strong><p>학습 앱을 여는 의지에 기대는 대신, 폰을 켜는 기존 습관 위에 학습을 얹어 습관화 비용을 없애기 위해 만들었습니다.</p></div>
+                    <div class="project-summary-card"><strong>핵심 기술</strong><p>Kotlin + Jetpack Compose 네이티브, 음성 인식 발화 판정, Leitner 간격반복</p></div>
+                </div>
+                <div class="project-screenshots" aria-label="Plan P 화면 이미지">
+                    <figure><div class="shot"><img src="/resume-v2/planp-1.png" alt="소개 — 학습 철학·잠금화면 UI 미리보기" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/planp-1.png</code><span>소개 — 학습 철학·잠금화면 UI 미리보기</span></div></div><figcaption>소개 — 잠금화면 학습</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/planp-2.png" alt="핵심 기능 — 6가지 학습 기능 소개" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/planp-2.png</code><span>핵심 기능 — 6가지 학습 기능 소개</span></div></div><figcaption>핵심 기능</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/planp-3.png" alt="3단계 발화 학습 — 음성 인식→녹음→판정 과정" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/planp-3.png</code><span>3단계 발화 학습 — 음성 인식→녹음→판정 과정</span></div></div><figcaption>3단계 발화 학습</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/planp-4.png" alt="학습 방식 장점 — 소리 내기·반복 학습 등 핵심 포인트" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/planp-4.png</code><span>학습 방식 장점 — 소리 내기·반복 학습 등 핵심 포인트</span></div></div><figcaption>학습 방식의 장점</figcaption></figure>
+                </div>
+                <div class="three-grid">
+                    <div>
+                        <h4>주요 기능</h4>
+                        <ul>
+                            <li>잠금화면에 영어 문장 노출 — 소리 내어 말해야 해제</li>
+                            <li>음성 인식 발화 판정 (한국식 발음에 관대한 판정)</li>
+                            <li>Leitner 간격반복 학습</li>
+                            <li>Play Billing 구독 결제</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>구현 포인트</h4>
+                        <ul>
+                            <li>Kotlin + Jetpack Compose 네이티브 단독 구현</li>
+                            <li>Room DB 기반 로컬 학습 데이터 관리</li>
+                            <li>잠금화면 오버레이와 음성 인식 판정 흐름 연결</li>
+                            <li>스핀오프 앱 'Plan P: 투데이'와 패키지 쿼리 기반 연동</li>
+                        </ul>
+                    </div>
+                    <div class="soft-accent">
+                        <h4>문제 해결 경험</h4>
+                        <div class="text-stack">
+                            <p>학습 앱의 진짜 병목은 콘텐츠가 아니라 '앱을 여는 의지'였습니다.</p>
+                            <p>폰을 켜는 기존 습관 위에 학습을 얹어, 의지 없이도 반복되는 구조를 만들었습니다.</p>
+                            <p>한국식 발음에 관대한 판정으로 학습 이탈을 줄였습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="project-head">
+                    <div>
+                        <div class="meta-row"><span>04</span><span>Personal Project</span><span>2025.12 — 2026.04</span><span>완전 AI 자동화</span></div>
+                        <h3>남녀분석보고서</h3>
+                        <p>남녀 간 생각의 차이에서 오는 오해를 상황별 성별 심리·MBTI 관점으로 AI가 분석해 매일 발행하는 뉴스레터 — 생성부터 발송·수익화까지 전 과정 완전 AI 자동화입니다.</p>
+                    </div>
+                    <div class="icon-actions">
+                        <a href="https://man-woman-analysis-report.vercel.app/" target="_blank" rel="noreferrer" aria-label="남녀분석보고서 사이트">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="pill-row"><span class="pill">Next.js</span><span class="pill">Supabase</span><span class="pill">Gemini</span><span class="pill">GitHub Actions</span><span class="pill">Leonardo.ai</span><span class="pill">OpenClaw</span></div>
+                <div class="project-summary-grid">
+                    <div class="project-summary-card"><strong>프로젝트 목적</strong><p>사람 손이 한 번도 닿지 않고 굴러가는 완전 무인 콘텐츠 서비스가 가능한지 검증하기 위해 만들었습니다.</p></div>
+                    <div class="project-summary-card"><strong>핵심 기술</strong><p>멀티 LLM 폴백(Gemini 2.5 Flash → GLM-4.5), GitHub Actions 크론, Leonardo.ai</p></div>
+                </div>
+                <div class="project-screenshots cols-3" aria-label="남녀분석보고서 화면 이미지">
+                    <figure><div class="shot"><img src="/resume-v2/report-1.png" alt="서비스 메인 — 남녀 관점 비교 일러스트 랜딩" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/report-1.png</code><span>서비스 메인 — 남녀 관점 비교 일러스트 랜딩</span></div></div><figcaption>서비스 메인</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/report-2.png" alt="에피소드 목록 — 토픽 타이틀·분류 태그" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/report-2.png</code><span>에피소드 목록 — 토픽 타이틀·분류 태그</span></div></div><figcaption>에피소드 목록</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/report-3.png" alt="에피소드 상세 — 요약·태그·댓글·공유" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/report-3.png</code><span>에피소드 상세 — 요약·태그·댓글·공유</span></div></div><figcaption>에피소드 상세</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/report-4.png" alt="AI 심리 분석 — 확률 그래프·위험 요소 정리" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/report-4.png</code><span>AI 심리 분석 — 확률 그래프·위험 요소 정리</span></div></div><figcaption>AI 심리 분석</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/report-5.png" alt="결론 — 최종 제안·성별 공감도 투표" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/report-5.png</code><span>결론 — 최종 제안·성별 공감도 투표</span></div></div><figcaption>결론·공감 투표</figcaption></figure>
+                    <figure><div class="shot"><img src="/resume-v2/report-6.png" alt="심리 테스트 — 타로·MBTI·연애 유형 미니앱" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/report-6.png</code><span>심리 테스트 — 타로·MBTI·연애 유형 미니앱</span></div></div><figcaption>심리 테스트 미니앱</figcaption></figure>
+                </div>
+                <div class="three-grid">
+                    <div>
+                        <h4>주요 기능</h4>
+                        <ul>
+                            <li>상황별 성별 심리·MBTI 관점 분석 콘텐츠 매일 발행</li>
+                            <li>크론잡 생성 → 아침·저녁 자동 발송 → DB 동기화</li>
+                            <li>Leonardo.ai 이미지 자동 생성 파이프라인</li>
+                            <li>쿠팡 파트너스 연동 수익화</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>구현 포인트</h4>
+                        <ul>
+                            <li>멀티 LLM 폴백(Gemini 2.5 Flash → GLM-4.5)으로 생성 실패 무인 대응</li>
+                            <li>15종 제목 패턴 프롬프트로 콘텐츠 다양성 유지</li>
+                            <li>GitHub Actions만으로 생성–발송–동기화 전 파이프라인 구성</li>
+                            <li>2025.12부터 사람 개입 없이 무인 운영 지속</li>
+                        </ul>
+                    </div>
+                    <div class="soft-accent">
+                        <h4>문제 해결 경험</h4>
+                        <div class="text-stack">
+                            <p>콘텐츠 서비스는 매일 만드는 사람의 손이 병목이 됩니다.</p>
+                            <p>생성 실패·품질 편차를 멀티 LLM 폴백과 패턴 프롬프트로 흡수해 무인화했습니다.</p>
+                            <p>생성부터 발송·수익화까지 전 과정이 자동으로 굴러가는 구조를 검증했습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="extra-grid">
+                    <div>
+                        <h4>그 외 프로젝트
+                            <a class="repo-more" href="https://github.com/jyoung9154?tab=repositories" target="_blank" rel="noreferrer">GitHub에 +<span data-extra-repos>15</span>개 저장소
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                            </a>
+                        </h4>
+                        <ul class="extra-list">
+                            <li><span><a href="/previews/promopilot.html" target="_blank" rel="noreferrer">PromoPilot</a> <span class="desc">— 카드뉴스를 AI가 재검토·보정해 SNS에 게시하는 자동화 도구</span></span><span class="tag">Next.js·Playwright</span></li>
+                            <li><span><a href="/previews/auto-thread.html" target="_blank" rel="noreferrer">Auto_Thread</a> <span class="desc">— GitHub 저장소 분석 후 4개 SNS 홍보 자동 게시</span></span><span class="tag">Node.js·Actions</span></li>
+                            <li><span><a href="/previews/multi-calendar.html" target="_blank" rel="noreferrer">Multi-calendar</a> <span class="desc">— 여러 캘린더를 통합 관리하는 PWA · 푸시·모바일 앱</span></span><span class="tag">Next.js·Firebase</span></li>
+                            <li><span><a href="/previews/bizsite.html" target="_blank" rel="noreferrer">bizsite-platform</a> <span class="desc">— 지도 URL 하나로 소상공인 홈페이지 즉시 발행</span></span><span class="tag">Next.js·Prisma</span></li>
+                            <li><span><a href="/previews/today.html" target="_blank" rel="noreferrer">Plan P: 투데이</a> <span class="desc">— Plan P와 연동되는 투두·일정 관리 앱</span></span><span class="tag">Kotlin·Compose</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/Antigravity-Link" target="_blank" rel="noreferrer">Antigravity-Link</a> <span class="desc">— 폰에서 내 PC 워크스페이스를 원격으로 다루는 Gemini 에이전트 브릿지</span></span><span class="tag">Next.js·Node·Gemini</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/host-calendar" target="_blank" rel="noreferrer">host-calendar</a> <span class="desc">— 토스 앱 안에서 돌아가는 숙박 호스트 관리 미니앱(Apps in Toss)</span></span><span class="tag">React Native·TDS·Firestore</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/ChestnutMap" target="_blank" rel="noreferrer">ChestnutMap</a> <span class="desc">— 여행 계획용 실시간 마커 공유 지도 앱</span></span><span class="tag">Kotlin·Compose·Firebase</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/Bamtori_Company" target="_blank" rel="noreferrer">Bamtori_Company</a> <span class="desc">— 12개 역할의 AI 에이전트가 협업해 소프트웨어를 만드는 자율 조직 실험</span></span><span class="tag">Python·Redis·Docker</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/WordPress_Blog" target="_blank" rel="noreferrer">WordPress_Blog · WP_Theme</a> <span class="desc">— Docker Compose로 띄운 WordPress와 mu-plugin, 직접 만든 테마</span></span><span class="tag">PHP·Docker·nginx</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>오픈소스</h4>
+                        <ul class="extra-list">
+                            <li><span><a href="https://github.com/jyoung9154/AgentSkills" target="_blank" rel="noreferrer">AgentSkills</a> <span class="desc">— 직군별 한국어 AI 에이전트 스킬 137종. 오케스트레이터 포함</span></span><span class="tag">GitHub</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/AIAgent_Report" target="_blank" rel="noreferrer">AIAgent_Report</a> <span class="desc">— Copilot, Antigravity, Cursor, Codex, Claude Code 세션을 모아 일일 업무보고서를 만드는 도구</span></span><span class="tag">GitHub</span></li>
+                            <li><span><a href="https://github.com/jyoung9154/github-repo-finder-mcp" target="_blank" rel="noreferrer">github-repo-finder-mcp</a> <span class="desc">— 프로젝트를 분석해 필요한 GitHub 저장소를 찾아주는 MCP 서버</span></span><span class="tag">MCP</span></li>
+                        </ul>
+                        <div class="evidence-note">
+                            <p><strong>공개 저장소 확인</strong> GitHub 공개 저장소 22개(포크 제외)는 커밋 작성자를 직접 대조했습니다. Bamtori_Company와 daily-receipt는 제가 만든 AI 에이전트(Hermes)가 커밋을 남긴 실험 저장소입니다. 판매 중인 제품은 비공개라 커밋 수를 적지 않았습니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <section id="skills" class="section section-band">
+        <div class="section-title">
+            <div class="eyebrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                Skills
+            </div>
+            <h2>기술 스택</h2>
+            <p>회사에서 실제로 쓴 것과 개인 프로젝트에서 써 본 것만 적었습니다.</p>
+        </div>
+        <div class="three-grid skill-summary">
+            <article class="panel">
+                <h3>Main</h3>
+                <div class="pill-row"><span class="pill">Java</span><span class="pill">Spring Boot</span><span class="pill">React</span><span class="pill">MariaDB · MySQL</span><span class="pill">Oracle</span><span class="pill">PostgreSQL</span><span class="pill">Kubernetes</span><span class="pill">Kafka</span><span class="pill">Redis</span><span class="pill">Elasticsearch · OpenSearch</span></div>
+            </article>
+            <article class="panel">
+                <h3>AI</h3>
+                <div class="pill-row"><span class="pill">LangGraph4j</span><span class="pill">Spring AI</span><span class="pill">MCP</span><span class="pill">RAG (파일 기반 · 코드 인덱스)</span><span class="pill">Azure OpenAI</span><span class="pill">멀티에이전트 오케스트레이션</span></div>
+            </article>
+            <article class="panel">
+                <h3>Product &amp; Tools</h3>
+                <div class="pill-row"><span class="pill">Next.js</span><span class="pill">Kotlin · Compose</span><span class="pill">Python</span><span class="pill">Node.js</span><span class="pill">GitHub Actions</span><span class="pill">Supabase</span><span class="pill">Firebase</span><span class="pill">Vercel</span><span class="pill">Docker</span></div>
+            </article>
+        </div>
+        <div class="three-grid skill-detail">
+            <article class="panel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                <h3>Backend &amp; Infra</h3>
+                <ul>
+                    <li>메일 게이트웨이, 업무 서버, SMTP/IMAP/POP3 엔진을 같이 만졌습니다. Kafka로 발송결과를 받고, Redis에 메일함을 캐시하고, Elasticsearch 7/8과 OpenSearch 2를 함께 지원합니다.</li>
+                    <li>대량 삭제 잡에 배치 트랜잭션과 락 재시도를 넣고, Elasticsearch bulk 누적과 클라이언트 누수를 정리했습니다. 성능 문제는 구조를 바꿔서 풉니다.</li>
+                    <li>Kubernetes 서비스 라우팅, SSL 인증서 자동화, S3 오브젝트 스토리지 같은 고객사 요구를 받아 처리했습니다.</li>
+                </ul>
+            </article>
+            <article class="panel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+                <h3>AI · Agentic Workflow</h3>
+                <ul>
+                    <li>LangGraph4j 15노드 워크플로, RAG 코드 인덱스 생성, MCP 도구 연결로 근거가 붙은 답을 내는 시스템을 설계했습니다.</li>
+                    <li>설계자–워커 멀티에이전트 체계로 기획–개발–검증을 수행하고, 난이도별 모델 라우팅으로 비용을 통제합니다.</li>
+                    <li>완전 자동화 대신 시스템이 틀릴 수 있는 지점에 검증 게이트와 사람의 승인 노드를 배치합니다.</li>
+                </ul>
+            </article>
+            <article class="panel">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+                <h3>Frontend &amp; 자동화</h3>
+                <ul>
+                    <li>React 마이크로프런트에서 목록과 본문을 나누고, 보낸 뒤 취소할 수 있는 대기발송과 AI 검증 화면을 만들었습니다. CRA는 Webpack 5로 바꿨습니다.</li>
+                    <li>Next.js 웹, Kotlin·Compose 안드로이드 등 사용자에게 닿는 제품을 끝까지 완성해 출시·판매했습니다.</li>
+                    <li>GitHub Actions로 콘텐츠 생성, 발송, 게시를 자동화해 사람 손 없이 돌리고 있습니다.</li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <section id="education" class="section">
+        <div class="section-title">
+            <div class="eyebrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+                Education
+            </div>
+            <h2>학력 · 자격 · 병역</h2>
+        </div>
+        <div class="education-list">
+            <article class="education-card">
+                <div>
+                    <h3>국가평생교육진흥원</h3>
+                    <p>컴퓨터공학 학사</p>
+                </div>
+                <span>2019.07 ~ 2021.08</span>
+                <div class="pill-row"><span class="pill">학사 학위 취득</span></div>
+            </article>
+            <article class="education-card">
+                <div>
+                    <h3>부산과학기술대학교</h3>
+                    <p>소프트웨어개발</p>
+                </div>
+                <span>2011.03 ~ 2013.02</span>
+                <div class="pill-row"><span class="pill">소프트웨어개발 전공</span></div>
+            </article>
+            <article class="education-card">
+                <div>
+                    <h3>자격증 · 수상</h3>
+                    <p>Certifications</p>
+                </div>
+                <span></span>
+                <div class="pill-row"><span class="pill">정보처리기사 (2021.06)</span><span class="pill">TOPCIT Level 3 (2021.10)</span><span class="pill">컴퓨터활용능력 2급 (2019.08)</span><span class="pill">프로젝트 최우수상 — Esquisse (2018.06)</span></div>
+            </article>
+            <article class="education-card">
+                <div>
+                    <h3>병역</h3>
+                    <p>대한민국 국군 정보사령부 (HID)</p>
+                </div>
+                <span>2013.08 ~ 2017.11</span>
+                <div class="pill-row"><span class="pill">임관 후 특수임무 수행</span><span class="pill">중사 전역</span></div>
+            </article>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div>
+            <p>스스로의 가능성을 믿지 않으면 아무것도 시작할 수 없다.</p>
+            <div class="actions">
+                <a href="mailto:jyoung_9154@naver.com" class="button button-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    jyoung_9154@naver.com
+                </a>
+                <a href="https://github.com/jyoung9154" target="_blank" rel="noreferrer" class="button button-footer-outline">
+                    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+                    GitHub
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+</main>
+
+<script>
+(function () {
+    // V1(careerUtils.js)과 동일한 연차 계산 — 정본 로직 복제
+    var periods = [
+        [new Date(2018, 8, 1), new Date(2022, 5, 30)],
+        [new Date(2024, 6, 1), null],
+    ];
+    var months = 0;
+    periods.forEach(function (p) {
+        var end = p[1] || new Date();
+        months += (end.getFullYear() - p[0].getFullYear()) * 12 + (end.getMonth() - p[0].getMonth());
+    });
+    var label = (Math.floor(months / 12) + 1) + '년차';
+    document.querySelectorAll('[data-career-years]').forEach(function (el) { el.textContent = label; });
+})();
+
+(function () {
+    // 인쇄(PDF 저장) 시 브라우저가 문서 제목을 파일명으로 쓰므로 제출용 이름으로 바꿔둔다 — V1 DocShell과 동일한 방식
+    var original = document.title;
+    window.addEventListener('beforeprint', function () { document.title = '박재영_이력서_AI풀스택개발자'; });
+    window.addEventListener('afterprint', function () { document.title = original; });
+})();
+
+(function () {
+    // 노출된 저장소·비프로젝트성 저장소를 제외한 나머지 공개 저장소 수를 실시간 계산 (실패 시 정적 폴백 유지)
+    var EXPOSED = ['agentskills', 'aiagent_report', 'github-repo-finder-mcp', 'multi-calendar',
+        'jyoung9154', 'jyoung9154.github.io', 'plan-p-privacy', 'planp-config'];
+    fetch('https://api.github.com/users/jyoung9154/repos?per_page=100')
+        .then(function (res) { return res.ok ? res.json() : Promise.reject(); })
+        .then(function (repos) {
+            var n = repos.filter(function (r) {
+                return !r.fork && EXPOSED.indexOf(r.name.toLowerCase()) === -1;
+            }).length;
+            if (n > 0) {
+                document.querySelectorAll('[data-extra-repos]').forEach(function (el) { el.textContent = n; });
+            }
+        })
+        .catch(function () {});
+})();
+
+(function () {
+    // 스크린샷 라이트박스 — 템플릿 원본(main.tsx)과 동일 동작: 클릭 확대, ←/→ 순환, Esc·배경 클릭 닫기
+    var state = null; // { images: [{src, alt}], index }
+
+    var box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.innerHTML =
+        '<button class="lightbox-backdrop" type="button" aria-label="이미지 닫기"></button>' +
+        '<div class="lightbox-content">' +
+        '<button class="lightbox-close" type="button" aria-label="이미지 닫기">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>' +
+        '<button class="lightbox-nav lightbox-nav-prev" type="button" aria-label="이전 이미지">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>' +
+        '<img alt="">' +
+        '<button class="lightbox-nav lightbox-nav-next" type="button" aria-label="다음 이미지">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>' +
+        '<p></p></div>';
+
+    var img = box.querySelector('img');
+    var caption = box.querySelector('p');
+    var prevBtn = box.querySelector('.lightbox-nav-prev');
+    var nextBtn = box.querySelector('.lightbox-nav-next');
+
+    function render() {
+        var current = state.images[state.index];
+        img.src = current.src;
+        img.alt = current.alt;
+        caption.textContent = current.alt;
+        box.setAttribute('aria-label', current.alt);
+        var multi = state.images.length > 1;
+        prevBtn.style.display = multi ? '' : 'none';
+        nextBtn.style.display = multi ? '' : 'none';
+    }
+    function open(images, index) {
+        state = { images: images, index: index };
+        render();
+        document.body.appendChild(box);
+    }
+    function close() {
+        state = null;
+        if (box.parentElement) box.parentElement.removeChild(box);
+    }
+    function step(delta) {
+        if (!state) return;
+        state.index = (state.index + delta + state.images.length) % state.images.length;
+        render();
+    }
+
+    box.querySelector('.lightbox-backdrop').addEventListener('click', close);
+    box.querySelector('.lightbox-close').addEventListener('click', close);
+    prevBtn.addEventListener('click', function () { step(-1); });
+    nextBtn.addEventListener('click', function () { step(1); });
+    document.addEventListener('keydown', function (event) {
+        if (!state) return;
+        if (event.key === 'Escape') close();
+        if (event.key === 'ArrowLeft') step(-1);
+        if (event.key === 'ArrowRight') step(1);
+    });
+
+    document.querySelectorAll('.project-screenshots').forEach(function (grid) {
+        grid.addEventListener('click', function (event) {
+            var shot = event.target.closest('.shot');
+            if (!shot || shot.classList.contains('missing')) return;
+            var loaded = Array.prototype.filter.call(grid.querySelectorAll('.shot'), function (s) {
+                return !s.classList.contains('missing');
+            });
+            var images = loaded.map(function (s) {
+                var i = s.querySelector('img');
+                return { src: i.src, alt: i.alt };
+            });
+            open(images, loaded.indexOf(shot));
+        });
+    });
+})();
+</script>
+</body>
+</html>

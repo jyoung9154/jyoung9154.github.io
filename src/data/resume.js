@@ -96,7 +96,7 @@ export const aiProjects = [
     },
     {
         title: "github-repo-finder-mcp",
-        status: "npm 배포",
+        status: "npm 패키지",
         period: "2026.03",
         oneLiner: "프로젝트 코드를 분석해 필요한 GitHub 라이브러리를 AI가 추천하는 MCP 서버",
         why: "AI 에이전트가 개발 중 라이브러리 탐색을 IDE 안에서 즉시 수행하도록",
@@ -116,15 +116,15 @@ export const resume = {
         { label: "github.com/jyoung9154", href: "https://github.com/jyoung9154" },
     ],
     about: [
-        "Java/Spring 기반 풀스택 개발자로, 500만+ 사용자 규모의 B2B/B2C 그룹웨어(전자결재·메일) SaaS를 설계·개발·운영해 왔습니다.",
+        "Java/Spring 기반 풀스택 개발자입니다. 그룹웨어(전자결재·메일)의 백엔드와 프런트를 만들고 운영해 왔습니다.",
         "전자결재팀에서 시작해 메일팀을 거쳐, 지금은 LLM/RAG/MCP 기반 AI 워크플로우 개발을 전담합니다.",
         "역할이 나뉜 AI 에이전트 팀을 설계해 기획–개발–검증 전 과정을 수행하고, 아키텍처부터 배포·자동화까지 End-to-End로 책임집니다.",
         "긍정적이고 밝은 ENFP — \"안 되는 건 없다, 안 할 뿐이지\"라는 마인드로 일합니다.",
         "취미 : 코딩 · 특징 : 집돌이",
     ],
     skills: {
-        main: "Java · Spring Boot · React · MySQL · Kubernetes · Docker · Kafka · Redis · Elasticsearch",
-        ai: "LangGraph · Spring AI · MCP · RAG (Milvus) · Azure OpenAI · 멀티에이전트 오케스트레이션",
+        main: "Java · Spring Boot · React · MariaDB/MySQL · Oracle · PostgreSQL · Kubernetes · Docker · Kafka · Redis · Elasticsearch/OpenSearch",
+        ai: "LangGraph4j · Spring AI · MCP · RAG (파일 기반 · 코드 인덱스) · Azure OpenAI · 멀티에이전트 오케스트레이션",
     },
     howIWork: [
         {
@@ -137,7 +137,7 @@ export const resume = {
         },
         {
             title: "사람·AI 경계 설계",
-            desc: "완전 자동화 대신, 시스템이 틀릴 수 있는 지점에 검증 게이트와 사람의 승인 노드를 배치 (JIRA-AI 5중 검증 게이트)",
+            desc: "완전 자동화 대신, 시스템이 틀릴 수 있는 지점에 검증 게이트와 사람의 승인 노드를 배치 (JIRA-AI의 지식 승인 격리 · 도메인 구축 승인 게이트 · AI 패치 정적 검증)",
         },
     ],
     howIWorkNote:
@@ -149,23 +149,25 @@ export const resume = {
             date: "2024.07 — 현재",
             groups: [
                 {
-                    heading: "JIRA-AI — 이슈 자동 분석·응답 AI 시스템 (사내 단독 개발)",
+                    heading: "JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템 (사내 단독 개발 · 2026.04 —)",
                     bullets: [
-                        "\"쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가\"라는 의문에서 출발 — 사내 지식·소스코드·운영로그를 대조해 근거 있는 1차 답변을 자동 생성하는 시스템을 기획부터 개발까지 단독 수행",
-                        "LangGraph 12-노드 오케스트레이션 — 패턴 즉답(LLM 호출 0회)·직통·일반 추론 3모드 라우팅으로 품질 표준화와 비용 최소화",
-                        "4원천 RAG(Milvus) + 코드 5단계 추적으로 답변마다 근거 첨부, 자동 생성 패치는 5중 검증 게이트 통과 후에만 제안",
-                        "성공 답변을 패턴 지식으로 축적하고 12개월 미사용 지식은 자동 퇴역 — 운영할수록 즉답률이 오르는 자가학습 루프",
+                        "\"쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가\"라는 의문에서 시작했습니다. 사내 지식과 GitLab 소스, 비슷한 이슈를 대조해 근거가 붙은 1차 답변을 다는 시스템을 기획부터 개발까지 맡았습니다. 코드는 AI 코딩 도구와 함께 썼고 커밋에 공동 저자로 남겼습니다.",
+                        "LLM을 한 번 부르던 구조를 LangGraph4j 15노드 워크플로로 바꿨습니다. 근거가 모자라면 다시 수집하고, 검수에서 떨어지면 다시 합성합니다. 비슷한 이슈 조회는 LLM에게 맡기지 않고 항상 실행되는 단계로 뺐습니다.",
+                        "GitLab 소스를 상한 안에서 읽어 RAG 코드 인덱스를 만들고, LLM이 고른 파일 경로는 실제로 있는지 다시 확인합니다. 담당자 답변은 _pending 폴더에 격리해 승인 뒤에만 검색에 잡히게 했습니다.",
+                        "수십 초 걸리는 분석이 실패하면 Kafka DLT에 보관했다가 60분 뒤 다시 넣습니다. permit-all이던 API는 JWT와 역할 규칙으로 막고 401·403·200을 테스트로 고정했습니다. A10 SSO와 테넌트 복합 키도 넣었습니다.",
+                        "메일 도메인 구축 요청을 접수, 담당자 승인, 예약 재확인, A10/WBlock 등록, 보상, 수동검토 상태로 관리합니다. webhook에 찍힌 사람을 믿지 않고 Jira를 다시 조회합니다.",
+                        "IssueFlow(2026.09 —)는 노드 그래프를 정의하면 Jira와 MCP 도구가 조합돼 돌아가는 범용 엔진입니다. 서버가 알려주는 도구를 읽는 mcp.tool 노드, 예산 상한, 서명 POST 승인을 만들었고 아직 로컬 단계입니다.",
                     ],
                 },
                 {
-                    heading: "그룹웨어 메일 — AI 고도화·최적화 (500만+ 사용자 SaaS)",
+                    heading: "그룹웨어 메일 — 게이트웨이·업무 서버·프로토콜 엔진·프런트 (2024.07 — 2026.08)",
                     bullets: [
-                        "Spring AI 기반 MCP·RAG 플랫폼 구축 — 자연어 메일 요약·추출 자동화, 검색 속도 60% 개선·재탐색 40% 감소",
-                        "LLM 스마트 답장 템플릿·메일 요약 서비스 출시 — 텍스트 파싱·임베딩 파이프라인 최적화로 메일 분석 30초 → 4초(86% 개선)",
-                        "MSA(Kafka·Spring Cloud Stream) 대용량 메일 아키텍처 설계, SMTP/POP/IMAP 프로토콜 개발, 게이트웨이 라우팅 자동화",
-                        "초기 로딩 10초 → 1초 미만(90%+ 개선) 백엔드 최적화, 리엔지니어링으로 최대 메모리 사용량 40% 절감",
-                        "탈취 조회 자가진단 화면 제공으로 확인 요청 90% 감소, SSL 인증서 등록 자동화로 관련 CS 0건",
-                        "FrontEnd 전면 리팩토링(리뷰·온보딩 효율 50% 향상), 강원랜드 망연계·전자정부 프레임워크·AWS S3 등 엔터프라이즈 대응",
+                        "전자정부 프레임워크를 적용하면서 컨트롤러에 섞여 있던 업무 로직을 서비스 계층으로 옮겼습니다. 이어서 JDK 17과 Gradle 8로 올렸습니다.",
+                        "Kafka로 발송결과를 받아 보낸메일함에 상태를 보여주고, 90일 기준선과 최근 14일, 오늘 발송량을 SQL로 계산해 계정탈취가 의심되는 계정을 조회합니다.",
+                        "오래된 메일을 지우는 잡을 도메인당 하나만 돌게 하고, 배치 트랜잭션과 락 재시도, 중지와 진행률 조회를 넣었습니다. 끝나면 Redis와 Elasticsearch/OpenSearch 인덱스도 정리합니다.",
+                        "MCP 메일 게이트웨이와 검색·상세·부재·연관메일 API를 만들어 A10.ONE 에이전트가 사용자 문맥으로만 메일을 읽게 했습니다. AI 내부유출 검증은 발송 승인 헤더와 승인자 알림, 프런트 SSE 팝업까지 연결했습니다.",
+                        "메일엔진이 시작할 때 인증서를 중앙에서 받아 SSL에 적용하고, keystore가 깨지면 DB 데이터로 다시 만듭니다. 여러 스레드가 함께 쓰던 Cipher는 ThreadLocal로 격리했습니다.",
+                        "프런트에서는 목록과 본문을 나누고, 보낸 뒤 취소할 수 있는 대기발송 큐와 자동분류 규칙 화면을 만들었고, CRA를 Webpack 5로 바꿨습니다. S3 스토리지와 전자정부 같은 고객사 요구도 처리했습니다. GitLab MR 80건 중 74건이 머지됐습니다.",
                     ],
                 },
             ],
@@ -189,16 +191,16 @@ export const resume = {
                 {
                     heading: null,
                     bullets: [
-                        "Amaranth 10 그룹웨어(B2B 50만+ 사용자) 개발 초기 멤버 — 개발부터 런칭까지 전 라이프사이클에 메인으로 참여, 전자결재 결재함·문서함·양식 핵심 로직 전담",
-                        "데이터 마이그레이션 자동화 툴 개발 — 이관 소요 3일 → 2시간(97% 단축), 500여 개사 성공 이관 후 사내 마이그레이션 표준 모델로 채택(타 모듈 개발의 참조 표준)",
-                        "BizboxAlpha 유지보수 800여 건 수행 — 결함률 지속 감소",
+                        "Amaranth 10 그룹웨어 개발 초기 멤버로 결재 취소·재기안·접수 승인/반려 같은 결재 처리 로직, 문서 열람 권한 API, 결재선 상태 표시, 양식·Role·인수인계 관리, 문서함 Excel 내보내기와 필터를 만들었습니다. 저장소 4곳에 커밋 1,259건이 남아 있습니다.",
+                        "옛 제품에서 새 제품으로 결재 문서를 옮기는 이관 도구를 만들었습니다. 그룹별로 목적지 DB를 고르고, 테이블 단위로 페이지를 나눠 옮기며 진행 상황을 SSE로 보여주고, 중간부터 다시 돌릴 수 있게 했습니다.",
+                        "BizboxAlpha 결재 로직 유지보수에도 참여했습니다. 이 기간 커밋은 지금 GitLab에 남아 있지 않아 건수는 적지 않았습니다.",
                     ],
                 },
             ],
         },
     ],
     sideProjects: {
-        note: "전부 2025.12부터 현재까지 위 멀티에이전트 워크플로우로 기획–개발–배포–운영을 단독 수행 · 10개 프로젝트 · 1,100+ 커밋",
+        note: "전부 2025.12부터 현재까지 위 멀티에이전트 워크플로우로 기획–개발–배포–운영을 단독 수행",
         items: [
             { name: "Plan P: 투데이", desc: "Plan P와 연동되는 투두·일정 관리 앱", tech: "Kotlin·Compose", meta: "개발 중", date: "2026.07.11" },
             { name: "Plan P", desc: "계획해도 계획대로 되지 않는 P들을 위한 영어회화 앱", tech: "Kotlin·Compose", meta: "출시 준비", date: "2026.07.07" },
@@ -213,9 +215,9 @@ export const resume = {
         more: "상세 설명과 프리뷰 링크는 포트폴리오(jyoung9154.github.io/career)에서 확인할 수 있습니다.",
     },
     openSource: [
-        { name: "AgentSkills", desc: "직군별 한국어 AI 에이전트 스킬 130+ 오픈소스 (기획·개발·마케팅·DevOps)", href: "https://github.com/jyoung9154/AgentSkills" },
-        { name: "AIAgent_Report", desc: "5개 AI 코딩 에이전트의 세션 히스토리를 파싱해 일일 업무보고서 자동 생성", href: "https://github.com/jyoung9154/AIAgent_Report" },
-        { name: "github-repo-finder-mcp", desc: "프로젝트 분석 기반 GitHub 라이브러리 추천 MCP 서버 · npm 배포", href: "https://github.com/jyoung9154/github-repo-finder-mcp" },
+        { name: "AgentSkills", desc: "직군별 한국어 AI 에이전트 스킬 137종 오픈소스 (기획·개발·마케팅·DevOps) · 오케스트레이터 포함", href: "https://github.com/jyoung9154/AgentSkills" },
+        { name: "AIAgent_Report", desc: "Copilot·Antigravity·Cursor·Codex·Claude Code 세션 히스토리를 파싱해 일일 업무보고서 자동 생성", href: "https://github.com/jyoung9154/AIAgent_Report" },
+        { name: "github-repo-finder-mcp", desc: "프로젝트 분석 기반 GitHub 라이브러리 추천 MCP 서버 · npm 패키지 구성", href: "https://github.com/jyoung9154/github-repo-finder-mcp" },
     ],
     education: [
         { name: "국가평생교육진흥원 — 컴퓨터공학 학사", date: "2019.07 — 2021.08" },

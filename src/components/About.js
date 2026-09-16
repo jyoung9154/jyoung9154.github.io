@@ -15,11 +15,11 @@ const douzoneApproval = {
     title: <>첫 입사, <em>전자결재팀</em></>,
     counters: [
         { to: 45, label: 'Months' },
-        { to: 500, suffix: '+', label: 'Companies Migrated' },
-        { to: 800, suffix: '+', label: 'Maintenance Cases' },
+        { to: 1259, label: 'Author Commits' },
+        { to: 25, label: 'Verified Cases' },
     ],
-    chips: ['Amaranth 10 초기멤버 — 개발부터 런칭까지', '마이그레이션 자동화 — 3일 → 2시간', 'BizboxAlpha 유지보수·고도화'],
-    caption: 'Amaranth 10 그룹웨어의 초기 멤버로 개발부터 런칭까지 전 라이프사이클에 메인으로 참여했고, 수동으로 3일 걸리던 데이터 이관을 자동화해 2시간으로 줄였습니다.',
+    chips: ['Amaranth 10 초기멤버 — 개발부터 런칭까지', '마이그레이션 도구 — 그룹별 이관·부분 재개', 'BizboxAlpha 유지보수·고도화'],
+    caption: 'Amaranth 10 그룹웨어의 초기 멤버로 개발부터 런칭까지 전 라이프사이클에 메인으로 참여했고, 수동 데이터 이관을 그룹별 데이터소스·부분 재개·진행 표시가 있는 도구로 자동화했습니다.',
 };
 
 const douzoneAi = {
@@ -27,12 +27,12 @@ const douzoneAi = {
     eyebrow: '04 · Douzone — 메일팀 → AI 전담',
     title: <>다시 더존, <em>AI 워크플로우 전담</em></>,
     counters: [
-        { text: '500만+', label: 'Users' },
-        { to: 90, suffix: '%', label: 'Faster Loading' },
-        { to: 60, suffix: '%', label: 'Faster Search' },
+        { to: 855, label: 'Mail Backend Commits' },
+        { to: 15, label: 'LangGraph4j Nodes' },
+        { to: 80, label: 'Merge Requests' },
     ],
-    chips: ['2024.07 메일팀 재입사', '메일 최적화 — 10초 → 1초', 'MCP·RAG 플랫폼 구축', 'JIRA-AI 단독 개발', '현재 · AI 워크플로우 전담'],
-    caption: '메일팀으로 재입사해 시스템을 바닥부터 최적화했고, 지금은 AI 워크플로우 개발을 전담하며 회사의 AI 전환을 이끕니다.',
+    chips: ['2024.07 메일팀 재입사', '메일 3계층 — Kafka·SSL·삭제 잡', 'MCP·AI 게이트웨이 구축', 'JIRA-AI 단독 개발', '현재 · AI 워크플로우 전담'],
+    caption: '메일팀으로 재입사해 게이트웨이·업무 서버·프로토콜 엔진 3계층을 안정화했고, 지금은 LangGraph4j·MCP 기반 AI 워크플로우 개발을 전담합니다.',
 };
 
 export default function About() {
