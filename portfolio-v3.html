@@ -265,7 +265,6 @@
             <a href="#legacy">레거시 메일</a>
             <a href="#eap">전자결재·이관</a>
             <a href="#side">사이드</a>
-            <a href="#evidence">근거</a>
         </div>
         <div class="nav-actions">
             <button type="button" class="button button-outline" onclick="window.print()">
@@ -299,7 +298,6 @@
                     <a href="#eap">6 · 전자결재</a>
                     <a href="#mig">7 · 데이터 이관 도구</a>
                     <a href="#side">사이드 프로젝트</a>
-                    <a href="#evidence">어떻게 확인했나</a>
                 </div>
                 <figure class="diagram">
 <pre class="mermaid">
@@ -968,29 +966,6 @@ flowchart TD
         </div>
     </section>
 
-    <!-- Evidence -->
-    <section id="evidence" class="section">
-        <div class="section-title">
-            <div class="eyebrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg> Evidence</div>
-            <h2>어떻게 확인했고, 무엇을 뺐나</h2>
-        </div>
-        <div class="about-grid">
-            <article class="panel panel-wide">
-                <p>GitLab 계정 2개(Jaeyoung, jyoung9154)와 이메일 3개(회사 2, 개인 1)를 서버에서 대조하고, 해당 이메일과 정확히 일치하는 author 커밋만 본인 기여로 귀속했습니다. 표시 이름이 박재영, jaeyoung, [UC]박재영, [메일/박재영]으로 달라 이메일 기준으로 묶었습니다.</p>
-                <p>GitLab 프로젝트 894개의 contributors를 전수 확인해 본인 커밋이 있는 원격 14개와 로컬 22개 저장소에서 4,007건(고유 SHA 3,988개)을 수집했습니다. 분야별 100여 건은 diff를 직접 정독했고, authored MR 80건과 활동 이벤트 1,826건도 보관했습니다. GitHub 공개 저장소 22개(포크 제외)는 bare clone으로 작성자를 확인했습니다.</p>
-                <p>제외한 항목은 다음과 같습니다. 측정 자료가 없는 처리시간·메모리·사용자 수·CS 건수·정확도. 2018년과 2023년 커밋(잔존 기록 없음). 운영 배포·장애 감소·단독 기여율. exactly-once나 무손실 이관 같은 보장 표현. 커밋 제목에 "배포"나 "성능 개선"이 있어도 운영 사실의 증거로 사용하지 않았습니다.</p>
-                <p>측정 자료(처리시간 로그, 채택·수정 기록, 오탐 라벨)가 생기면 그 항목만 숫자로 바꿀 생각입니다. 그 전까지는 판단 기준만 적어 둡니다.</p>
-            </article>
-            <article class="panel panel-accent">
-                <h3>읽는 법</h3>
-                <ul class="check-list">
-                    <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span><strong>배경 · 수행 · 성과</strong> — 왜 시작했고, 무엇을 했고, 코드로 확인되는 결과가 무엇인지</span></li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span><strong>한계</strong> — 해당 항목에서 확대 해석하면 안 되는 범위. 대부분 미측정 사유</span></li>
-                    <li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg><span><strong>다이어그램</strong> — 커밋 당시 코드에 실재하던 배선. 설명을 위해 단순화한 부분은 캡션에 표기</span></li>
-                </ul>
-            </article>
-        </div>
-    </section>
 
     <footer class="footer">
         <div>
