@@ -14,7 +14,7 @@ function absoluteLink(link) {
 const jiraAi = careerProjects.find(p => p.id === 'jira-ai');
 const companyProject = {
     title: 'JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템',
-    status: '사내 단독 개발',
+    status: '1인 개발 · 운영중',
     period: jiraAi.dateLabel,
     oneLiner:
         '문의 이슈가 등록되면 사내 지식과 GitLab 소스, 비슷한 이슈를 대조해 근거가 붙은 1차 답변을 달고, 반복되는 운영 요청은 담당자 승인만 받아 처리하는 AI 시스템. 기획부터 설계, 개발까지 맡았습니다',
@@ -54,7 +54,7 @@ export default function PortfolioDoc() {
                     단독 수행한 사이드 프로젝트 사례집입니다.
                 </p>
                 <p className="r-about-line">
-                    2025.12 — 현재 · 사이드 프로젝트 10개 · 1,100+ 커밋 · 최장 3개월 무중단 운영.
+                    2025.12 — 현재 · 사이드 프로젝트 10개 · 최장 3개월 무중단 운영.
                     각 항목은 어떤 문제의식에서 출발해 어떤 구조로 풀었는지를 중심으로 정리했습니다.
                 </p>
             </Section>

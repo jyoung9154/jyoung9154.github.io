@@ -118,7 +118,7 @@ export default function Career() {
             kicker: "구조 · Orchestration",
             title: "혼자 일해도 팀처럼 굴러갑니다",
             desc: "메인 세션은 설계·검토·통합만 맡고, 구현·테스트·리서치는 역할별 전용 서브에이전트에 위임합니다. 작업 난이도에 따라 상위·경량 모델을 라우팅해 품질과 비용을 함께 통제합니다.",
-            proof: "개인 프로젝트 10개 · 1,100+ 커밋 단독 수행",
+            proof: "개인 프로젝트 10개 단독 수행",
         },
         {
             kicker: "환경 · Systemization",
@@ -374,7 +374,7 @@ export default function Career() {
                     <p className="text-center max-w-3xl mx-auto text-slate-400 leading-relaxed mb-16">
                         업무 외 시간에 위의 <strong className="text-slate-200">멀티에이전트 워크플로우</strong>만으로
                         기획부터 아키텍처 설계, 배포·운영까지 단독 수행한 프로젝트들입니다.{' '}
-                        <strong className="text-slate-200">10개 프로젝트 · 1,100+ 커밋 · 최장 3개월 무중단 운영</strong> —
+                        <strong className="text-slate-200">10개 프로젝트 · 최장 3개월 무중단 운영</strong> —
                         회사 밖에서 아이디어가 어디까지 갈 수 있는지의 증명입니다.
                     </p>
 

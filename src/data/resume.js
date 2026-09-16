@@ -6,7 +6,7 @@ export const aiProjects = [
     {
         title: "Hostay",
         status: "판매중",
-        period: "2026.06 — 07 · 361 commits",
+        period: "2026.06 — 07",
         oneLiner: "국내외 8개 숙박 플랫폼(에어비앤비·부킹닷컴·직방 등)의 예약·차단·정산·채팅을 한 화면에서 관리하는 통합 PMS",
         why: "다중 플랫폼 숙소 운영 시 오버부킹 위험과 정산·메시지 분산 문제를 해소하기 위해",
         arch: "통합 캘린더 + iCal 연동, 예약 확정 시 타 채널 자동 차단, 수수료 자동 정산·CSV 내보내기, 역할별 공유 링크(권한·만료·PIN)",
@@ -16,7 +16,7 @@ export const aiProjects = [
     {
         title: "Plan P",
         status: "출시 준비",
-        period: "2026.07 · 118 commits",
+        period: "2026.07",
         oneLiner: "계획해도 계획대로 되지 않는 P들을 위한 영어회화 앱 — 화면을 켤 때마다 잠금화면에 영어 문장이 뜨고, 소리 내어 말해야 잠금이 해제됩니다",
         why: "학습 앱을 여는 의지에 기대는 대신, 폰을 켜는 기존 습관 위에 학습을 얹어 습관화 비용을 없애기 위해",
         arch: "Kotlin + Jetpack Compose 네이티브, Room DB, 음성 인식 발화 판정(한국식 발음 관대), Leitner 간격반복, Play Billing 구독",
@@ -26,7 +26,7 @@ export const aiProjects = [
     {
         title: "Plan P: 투데이",
         status: "개발 중",
-        period: "2026.07 · 45 commits · 3일 개발",
+        period: "2026.07 · 3일 개발",
         oneLiner: "Plan P와 연동되는 투두·일정 관리 Android 앱 — 폰을 켜는 순간을 학습과 일정의 허브로 확장하는 스핀오프",
         why: "잠금화면 학습(Plan P) 위에 하루 일정까지 얹어, 폰을 켜는 습관을 생산성으로 연결하기 위해",
         arch: "Kotlin + Jetpack Compose, Room DB, 패키지 쿼리 기반 Plan P 연동(미설치 시 기능 양보), 폴더 그룹핑·온보딩 가이드",
@@ -46,7 +46,7 @@ export const aiProjects = [
     {
         title: "Quant Auto Trader",
         status: "운영 중",
-        period: "2026.04 — 05 · 219 commits",
+        period: "2026.04 — 05",
         oneLiner: "5개 LLM 에이전트가 병렬로 매매하고, 수익률 악화를 스스로 감지해 전략을 재튜닝하는 무인 퀀트 시스템",
         why: "사람 개입 없이 시장 변화에 적응하는 자기치유(self-healing) 트레이딩 구조를 검증하기 위해",
         arch: "Python + Cascade LLM(Gemini Flash→Claude Sonnet) 라우팅, 모멘텀·역발상·신호·변동성·DCA 5전략 노드, Supabase 저장, 실시간 대시보드",
@@ -56,7 +56,7 @@ export const aiProjects = [
     {
         title: "Auto_Thread",
         status: "3개월 무중단 운영",
-        period: "2026.04 — 07 · 300 commits",
+        period: "2026.04 — 07",
         oneLiner: "GitHub 저장소를 Gemini로 분석해 Threads·Twitter·Bluesky·Mastodon 4개 SNS에 홍보 콘텐츠를 자동 생성·게시하는 파이프라인",
         why: "개발자가 만든 프로젝트의 홍보를 사람 손 없이 지속하기 위해",
         arch: "Node.js 20(ESM) + GitHub Actions 워크플로우 4개, Gemini API 콘텐츠 생성, 플랫폼별 API 게시, dry-run 지원",
@@ -66,7 +66,7 @@ export const aiProjects = [
     {
         title: "Multi-calendar",
         status: "배포 준비",
-        period: "2026.03 — 05 · 84 commits",
+        period: "2026.03 — 05",
         oneLiner: "여러 캘린더를 통합 관리하는 PWA — FCM 푸시 알림, 가계부, 모바일 앱(Capacitor)까지 지원",
         why: "가족·팀 단위의 분산된 일정을 하나의 캘린더로 모으고 알림까지 자동화하기 위해",
         arch: "Next.js 15 + Firebase(Auth·Realtime DB·FCM) + Gemini API, Vercel Cron 스케줄, Capacitor 모바일 빌드, PWA",
@@ -149,9 +149,9 @@ export const resume = {
             date: "2024.07 — 현재",
             groups: [
                 {
-                    heading: "JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템 (사내 단독 개발 · 2026.04 —)",
+                    heading: "JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템 (1인 개발 · 운영중 · 2026.04 —)",
                     bullets: [
-                        "\"쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가\"라는 의문에서 시작했습니다. 사내 지식과 GitLab 소스, 비슷한 이슈를 대조해 근거가 붙은 1차 답변을 다는 시스템을 기획부터 개발까지 맡았습니다. 코드는 AI 코딩 도구와 함께 썼고 커밋에 공동 저자로 남겼습니다.",
+                        "\"쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가\"라는 의문에서 출발. 사내 지식·GitLab 소스·유사 이슈를 대조해 근거가 붙은 1차 답변을 생성하는 시스템을 기획부터 개발까지 단독 수행, AI 코딩 도구 사용 사실은 커밋 공동 저자로 기록",
                         "LLM을 한 번 부르던 구조를 LangGraph4j 15노드 워크플로로 바꿨습니다. 근거가 모자라면 다시 수집하고, 검수에서 떨어지면 다시 합성합니다. 비슷한 이슈 조회는 LLM에게 맡기지 않고 항상 실행되는 단계로 뺐습니다.",
                         "GitLab 소스를 상한 안에서 읽어 RAG 코드 인덱스를 만들고, LLM이 고른 파일 경로는 실제로 있는지 다시 확인합니다. 담당자 답변은 _pending 폴더에 격리해 승인 뒤에만 검색에 잡히게 했습니다.",
                         "수십 초 걸리는 분석이 실패하면 Kafka DLT에 보관했다가 60분 뒤 다시 넣습니다. permit-all이던 API는 JWT와 역할 규칙으로 막고 401·403·200을 테스트로 고정했습니다. A10 SSO와 테넌트 복합 키도 넣었습니다.",
@@ -167,7 +167,7 @@ export const resume = {
                         "오래된 메일을 지우는 잡을 도메인당 하나만 돌게 하고, 배치 트랜잭션과 락 재시도, 중지와 진행률 조회를 넣었습니다. 끝나면 Redis와 Elasticsearch/OpenSearch 인덱스도 정리합니다.",
                         "MCP 메일 게이트웨이와 검색·상세·부재·연관메일 API를 만들어 A10.ONE 에이전트가 사용자 문맥으로만 메일을 읽게 했습니다. AI 내부유출 검증은 발송 승인 헤더와 승인자 알림, 프런트 SSE 팝업까지 연결했습니다.",
                         "메일엔진이 시작할 때 인증서를 중앙에서 받아 SSL에 적용하고, keystore가 깨지면 DB 데이터로 다시 만듭니다. 여러 스레드가 함께 쓰던 Cipher는 ThreadLocal로 격리했습니다.",
-                        "프런트에서는 목록과 본문을 나누고, 보낸 뒤 취소할 수 있는 대기발송 큐와 자동분류 규칙 화면을 만들었고, CRA를 Webpack 5로 바꿨습니다. S3 스토리지와 전자정부 같은 고객사 요구도 처리했습니다. GitLab MR 80건 중 74건이 머지됐습니다.",
+                        "프런트는 목록·본문 분리, 발송 후 취소 가능한 대기발송 큐와 자동분류 규칙 화면 개발, CRA → Webpack 5 전환. S3 스토리지·전자정부 프레임워크 등 고객사 요구사항 대응",
                     ],
                 },
             ],
@@ -191,9 +191,9 @@ export const resume = {
                 {
                     heading: null,
                     bullets: [
-                        "Amaranth 10 그룹웨어 개발 초기 멤버로 결재 취소·재기안·접수 승인/반려 같은 결재 처리 로직, 문서 열람 권한 API, 결재선 상태 표시, 양식·Role·인수인계 관리, 문서함 Excel 내보내기와 필터를 만들었습니다. 저장소 4곳에 커밋 1,259건이 남아 있습니다.",
+                        "Amaranth 10 그룹웨어 개발 초기 멤버로 결재 취소·재기안·접수 승인/반려 등 결재 처리 로직, 문서 열람 권한 API, 결재선 상태 표시, 양식·Role·인수인계 관리, 문서함 Excel 내보내기·필터 개발",
                         "옛 제품에서 새 제품으로 결재 문서를 옮기는 이관 도구를 만들었습니다. 그룹별로 목적지 DB를 고르고, 테이블 단위로 페이지를 나눠 옮기며 진행 상황을 SSE로 보여주고, 중간부터 다시 돌릴 수 있게 했습니다.",
-                        "BizboxAlpha 결재 로직 유지보수에도 참여했습니다. 이 기간 커밋은 지금 GitLab에 남아 있지 않아 건수는 적지 않았습니다.",
+                        "BizboxAlpha 결재 로직 유지보수 참여. 해당 기간 기록은 현재 GitLab에 남아 있지 않음",
                     ],
                 },
             ],

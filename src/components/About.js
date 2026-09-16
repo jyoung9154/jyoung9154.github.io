@@ -15,7 +15,7 @@ const douzoneApproval = {
     title: <>첫 입사, <em>전자결재팀</em></>,
     counters: [
         { to: 45, label: 'Months' },
-        { to: 1259, label: 'Author Commits' },
+        { to: 4, label: 'Repositories' },
         { to: 25, label: 'Verified Cases' },
     ],
     chips: ['Amaranth 10 초기멤버 — 개발부터 런칭까지', '마이그레이션 도구 — 그룹별 이관·부분 재개', 'BizboxAlpha 유지보수·고도화'],
@@ -27,9 +27,9 @@ const douzoneAi = {
     eyebrow: '04 · Douzone — 메일팀 → AI 전담',
     title: <>다시 더존, <em>AI 워크플로우 전담</em></>,
     counters: [
-        { to: 855, label: 'Mail Backend Commits' },
+        { to: 3, label: 'Mail Service Tiers' },
         { to: 15, label: 'LangGraph4j Nodes' },
-        { to: 80, label: 'Merge Requests' },
+        { to: 25, label: 'Months' },
     ],
     chips: ['2024.07 메일팀 재입사', '메일 3계층 — Kafka·SSL·삭제 잡', 'MCP·AI 게이트웨이 구축', 'JIRA-AI 단독 개발', '현재 · AI 워크플로우 전담'],
     caption: '메일팀으로 재입사해 게이트웨이·업무 서버·프로토콜 엔진 3계층을 안정화했고, 지금은 LangGraph4j·MCP 기반 AI 워크플로우 개발을 전담합니다.',

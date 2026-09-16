@@ -6,7 +6,7 @@
 const careerProjects = [
     {
         id: 'jira-ai',
-        dateLabel: '2026.04 — 현재 · 사내 단독 개발 · 고도화 진행 중',
+        dateLabel: '2026.04 — 현재 · 1인 개발 · 운영중',
         title: 'JIRA-AI — 이슈 자동 분석·업무 자동화 AI 시스템',
         org: '더존비즈온 (DOUZONE) · 주 개발자',
         icon: 'support_agent',
@@ -15,7 +15,7 @@ const careerProjects = [
             '“쌓여 있는 방대한 Jira 데이터가 있는데, 왜 같은 문의에 매번 사람이 답하는가” — 이 의문에서 시작했습니다. ' +
             '문의 이슈가 등록되면 사내 지식과 GitLab 소스, 비슷한 이슈를 대조해 근거가 붙은 1차 답변을 달고, ' +
             '메일 도메인 구축처럼 반복되는 요청은 담당자 승인만 받아 처리합니다. ' +
-            '기획부터 설계, 개발까지 제가 했고, 코드는 AI 코딩 도구와 함께 썼습니다. 그 사실은 커밋에 공동 저자로 남겨 두었습니다.',
+            '기획부터 아키텍처 설계, 개발까지 단독 수행했으며 AI 코딩 도구 사용 사실은 커밋 공동 저자로 기록했습니다.',
         items: [
             {
                 title: 'LangGraph4j 15노드 조건부 워크플로',
@@ -66,7 +66,7 @@ const careerProjects = [
     },
     {
         id: 'issueflow',
-        dateLabel: '2026.09 — 현재 · 로컬 개발 단계',
+        dateLabel: '2026.09 — 현재 · 1인 개발',
         title: 'IssueFlow — 범용 워크플로 엔진',
         org: '더존비즈온 (DOUZONE)',
         icon: 'account_tree',
@@ -203,7 +203,7 @@ const careerProjects = [
     },
     {
         id: 'approval',
-        dateLabel: '2018.09 — 2022.06 · 커밋 확인 2019.11 — 2022.06',
+        dateLabel: '2018.09 — 2022.06 · 개발 2019.11 — 2022.06',
         title: '전자결재/메일 솔루션 개발 및 대규모 데이터 마이그레이션',
         org: '더존비즈온 (DOUZONE) · 전자결재팀',
         icon: 'database',
@@ -224,14 +224,14 @@ const careerProjects = [
                 date: '2019.11 — 2022.06',
                 background: '차세대 그룹웨어 출시를 위한 핵심 도메인(결재/문서함)의 신규 설계 및 개발 필요',
                 improvement: '문서 열람 권한 API 구현과 공통 그리드의 첨부·댓글 진입 전 호출 연결. 결재선 상태(반려·보류·거부) 표시, 결재 취소 시 직전 결재자 보정, 재기안 후결 제외(MariaDB·Oracle), 접수 승인·반려 API, 자주 쓰는 양식, Role·인수인계 관리 API, 공통 Excel 내보내기, 문서함 필터 개발',
-                result: '결재 처리·권한·양식·문서함이 백엔드와 화면 양쪽에서 연결됨. 저장소 4곳에 본인 커밋 1,259건 확인',
+                result: '결재 처리·권한·양식·문서함이 백엔드와 화면 양쪽에서 연결됨',
             },
             {
                 title: 'BizboxAlpha 유지보수 및 고도화',
                 date: '2018.09 — 2021.03',
                 background: '대규모 고객사가 사용하는 레거시 시스템의 안정적 운영 및 기능 확장 요구',
                 improvement: '주요 결재 로직 유지보수 및 단계적 고도화 참여',
-                result: '해당 기간 커밋이 현재 GitLab에 부재해 건수·성과 미기재',
+                result: '해당 기간 기록이 현재 GitLab에 남아 있지 않아 성과 미기재',
             },
         ],
         tags: ['Java', 'Spring MVC · Spring Boot', 'MyBatis', 'JPA', 'MariaDB · Oracle', 'React', 'WebFlux SSE'],
