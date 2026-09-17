@@ -246,6 +246,12 @@
     .three-grid li{display:block;position:relative;padding-left:13px;gap:0}
     .three-grid li::before{position:absolute;left:0;top:8px;margin-top:0}
     .three-grid li>a:first-child{font-weight:700}
+    /* 항목마다 프리뷰·저장소로 바로 갈 수 있는 작은 링크 */
+    .li-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+    .li-links a{border:1px solid #d7deeb;border-radius:999px;background:#fff;padding:2px 9px;
+      font-size:11.5px;font-weight:700;color:#3f4d63;text-decoration:none;line-height:1.7}
+    .li-links a:hover{border-color:#a9c7ff;color:#1f6feb}
+    .soft-accent .li-links a{background:#fbfdff}
     /* sticky nav(약 70px) 아래로 제목이 숨지 않도록 앵커 착지 지점을 내린다 */
     :target{scroll-margin-top:96px}
     section[id],article[id],[id^="jira"],[id^="issue"],[id^="mail"],[id^="eap"],[id^="mig"],[id^="legacy"],[id^="side"]{scroll-margin-top:96px}
@@ -979,29 +985,33 @@ flowchart TD
             <div>
                 <h4>제품</h4>
                 <ul>
-                    <li><a href="https://hostay.vercel.app/preview.html" target="_blank" rel="noreferrer">Hostay</a> — 8개 숙박 플랫폼의 예약, 차단, 정산, 채팅을 한 화면에서 보는 PMS. Next.js, iCal 양방향 동기화, 역할별 공유 링크. 판매중</li>
-                    <li><a href="/previews/quant.html" target="_blank" rel="noreferrer">Show Me The Money</a> — 전략별 에이전트가 매매하고 수익률이 나빠지면 스스로 재튜닝하는 무인 퀀트. Python, Cascade LLM 라우팅, Supabase. 운영 중</li>
-                    <li><a href="/previews/plan-p.html" target="_blank" rel="noreferrer">Plan P</a> — 잠금화면에서 소리 내어 말해야 풀리는 영어회화 앱. Kotlin·Compose, 음성 인식, Leitner 반복. 출시 준비</li>
-                    <li><a href="https://man-woman-analysis-report.vercel.app/" target="_blank" rel="noreferrer">남녀분석보고서</a> — 생성부터 발송, 수익화까지 사람 손 없이 돌아가는 뉴스레터. Next.js, Supabase, Gemini 폴백, GitHub Actions, OpenClaw</li>
+                    <li><a href="https://hostay.vercel.app/preview.html" target="_blank" rel="noreferrer">Hostay</a> — 8개 숙박 플랫폼의 예약, 차단, 정산, 채팅을 한 화면에서 보는 PMS. Next.js, iCal 양방향 동기화, 역할별 공유 링크. 판매중<span class="li-links"><a href="https://hostay.vercel.app/preview.html" target="_blank" rel="noreferrer">프리뷰</a></span></li>
+                    <li><a href="/previews/quant.html" target="_blank" rel="noreferrer">Show Me The Money</a> — 전략별 에이전트가 매매하고 수익률이 나빠지면 스스로 재튜닝하는 무인 퀀트. Python, Cascade LLM 라우팅, Supabase. 운영 중<span class="li-links"><a href="/previews/quant.html" target="_blank" rel="noreferrer">프리뷰</a></span></li>
+                    <li><a href="/previews/plan-p.html" target="_blank" rel="noreferrer">Plan P</a> — 잠금화면에서 소리 내어 말해야 풀리는 영어회화 앱. Kotlin·Compose, 음성 인식, Leitner 반복. 출시 준비<span class="li-links"><a href="/previews/plan-p.html" target="_blank" rel="noreferrer">프리뷰</a><a href="/previews/today.html" target="_blank" rel="noreferrer">투데이 프리뷰</a></span></li>
+                    <li><a href="https://man-woman-analysis-report.vercel.app/" target="_blank" rel="noreferrer">남녀분석보고서</a> — 생성부터 발송, 수익화까지 사람 손 없이 돌아가는 뉴스레터. Next.js, Supabase, Gemini 폴백, GitHub Actions, OpenClaw<span class="li-links"><a href="https://man-woman-analysis-report.vercel.app/" target="_blank" rel="noreferrer">사이트</a></span></li>
                 </ul>
             </div>
             <div>
                 <h4>도구 · 실험</h4>
                 <ul>
-                    <li><a href="https://github.com/jyoung9154/Antigravity-Link" target="_blank" rel="noreferrer">Antigravity-Link</a> — 폰에서 내 PC 워크스페이스를 원격으로 다루는 Gemini 에이전트 브릿지 (Next.js, Node, Ngrok)</li>
-                    <li><a href="https://github.com/jyoung9154/Bamtori_Company" target="_blank" rel="noreferrer">Bamtori_Company</a> — 12개 역할의 AI 에이전트가 협업해 소프트웨어를 만드는 자율 조직 실험 (Python, Redis Pub/Sub, Docker, Hermes)</li>
-                    <li><a href="https://github.com/jyoung9154/host-calendar" target="_blank" rel="noreferrer">host-calendar</a> — 토스 앱 안에서 돌아가는 숙박 호스트 미니앱 (React Native, TDS, Firestore)</li>
-                    <li><a href="https://github.com/jyoung9154/ChestnutMap" target="_blank" rel="noreferrer">ChestnutMap</a> — 여행 계획용 실시간 마커 공유 지도 앱 (Kotlin, Compose, Firebase, 네이버 지도)</li>
-                    <li><a href="https://github.com/jyoung9154/WordPress_Blog" target="_blank" rel="noreferrer">WordPress_Blog · WP_Theme</a> — Docker Compose로 띄운 WordPress와 mu-plugin, 직접 만든 테마</li>
+                    <li><a href="/previews/promopilot.html" target="_blank" rel="noreferrer">PromoPilot</a> — 카드뉴스를 AI가 재검토·보정해 SNS에 게시하는 자동화 도구 (Next.js, Playwright)<span class="li-links"><a href="/previews/promopilot.html" target="_blank" rel="noreferrer">프리뷰</a></span></li>
+                    <li><a href="/previews/auto-thread.html" target="_blank" rel="noreferrer">Auto_Thread</a> — GitHub 저장소를 분석해 4개 SNS에 홍보를 자동 게시 (Node.js, Actions)<span class="li-links"><a href="/previews/auto-thread.html" target="_blank" rel="noreferrer">프리뷰</a></span></li>
+                    <li><a href="/previews/multi-calendar.html" target="_blank" rel="noreferrer">Multi-calendar</a> — 여러 캘린더를 하나로 모으는 PWA. 푸시와 모바일 앱 지원 (Next.js, Firebase)<span class="li-links"><a href="/previews/multi-calendar.html" target="_blank" rel="noreferrer">프리뷰</a></span></li>
+                    <li><a href="/previews/bizsite.html" target="_blank" rel="noreferrer">bizsite-platform</a> — 지도 URL 하나로 소상공인 홈페이지를 즉시 발행 (Next.js, Prisma)<span class="li-links"><a href="/previews/bizsite.html" target="_blank" rel="noreferrer">프리뷰</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/Antigravity-Link" target="_blank" rel="noreferrer">Antigravity-Link</a> — 폰에서 내 PC 워크스페이스를 원격으로 다루는 Gemini 에이전트 브릿지 (Next.js, Node, Ngrok)<span class="li-links"><a href="https://github.com/jyoung9154/Antigravity-Link" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/Bamtori_Company" target="_blank" rel="noreferrer">Bamtori_Company</a> — 12개 역할의 AI 에이전트가 협업해 소프트웨어를 만드는 자율 조직 실험 (Python, Redis Pub/Sub, Docker)<span class="li-links"><a href="https://github.com/jyoung9154/Bamtori_Company" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/host-calendar" target="_blank" rel="noreferrer">host-calendar</a> — 토스 앱 안에서 돌아가는 숙박 호스트 미니앱 (React Native, TDS, Firestore)<span class="li-links"><a href="https://github.com/jyoung9154/host-calendar" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/ChestnutMap" target="_blank" rel="noreferrer">ChestnutMap</a> — 여행 계획용 실시간 마커 공유 지도 앱 (Kotlin, Compose, Firebase, 네이버 지도)<span class="li-links"><a href="https://github.com/jyoung9154/ChestnutMap" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/WordPress_Blog" target="_blank" rel="noreferrer">WordPress_Blog · WP_Theme</a> — Docker Compose로 띄운 WordPress와 mu-plugin, 직접 만든 테마<span class="li-links"><a href="https://github.com/jyoung9154/WordPress_Blog" target="_blank" rel="noreferrer">GitHub</a></span></li>
                 </ul>
             </div>
             <div class="soft-accent">
                 <h4>오픈소스</h4>
                 <ul>
-                    <li><a href="https://github.com/jyoung9154/AgentSkills" target="_blank" rel="noreferrer">AgentSkills</a> — 직군별 한국어 AI 에이전트 스킬 137종과 오케스트레이터</li>
-                    <li><a href="https://github.com/jyoung9154/AIAgent_Report" target="_blank" rel="noreferrer">AIAgent_Report</a> — Copilot, Antigravity, Cursor, Codex, Claude Code 세션을 모아 일일 업무보고서를 만드는 도구</li>
-                    <li><a href="https://github.com/jyoung9154/github-repo-finder-mcp" target="_blank" rel="noreferrer">github-repo-finder-mcp</a> — 프로젝트를 분석해 필요한 GitHub 저장소를 찾아주는 MCP 서버</li>
-                    <li><a href="https://github.com/jyoung9154/Json-Web-Token-With-Swagger" target="_blank" rel="noreferrer">JWT + Swagger</a>, <a href="https://github.com/jyoung9154/WebPush_Back" target="_blank" rel="noreferrer">FCM WebPush</a> — 2024년에 Spring Security·JWT와 Firebase 푸시를 다시 익히려고 만든 것들</li>
+                    <li><a href="https://github.com/jyoung9154/AgentSkills" target="_blank" rel="noreferrer">AgentSkills</a> — 직군별 한국어 AI 에이전트 스킬 137종과 오케스트레이터<span class="li-links"><a href="https://github.com/jyoung9154/AgentSkills" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/AIAgent_Report" target="_blank" rel="noreferrer">AIAgent_Report</a> — Copilot, Antigravity, Cursor, Codex, Claude Code 세션을 모아 일일 업무보고서를 만드는 도구<span class="li-links"><a href="https://github.com/jyoung9154/AIAgent_Report" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/github-repo-finder-mcp" target="_blank" rel="noreferrer">github-repo-finder-mcp</a> — 프로젝트를 분석해 필요한 GitHub 저장소를 찾아주는 MCP 서버<span class="li-links"><a href="https://github.com/jyoung9154/github-repo-finder-mcp" target="_blank" rel="noreferrer">GitHub</a></span></li>
+                    <li><a href="https://github.com/jyoung9154/Json-Web-Token-With-Swagger" target="_blank" rel="noreferrer">JWT + Swagger</a> — Spring Security·JWT와 Firebase 푸시를 다시 익히려고 2024년에 만든 것들<span class="li-links"><a href="https://github.com/jyoung9154/Json-Web-Token-With-Swagger" target="_blank" rel="noreferrer">JWT + Swagger</a><a href="https://github.com/jyoung9154/WebPush_Back" target="_blank" rel="noreferrer">FCM WebPush</a></span></li>
                 </ul>
             </div>
         </div>
