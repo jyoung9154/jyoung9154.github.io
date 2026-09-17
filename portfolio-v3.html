@@ -285,21 +285,63 @@
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
       };
-      // mermaid는 timeline 제목을 좌측 고정 x로 찍고, viewBox를 콘텐츠보다 넓게 잡을 때가 있다.
-      // 렌더가 끝난 뒤 실제 콘텐츠 범위로 viewBox를 맞추고 제목을 그 가운데로 옮긴다.
+      // timeline은 <br>을 해석하지 않고 그대로 출력한다. 렌더 뒤 tspan으로 쪼갠다.
+      const applyLineBreaks = (svg) => {
+        svg.querySelectorAll('text').forEach(t => {
+          // mermaid가 이미 tspan으로 줄을 나눠 둬서, 그대로 이으면 줄 끝 공백이 사라진다.
+          const spans = t.querySelectorAll('tspan');
+          const raw = spans.length
+            ? [...spans].map(s => s.textContent.trim()).filter(Boolean).join(' ')
+            : t.textContent;
+          const parts = raw.split(/<br\s*\/?>/);
+          if (parts.length < 2) return;
+          const x = t.getAttribute('x') || 0;
+          t.textContent = '';
+          parts.forEach((line, k) => {
+            const ts = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+            ts.setAttribute('x', x);
+            if (k) ts.setAttribute('dy', '1.25em');
+            ts.textContent = line.trim();
+            t.appendChild(ts);
+          });
+        });
+      };
+
+      // 타임라인 축 화살표가 마지막 열보다 오른쪽으로 더 뻗는다.
+      // 전체 bbox 기준으로 맞추면 열들이 왼쪽으로 쏠려 보이므로,
+      // 노드 사각형의 가운데를 기준으로 좌우 대칭이 되도록 viewBox를 잡는다.
       const centerDiagrams = () => {
         document.querySelectorAll('pre.mermaid svg').forEach(svg => {
+          applyLineBreaks(svg);
           let bb;
           try { bb = svg.getBBox(); } catch (e) { return; }
           if (!bb || !bb.width || !bb.height) return;
+
           const pad = 16;
-          const x = bb.x - pad, y = bb.y - pad;
-          const w = bb.width + pad * 2, h = bb.height + pad * 2;
+          let cx = bb.x + bb.width / 2;
+          const box = svg.getBoundingClientRect();
+          const vb = (svg.getAttribute('viewBox') || '').split(/\s+/).map(Number);
+          // timeline은 rect가 아니라 .timeline-node 로 박스를 그린다.
+          const nodes = svg.querySelectorAll('.timeline-node, rect');
+          if (nodes.length && box.width && vb.length === 4) {
+            const scale = vb[2] / box.width;
+            let l = Infinity, r = -Infinity;
+            nodes.forEach(el => {
+              const b = el.getBoundingClientRect();
+              if (b.width < 5) return;
+              l = Math.min(l, b.left); r = Math.max(r, b.right);
+            });
+            if (l < r) cx = vb[0] + ((l + r) / 2 - box.left) * scale;
+          }
+
+          const half = Math.max(cx - bb.x, bb.x + bb.width - cx) + pad;
+          const x = cx - half, w = half * 2;
+          const y = bb.y - pad, h = bb.height + pad * 2;
           svg.setAttribute('viewBox', x + ' ' + y + ' ' + w + ' ' + h);
           svg.style.maxWidth = w + 'px';
           const title = svg.querySelector(':scope > text');
           if (title) {
-            title.setAttribute('x', String(x + w / 2));
+            title.setAttribute('x', String(cx));
             title.setAttribute('text-anchor', 'middle');
             title.style.textAnchor = 'middle';
           }
@@ -361,13 +403,13 @@
 <pre class="mermaid">
 timeline
   title 이력 타임라인
-  2013.08 ~ 2017.11 : 국군 정보사령부 특수작전부대(HID) : 특수임무 수행 (2013.11 ~ 2017.10) : 중사 전역
-  2018.09 ~ 2022.06 : 더존비즈온 전자결재팀 : Amaranth 10 전자결재 (2019.11 ~ 2022.06) : 데이터 이관 도구 (2021.04 ~ 2022.06)
+  2013.08 ~ 2017.11 : 국군 정보사령부 특수작전부대 HID : 특수임무 수행 : 중사 전역
+  2018.09 ~ 2022.06 : 더존비즈온 전자결재팀 : Amaranth 10 전자결재&lt;br&gt;프론트 · 백엔드 개발 담당 : 데이터 마이그레이션 툴&lt;br&gt;개발 및 운영유지 담당
   2022.09 ~ 2024.05 : World Travel 550일 : 6대륙 41개국 155개 도시 : 아시아 · 오세아니아 · 중동아프리카 : 유럽 · 북아메리카 · 남아메리카
-  2024.07 ~ 2026.08 : 더존비즈온 메일팀 : Amaranth 10 메일 3계층·프런트 (2024.08 ~ 2026.08) : Bizbox Alpha 레거시 메일 (2024.10 ~ 2025.06)
-  2026.04 ~ 현재 : AI 워크플로 전담 : JIRA-AI 분석·자동화 (2026.04 ~) : IssueFlow 범용 엔진 (2026.09 ~)
+  2024.07 ~ 2026.08 : 더존비즈온 메일팀 : Amaranth 10 메일&lt;br&gt;프론트 · 백엔드 개발 담당 : Bizbox Alpha 레거시 메일
+  2026.04 ~ 현재 : AI 워크플로 전담 : JIRA-AI 분석·자동화 : IssueFlow 범용 엔진
 </pre>
-                    <figcaption>괄호 안은 해당 복무·작업이 실제로 진행된 기간</figcaption>
+                    <figcaption>상단은 재직·복무 기간, 아래는 그 기간에 맡은 일</figcaption>
                 </figure>
             </aside>
         </div>
