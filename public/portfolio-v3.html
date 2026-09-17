@@ -537,7 +537,7 @@ stateDiagram-v2
         <div class="section-title">
             <div class="eyebrow"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg> 02 · Workflow Engine</div>
             <h2>IssueFlow — 범용 워크플로 엔진</h2>
-            <p>JIRA-AI 개발 중 도구·시나리오가 늘 때마다 코드가 증가하는 구조가 병목이라 판단했습니다. 노드 그래프 정의만으로 Jira 조회·조건 분기·MCP 도구가 조합 실행되고, 승인·예약·비밀은 엔진이 공통으로 책임지는 구조를 목표로 개발 중입니다.</p>
+            <p>JIRA-AI 개발 중 도구·시나리오가 늘 때마다 코드가 증가하는 구조가 병목이라 판단했습니다. 노드 그래프 정의만으로 Jira 조회·조건 분기·MCP 도구가 조합 실행되고, 승인·예약·비밀은 엔진이 공통으로 책임집니다. 아래는 워크플로 목록과 편집 캔버스, RAG 지식맵, 자연어 요청으로 노드 그래프를 만드는 생성 기능 화면입니다.</p>
         </div>
         <article class="career-card">
             <div class="card-heading">
@@ -547,6 +547,14 @@ stateDiagram-v2
                     <span>2026.09 ~ 현재 · 1인 개발</span>
                 </div>
                 <strong>1인 개발</strong>
+            </div>
+            <div class="project-screenshots cols-3" aria-label="IssueFlow 화면 이미지">
+                <figure><div class="shot"><img src="/resume-v2/issueflow-1.png" alt="워크플로우 목록 — 분류별 카드와 사용·미사용 탭" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/issueflow-1.png</code><span>워크플로우 목록 — 분류별 카드와 사용·미사용 탭</span></div></div><figcaption>워크플로우 목록</figcaption></figure>
+                <figure><div class="shot"><img src="/resume-v2/issueflow-2.png" alt="워크플로우 편집 캔버스 — 메일 메인도메인 등록 자동화 24노드" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/issueflow-2.png</code><span>워크플로우 편집 캔버스 — 메일 메인도메인 등록 자동화 24노드</span></div></div><figcaption>노드 편집 캔버스</figcaption></figure>
+                <figure><div class="shot"><img src="/resume-v2/issueflow-3.png" alt="RAG 지식맵 — 모듈별 문서 군집과 연결" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/issueflow-3.png</code><span>RAG 지식맵 — 모듈별 문서 군집과 연결</span></div></div><figcaption>RAG 지식맵</figcaption></figure>
+                <figure><div class="shot"><img src="/resume-v2/issueflow-4.png" alt="지식 문서 상세 — 경로 트리·본문·유사 문서" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/issueflow-4.png</code><span>지식 문서 상세 — 경로 트리·본문·유사 문서</span></div></div><figcaption>지식 문서 상세</figcaption></figure>
+                <figure><div class="shot"><img src="/resume-v2/issueflow-5.png" alt="AI로 만들기 — 자연어 요청으로 노드와 연결 생성" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/issueflow-5.png</code><span>AI로 만들기 — 자연어 요청으로 노드와 연결 생성</span></div></div><figcaption>AI 워크플로 생성 요청</figcaption></figure>
+                <figure><div class="shot"><img src="/resume-v2/issueflow-6.png" alt="AI 생성 결과 — 13노드 워크플로와 노드 설정 패널" loading="lazy" onerror="this.parentElement.classList.add('missing');this.closest('figure').classList.add('img-missing')"><div class="ph"><strong>이미지 추가</strong><code>public/resume-v2/issueflow-6.png</code><span>AI 생성 결과 — 13노드 워크플로와 노드 설정 패널</span></div></div><figcaption>AI 생성 결과</figcaption></figure>
             </div>
             <p class="flow-note">Jira 이슈 1건이 저장된 워크플로를 API부터 저장소까지 완주합니다. 쓰기 도구는 기본 dry-run이며 실제 실행은 원장을 경유하고, 이를 테스트로 확인했습니다. step·시간·AI 호출·token·cost 상한을 넘으면 중단합니다(노드 경계 검사라 최대 N-1회 초과 가능). 비밀은 정의 JSON에 평문으로 남지 않으며, 승인은 링크 미리보기(GET)만으로 확정되지 않습니다.</p>
             <p class="flow-note">도구별 노드 대신 서버가 `tools/list`로 선언하는 목록을 읽는 `mcp.tool` 노드 하나로 통일했습니다. 서버가 `readOnlyHint`를 제공하지 않으면 쓰기로 간주합니다. 첫 슬라이스는 AI 합성 없이 조회·파싱·분기·기록만으로 관통시킨 뒤 검증 단계를 추가했습니다. 원격 반영·배포, 외부 MCP 서버 상호운용 테스트, 옛 secret 일괄 재암호화는 미수행입니다. 시나리오 1건 추가 소요 시간도 아직 측정하지 못했습니다.</p>
