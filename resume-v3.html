@@ -246,6 +246,12 @@
     .three-grid li{display:block;position:relative;padding-left:13px;gap:0}
     .three-grid li::before{position:absolute;left:0;top:8px;margin-top:0}
     .three-grid li>a:first-child{font-weight:700}
+    /* 항목마다 프리뷰·저장소로 바로 갈 수 있는 작은 링크 */
+    .li-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+    .li-links a{border:1px solid #d7deeb;border-radius:999px;background:#fff;padding:2px 9px;
+      font-size:11.5px;font-weight:700;color:#3f4d63;text-decoration:none;line-height:1.7}
+    .li-links a:hover{border-color:#a9c7ff;color:#1f6feb}
+    .soft-accent .li-links a{background:#fbfdff}
     /* sticky nav(약 70px) 아래로 제목이 숨지 않도록 앵커 착지 지점을 내린다 */
     :target{scroll-margin-top:96px}
     section[id],article[id],[id^="jira"],[id^="issue"],[id^="mail"],[id^="eap"],[id^="mig"],[id^="legacy"],[id^="side"]{scroll-margin-top:96px}
