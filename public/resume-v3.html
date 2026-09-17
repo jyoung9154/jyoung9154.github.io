@@ -241,6 +241,10 @@
     .status-row span{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
     .st-ok{background:#ecfdf5;color:#059669}
     .st-na{background:#fff7ed;color:#c2410c}
+    /* sticky nav(약 70px) 아래로 제목이 숨지 않도록 앵커 착지 지점을 내린다 */
+    :target{scroll-margin-top:96px}
+    section[id],article[id],[id^="jira"],[id^="issue"],[id^="mail"],[id^="eap"],[id^="mig"],[id^="legacy"],[id^="side"]{scroll-margin-top:96px}
+    @media (max-width:760px){:target,section[id],article[id]{scroll-margin-top:140px}}
     @media print{.diagram{break-inside:avoid;box-shadow:none}.toc{display:none}}
 
     </style>

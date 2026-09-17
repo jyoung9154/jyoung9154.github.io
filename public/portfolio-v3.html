@@ -241,17 +241,34 @@
     .status-row span{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
     .st-ok{background:#ecfdf5;color:#059669}
     .st-na{background:#fff7ed;color:#c2410c}
+    /* sticky nav(약 70px) 아래로 제목이 숨지 않도록 앵커 착지 지점을 내린다 */
+    :target{scroll-margin-top:96px}
+    section[id],article[id],[id^="jira"],[id^="issue"],[id^="mail"],[id^="eap"],[id^="mig"],[id^="legacy"],[id^="side"]{scroll-margin-top:96px}
+    @media (max-width:760px){:target,section[id],article[id]{scroll-margin-top:140px}}
     @media print{.diagram{break-inside:avoid;box-shadow:none}.toc{display:none}}
 
     </style>
 
     <script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-      mermaid.initialize({ startOnLoad: true, securityLevel: 'loose', theme: 'base', fontFamily: 'Pretendard Variable, Pretendard, sans-serif',
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'loose', theme: 'base', fontFamily: 'Pretendard Variable, Pretendard, sans-serif',
         themeVariables: { primaryColor: '#eef5ff', primaryBorderColor: '#a9c7ff', primaryTextColor: '#152033', lineColor: '#59677e',
           secondaryColor: '#f5f7fb', tertiaryColor: '#fff', noteBkgColor: '#fff7ed', noteBorderColor: '#fdba74', actorBkg: '#eef5ff', actorBorder: '#a9c7ff',
           signalColor: '#39475c', signalTextColor: '#152033', labelBoxBkgColor: '#f5f7fb', clusterBkg: '#f8fafc', fontSize: '14px' },
         flowchart: { curve: 'basis', htmlLabels: true, padding: 10 }, sequence: { actorMargin: 28, messageMargin: 34, useMaxWidth: true } });
+
+      // 다이어그램은 비동기로 그려지며 문서 높이를 크게 바꾼다.
+      // 브라우저가 먼저 해시로 점프한 뒤 높이가 늘어나면 목표가 화면 밖으로 밀리므로,
+      // 렌더가 끝난 시점에 해시 위치로 한 번 더 맞춘다.
+      const alignToHash = () => {
+        const id = decodeURIComponent(location.hash.slice(1));
+        if (!id) return;
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      };
+      await mermaid.run({ querySelector: 'pre.mermaid' });
+      requestAnimationFrame(() => requestAnimationFrame(alignToHash));
+      window.addEventListener('load', alignToHash, { once: true });
     </script>
 </head>
 <body>
