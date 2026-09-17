@@ -1,6 +1,6 @@
 // 회사 경력 상세 데이터 — Career 페이지(02 섹션)와 /career-history 경력기술서가 공유한다.
 // 각 항목은 배경(문제) → 수행(개선) → 성과 구조.
-// 2026-09: GitLab 커밋과 diff로 직접 확인한 것만 적는다. 재 본 적 없는 수치(처리시간·사용자 수·감소율)는 넣지 않는다.
+// 경력 프로젝트 데이터. 각 항목은 배경 → 수행 → 성과 순으로 기술한다.
 // 흐름도와 근거는 /portfolio-v3.html, 정적 이력서는 /resume-v3.html.
 
 const careerProjects = [
@@ -217,7 +217,7 @@ const careerProjects = [
                 date: '2021.04 — 2022.06',
                 background: '수동 마이그레이션으로 인한 막대한 시간 소요 및 휴먼 에러 발생 리스크. 중간 실패 시 전체 재실행 필요',
                 improvement: 'JPA 복합 키 매핑과 그룹별 목적지 DB를 선택하는 RoutingDataSource 적용. 테이블 단위 페이지 분할 이관과 SSE 진행 상황 전달, 본문의 별도 단계 분리, 시작 페이지 지정 기반 중단 지점 재개',
-                result: '중단 후 지정 페이지부터 재개 가능. 이전 이력서의 "3일 → 2시간", "500여 개사"는 측정 자료를 확인하지 못해 제외',
+                result: '중단 후 지정 페이지부터 재개 가능. 이관 소요 시간과 적용 고객사 수는 기록이 남아 있지 않음',
             },
             {
                 title: 'Amaranth 10 전자결재 시스템 구축',
@@ -231,7 +231,7 @@ const careerProjects = [
                 date: '2018.09 — 2021.03',
                 background: '대규모 고객사가 사용하는 레거시 시스템의 안정적 운영 및 기능 확장 요구',
                 improvement: '주요 결재 로직 유지보수 및 단계적 고도화 참여',
-                result: '해당 기간 기록이 현재 GitLab에 남아 있지 않아 성과 미기재',
+                result: '해당 기간 작업 기록이 현재 GitLab에 남아 있지 않음',
             },
         ],
         tags: ['Java', 'Spring MVC · Spring Boot', 'MyBatis', 'JPA', 'MariaDB · Oracle', 'React', 'WebFlux SSE'],

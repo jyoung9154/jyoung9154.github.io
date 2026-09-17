@@ -284,7 +284,6 @@
                 <p class="support">역할이 나뉜 AI 에이전트 팀을 설계해 기획–개발–검증 전 과정을 수행하고, 아키텍처부터 배포·자동화까지 End-to-End로 책임집니다.</p>
                 <div class="profile-note">
                     <p>판단은 사람이, 설계·구현·테스트·리서치는 역할별 에이전트가 — 시스템이 틀릴 수 있는 지점에는 검증 게이트를 배치합니다.</p>
-                    <p>실무 항목은 GitLab 커밋과 실제 diff로 재확인한 범위만 기재했으며, 측정 자료가 없는 수치는 싣지 않았습니다.</p>
                     <p>긍정적이고 밝은 ENFP — "안 되는 건 없다, 안 할 뿐이지"라는 마인드로 일합니다.</p>
                 </div>
                 <div class="actions">
@@ -317,9 +316,8 @@
         </div>
         <div class="about-grid">
             <article class="panel panel-wide">
-                <p>전자결재팀에서 시작해 메일팀을 거쳐, 지금은 LLM·RAG·MCP 기반 AI 워크플로우 개발을 전담합니다. <br>기업 고객이 매일 사용하는 그룹웨어를 개발하며 속도보다 안정성을 우선하는 기준을 세웠습니다. 개선은 코드와 테스트로 증명 가능한 범위에서만 기술합니다.</p>
+                <p>전자결재팀에서 시작해 메일팀을 거쳐, 지금은 LLM·RAG·MCP 기반 AI 워크플로우 개발을 전담합니다. <br>기업 고객이 매일 사용하는 그룹웨어를 개발하며 속도보다 안정성을 우선하는 기준을 세웠습니다.</p>
                 <p>프로젝트 별 역할을 할당한 AI 에이전트 팀을 설계해 기획–개발–검증 전 과정을 수행합니다. 기술 스택 그 자체보다 기술의 용어와 개발 플로우를 파악하는 능력이 더 중요하다고 생각합니다.</p>
-                <p>본 이력서는 근거 기준으로 전면 재작성했습니다. 이전 버전의 "30초 → 4초", "500만 사용자" 등은 측정 출처를 확인하지 못해 제외하고, 코드로 확인되는 동작 변화와 남은 한계를 함께 기재했습니다.</p>
             </article>
             <article class="panel panel-accent">
                 <h3>핵심 강점</h3>
@@ -338,7 +336,7 @@
                     </li>
                     <li>
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        <span><strong>근거로 말하기</strong> <br> — 커밋·테스트로 확인된 범위만 기재, 미측정 수치 미사용</span>
+                        <span><strong>레거시 위에 얹는 통합</strong> <br> — 신규 시스템 구축 없이 기존 인증·메일·승인 흐름에 AI와 MCP 연결</span>
                     </li>
                 </ul>
             </article>
@@ -459,7 +457,7 @@
                 Career History
             </div>
             <h2>프로젝트별 상세 — 배경 · 수행 · 성과</h2>
-            <p>각 항목을 배경 → 수행 → 성과 순으로 정리하고, 확인하지 못한 한계를 함께 기재했습니다. <br>날짜는 해당 작업이 진행된 기간입니다.</p>
+            <p>각 항목을 배경 → 수행 → 성과 순으로 정리했습니다. <br>날짜는 해당 작업이 진행된 기간입니다.</p>
         </div>
         <div class="career-list">
 
@@ -652,7 +650,7 @@
                             <p><b class="hl hl-bg">배경</b><span>조직 단위 통계 진입점 부재. 더존 클라우드가 아닌 오브젝트 스토리지를 사용하는 고객사 존재</span></p>
                             <p><b class="hl hl-im">수행</b><span>groupSeq 검증 후 mailbox 통계 API로 위임하는 게이트웨이 구현. S3 스토리지 오브젝트 설정·Endpoint 연동과 상담·법무 모듈 메일 반출 연계 API 개발</span></p>
                             <p><b class="hl hl-rs">성과</b><span>관리 화면에서 조직 단위 통계 조회. S3 호환 스토리지 환경에서도 메일 동작</span></p>
-                            <p><b class="hl hl-lm">한계</b><span>이전 이력서의 망분리 연계는 해당 커밋을 찾지 못해 제외</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>게이트웨이 통계와 S3 연동까지이며 망분리 연계는 담당 범위 밖</span></p>
                         </div>
                     </div>
                     <div class="hist-item">
@@ -670,7 +668,7 @@
                             <p><b class="hl hl-bg">배경</b><span>클라우드형 고객사 메일 초기 접속이 느려 최적화 진행</span></p>
                             <p><b class="hl hl-im">수행</b><span>메일함 카운트 갱신 시마다 전체 메일함 객체를 생성하던 경로를 Redis JSON에서 필요한 필드만 읽는 경로로 전환. 프런트는 메뉴·부가정보·카운트 API를 분리하고 환경설정을 props로 전달</span></p>
                             <p><b class="hl hl-rs">성과</b><span>카운트 갱신 시 객체 생성 제거. 필요한 데이터만 선택적으로 갱신</span></p>
-                            <p><b class="hl hl-lm">한계</b><span>이전 이력서의 "10초 → 1초"는 벤치마크가 없어 수치를 제외하고 구조 변경만 기재</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>벤치마크를 돌리지 않아 체감 개선폭은 수치로 확인되지 않음</span></p>
                         </div>
                     </div>
                     <div class="hist-item">
@@ -753,7 +751,7 @@
                             <p><b class="hl hl-bg">배경</b><span>수동 마이그레이션으로 인한 막대한 시간 소요 및 휴먼 에러 발생 리스크. 중간 실패 시 전체 재실행 필요</span></p>
                             <p><b class="hl hl-im">수행</b><span>JPA 복합 키 매핑과 그룹별 목적지 DB를 선택하는 RoutingDataSource 적용. 테이블 단위 페이지 분할 이관과 SSE 진행 상황 전달. 본문은 별도 단계로 분리하고 시작 페이지 지정으로 중단 지점부터 재개. 수신자 삭제를 건별 호출에서 묶음 호출로 전환</span></p>
                             <p><b class="hl hl-rs">성과</b><span>중단 후 지정 페이지부터 재개 가능. 진행 상황을 화면에서 확인</span></p>
-                            <p><b class="hl hl-lm">한계</b><span>이전 이력서의 "3일 → 2시간", "500여 개사"는 측정 자료를 찾지 못해 제외. 재개는 되나 멱등성·무손실은 미보장</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>재개는 되나 멱등성·무손실은 미보장. 이관 소요 시간과 적용 고객사 수는 기록이 남아 있지 않음</span></p>
                         </div>
                     </div>
                     <div class="hist-item">
@@ -762,7 +760,7 @@
                             <p><b class="hl hl-bg">배경</b><span>차세대 그룹웨어 출시를 위한 핵심 도메인(결재/문서함)의 신규 설계 및 개발 필요</span></p>
                             <p><b class="hl hl-im">수행</b><span>문서 열람 권한 API 구현과 공통 그리드의 첨부·댓글 진입 전 호출 연결. 결재선의 반려·보류·거부 구분 표시, 결재 취소 시 직전 결재자 보정, 재기안 후결자 제외 조건을 MariaDB·Oracle 매퍼에 동시 반영. 접수 승인·반려, 자주 쓰는 양식, 결재 Role·인수인계 관리 API, 공통 Excel 내보내기, 문서함 필터 개발</span></p>
                             <p><b class="hl hl-rs">성과</b><span>결재 처리·권한·양식·문서함이 백엔드와 화면 양쪽에서 연결됨</span></p>
-                            <p><b class="hl hl-lm">한계</b><span>"성능 개선" 제목 커밋이 있으나 실측 부재로 성과에 미기재. 파일 반환 API 자체의 접근 통제는 별도 검토 필요</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>양식 관리 쪽 성능 작업은 측정치가 없음. 파일 반환 API 자체의 접근 통제는 별도 검토 필요</span></p>
                         </div>
                     </div>
                     <div class="hist-item">
@@ -770,12 +768,9 @@
                         <div class="hist-rows">
                             <p><b class="hl hl-bg">배경</b><span>대규모 고객사가 사용하는 레거시 시스템의 안정적 운영 및 기능 확장 요구</span></p>
                             <p><b class="hl hl-im">수행</b><span>주요 결재 로직 유지보수 및 단계적 고도화 참여</span></p>
-                            <p><b class="hl hl-lm">한계</b><span>해당 기간 기록이 현재 GitLab에 남아 있지 않아 성과 미기재</span></p>
+                            <p><b class="hl hl-lm">한계</b><span>해당 기간 작업 기록이 현재 GitLab에 남아 있지 않음</span></p>
                         </div>
                     </div>
-                </div>
-                <div class="evidence-note">
-                    <p><strong>어떻게 확인했나</strong> GitLab 저장소를 전수 조회해 본인 이메일로 귀속되는 작업만 추리고, 분야별 대표 항목은 diff를 직접 재확인했습니다. 이전 이력서의 처리시간·메모리·사용자 수 수치는 측정 자료를 확인하지 못해 제외했습니다. 2018년과 2023년은 확인 가능한 기록이 없어 해당 기간을 비워 두었습니다.</p>
                 </div>
             </article>
 
@@ -1044,9 +1039,6 @@
                             <li><span><a href="https://github.com/jyoung9154/AIAgent_Report" target="_blank" rel="noreferrer">AIAgent_Report</a> <span class="desc">— Copilot, Antigravity, Cursor, Codex, Claude Code 세션을 모아 일일 업무보고서를 만드는 도구</span></span><span class="tag">GitHub</span></li>
                             <li><span><a href="https://github.com/jyoung9154/github-repo-finder-mcp" target="_blank" rel="noreferrer">github-repo-finder-mcp</a> <span class="desc">— 프로젝트를 분석해 필요한 GitHub 저장소를 찾아주는 MCP 서버</span></span><span class="tag">MCP</span></li>
                         </ul>
-                        <div class="evidence-note">
-                            <p><strong>공개 저장소 확인</strong> GitHub 공개 저장소(포크 제외)는 작성자를 직접 대조했습니다. Bamtori_Company와 daily-receipt는 본인이 구성한 AI 에이전트(Hermes)가 작업한 실험 저장소입니다. 판매·운영 중인 제품은 비공개 저장소입니다.</p>
-                        </div>
                     </div>
                 </div>
             </article>
@@ -1061,7 +1053,7 @@
                 Skills
             </div>
             <h2>기술 스택</h2>
-            <p>실무에서 사용한 기술과 개인 프로젝트에서 적용한 기술만 기재했습니다.</p>
+            <p>실무와 개인 프로젝트에서 직접 다룬 기술입니다.</p>
         </div>
         <div class="three-grid skill-summary">
             <article class="panel">

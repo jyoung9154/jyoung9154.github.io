@@ -5,7 +5,7 @@ import careerProjects from '../data/career';
 import DocShell, { Section } from './DocShell';
 
 // 채용 서류 관례: 인사담당자는 요약을 먼저 본다 — 하이라이트를 최상단에 배치한다.
-// 커밋·diff로 확인된 동작만 적고, 측정 자료가 없는 수치는 쓰지 않는다.
+// 각 항목은 배경(문제) → 수행 → 성과 순으로 기술한다.
 const HIGHLIGHTS = [
     { head: 'JIRA-AI 1인 개발 · 운영중', rest: '단일 LLM 호출을 LangGraph4j 15노드 워크플로로 확장하고, 지식 승인 격리와 DLT 재접수로 오답 고착과 실패 유실을 차단' },
     { head: '메일 3계층 안정화', rest: 'Kafka로 발송결과를 보여주고, 탈취 의심 계정을 조회하고, 중간에 멈출 수 있는 대량 삭제 잡과 SSL 인증서 자동 반영을 만들었습니다' },
