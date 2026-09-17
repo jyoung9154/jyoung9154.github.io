@@ -65,7 +65,7 @@
     "typescript": "^4.8.3"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && node scripts/set-landing.js",
     "deploy": "gh-pages -d build",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
