@@ -285,7 +285,29 @@
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
       };
+      // mermaid는 timeline 제목을 좌측 고정 x로 찍고, viewBox를 콘텐츠보다 넓게 잡을 때가 있다.
+      // 렌더가 끝난 뒤 실제 콘텐츠 범위로 viewBox를 맞추고 제목을 그 가운데로 옮긴다.
+      const centerDiagrams = () => {
+        document.querySelectorAll('pre.mermaid svg').forEach(svg => {
+          let bb;
+          try { bb = svg.getBBox(); } catch (e) { return; }
+          if (!bb || !bb.width || !bb.height) return;
+          const pad = 16;
+          const x = bb.x - pad, y = bb.y - pad;
+          const w = bb.width + pad * 2, h = bb.height + pad * 2;
+          svg.setAttribute('viewBox', x + ' ' + y + ' ' + w + ' ' + h);
+          svg.style.maxWidth = w + 'px';
+          const title = svg.querySelector(':scope > text');
+          if (title) {
+            title.setAttribute('x', String(x + w / 2));
+            title.setAttribute('text-anchor', 'middle');
+            title.style.textAnchor = 'middle';
+          }
+        });
+      };
+
       await mermaid.run({ querySelector: 'pre.mermaid' });
+      centerDiagrams();
       requestAnimationFrame(() => requestAnimationFrame(alignToHash));
       window.addEventListener('load', alignToHash, { once: true });
     </script>
@@ -341,7 +363,7 @@ timeline
   title 이력 타임라인
   2013.08 ~ 2017.11 : 국군 정보사령부 특수작전부대(HID) : 특수임무 수행 (2013.11 ~ 2017.10) : 중사 전역
   2018.09 ~ 2022.06 : 더존비즈온 전자결재팀 : Amaranth 10 전자결재 (2019.11 ~ 2022.06) : 데이터 이관 도구 (2021.04 ~ 2022.06)
-  2022.09 ~ 2024.05 : World Travel 6대륙 41개국 550일
+  2022.09 ~ 2024.05 : World Travel 550일 : 6대륙 41개국 155개 도시 : 아시아 · 오세아니아 · 중동아프리카 : 유럽 · 북아메리카 · 남아메리카
   2024.07 ~ 2026.08 : 더존비즈온 메일팀 : Amaranth 10 메일 3계층·프런트 (2024.08 ~ 2026.08) : Bizbox Alpha 레거시 메일 (2024.10 ~ 2025.06)
   2026.04 ~ 현재 : AI 워크플로 전담 : JIRA-AI 분석·자동화 (2026.04 ~) : IssueFlow 범용 엔진 (2026.09 ~)
 </pre>
