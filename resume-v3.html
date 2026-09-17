@@ -241,6 +241,11 @@
     .status-row span{border-radius:999px;padding:5px 10px;font-size:12px;font-weight:800}
     .st-ok{background:#ecfdf5;color:#059669}
     .st-na{background:#fff7ed;color:#c2410c}
+    /* 목록의 이름과 설명이 각각 flex 아이템이 되어 이름이 좁은 칸에서 줄바꿈되던 문제.
+       블록 흐름으로 바꿔 한 문단처럼 이어지게 하고 불릿만 절대 배치한다. */
+    .three-grid li{display:block;position:relative;padding-left:13px;gap:0}
+    .three-grid li::before{position:absolute;left:0;top:8px;margin-top:0}
+    .three-grid li>a:first-child{font-weight:700}
     /* sticky nav(약 70px) 아래로 제목이 숨지 않도록 앵커 착지 지점을 내린다 */
     :target{scroll-margin-top:96px}
     section[id],article[id],[id^="jira"],[id^="issue"],[id^="mail"],[id^="eap"],[id^="mig"],[id^="legacy"],[id^="side"]{scroll-margin-top:96px}
