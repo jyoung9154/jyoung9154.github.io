@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan P 쿠폰 — 흩어진 쿠폰을 한 곳에, 만료돼도 돌려받게</title>
+<style>
+  :root{
+    --bg-top:#fdf7ec;
+    --bg-bot:#ffffff;
+    --ink:#22303f;
+    --ink-soft:#5d6b7d;
+    --gold:#b5791b;
+    --gold-soft:#fdf2dc;
+    --gold-line:#f0dcb4;
+    --green:#1f7a4d;
+    --green-soft:#e6f6ee;
+    --green-line:#bfe6d3;
+    --red:#b23c3c;
+    --line:#e6e2d8;
+    --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bot) 460px,var(--bg-bot) 100%);
+    color:var(--ink);
+    font-family:'Pretendard',-apple-system,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  a{color:var(--green);}
+  a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px;}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px;}
+
+  /* HERO */
+  .hero{
+    max-width:1040px;margin:0 auto;padding:60px 24px 44px;
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:44px;align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;font-weight:700;color:var(--gold);
+    background:var(--gold-soft);border:1px solid var(--gold-line);
+    padding:6px 14px;border-radius:999px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block;}
+  h1{font-size:clamp(34px,5vw,50px);line-height:1.18;margin:20px 0 14px;letter-spacing:-.02em;}
+  .accent{
+    background:linear-gradient(180deg,transparent 62%,#f7e3bb 62%);
+    padding:0 4px;
+  }
+  .lede{font-size:17px;color:var(--ink-soft);margin:0 0 22px;max-width:30em;}
+  .pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .pill{
+    font-size:13px;font-weight:700;background:#fff;border:1px solid var(--line);
+    border-radius:999px;padding:6px 13px;color:var(--ink-soft);
+  }
+
+  /* PHONE */
+  .phone-stage{display:flex;justify-content:center;}
+  .phone{
+    width:296px;border-radius:38px;background:#1b2330;padding:11px;
+    box-shadow:0 26px 64px rgba(34,48,63,.22);
+  }
+  .screen{background:#fbf9f4;border-radius:28px;overflow:hidden;}
+  .status-bar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:9px 16px 4px;font-size:11px;color:#8b93a0;font-weight:700;
+  }
+  .app-title{padding:4px 16px 10px;font-size:15px;font-weight:800;}
+  .group{padding:0 12px 10px;}
+  .group-label{
+    font-size:11.5px;font-weight:800;padding:8px 4px 6px;color:var(--gold);
+  }
+  .group-label.ok{color:var(--green);}
+  .coupon{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:9px 11px;margin-bottom:7px;
+  }
+  .coupon .nm{font-size:12.5px;font-weight:700;line-height:1.35;}
+  .coupon .sub{font-size:10.5px;color:var(--ink-soft);margin-top:3px;}
+  .coupon .amt{font-size:12px;font-weight:800;margin-top:4px;color:var(--ink);}
+  .refund{border-color:var(--gold-line);background:#fffdf7;}
+  .refund .sub{color:var(--gold);font-weight:700;}
+  .soon{border-color:#f2d5d5;background:#fffbfb;}
+  .soon .sub{color:var(--red);font-weight:700;}
+  .add-btn{
+    margin:2px 12px 12px;text-align:center;background:var(--ink);color:#fff;
+    border-radius:11px;padding:9px;font-size:12.5px;font-weight:700;
+  }
+
+  /* SECTIONS */
+  section.sec{padding:52px 0 10px;}
+  .section-head{max-width:640px;}
+  .kicker{font-size:12.5px;font-weight:800;color:var(--gold);letter-spacing:.06em;}
+  h2{font-size:clamp(23px,3vw,30px);margin:8px 0 10px;letter-spacing:-.01em;line-height:1.3;}
+  .section-sub{color:var(--ink-soft);margin:0;font-size:15.5px;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:26px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;
+  }
+  .card h3{margin:0 0 8px;font-size:16px;}
+  .card p{margin:0;font-size:14px;color:var(--ink-soft);}
+  .card .tag{
+    display:inline-block;font-size:11.5px;font-weight:800;border-radius:999px;
+    padding:3px 10px;margin-bottom:10px;
+  }
+  .tag-gold{background:var(--gold-soft);color:var(--gold);}
+  .tag-green{background:var(--green-soft);color:var(--green);}
+  .tag-plain{background:#eef1f5;color:var(--ink-soft);}
+
+  /* FLOW */
+  .flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px;}
+  .step{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;position:relative;
+  }
+  .step .n{
+    font-size:11px;font-weight:800;color:#fff;background:var(--ink);
+    width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    margin-bottom:10px;
+  }
+  .step h4{margin:0 0 6px;font-size:14.5px;}
+  .step p{margin:0;font-size:13px;color:var(--ink-soft);}
+
+  /* NUMBERS */
+  .nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px;}
+  .num{
+    background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;
+  }
+  .num b{display:block;font-size:26px;letter-spacing:-.02em;}
+  .num span{font-size:12.5px;color:var(--ink-soft);}
+
+  /* LIMITS */
+  .limits{
+    margin-top:26px;background:#fbfaf7;border:1px dashed var(--gold-line);
+    border-radius:14px;padding:20px 22px;
+  }
+  .limits h3{margin:0 0 10px;font-size:15.5px;}
+  .limits ul{margin:0;padding-left:18px;}
+  .limits li{font-size:14px;color:var(--ink-soft);margin-bottom:5px;}
+
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .sw{
+    font-size:12.5px;font-weight:700;background:#fff;border:1px solid var(--line);
+    border-radius:8px;padding:6px 11px;color:var(--ink-soft);
+  }
+
+  footer{
+    margin-top:54px;border-top:1px solid var(--line);padding:26px 0 44px;
+    font-size:13px;color:var(--ink-soft);
+  }
+  footer a{font-weight:700;text-decoration:none;}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:44px;}
+    .grid,.flow,.nums{grid-template-columns:repeat(2,minmax(0,1fr));}
+  }
+  @media (max-width:520px){
+    .grid,.flow,.nums{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div>
+    <span class="eyebrow"><span class="dot"></span>개발 중 · Kotlin · Jetpack Compose</span>
+    <h1>흩어진 쿠폰을 한 곳에,<br><span class="accent">만료돼도 돌려받게</span></h1>
+    <p class="lede">
+      카카오톡·문자·이메일·앱·종이 쿠폰까지 받은 화면에서 공유만 누르면 담깁니다.
+      유효기간이 지난 상품권도 버리지 않고, 환불을 청구할 수 있다는 것을 먼저 알려줍니다.
+    </p>
+    <div class="pills">
+      <span class="pill">Plan P 제품군</span>
+      <span class="pill">Android</span>
+      <span class="pill">사진 권한 0개</span>
+      <span class="pill">오프라인 동작</span>
+    </div>
+  </div>
+
+  <div class="phone-stage">
+    <div class="phone">
+      <div class="screen">
+        <div class="status-bar"><span>10:52</span><span>▮▮▮</span></div>
+        <div class="app-title">Plan P 쿠폰</div>
+
+        <div class="group">
+          <div class="group-label">돌려받을 수 있어요</div>
+          <div class="coupon refund">
+            <div class="nm">투썸플레이스 모바일 금액권</div>
+            <div class="sub">2025.07.10 만료 · 최대 90% 환불 가능</div>
+            <div class="amt">30,000원</div>
+          </div>
+          <div class="coupon refund">
+            <div class="nm">해피머니 금액권</div>
+            <div class="sub">2025.01.31 만료 · 최대 95% 환불 가능</div>
+            <div class="amt">100,000원</div>
+          </div>
+
+          <div class="group-label">곧 만료돼요</div>
+          <div class="coupon soon">
+            <div class="nm">CGV 최대 8인 8천원 관람 쿠폰</div>
+            <div class="sub">6일 남음 · 2026.07.31</div>
+          </div>
+
+          <div class="group-label ok">사용 가능</div>
+          <div class="coupon">
+            <div class="nm">GS25 모바일 상품권 3만원권</div>
+            <div class="sub">2026.09.18 까지 · 카카오톡</div>
+            <div class="amt">30,000원</div>
+          </div>
+        </div>
+        <div class="add-btn">＋ 쿠폰 추가</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <section class="sec">
+    <div class="section-head">
+      <div class="kicker">WHY</div>
+      <h2>카카오톡이 해주는 일 말고,<br>아무도 안 알려주는 일을 맡는다</h2>
+      <p class="section-sub">
+        기프티콘 보관함은 이미 있습니다. 문제는 그 바깥입니다.
+        문자로 온 상품권, 메일에 묻힌 교환권, 사진첩에 캡처만 해둔 쿠폰은 만료될 때까지 아무도 모릅니다.
+      </p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <span class="tag tag-gold">차별점</span>
+        <h3>만료를 끝으로 보지 않는다</h3>
+        <p>상품권·교환권은 유효기간이 지나도 5년 안에 90~100% 환불을 청구할 수 있습니다. 만료된 쿠폰을 목록 맨 위로 올리고 청구 방법까지 안내합니다.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-green">수집</span>
+        <h3>받은 화면에서 공유 한 번</h3>
+        <p>앱을 열고 입력하는 대신 쿠폰이 도착한 화면에서 바로 공유합니다. 사진첩에 쌓인 캡처는 한 번에 담을 수 있습니다.</p>
+      </div>
+      <div class="card">
+        <span class="tag tag-plain">알림</span>
+        <h3>네 번만 알린다</h3>
+        <p>만료 7일·3일·1일 전과 당일에만 보냅니다. 남은 기간 내내 매일 보내지 않습니다. 받을 시각은 직접 정합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="section-head">
+      <div class="kicker">HOW</div>
+      <h2>담는 순간부터 돌려받기까지</h2>
+      <p class="section-sub">정확도 100%를 쫓는 대신, 틀린 값을 3초에 고칠 수 있게 만드는 쪽을 택했습니다.</p>
+    </div>
+    <div class="flow">
+      <div class="step">
+        <div class="n">1</div>
+        <h4>공유로 받기</h4>
+        <p>쿠폰 화면에서 공유 → Plan P 쿠폰. 사진첩 일괄 담기도 지원합니다.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h4>읽어서 채우기</h4>
+        <p>ML Kit 한국어 텍스트 인식과 바코드 스캔으로 브랜드·상품명·유효기간·금액을 채웁니다.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h4>애매하면 물어보기</h4>
+        <p>날짜를 못 읽었거나 코드가 충돌하면 자동 저장하지 않고 확인 목록으로 보냅니다. 왜 확인이 필요한지도 적습니다.</p>
+      </div>
+      <div class="step">
+        <div class="n">4</div>
+        <h4>만료 뒤에도 남기기</h4>
+        <p>기간이 지나면 지우지 않고 환불 청구 대상으로 분류해 맨 위에 둡니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="section-head">
+      <div class="kicker">MEASURED</div>
+      <h2>직접 재 본 값</h2>
+      <p class="section-sub">실제 쿠폰 이미지로 돌린 결과와 코드 규모입니다.</p>
+    </div>
+    <div class="nums">
+      <div class="num"><b>74%</b><span>실측 42건 중 31건 자동 등록</span></div>
+      <div class="num"><b>45</b><span>통과한 유닛 테스트</span></div>
+      <div class="num"><b>0</b><span>요구하는 사진 권한</span></div>
+      <div class="num"><b>8,200</b><span>Kotlin 코드 줄 수 (33개 파일)</span></div>
+    </div>
+
+    <div class="limits">
+      <h3>아직 못 한 것</h3>
+      <ul>
+        <li>출시 준비 완료가 아닙니다. 갤러리 감지의 실패 처리와 중복 판정에 남은 결함을 정리하는 중입니다.</li>
+        <li>진행 중이던 작업이 강제 종료되면 원자적으로 복구하는 영속 큐가 없습니다.</li>
+        <li>인식 속도는 목표에 못 미칩니다. 이미지 내 병렬 인식의 취소·복구가 미완성입니다.</li>
+        <li>실기기 검증은 Galaxy S25 Ultra(Android 16)와 S21(Android 14) 두 대까지입니다.</li>
+        <li>환불 가능 비율은 상품권 표준 약관 기준 안내이며, 실제 청구 결과를 보장하지 않습니다.</li>
+      </ul>
+    </div>
+
+    <div class="stack">
+      <span class="sw">Kotlin</span>
+      <span class="sw">Jetpack Compose</span>
+      <span class="sw">Room</span>
+      <span class="sw">DataStore</span>
+      <span class="sw">WorkManager</span>
+      <span class="sw">ML Kit 한국어 인식</span>
+      <span class="sw">ML Kit 바코드</span>
+      <span class="sw">Coroutines</span>
+      <span class="sw">minSdk 26 · targetSdk 35</span>
+    </div>
+  </section>
+
+  <footer>
+    Plan P 제품군 — <a href="/previews/plan-p.html">Plan P 영어회화</a> ·
+    <a href="/previews/today.html">Plan P: 투데이</a> · Plan P 쿠폰<br>
+    <a href="/portfolio-v3.html#side">포트폴리오로 돌아가기</a>
+  </footer>
+
+</div>
+</body>
+</html>
